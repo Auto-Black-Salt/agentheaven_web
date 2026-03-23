@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — AgentHeaven</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0C0B09;
+      --bg2:    #131109;
+      --card:   #18160F;
+      --border: #2A2618;
+      --gold:   #E8A838;
+      --text:   #C8BFA0;
+      --muted:  #6B6248;
+      --white:  #FAF6EC;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+      pointer-events: none; z-index: 999; opacity: 0.6;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(12,11,9,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--white); letter-spacing: -0.01em;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 7px var(--gold);
+      display: inline-block; animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(0.85); }
+    }
+    .nav-back {
+      font-size: 0.85rem; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    .page-label {
+      font-size: 0.72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .effective-date {
+      font-size: 0.82rem; color: var(--muted);
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--white); margin: 2.75rem 0 0.85rem;
+      letter-spacing: -0.01em;
+    }
+
+    p { margin-bottom: 1rem; font-weight: 300; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; font-weight: 300; }
+    li { margin-bottom: 0.4rem; }
+
+    a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.75; }
+
+    strong { color: var(--white); font-weight: 500; }
+
+    .highlight-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .highlight-box p { margin-bottom: 0.5rem; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    .warning-box {
+      background: rgba(224, 112, 112, 0.06);
+      border: 1px solid rgba(224, 112, 112, 0.2);
+      border-left: 3px solid #E07070;
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .warning-box p { margin-bottom: 0.5rem; }
+    .warning-box p:last-child { margin-bottom: 0; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 780px; margin: 0 auto;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-dot"></span>
+    AgentHeaven
+  </a>
+  <a href="index.html" class="nav-back">&#8592; Back to home</a>
+</nav>
+
+<div class="container">
+
+  <div class="page-label">Legal</div>
+  <h1>Terms &amp; <em>Conditions</em></h1>
+  <p class="effective-date">Effective date: 22 March 2026 &nbsp;&middot;&nbsp; Last updated: 22 March 2026</p>
+
+  <p>
+    Please read these Terms and Conditions (&ldquo;Terms&rdquo;) carefully before using the <strong>AgentHeaven</strong> service operated by <strong>Black Salt Kft.</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) at <strong>agentheaven.ai</strong>, registered at 1077 Budapest, Baross t&eacute;r 14, Hungary (company registration no. 01 09 450602, VAT no. HU13853619).
+  </p>
+  <p>
+    By subscribing to our service or accessing our website, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you may not use our service.
+  </p>
+
+  <div class="highlight-box">
+    <p><strong>Summary:</strong> AgentHeaven is a managed AI social media agent service. We set up and operate AI agents on your behalf. You remain responsible for your social media accounts and the content published through them. Our service is subscription-based, billed monthly, and can be cancelled at any time.</p>
+  </div>
+
+  <h2>1. The Service</h2>
+  <p>
+    AgentHeaven provides a managed artificial intelligence agent service (&ldquo;the Service&rdquo;) that, on your behalf:
+  </p>
+  <ul>
+    <li>Creates and publishes social media posts to platforms you designate (including Instagram and Facebook);</li>
+    <li>Automatically replies to direct messages and comments on those platforms;</li>
+    <li>Learns and adapts its output based on your brand guidelines and preferences over time.</li>
+  </ul>
+  <p>
+    The Service is configured by us following an onboarding call with you. You provide us with access to your social media accounts and brand information, and we manage the AI agent on an ongoing basis.
+  </p>
+
+  <h2>2. Eligibility</h2>
+  <p>
+    You must be at least 18 years old and have the legal authority to enter into these Terms on behalf of yourself or your business. By using the Service, you represent and warrant that you meet these requirements.
+  </p>
+
+  <h2>3. Your Account and Responsibilities</h2>
+  <p>By subscribing to the Service, you agree to:</p>
+  <ul>
+    <li>Provide accurate, complete, and up-to-date information during onboarding and throughout your subscription;</li>
+    <li>Grant us the necessary access and permissions to operate the AI agent on your social media accounts;</li>
+    <li>Keep us informed of any changes to your brand guidelines, business information, or preferences that may affect the agent&rsquo;s output;</li>
+    <li>Review agent activity periodically and notify us promptly if you identify any content that is inappropriate, inaccurate, or off-brand;</li>
+    <li>Comply with the terms of service of any social media platforms on which the agent operates.</li>
+  </ul>
+
+  <h2>4. Content and Brand Responsibility</h2>
+  <p>
+    While we configure and operate the AI agent on your behalf, <strong>you retain full responsibility</strong> for all content published to your social media accounts, including content generated and posted by the AI agent.
+  </p>
+  <p>You agree that you will not instruct us to create or publish content that:</p>
+  <ul>
+    <li>Is unlawful, defamatory, harassing, discriminatory, or otherwise harmful;</li>
+    <li>Infringes on the intellectual property rights of any third party;</li>
+    <li>Is misleading, deceptive, or in violation of advertising standards;</li>
+    <li>Violates the community guidelines or terms of service of any social media platform;</li>
+    <li>Promotes illegal products, services, or activities.</li>
+  </ul>
+  <p>
+    We reserve the right to refuse to publish content that we reasonably believe violates the above standards, applicable law, or platform policies.
+  </p>
+
+  <h2>5. Social Media Platform Compliance</h2>
+  <p>
+    The operation of AI agents on social media platforms is subject to the terms of service of those platforms (including Meta, Instagram, and Facebook). You acknowledge that:
+  </p>
+  <ul>
+    <li>Platform policies may change at any time and may affect the features or availability of the Service;</li>
+    <li>We cannot guarantee uninterrupted access to any third-party platform;</li>
+    <li>Any suspension or restriction of your social media account by a platform is outside our control and does not entitle you to a refund of subscription fees already paid.</li>
+  </ul>
+
+  <h2>6. Account Loss and Platform Suspension</h2>
+  <div class="warning-box">
+    <p><strong>Important:</strong> The use of automated AI agents on social media platforms carries an inherent risk of account restriction or loss. AgentHeaven is not liable for account suspension, restriction, or loss arising from platform policy changes, automated behaviour policies, or content generated in good faith based on your brand guidelines. Our liability in all such cases is limited as set out in Section 12.</p>
+  </div>
+  <p>
+    Social media platforms (including but not limited to Meta, Instagram, and Facebook) may suspend, restrict, or permanently ban accounts that they determine to be in violation of their terms of service, community guidelines, or automated behaviour policies. This includes accounts using third-party tools or AI agents to post content or send messages.
+  </p>
+  <p>By subscribing to the Service, you explicitly acknowledge and accept that:</p>
+  <ul>
+    <li>The use of automated posting and AI-generated replies carries an inherent risk of account restriction or loss under certain platform policies;</li>
+    <li>AgentHeaven shall not be liable for account suspension, restriction, shadow ban, or loss of access arising from platform policy changes or from content posted in good faith based on your brand guidelines. Any remaining liability is subject to the cap in Section 12;</li>
+    <li>It is your responsibility to keep us informed of any platform policy changes that may affect the agent&rsquo;s operation;</li>
+    <li>AgentHeaven cannot guarantee that the Service will always operate within the automated activity limits set by social media platforms, as those limits may change without notice.</li>
+  </ul>
+  <p>
+    We recommend that you do not use the Service as your sole means of social media management and that you maintain independent access and backup copies of all account content and credentials.
+  </p>
+
+  <h2>7. Subscription, Billing, and Payment</h2>
+  <p>
+    The Service is offered on a monthly subscription basis at the price stated at the time of sign-up (currently <strong>&euro;69 per month</strong> for early access subscribers).
+  </p>
+  <ul>
+    <li><strong>Billing cycle:</strong> Subscriptions are billed monthly in advance from the date you subscribe.</li>
+    <li><strong>Payment:</strong> Payment is processed via our third-party payment provider. By subscribing, you authorise us to charge your payment method on a recurring monthly basis.</li>
+    <li><strong>Price changes:</strong> We may change our subscription price with at least 30 days&rsquo; written notice. Early access pricing is locked in for subscribers who join during the early access period, for as long as their subscription remains active and uninterrupted.</li>
+    <li><strong>Failed payments:</strong> If a payment fails, we will attempt to notify you. Continued failure to pay may result in suspension or termination of the Service.</li>
+    <li><strong>No refunds:</strong> Subscription fees are non-refundable except where required by applicable law. If you cancel mid-month, your Service will continue until the end of the current billing period.</li>
+  </ul>
+  <p>
+    <strong>VAT treatment:</strong> All prices are stated exclusive of Value Added Tax (VAT) unless otherwise indicated.
+  </p>
+  <ul>
+    <li><strong>Hungarian customers:</strong> Hungarian VAT at the current statutory rate (27%) will be added to all invoices.</li>
+    <li><strong>EU business customers (B2B):</strong> If you are a VAT-registered business in another EU member state and provide a valid VAT number, the reverse charge mechanism applies under Art. 196 of the EU VAT Directive and no VAT will be charged by us.</li>
+    <li><strong>EU consumer customers (B2C):</strong> VAT will be charged at the rate applicable in your EU member state of residence, in accordance with EU digital services VAT rules.</li>
+    <li><strong>Non-EU customers:</strong> No VAT is charged by AgentHeaven. You are responsible for any local taxes or duties that may apply in your jurisdiction.</li>
+    <li><strong>Invoicing:</strong> Invoices are issued in accordance with Hungarian invoicing regulations. If you require a specific invoice format, please contact us at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>.</li>
+  </ul>
+
+  <h2>8. Cancellation</h2>
+  <p>
+    You may cancel your subscription at any time by contacting us at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>. Cancellation takes effect at the end of your current billing period. After cancellation:
+  </p>
+  <ul>
+    <li>Your AI agent will be deactivated and will no longer post or reply on your behalf;</li>
+    <li>Your social media account access will be revoked from our systems;</li>
+    <li>Your personal data will be handled in accordance with our <a href="privacy.html">Privacy Policy</a>.</li>
+  </ul>
+  <p>
+    We reserve the right to cancel or suspend your subscription if you breach these Terms. For non-material breaches, we will provide 14 days&rsquo; written notice and an opportunity to remedy the breach before cancellation takes effect. For serious or material breaches (including posting illegal content, fraud, or activity that creates immediate risk to AgentHeaven or third parties), we may suspend or terminate with immediate effect and without refund.
+  </p>
+
+  <h2>9. Service Availability and Support</h2>
+  <p>
+    We aim to provide a reliable, continuously operating service. However, we do not guarantee 100% uptime. The Service may be temporarily unavailable due to:
+  </p>
+  <ul>
+    <li>Scheduled maintenance (we will endeavour to provide advance notice);</li>
+    <li>Technical failures or circumstances beyond our reasonable control;</li>
+    <li>Restrictions or outages on third-party social media platforms.</li>
+  </ul>
+  <p>
+    Support is provided via email at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>. We aim to respond to all support requests within 2 business days.
+  </p>
+
+  <h2>10. Intellectual Property</h2>
+  <p>
+    <strong>Your content:</strong> You retain ownership of all brand materials, images, and information you provide to us. You grant us a limited licence to use this material solely to configure and operate your AI agent.
+  </p>
+  <p>
+    <strong>Our service:</strong> All technology, software, processes, and methods used to deliver the Service remain the intellectual property of AgentHeaven. These Terms do not grant you any licence to our intellectual property beyond the right to use the Service as described herein.
+  </p>
+  <p>
+    <strong>AI-generated content:</strong> AgentHeaven grants you a perpetual, royalty-free, worldwide licence to use, copy, distribute, and repurpose content generated by the AI agent in connection with your subscription. Note that AI-generated content may not qualify for copyright protection under applicable law; we make no warranty as to its copyright status.
+  </p>
+
+  <h2>11. Confidentiality</h2>
+  <p>
+    We treat your brand guidelines, business information, and onboarding materials as confidential. We will not disclose this information to third parties except as necessary to operate the Service or as required by law.
+  </p>
+  <p>
+    Equally, you agree to keep confidential any proprietary information about our processes, pricing structures (outside of publicly listed prices), or technical methods that we share with you during the course of the Service.
+  </p>
+
+  <h2>12. Limitation of Liability</h2>
+  <div class="warning-box">
+    <p>To the maximum extent permitted by applicable law, AgentHeaven shall not be liable for:</p>
+    <ul style="margin-top:0.5rem;">
+      <li>Any indirect, incidental, special, or consequential damages arising from your use of the Service;</li>
+      <li>Loss of revenue, business, reputation, or data;</li>
+      <li>Any content posted by the AI agent that is inaccurate, off-brand, or causes reputational harm, provided we acted in good faith based on your brand guidelines;</li>
+      <li>Actions taken by social media platforms, including account suspension or restriction;</li>
+      <li>Interruption of service caused by third-party platform outages.</li>
+    </ul>
+  </div>
+  <p>
+    Our total aggregate liability to you for any claim arising under or in connection with these Terms shall not exceed the total subscription fees paid by you in the three (3) months preceding the claim.
+  </p>
+  <p>
+    Nothing in these Terms limits our liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded by law.
+  </p>
+
+  <h2>13. Indemnification</h2>
+  <p>
+    You agree to indemnify and hold harmless AgentHeaven, its team members, and partners from and against any claims, losses, damages, or expenses (including reasonable legal fees) arising from:
+  </p>
+  <ul>
+    <li>Your breach of these Terms;</li>
+    <li>Content you instruct us to publish that violates applicable law or third-party rights;</li>
+    <li>Your violation of any social media platform&rsquo;s terms of service.</li>
+  </ul>
+
+  <h2>14. Modifications to the Service and Terms</h2>
+  <p>
+    We reserve the right to modify or discontinue the Service (or any part of it) at any time, with reasonable notice where possible. We will notify active subscribers of any significant changes to the Service by email.
+  </p>
+  <p>
+    We may update these Terms from time to time. The updated version will be posted on this page with a revised effective date. Continued use of the Service after changes take effect constitutes your acceptance of the revised Terms. If you do not agree with the changes, you may cancel your subscription before the new Terms take effect.
+  </p>
+
+  <h2>15. Consumer Right of Withdrawal</h2>
+  <p>
+    If you are a consumer (not a business) located in the EU or EEA, you have the right to withdraw from this contract within <strong>14 days</strong> of subscribing, without giving any reason (the &ldquo;cooling-off period&rdquo;), under the EU Consumer Rights Directive.
+  </p>
+  <p>
+    However, by requesting that we begin setting up your AI agent immediately upon subscription, you <strong>expressly consent</strong> to the Service commencing before the end of the 14-day withdrawal period. If you then exercise your right of withdrawal, you acknowledge that you will be liable to pay for the portion of the Service already delivered up to the point of withdrawal, calculated pro-rata.
+  </p>
+  <p>
+    To exercise your right of withdrawal, contact us at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a> with the subject line &ldquo;Withdrawal&rdquo; within the 14-day period.
+  </p>
+  <p>
+    This right does not apply to business subscribers.
+  </p>
+
+  <h2>16. Governing Law and Disputes</h2>
+  <p>
+    These Terms are governed by and construed in accordance with the laws of <strong>Hungary</strong>. Any disputes arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts of <strong>Budapest, Hungary</strong>, except where mandatory applicable consumer law in your country of residence provides otherwise.
+  </p>
+  <p>
+    We will always attempt to resolve any dispute amicably in the first instance &mdash; please contact us at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a> before pursuing any formal action.
+  </p>
+  <p>
+    If you are a consumer located in the EU, you may also use the European Commission&rsquo;s Online Dispute Resolution platform: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>. Our email address for ODR purposes is <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>.
+  </p>
+
+  <h2>17. Entire Agreement</h2>
+  <p>
+    These Terms, together with our <a href="privacy.html">Privacy Policy</a>, constitute the entire agreement between you and AgentHeaven regarding the Service and supersede all prior agreements and understandings, whether written or oral.
+  </p>
+  <p>
+    If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.
+  </p>
+
+  <h2>18. Contact</h2>
+  <p>For any questions about these Terms, please contact us:</p>
+
+  <div class="highlight-box">
+    <p><strong>Black Salt Kft.</strong> (trading as AgentHeaven)</p>
+    <p>1077 Budapest, Baross t&eacute;r 14, Hungary</p>
+    <p>Company registration: 01 09 450602 &nbsp;&middot;&nbsp; VAT: HU13853619</p>
+    <p>Email: <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a></p>
+    <p>Website: <a href="https://agentheaven.ai">agentheaven.ai</a></p>
+  </div>
+
+  <hr />
+  <p style="font-size:0.82rem; color:var(--muted);">
+    These Terms were last reviewed on 22 March 2026. AgentHeaven reserves the right to update this document at any time. The current version is always available at agentheaven.ai/terms.
+  </p>
+
+</div>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Black Salt Kft. &middot; AgentHeaven &middot; agentheaven.ai</div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
+  </div>
+</footer>
+
+</body>
+</html>
