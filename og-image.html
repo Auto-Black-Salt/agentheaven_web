@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0C0B09;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    position: relative;
+  }
+
+  /* ── GRAIN TEXTURE ── */
+  body::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 10;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  /* ── BACKGROUND GLOWS ── */
+  .glow-left {
+    position: absolute;
+    top: -120px; left: -80px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse at center, rgba(232,168,56,0.13) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .glow-right {
+    position: absolute;
+    bottom: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(232,168,56,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .glow-center {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 900px; height: 400px;
+    background: radial-gradient(ellipse at center, rgba(232,168,56,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── GRID LINES (subtle) ── */
+  .grid {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(42,38,24,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,38,24,0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, transparent 30%, black 80%);
+  }
+
+  /* ── BORDER FRAME ── */
+  .frame {
+    position: absolute; inset: 24px; z-index: 2;
+    border: 1px solid rgba(42,38,24,0.8);
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  .frame::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: 20px;
+    background: linear-gradient(135deg,
+      rgba(232,168,56,0.15) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(232,168,56,0.08) 100%
+    );
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    gap: 60px;
+  }
+
+  /* ── LEFT COLUMN ── */
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(232,168,56,0.3);
+    background: rgba(232,168,56,0.06);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+  .badge-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #E8A838;
+    box-shadow: 0 0 8px #E8A838;
+  }
+  .badge-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #E8A838;
+  }
+
+  .headline {
+    font-family: 'Fraunces', serif;
+    font-size: 58px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #FAF6EC;
+    margin-bottom: 20px;
+  }
+  .headline em {
+    font-style: italic;
+    color: #E8A838;
+  }
+
+  .sub {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: #C8BFA0;
+    margin-bottom: 32px;
+    max-width: 420px;
+  }
+
+  .pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #18160F;
+    border: 1px solid #2A2618;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #C8BFA0;
+  }
+  .pill-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #4CAF82;
+  }
+
+  /* ── RIGHT COLUMN ── */
+  .right {
+    width: 360px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Agent panel */
+  .panel {
+    background: #18160F;
+    border: 1px solid #2A2618;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+  }
+  .panel-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #2A2618;
+    background: #201D13;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .panel-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #6B6248; font-weight: 500; }
+  .panel-live  { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #4CAF82; font-weight: 500; }
+  .live-dot    { width: 5px; height: 5px; border-radius: 50%; background: #4CAF82; }
+
+  .feed { padding: 4px 0; }
+  .feed-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(42,38,24,0.4);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-icon {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+  }
+  .feed-icon.post  { background: rgba(232,168,56,0.12); }
+  .feed-icon.reply { background: rgba(76,175,130,0.12); }
+  .feed-icon.dm    { background: rgba(100,160,240,0.12); }
+  .feed-body { flex: 1; min-width: 0; }
+  .feed-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .feed-label.post  { color: #E8A838; }
+  .feed-label.reply { color: #4CAF82; }
+  .feed-label.dm    { color: #64A0F0; }
+  .feed-text { font-size: 11px; color: #C8BFA0; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .feed-meta { font-size: 9px; color: #6B6248; margin-top: 2px; }
+
+  /* stats row */
+  .stats {
+    display: flex;
+    gap: 10px;
+  }
+  .stat {
+    flex: 1;
+    background: #18160F;
+    border: 1px solid #2A2618;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #FAF6EC;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 9px; color: #6B6248; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── LOGO ── */
+  .logo-wrap {
+    position: absolute;
+    bottom: 40px; right: 80px;
+    z-index: 6;
+    opacity: 0.5;
+  }
+  .logo-wrap svg { width: 120px; height: auto; display: block; }
+
+  /* ── DOMAIN ── */
+  .domain {
+    position: absolute;
+    bottom: 42px; left: 80px;
+    z-index: 6;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #6B6248;
+  }
+  .domain span { color: #E8A838; }
+
+  /* ── PRICE TAG ── */
+  .price-tag {
+    position: absolute;
+    top: 46px; right: 80px;
+    z-index: 6;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .price-main {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #FAF6EC;
+  }
+  .price-main sup { font-size: 14px; vertical-align: super; }
+  .price-per { font-size: 12px; color: #6B6248; }
+</style>
+</head>
+<body>
+
+<div class="glow-left"></div>
+<div class="glow-right"></div>
+<div class="glow-center"></div>
+<div class="grid"></div>
+<div class="frame"></div>
+
+<div class="content">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">AI Social Media Agent</span>
+    </div>
+
+    <div class="headline">
+      Your business,<br />
+      <em>always on.</em>
+    </div>
+
+    <div class="sub">Autonomous AI agents that post on Instagram &amp; Facebook and reply to customers 24/7 — in your brand voice.</div>
+
+    <div class="pills">
+      <div class="pill"><div class="pill-dot" style="background:#E8A838;"></div>2 posts/day</div>
+      <div class="pill"><div class="pill-dot"></div>Instant DM replies</div>
+      <div class="pill"><div class="pill-dot" style="background:#64A0F0;"></div>No tech skills needed</div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Your agent — live</span>
+        <div class="panel-live"><div class="live-dot"></div>Running now</div>
+      </div>
+      <div class="feed">
+        <div class="feed-item">
+          <div class="feed-icon post">📸</div>
+          <div class="feed-body">
+            <div class="feed-label post">Post published</div>
+            <div class="feed-text">"Monday motivation — your best week starts NOW 💪"</div>
+            <div class="feed-meta">Instagram · just now</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon reply">💬</div>
+          <div class="feed-body">
+            <div class="feed-label reply">Comment replied</div>
+            <div class="feed-text">@sara_m: "Morning class is at 7:00am — see you! 🌅"</div>
+            <div class="feed-meta">Facebook · 2 min ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon dm">✉️</div>
+          <div class="feed-body">
+            <div class="feed-label dm">DM answered</div>
+            <div class="feed-text">@run_tom: "Yes, open Sunday! Doors at 8am. 🏃"</div>
+            <div class="feed-meta">Instagram · 5 min ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">14</div>
+        <div class="stat-label">Posts today</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">47</div>
+        <div class="stat-label">Replies sent</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3.8%</div>
+        <div class="stat-label">Engagement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO bottom-right -->
+<div class="logo-wrap">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" aria-hidden="true" focusable="false">
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 196.258 1435.8 C 225.373 1374.9 261.546 1308.01 292.861 1247.72 C 334.522 1165.83 376.626 1084.17 419.169 1002.74 L 502.878 840.013 C 516.194 814.001 529.961 783.685 544.654 758.954 C 552.414 772.57 560.497 788.574 567.417 802.643 C 602.565 874.101 641.343 944.075 676.992 1015.2 C 667.789 1031.17 641.476 1063.97 629.067 1077.43 C 621.449 1065.68 611.423 1044.27 604.894 1031.21 C 594.432 1010.28 583.65 989.522 572.552 968.928 C 570.882 963.864 563.411 950.632 560.69 945.741 C 555.597 935.864 549.175 924.17 544.533 914.253 C 532.372 934.885 518.274 964.688 507.171 986.529 L 443.121 1112.34 L 387.075 1222.17 C 376.69 1242.32 362.766 1267.66 353.752 1287.87 C 582.987 1277.65 695.777 1160.95 807.093 970.224 C 796.501 974.593 771.691 982.93 765.823 991.304 C 756.25 992.14 729.609 994.72 722.994 988.604 L 730.017 977.918 C 711.608 969.209 683.866 955.353 665.821 948.646 C 678.482 942.324 691.902 936.032 704.803 930.19 C 770.427 900.472 835.148 866.373 900.994 837.404 C 899.748 845.39 899.335 857.749 898.58 866.221 L 892.913 926.367 C 887.129 986.508 881.769 1046.69 876.832 1106.91 C 861.795 1091.74 843.494 1069.96 828.86 1053.64 C 804.021 1096.94 782.219 1124.02 751.916 1161.72 C 757.608 1173.74 764.425 1186.33 770.608 1198.15 C 811.896 1277.1 850.892 1357.69 893.42 1435.97 C 842.974 1435.11 790.638 1436.05 739.941 1435.89 C 712.735 1378.31 680.672 1316.79 651.411 1259.87 C 640.369 1267.02 629.826 1275.06 618.629 1282.18 C 550.3 1325.61 473.298 1346.84 393.315 1356.16 C 379.372 1379.35 364.845 1411.12 351.674 1435.73 C 301.742 1437.03 246.605 1435.84 196.258 1435.8 z M 682.749 1234.67 L 727.372 1322.07 C 733.408 1333.83 742.857 1353.57 749.627 1364.36 L 761.155 1364.29 L 774.151 1364.47 C 756.318 1326.54 734.485 1289.47 716.525 1251.42 C 714.124 1246.33 702.742 1222.28 699.838 1218.94 C 694.265 1224.32 688.567 1229.56 682.749 1234.67 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 534.076 614.445 C 593.454 612.336 683.559 620.389 736.753 648.787 C 747.305 654.465 761.98 666.313 764.4 678.484 C 771.355 713.459 713.616 732.282 689.266 737.813 C 682.198 727.973 676.079 719.854 667.867 710.919 C 690.029 706.367 716.516 698.936 733.684 683.644 C 697.208 653.826 603.5 646.429 556.831 645.911 C 509.372 645.574 393.308 650.128 358.552 684.227 C 372.429 698.814 405.796 707.399 425.103 710.695 C 415.881 720.578 410.351 727.238 402.88 738.476 C 377.793 731.135 329.787 718.94 326.488 686.619 C 324.575 667.877 342.499 653.87 357.957 646.596 C 411.996 621.168 475.158 616.176 534.076 614.445 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1838.46 1169.52 C 1842.29 1169.24 1847.01 1169.45 1850.91 1169.51 C 1851.7 1220.02 1851.04 1272.33 1851.08 1322.99 C 1841.28 1323.07 1831.49 1323.04 1821.69 1322.9 C 1809.8 1310.26 1797.53 1293.69 1786.58 1279.97 C 1773.49 1263.57 1759.99 1247.02 1747.21 1230.41 C 1747.72 1261.25 1747.98 1292.08 1748 1322.92 L 1722.75 1323.01 L 1713.04 1323.03 C 1711.61 1274.16 1711.92 1218.76 1712.61 1169.73 C 1722.83 1169.68 1732.36 1169.65 1742.61 1170.14 C 1750.76 1178.14 1759.93 1191.34 1767.4 1200.56 C 1783.6 1220.54 1799.15 1241.49 1816.1 1260.85 C 1815.48 1230.41 1815.13 1199.96 1815.05 1169.5 C 1822.64 1169.76 1830.81 1169.56 1838.46 1169.52 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1309.56 1169.46 C 1318.31 1169.75 1334.94 1166.82 1342.54 1170.79 C 1345.11 1172.12 1404.62 1306.08 1410.7 1323.08 C 1398.55 1323.36 1386.39 1323.38 1374.23 1323.15 C 1368.93 1313.72 1363.62 1300.79 1359.8 1290.73 L 1343.25 1290.71 C 1325.63 1291.04 1307.34 1290.8 1289.63 1290.91 C 1287.11 1300.87 1282.22 1312.83 1277.79 1322.06 C 1268.37 1323.08 1250.27 1322.79 1240.15 1322.91 C 1245.29 1312.28 1250.59 1298.39 1255.5 1287.17 C 1266.77 1261.84 1277.83 1236.41 1288.67 1210.88 C 1293.78 1198.81 1298.84 1186.55 1303.95 1174.48 C 1305.63 1170.5 1306.4 1170.65 1309.56 1169.46 z M 1301.68 1262.67 C 1309.38 1262.61 1317.07 1262.6 1324.76 1262.62 L 1348.48 1262.61 C 1344.58 1252.92 1329.46 1212.34 1325.19 1206.6 C 1316.99 1225.13 1309.15 1243.83 1301.68 1262.67 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 947.567 1169.22 C 959.323 1169.42 971.082 1169.46 982.84 1169.34 C 983.358 1188.73 982.96 1209.52 983.177 1229.09 C 1003.44 1228.11 1028.84 1229.62 1049.88 1229.69 C 1048.18 1218.04 1049.06 1183.38 1049.1 1170.18 C 1060.61 1169.84 1073.27 1170.07 1084.86 1170.04 C 1083.7 1185.72 1084.51 1200.6 1084.67 1216.28 L 1085 1284.66 C 1085.03 1294.2 1085.65 1313.95 1084.67 1322.6 L 1049.05 1322.98 L 1049.04 1259.04 L 982.933 1259.06 L 983.009 1322.97 L 947.04 1323.05 C 946.795 1274.21 945.991 1217.58 947.567 1169.22 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1118.29 1169.88 C 1151.43 1168.3 1197.72 1169.91 1231.9 1169.79 L 1231.52 1198.84 C 1206.29 1198.29 1179.21 1198.84 1153.84 1198.93 L 1153.98 1230.75 C 1175.36 1229.9 1200.75 1230.47 1222.47 1230.45 C 1222.45 1239.93 1222.59 1249.41 1222.89 1258.88 C 1203.99 1257.88 1178.06 1258.7 1158.75 1258.88 L 1153.86 1258.7 C 1152.66 1261.63 1153.03 1289.02 1153.02 1294.1 C 1180.06 1294.02 1207.05 1293.25 1234.13 1293.04 C 1234.15 1301.79 1233.8 1314.44 1234.91 1322.81 L 1118.7 1323.22 C 1117.93 1304.27 1118.34 1283.61 1118.29 1264.46 C 1118.12 1232.93 1118.12 1201.4 1118.29 1169.88 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1572.8 1169.43 L 1684.85 1169.43 C 1684.31 1179.7 1684.21 1188.63 1684.21 1198.86 C 1659.09 1198.98 1631.56 1199.33 1606.59 1198.55 C 1606.99 1208.38 1606.75 1220.13 1606.97 1230.3 C 1627.69 1229.45 1654.96 1230.03 1675.92 1230.34 L 1675.95 1258.2 C 1654.42 1257.53 1630.52 1257.99 1608.8 1258.01 C 1607.57 1258.15 1608.24 1257.93 1606.96 1259.06 C 1606.6 1270.19 1607.01 1282.33 1607.17 1293.54 C 1632.51 1294.48 1662.31 1293.47 1687.74 1293.03 C 1688.03 1302.68 1687.89 1313.26 1687.93 1322.97 L 1572.02 1322.9 C 1572.02 1308.1 1570.7 1175.2 1572.8 1169.43 z"/>
+    <path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1395.36 1169.3 C 1406.09 1169.53 1420.42 1167.97 1430.73 1170.46 C 1432.83 1170.78 1434.59 1174.12 1435.41 1175.97 C 1450.27 1209.64 1462.27 1244.49 1478.01 1277.8 C 1481.2 1268.01 1488.93 1250.86 1493.12 1240.81 C 1503.04 1217.14 1512.84 1193.41 1522.52 1169.64 C 1534.41 1169.39 1546.3 1169.4 1558.19 1169.67 C 1554.28 1181.14 1549.18 1192.57 1544.43 1203.75 C 1529.29 1241.16 1511.23 1286.84 1494.74 1322.85 C 1482.96 1323.09 1470.62 1322.95 1458.79 1322.99 C 1445.08 1288.03 1429.33 1253.4 1415.05 1218.63 C 1408.46 1202.61 1400.85 1185.64 1395.36 1169.3 z"/>
+  </svg>
+</div>
+
+<!-- DOMAIN bottom-left -->
+<div class="domain"><span>agentheaven</span>.ai</div>
+
+<!-- PRICE top-right -->
+<div class="price-tag">
+  <div class="price-main"><sup>€</sup>69</div>
+  <div class="price-per">/ month</div>
+</div>
+
+</body>
+</html>
