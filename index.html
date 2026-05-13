@@ -202,6 +202,32 @@
     }
     .nav-cta:hover { background: #000; }
 
+    /* ---------------- HERO ---------------- */
+    .hero { padding: 5rem 0 6rem; }
+    @media (min-width: 768px) { .hero { padding: 7rem 0 8rem; } }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--accent-bg); color: var(--accent);
+      border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 { max-width: 18ch; margin-bottom: 1.5rem; }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      color: var(--ink-soft);
+      max-width: 38rem;
+      margin-bottom: 2.25rem;
+      line-height: 1.55;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-bottom: 1rem; }
+    .hero-reassure { font-size: 0.88rem; color: var(--muted); }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -232,6 +258,23 @@
   </div>
 </nav>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow" data-i18n="hero.eyebrow">AI digital employees for SMBs</span>
+    <h1>
+      <span data-i18n="hero.h1.a">The boring work,</span>
+      <em data-i18n="hero.h1.b">finally off your plate.</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary" data-cta="hero" data-i18n="hero.cta">Book a free 30-min call</a>
+      <a href="#how" class="btn-ghost" data-i18n="hero.ghost">See how it works →</a>
+    </div>
+    <p class="hero-reassure" data-i18n="hero.reassure">30 minutes. No slides. No commitment.</p>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -246,19 +289,40 @@
       'nav.how':     'How it works',
       'nav.roles':   'Roles',
       'nav.pricing': 'Pricing',
-      'nav.cta':     'Book a call'
+      'nav.cta':     'Book a call',
+      'hero.eyebrow':  'AI digital employees for SMBs',
+      'hero.h1.a':     'The boring work,',
+      'hero.h1.b':     'finally off your plate.',
+      'hero.sub':      'We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.',
+      'hero.cta':      'Book a free 30-min call',
+      'hero.ghost':    'See how it works →',
+      'hero.reassure': '30 minutes. No slides. No commitment.'
     },
     hu: {
       'nav.how':     'Hogyan működik',
       'nav.roles':   'Szerepkörök',
       'nav.pricing': 'Árazás',
-      'nav.cta':     'Időpontfoglalás'
+      'nav.cta':     'Időpontfoglalás',
+      'hero.eyebrow':  'AI digitális munkavállalók kkv-knak',
+      'hero.h1.a':     'Az unalmas munka,',
+      'hero.h1.b':     'végre nem a tiéd.',
+      'hero.sub':      'Beüzemelünk, futtatunk és csendben fejlesztünk egy AI-munkatársat, aki elvégzi az ismétlődő munkát. Egy fix havidíj — mi álljuk az AI-, szerver- és felügyeleti költségeket.',
+      'hero.cta':      'Foglalj egy ingyenes 30 perces hívást',
+      'hero.ghost':    'Nézd meg, hogyan működik →',
+      'hero.reassure': '30 perc. Nincs prezentáció. Semmi kötelezettség.'
     },
     de: {
       'nav.how':     'So funktioniert es',
       'nav.roles':   'Rollen',
       'nav.pricing': 'Preise',
-      'nav.cta':     'Termin buchen'
+      'nav.cta':     'Termin buchen',
+      'hero.eyebrow':  'KI-Mitarbeiter für KMU',
+      'hero.h1.a':     'Die langweilige Arbeit,',
+      'hero.h1.b':     'endlich vom Tisch.',
+      'hero.sub':      'Wir richten einen KI-Mitarbeiter ein, hosten ihn und verbessern ihn still und leise. Ein fester Monatspreis — wir tragen die KI-, Server- und Betreuungskosten.',
+      'hero.cta':      'Kostenloses 30-min Gespräch buchen',
+      'hero.ghost':    'So funktioniert es →',
+      'hero.reassure': '30 Minuten. Keine Slides. Keine Verpflichtung.'
     }
   };
 
