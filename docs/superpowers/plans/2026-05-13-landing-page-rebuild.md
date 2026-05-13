@@ -1,0 +1,2258 @@
+# AgentHeaven Landing Page Rebuild — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Rebuild `index.html` end-to-end to support the digital-employees pivot — new visual identity, new copy in EN/HU/DE, Calendly-driven CTA, and an updated supporting set of pages — ready to receive paid Facebook traffic.
+
+**Architecture:** Single static HTML file with inline `<style>` and `<script>` (same deployment model as the existing site, no build step). Self-hosted fonts (Inter for body/UI, Newsreader for occasional italic emphasis). Three-locale i18n via `data-i18n` attributes and a `T` object. **All translation values are plain text only** — the i18n function uses `textContent` (never `innerHTML`) so translations cannot inject HTML. Where emphasis or links are needed, the markup splits the text into sibling elements (a `<span>` plus an `<em>` or `<a>`), each with its own `data-i18n` key.
+
+**Tech Stack:** Plain HTML, CSS, JavaScript. Inter and Newsreader fonts (WOFF2, self-hosted). IntersectionObserver for scroll reveals. Calendly inline link (no embed widget at launch — embed can be added later if conversion data justifies it). Meta Pixel base + `Lead` event on CTA clicks.
+
+**Verification approach:** This is a static landing page — there are no unit tests. Each task has a **visual verification step**: open the file in a browser, scroll to the new section, and check that (a) it renders correctly, (b) language switching works for the new keys, (c) the layout is responsive at 375px / 768px / 1280px widths.
+
+**Out of scope (per spec §10):** per-role detail pages, customer dashboard, multi-product nav, full brand/logo redesign, Calendly account setup, Meta Pixel ID provisioning, ad creative.
+
+---
+
+## File Structure
+
+- **Modify** `index.html` — full rewrite, broken into one task per section
+- **Modify** `privacy.html` — refresh for digital-employees offer
+- **Modify** `terms.html` — refresh for digital-employees offer
+- **Modify** `og-image.html` — regenerate matching the new visual identity
+- **Replace** `og-image.png` — regenerated from `og-image.html` via headless screenshot
+- **Add** to `fonts/`: Inter (400/500/600/700) and Newsreader italic 400 WOFF2 subsets
+
+Files that stay as-is: `agentheaven.svg`, `favicon.svg`, `.git/`.
+
+---
+
+## Design Constants
+
+Defined once in Task 1 and used throughout.
+
+**Palette:**
+```css
+--bg:         #faf7f2;  /* warm off-white background */
+--bg-2:       #f3eee5;  /* subtly darker panel */
+--ink:        #1a1d1a;  /* primary text, near-black */
+--ink-soft:   #4a4d4a;  /* secondary text */
+--muted:      #767972;  /* tertiary text, captions */
+--accent:     #4a6c5b;  /* sage green primary */
+--accent-2:   #5d8071;  /* sage hover / lighter */
+--accent-bg:  #eef2ed;  /* sage tint for backgrounds */
+--card:       #ffffff;  /* white card */
+--border:     #e4dfd4;  /* soft border */
+```
+
+**Typography:**
+- Body / UI: `Inter`, fallback `system-ui, -apple-system, sans-serif`
+- Emphasis (italic em in headings only): `Newsreader`, fallback `Georgia, serif`
+- Scale (clamp-based): h1 `clamp(2.5rem, 5.5vw, 4.5rem)`, h2 `clamp(1.8rem, 3.6vw, 2.6rem)`, h3 `1.25rem`, body `1rem` / 1.6
+
+**Spacing scale:** 0.5 / 1 / 1.5 / 2 / 3 / 4 / 6 rem as `--s-1` … `--s-7`.
+
+**Container:** max-width 1140px, side padding 1.5rem mobile / 2rem desktop.
+
+**Primary CTA URL:** `https://cal.com/agentheaven/30min` (placeholder — founder will replace before launch). Defined once as `BOOKING_URL` in the JS.
+
+---
+
+## Task Decomposition Overview
+
+1. Foundation: fonts, palette, base styles, document skeleton
+2. Nav (logo, language switcher, booking CTA)
+3. Hero
+4. Roles strip (6 cards)
+5. How it works (4 steps)
+6. Day 1 → Day 90 journey
+7. What's included
+8. Pricing (3 tiers)
+9. Why us
+10. FAQ (8 questions)
+11. Final CTA + footer
+12. JavaScript: i18n switcher, scroll reveal, FAQ accordion, booking-CTA wiring, Meta Pixel scaffold
+13. Refresh `privacy.html`
+14. Refresh `terms.html`
+15. Regenerate `og-image.html` + screenshot to `og-image.png`
+16. Final QA pass (Lighthouse, responsive sweep, all 3 languages)
+
+---
+
+## Task 1: Foundation — fonts, palette, base styles, document skeleton
+
+**Files:**
+- Modify: `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/index.html` (full rewrite — start fresh)
+- Add: `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/fonts/inter-400.woff2`, `inter-500.woff2`, `inter-600.woff2`, `inter-700.woff2`, `newsreader-italic-400.woff2`
+
+### Steps
+
+- [ ] **Step 1: Download Inter and Newsreader font subsets**
+
+Use `google-webfonts-helper` at `https://gwfh.mranftl.com/fonts` to pull self-host-ready WOFF2 files. For Inter, select weights 400, 500, 600, 700 and the "latin-ext" charset (required for Hungarian/German accented characters). For Newsreader, select italic 400 with latin-ext. Place the files under `fonts/` with the exact names: `inter-400.woff2`, `inter-500.woff2`, `inter-600.woff2`, `inter-700.woff2`, `newsreader-italic-400.woff2`.
+
+Acceptance: `ls fonts/` shows the 5 new files. (The Hungarian "ű/ő" and German "ä/ö/ü/ß" must render correctly — that's what the latin-ext subset is for.)
+
+- [ ] **Step 2: Replace `index.html` with the foundation skeleton**
+
+Completely overwrite `index.html` with:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentHeaven — Digital employees for SMBs. We handle the AI, you get the work done.</title>
+  <meta name="description" content="AgentHeaven sets up an AI digital employee that handles your repetitive work — research, inbox, support, ops. Flat monthly fee. We absorb the LLM and infrastructure cost." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://agentheaven.ai/" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agentheaven.ai/" />
+  <meta property="og:site_name" content="AgentHeaven" />
+  <meta property="og:title" content="AgentHeaven — Digital employees for SMBs" />
+  <meta property="og:description" content="We set up and run an AI digital employee that handles your repetitive work. Flat fee. We absorb the LLM and infrastructure cost." />
+  <meta property="og:image" content="https://agentheaven.ai/og-image.png" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="hu_HU" />
+  <meta property="og:locale:alternate" content="de_DE" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AgentHeaven — Digital employees for SMBs" />
+  <meta name="twitter:description" content="AI digital employees that quietly handle your repetitive work. Flat fee. We absorb the LLM and infra cost." />
+  <meta name="twitter:image" content="https://agentheaven.ai/og-image.png" />
+
+  <link rel="alternate" hreflang="en" href="https://agentheaven.ai/" />
+  <link rel="alternate" hreflang="hu" href="https://agentheaven.ai/" />
+  <link rel="alternate" hreflang="de" href="https://agentheaven.ai/" />
+  <link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/" />
+
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/inter-400.woff2) format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url(fonts/inter-500.woff2) format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/inter-600.woff2) format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/inter-700.woff2) format('woff2'); }
+    @font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/newsreader-italic-400.woff2) format('woff2'); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #faf7f2;
+      --bg-2:      #f3eee5;
+      --ink:       #1a1d1a;
+      --ink-soft:  #4a4d4a;
+      --muted:     #767972;
+      --accent:    #4a6c5b;
+      --accent-2:  #5d8071;
+      --accent-bg: #eef2ed;
+      --card:      #ffffff;
+      --border:    #e4dfd4;
+
+      --s-1: 0.5rem; --s-2: 1rem; --s-3: 1.5rem; --s-4: 2rem;
+      --s-5: 3rem;   --s-6: 4rem; --s-7: 6rem;
+
+      --radius: 14px;
+      --radius-sm: 8px;
+      --max-w: 1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { color: var(--ink); line-height: 1.15; letter-spacing: -0.015em; font-weight: 600; }
+    h1 { font-size: clamp(2.5rem, 5.5vw, 4.5rem); font-weight: 600; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 600; }
+    h3 { font-size: 1.25rem; font-weight: 600; }
+
+    h1 em, h2 em {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    p { color: var(--ink-soft); }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+    @media (min-width: 768px) { .container { padding: 0 2rem; } }
+
+    .section { padding: var(--s-7) 0; }
+
+    .section-label {
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--s-2);
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.95rem 1.5rem;
+      background: var(--ink); color: var(--bg);
+      border: none; border-radius: var(--radius-sm);
+      font-family: inherit; font-size: 1rem; font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn-primary:hover { background: #000; color: var(--bg); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.95rem 0.5rem;
+      color: var(--ink); font-weight: 500; font-size: 1rem;
+    }
+    .btn-ghost:hover { color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+
+    /* Section-specific styles are appended by subsequent tasks below this line. */
+  </style>
+</head>
+<body>
+
+<!-- Sections are appended here by subsequent tasks. -->
+
+<script>
+  /* Constants. The founder will replace BOOKING_URL and META_PIXEL_ID before launch. */
+  var BOOKING_URL = 'https://cal.com/agentheaven/30min';
+  var META_PIXEL_ID = '';
+
+  /* Translations: sections 2–11 each append their keys to T.en, T.hu, T.de.
+     ALL values must be plain text — no HTML — because applyTranslations uses textContent. */
+  var T = { en: {}, hu: {}, de: {} };
+
+  var currentLang = localStorage.getItem('ah_lang') || (navigator.language && navigator.language.slice(0,2)) || 'en';
+  if (!T[currentLang]) currentLang = 'en';
+
+  function t(key) {
+    return (T[currentLang] && T[currentLang][key]) || (T.en && T.en[key]) || '';
+  }
+
+  function applyTranslations() {
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      var val = t(key);
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      var val = t(key);
+      if (val) el.setAttribute('placeholder', val);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-aria-label');
+      var val = t(key);
+      if (val) el.setAttribute('aria-label', val);
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    applyTranslations();
+  });
+</script>
+
+</body>
+</html>
+```
+
+- [ ] **Step 3: Open `index.html` in a browser and verify**
+
+Open the file (file:// URL). Expected:
+- Page renders the warm off-white background
+- No JavaScript console errors
+- Network tab shows the 5 WOFF2 files loaded with 200 status
+
+If any font 404s, recheck filenames in `fonts/` match exactly.
+
+- [ ] **Step 4: Commit**
+
+```bash
+/usr/bin/git add index.html fonts/inter-400.woff2 fonts/inter-500.woff2 fonts/inter-600.woff2 fonts/inter-700.woff2 fonts/newsreader-italic-400.woff2
+/usr/bin/git commit -m "feat(landing): scaffold rebuilt index.html with new palette and typography
+
+Replaces the social-media-agent landing page with the foundation for the
+digital-employees rebuild. Fonts (Inter + Newsreader italic) are now
+self-hosted; palette is warm off-white with sage accent."
+```
+
+---
+
+## Task 2: Navigation
+
+**Files:** Modify `index.html` — add `<nav>` after `<body>`, append nav CSS, append nav keys to `T`.
+
+### Steps
+
+- [ ] **Step 1: Append nav CSS to the `<style>` block** (insert right before the trailing `/* Section-specific styles ... */` comment)
+
+```css
+nav#nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+nav#nav.scrolled { border-bottom-color: var(--border); }
+@media (min-width: 768px) { nav#nav { padding: 1rem 2rem; } }
+
+.nav-left { display: flex; align-items: center; gap: 1.5rem; }
+
+.logo {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-weight: 700; font-size: 1.1rem; color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+
+.nav-links { display: none; gap: 1.5rem; }
+.nav-links a { color: var(--ink-soft); font-size: 0.93rem; font-weight: 500; }
+.nav-links a:hover { color: var(--ink); }
+@media (min-width: 900px) { .nav-links { display: flex; } }
+
+.lang-switcher { display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--muted); }
+.lang-btn {
+  background: none; border: none;
+  font-family: inherit; font-size: 0.8rem;
+  color: var(--muted); cursor: pointer;
+  padding: 0.2rem 0.3rem; letter-spacing: 0.05em;
+}
+.lang-btn.active { color: var(--ink); font-weight: 600; }
+.lang-sep { color: var(--border); }
+
+.nav-cta {
+  padding: 0.55rem 1rem;
+  background: var(--ink); color: var(--bg) !important;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem; font-weight: 500;
+}
+.nav-cta:hover { background: #000; }
+```
+
+- [ ] **Step 2: Insert the `<nav>` HTML right after `<body>`**
+
+```html
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="logo">
+      <span class="logo-dot"></span>
+      AgentHeaven
+    </a>
+    <div class="nav-links">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#roles" data-i18n="nav.roles">Roles</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+    </div>
+  </div>
+  <div class="nav-left">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="hu">HU</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="#cta" class="nav-cta" id="navBookBtn" data-i18n="nav.cta">Book a call</a>
+  </div>
+</nav>
+```
+
+- [ ] **Step 3: Replace the empty `T` object with nav keys**
+
+Replace `var T = { en: {}, hu: {}, de: {} };` with:
+
+```javascript
+var T = {
+  en: {
+    'nav.how':     'How it works',
+    'nav.roles':   'Roles',
+    'nav.pricing': 'Pricing',
+    'nav.cta':     'Book a call'
+  },
+  hu: {
+    'nav.how':     'Hogyan működik',
+    'nav.roles':   'Szerepkörök',
+    'nav.pricing': 'Árazás',
+    'nav.cta':     'Időpontfoglalás'
+  },
+  de: {
+    'nav.how':     'So funktioniert es',
+    'nav.roles':   'Rollen',
+    'nav.pricing': 'Preise',
+    'nav.cta':     'Termin buchen'
+  }
+};
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected:
+- Top bar: `[●] AgentHeaven` left, `How it works · Roles · Pricing` middle (only ≥900px wide), `EN · HU · DE [Book a call]` right
+- Clicking EN/HU/DE switches all four labels (test all three)
+- No scroll-shadow effect yet (added in Task 12) — fine
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add navigation with language switcher and booking CTA"
+```
+
+---
+
+## Task 3: Hero
+
+**Files:** Modify `index.html` — append hero `<section>`, append hero CSS, append hero keys to `T`.
+
+### Steps
+
+- [ ] **Step 1: Append hero CSS**
+
+```css
+.hero { padding: 5rem 0 6rem; }
+@media (min-width: 768px) { .hero { padding: 7rem 0 8rem; } }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 999px;
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 { max-width: 18ch; margin-bottom: 1.5rem; }
+
+.hero-sub {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--ink-soft);
+  max-width: 38rem;
+  margin-bottom: 2.25rem;
+  line-height: 1.55;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-bottom: 1rem; }
+.hero-reassure { font-size: 0.88rem; color: var(--muted); }
+```
+
+- [ ] **Step 2: Append the hero `<section>` after `</nav>`**
+
+The headline is split into a plain `<span>` and an `<em>` so each piece is its own translation key.
+
+```html
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow" data-i18n="hero.eyebrow">AI digital employees for SMBs</span>
+    <h1>
+      <span data-i18n="hero.h1.a">The boring work,</span>
+      <em data-i18n="hero.h1.b">finally off your plate.</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary" data-cta="hero" data-i18n="hero.cta">Book a free 30-min call</a>
+      <a href="#how" class="btn-ghost" data-i18n="hero.ghost">See how it works →</a>
+    </div>
+    <p class="hero-reassure" data-i18n="hero.reassure">30 minutes. No slides. No commitment.</p>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append hero keys to all three locales in `T`**
+
+Inside `T.en`, after the nav keys (before the closing `}` of `en:`):
+```javascript
+'hero.eyebrow':  'AI digital employees for SMBs',
+'hero.h1.a':     'The boring work,',
+'hero.h1.b':     'finally off your plate.',
+'hero.sub':      'We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.',
+'hero.cta':      'Book a free 30-min call',
+'hero.ghost':    'See how it works →',
+'hero.reassure': '30 minutes. No slides. No commitment.',
+```
+
+Inside `T.hu`:
+```javascript
+'hero.eyebrow':  'AI digitális munkavállalók kkv-knak',
+'hero.h1.a':     'Az unalmas munka,',
+'hero.h1.b':     'végre nem a tiéd.',
+'hero.sub':      'Beüzemelünk, futtatunk és csendben fejlesztünk egy AI-munkatársat, aki elvégzi az ismétlődő munkát. Egy fix havidíj — mi álljuk az AI-, szerver- és felügyeleti költségeket.',
+'hero.cta':      'Foglalj egy ingyenes 30 perces hívást',
+'hero.ghost':    'Nézd meg, hogyan működik →',
+'hero.reassure': '30 perc. Nincs prezentáció. Semmi kötelezettség.',
+```
+
+Inside `T.de`:
+```javascript
+'hero.eyebrow':  'KI-Mitarbeiter für KMU',
+'hero.h1.a':     'Die langweilige Arbeit,',
+'hero.h1.b':     'endlich vom Tisch.',
+'hero.sub':      'Wir richten einen KI-Mitarbeiter ein, hosten ihn und verbessern ihn still und leise. Ein fester Monatspreis — wir tragen die KI-, Server- und Betreuungskosten.',
+'hero.cta':      'Kostenloses 30-min Gespräch buchen',
+'hero.ghost':    'So funktioniert es →',
+'hero.reassure': '30 Minuten. Keine Slides. Keine Verpflichtung.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected:
+- Hero: sage eyebrow pill → big headline where "finally off your plate." is rendered in Newsreader italic sage
+- Two CTAs: filled dark "Book a free 30-min call", ghost "See how it works →"
+- Reassurance line in muted text below
+- Switch to HU and DE; italic part stays in serif sage
+- At 375px width, buttons wrap cleanly
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add hero section with sage eyebrow and italic emphasis"
+```
+
+---
+
+## Task 4: Roles strip (6 cards)
+
+**Files:** Modify `index.html` — append roles `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append roles CSS**
+
+```css
+.roles { background: var(--bg-2); }
+.roles h2 { max-width: 22ch; margin-bottom: 1rem; }
+.roles-intro { color: var(--ink-soft); max-width: 38rem; margin-bottom: 3rem; }
+
+.roles-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 600px) { .roles-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .roles-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+.role-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.role-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.role-card h3 { margin-bottom: 0.5rem; }
+.role-card p { color: var(--ink-soft); font-size: 0.95rem; }
+
+.role-icon {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+```
+
+- [ ] **Step 2: Append the roles `<section>` after the hero section**
+
+```html
+<section class="section roles" id="roles">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="roles.label">What it can do</div>
+      <h2>
+        <span data-i18n="roles.h2.a">One employee.</span>
+        <em data-i18n="roles.h2.b">Many possible jobs.</em>
+      </h2>
+      <p class="roles-intro" data-i18n="roles.intro">Pick the work you wish you had time to do well. We configure the digital employee around it.</p>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card reveal reveal-delay-1">
+        <span class="role-icon" aria-hidden="true">⟲</span>
+        <h3 data-i18n="roles.1.title">Repetitive task assistant</h3>
+        <p data-i18n="roles.1.desc">Data entry, weekly reports, copying things between tools. The work nobody wants but everyone needs done.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-2">
+        <span class="role-icon" aria-hidden="true">⌕</span>
+        <h3 data-i18n="roles.2.title">Research assistant</h3>
+        <p data-i18n="roles.2.desc">Market research, competitor monitoring, lead enrichment. Delivered to you, not buried in tabs.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-3">
+        <span class="role-icon" aria-hidden="true">✉</span>
+        <h3 data-i18n="roles.3.title">Inbox & triage</h3>
+        <p data-i18n="roles.3.desc">Sorts your email, drafts replies, flags what actually matters. Your inbox, finally tamed.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-1">
+        <span class="role-icon" aria-hidden="true">☎</span>
+        <h3 data-i18n="roles.4.title">Customer support agent</h3>
+        <p data-i18n="roles.4.desc">Answers FAQs, handles tickets, escalates the rest. Available around the clock, consistent every time.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-2">
+        <span class="role-icon" aria-hidden="true">⌘</span>
+        <h3 data-i18n="roles.5.title">Internal knowledge assistant</h3>
+        <p data-i18n="roles.5.desc">Trained on your SOPs and docs. Your team asks; it answers — without bothering you.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-3">
+        <span class="role-icon" aria-hidden="true">∎</span>
+        <h3 data-i18n="roles.6.title">Ops & back-office</h3>
+        <p data-i18n="roles.6.desc">Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append roles keys to all three locales**
+
+`T.en`:
+```javascript
+'roles.label':   'What it can do',
+'roles.h2.a':    'One employee.',
+'roles.h2.b':    'Many possible jobs.',
+'roles.intro':   'Pick the work you wish you had time to do well. We configure the digital employee around it.',
+'roles.1.title': 'Repetitive task assistant',
+'roles.1.desc':  'Data entry, weekly reports, copying things between tools. The work nobody wants but everyone needs done.',
+'roles.2.title': 'Research assistant',
+'roles.2.desc':  'Market research, competitor monitoring, lead enrichment. Delivered to you, not buried in tabs.',
+'roles.3.title': 'Inbox & triage',
+'roles.3.desc':  'Sorts your email, drafts replies, flags what actually matters. Your inbox, finally tamed.',
+'roles.4.title': 'Customer support agent',
+'roles.4.desc':  'Answers FAQs, handles tickets, escalates the rest. Available around the clock, consistent every time.',
+'roles.5.title': 'Internal knowledge assistant',
+'roles.5.desc':  'Trained on your SOPs and docs. Your team asks; it answers — without bothering you.',
+'roles.6.title': 'Ops & back-office',
+'roles.6.desc':  'Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.',
+```
+
+`T.hu`:
+```javascript
+'roles.label':   'Mire képes',
+'roles.h2.a':    'Egy munkavállaló.',
+'roles.h2.b':    'Sokféle feladat.',
+'roles.intro':   'Válaszd ki a munkát, amit szeretnél, ha lenne időd jól megcsinálni. A digitális munkavállalót köré építjük.',
+'roles.1.title': 'Ismétlődő feladatok asszisztens',
+'roles.1.desc':  'Adatbevitel, heti riportok, információ átemelése rendszerek között. A munka, amit senki sem szeret, de mindenkinek kell.',
+'roles.2.title': 'Kutatási asszisztens',
+'roles.2.desc':  'Piackutatás, versenytársak figyelése, leadek dúsítása. Hozzád érkezik, nem 30 megnyitott fülön.',
+'roles.3.title': 'Inbox és szortírozás',
+'roles.3.desc':  'Rendezi az e-maileket, válaszokat fogalmaz, jelzi, ami tényleg számít. A postafiókod végre kézben.',
+'roles.4.title': 'Ügyfélszolgálati ügynök',
+'roles.4.desc':  'Válaszol a GYIK-re, kezeli a ticketeket, eszkalálja, ami nem fér bele. Éjjel-nappal, mindig egyformán.',
+'roles.5.title': 'Belső tudásasszisztens',
+'roles.5.desc':  'A te folyamataidra és dokumentumaidra van betanítva. A csapatod kérdez; ő válaszol — anélkül, hogy téged zavarna.',
+'roles.6.title': 'Ops és back-office',
+'roles.6.desc':  'Számla-egyeztetés, beszállítói utánkövetés, rendelésfeldolgozás. Az iroda hátsó része, ami magát futtatja.',
+```
+
+`T.de`:
+```javascript
+'roles.label':   'Was er kann',
+'roles.h2.a':    'Ein Mitarbeiter.',
+'roles.h2.b':    'Viele mögliche Rollen.',
+'roles.intro':   'Wähle die Arbeit, die du eigentlich gut machen würdest, wenn du Zeit hättest. Wir bauen den KI-Mitarbeiter darum herum.',
+'roles.1.title': 'Assistent für repetitive Aufgaben',
+'roles.1.desc':  'Dateneingabe, Wochenreports, Informationen zwischen Tools übertragen. Die Arbeit, die niemand will, aber jeder braucht.',
+'roles.2.title': 'Recherche-Assistent',
+'roles.2.desc':  'Marktrecherche, Wettbewerbsbeobachtung, Lead-Anreicherung. Geliefert zu dir, statt in 30 offenen Tabs zu versinken.',
+'roles.3.title': 'Inbox & Triage',
+'roles.3.desc':  'Sortiert deine E-Mails, schreibt Antwortentwürfe, markiert, was wirklich zählt. Dein Postfach, endlich im Griff.',
+'roles.4.title': 'Kundenservice-Agent',
+'roles.4.desc':  'Beantwortet FAQs, bearbeitet Tickets, eskaliert den Rest. Rund um die Uhr, immer gleich konsistent.',
+'roles.5.title': 'Internes Wissensassistent',
+'roles.5.desc':  'Trainiert auf deine SOPs und Dokumente. Dein Team fragt; er antwortet — ohne dich zu stören.',
+'roles.6.title': 'Ops & Back-Office',
+'roles.6.desc':  'Rechnungsabgleich, Lieferanten-Follow-ups, Auftragsabwicklung. Das Back-Office, das sich selbst erledigt.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected:
+- "What it can do" section on a slightly darker off-white background
+- 6 cards in a responsive grid (1 / 2 / 3 columns)
+- Each card has a sage icon square, role title, one-line description
+- Hover: border turns sage, lifts 2px
+- All three languages translate
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add roles strip with 6 example digital-employee roles"
+```
+
+---
+
+## Task 5: How it works (4 steps)
+
+**Files:** Modify `index.html` — append how `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append "how" CSS**
+
+```css
+.how h2 { max-width: 18ch; margin-bottom: 3rem; }
+.steps { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 768px) { .steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; } }
+
+.step { display: flex; gap: 1.25rem; }
+.step-num {
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink); color: var(--bg);
+  border-radius: 999px;
+  font-weight: 600; font-size: 0.95rem;
+}
+.step h3 { margin-bottom: 0.4rem; }
+.step p { color: var(--ink-soft); font-size: 0.97rem; }
+```
+
+- [ ] **Step 2: Append the "how" `<section>` after roles**
+
+```html
+<section class="section how" id="how">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="how.label">How it works</div>
+      <h2>
+        <span data-i18n="how.h2.a">Four steps to a</span>
+        <em data-i18n="how.h2.b">working employee.</em>
+      </h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">1</div>
+        <div>
+          <h3 data-i18n="how.1.title">Discovery call</h3>
+          <p data-i18n="how.1.desc">A 30-minute call to understand your business and the work you'd like to hand off.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">2</div>
+        <div>
+          <h3 data-i18n="how.2.title">We configure</h3>
+          <p data-i18n="how.2.desc">We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">3</div>
+        <div>
+          <h3 data-i18n="how.3.title">Day 1 generalist</h3>
+          <p data-i18n="how.3.desc">Your employee starts working in days. Capable, responsive, useful from day one.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">4</div>
+        <div>
+          <h3 data-i18n="how.4.title">Day 90 specialist</h3>
+          <p data-i18n="how.4.desc">We keep tuning. Feedback shapes memory. By month three, it's a specialist at your version of the job.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append "how" keys**
+
+`T.en`:
+```javascript
+'how.label':   'How it works',
+'how.h2.a':    'Four steps to a',
+'how.h2.b':    'working employee.',
+'how.1.title': 'Discovery call',
+'how.1.desc':  'A 30-minute call to understand your business and the work you\'d like to hand off.',
+'how.2.title': 'We configure',
+'how.2.desc':  'We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.',
+'how.3.title': 'Day 1 generalist',
+'how.3.desc':  'Your employee starts working in days. Capable, responsive, useful from day one.',
+'how.4.title': 'Day 90 specialist',
+'how.4.desc':  'We keep tuning. Feedback shapes memory. By month three, it\'s a specialist at your version of the job.',
+```
+
+`T.hu`:
+```javascript
+'how.label':   'Hogyan működik',
+'how.h2.a':    'Négy lépés egy',
+'how.h2.b':    'dolgozó munkavállalóig.',
+'how.1.title': 'Felfedező hívás',
+'how.1.desc':  'Egy 30 perces beszélgetés, hogy megértsük a vállalkozásodat és azt a munkát, amit átadnál.',
+'how.2.title': 'Beüzemelünk',
+'how.2.desc':  'Beállítjuk az ügynököt a Hermes Agent harness-en, csatlakoztatjuk az eszközeidet, és megírjuk a runbookot.',
+'how.3.title': '1. nap: generalista',
+'how.3.desc':  'A munkavállalód napok alatt elkezd dolgozni. Hozzáértő, reaktív, az első naptól hasznos.',
+'how.4.title': '90. nap: specialista',
+'how.4.desc':  'Folyamatosan hangoljuk. A visszajelzések alakítják a memóriáját. A harmadik hónapra a te változatodban specialista.',
+```
+
+`T.de`:
+```javascript
+'how.label':   'So funktioniert es',
+'how.h2.a':    'Vier Schritte zu einem',
+'how.h2.b':    'arbeitenden Mitarbeiter.',
+'how.1.title': 'Erstgespräch',
+'how.1.desc':  'Ein 30-minütiges Gespräch, um dein Geschäft und die Arbeit, die du abgeben möchtest, zu verstehen.',
+'how.2.title': 'Wir konfigurieren',
+'how.2.desc':  'Wir richten deinen Agenten auf der Hermes Agent Harness ein, verbinden deine Tools und schreiben das Runbook.',
+'how.3.title': 'Tag 1: Generalist',
+'how.3.desc':  'Dein Mitarbeiter arbeitet innerhalb von Tagen. Fähig, reaktiv, ab Tag eins nützlich.',
+'how.4.title': 'Tag 90: Spezialist',
+'how.4.desc':  'Wir tunen kontinuierlich. Feedback formt das Gedächtnis. Nach drei Monaten ist er Spezialist für deine Variante des Jobs.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: 4 numbered steps in 2×2 grid on desktop, italic emphasis on "working employee." in sage, all three languages render.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add how-it-works section with 4 steps"
+```
+
+---
+
+## Task 6: Day 1 → Day 90 journey
+
+**Files:** Modify `index.html` — append journey `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append journey CSS**
+
+```css
+.journey { background: var(--ink); color: var(--bg); }
+.journey h2 { color: var(--bg); max-width: 18ch; margin-bottom: 3rem; }
+.journey h2 em { color: var(--accent-2); }
+.journey .section-label { color: var(--accent-2); }
+
+.journey-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 800px) { .journey-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; } }
+
+.journey-card {
+  padding: 1.75rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+}
+.journey-card h3 { color: var(--bg); margin-bottom: 0.4rem; }
+.journey-card p { color: #cfd1cd; font-size: 0.97rem; }
+.journey-day {
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.75rem;
+}
+```
+
+- [ ] **Step 2: Append journey `<section>` after the "how" section**
+
+```html
+<section class="section journey">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="journey.label">The journey</div>
+      <h2>
+        <span data-i18n="journey.h2.a">Generalist on Monday.</span>
+        <em data-i18n="journey.h2.b">Specialist by quarter-end.</em>
+      </h2>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-card reveal reveal-delay-1">
+        <div class="journey-day" data-i18n="journey.1.day">Day 1</div>
+        <h3 data-i18n="journey.1.title">Trained on your runbook</h3>
+        <p data-i18n="journey.1.desc">Connected to your tools. Working the moment you say go. Knows the basics of your business and the shape of the job.</p>
+      </div>
+      <div class="journey-card reveal reveal-delay-2">
+        <div class="journey-day" data-i18n="journey.2.day">Day 30</div>
+        <h3 data-i18n="journey.2.title">Knows your edge cases</h3>
+        <p data-i18n="journey.2.desc">Has seen your customers, your exceptions, your preferences. Stops asking the same questions twice.</p>
+      </div>
+      <div class="journey-card reveal reveal-delay-3">
+        <div class="journey-day" data-i18n="journey.3.day">Day 90</div>
+        <h3 data-i18n="journey.3.title">Indistinguishable from a senior</h3>
+        <p data-i18n="journey.3.desc">A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append journey keys**
+
+`T.en`:
+```javascript
+'journey.label':   'The journey',
+'journey.h2.a':    'Generalist on Monday.',
+'journey.h2.b':    'Specialist by quarter-end.',
+'journey.1.day':   'Day 1',
+'journey.1.title': 'Trained on your runbook',
+'journey.1.desc':  'Connected to your tools. Working the moment you say go. Knows the basics of your business and the shape of the job.',
+'journey.2.day':   'Day 30',
+'journey.2.title': 'Knows your edge cases',
+'journey.2.desc':  'Has seen your customers, your exceptions, your preferences. Stops asking the same questions twice.',
+'journey.3.day':   'Day 90',
+'journey.3.title': 'Indistinguishable from a senior',
+'journey.3.desc':  'A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.',
+```
+
+`T.hu`:
+```javascript
+'journey.label':   'Az út',
+'journey.h2.a':    'Hétfőn generalista.',
+'journey.h2.b':    'A negyedév végére specialista.',
+'journey.1.day':   '1. nap',
+'journey.1.title': 'A runbookodra betanítva',
+'journey.1.desc':  'Az eszközeidhez csatlakoztatva. Dolgozik abban a pillanatban, hogy azt mondod, mehet. Tudja az alapokat a vállalkozásodról és a munka formájáról.',
+'journey.2.day':   '30. nap',
+'journey.2.title': 'Ismeri a kivételeket',
+'journey.2.desc':  'Látta az ügyfeleidet, a kivételeket, a preferenciáidat. Már nem kérdezi kétszer ugyanazt.',
+'journey.3.day':   '90. nap',
+'journey.3.title': 'Megkülönböztethetetlen egy senior munkatárstól',
+'journey.3.desc':  'Specialista a munkájában. Tud olyan dolgokat, amiket leírni elfelejtettél. Az új normális — és alig veszed észre, hogy dolgozik.',
+```
+
+`T.de`:
+```javascript
+'journey.label':   'Der Weg',
+'journey.h2.a':    'Montag Generalist.',
+'journey.h2.b':    'Quartalsende Spezialist.',
+'journey.1.day':   'Tag 1',
+'journey.1.title': 'Auf dein Runbook trainiert',
+'journey.1.desc':  'Mit deinen Tools verbunden. Arbeitet, sobald du grünes Licht gibst. Kennt die Grundlagen deines Geschäfts und die Form der Aufgabe.',
+'journey.2.day':   'Tag 30',
+'journey.2.title': 'Kennt deine Ausnahmen',
+'journey.2.desc':  'Hat deine Kunden, deine Ausnahmen, deine Präferenzen gesehen. Stellt nicht zweimal dieselbe Frage.',
+'journey.3.day':   'Tag 90',
+'journey.3.title': 'Nicht von einem Senior zu unterscheiden',
+'journey.3.desc':  'Spezialist für den Job. Weiß Dinge, die du vergessen hast aufzuschreiben. Das neue Normal — und du merkst kaum, dass er arbeitet.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: dark band section, 3 cards with sage day labels and white titles, italic sage emphasis renders.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add Day 1 → Day 90 journey section on dark band"
+```
+
+---
+
+## Task 7: What's included
+
+**Files:** Modify `index.html` — append included `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append "included" CSS**
+
+```css
+.included h2 { max-width: 22ch; margin-bottom: 3rem; }
+.included-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 700px) { .included-grid { grid-template-columns: 1fr 1fr; } }
+
+.included-card {
+  display: flex; gap: 1rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.included-card .check {
+  flex-shrink: 0; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 999px; font-weight: 700;
+}
+.included-card h3 { margin-bottom: 0.3rem; }
+.included-card p { color: var(--ink-soft); font-size: 0.95rem; }
+```
+
+- [ ] **Step 2: Append the included `<section>` after journey**
+
+```html
+<section class="section included">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="incl.label">What we handle</div>
+      <h2>
+        <span data-i18n="incl.h2.a">Flat fee.</span>
+        <em data-i18n="incl.h2.b">Everything included.</em>
+      </h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-card reveal reveal-delay-1">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.1.title">All the AI costs</h3>
+          <p data-i18n="incl.1.desc">We absorb every token and every server hour. No metered bills. No surprise overage.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-2">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.2.title">The best model for the job</h3>
+          <p data-i18n="incl.2.desc">Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don't choose. We do.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-3">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.3.title">EU hosting available</h3>
+          <p data-i18n="incl.3.desc">Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-1">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.4.title">Monitoring and tuning</h3>
+          <p data-i18n="incl.4.desc">We watch what your employee does. We fix what doesn't work. You don't touch infrastructure.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-2">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.5.title">One number to call</h3>
+          <p data-i18n="incl.5.desc">When something needs adjusting, you tell us. No support tickets. No prompt engineering.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-3">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.6.title">Cancel anytime</h3>
+          <p data-i18n="incl.6.desc">No annual contracts. No notice periods. We earn the next month or we don't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append "included" keys**
+
+`T.en`:
+```javascript
+'incl.label':   'What we handle',
+'incl.h2.a':    'Flat fee.',
+'incl.h2.b':    'Everything included.',
+'incl.1.title': 'All the AI costs',
+'incl.1.desc':  'We absorb every token and every server hour. No metered bills. No surprise overage.',
+'incl.2.title': 'The best model for the job',
+'incl.2.desc':  'Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don\'t choose. We do.',
+'incl.3.title': 'EU hosting available',
+'incl.3.desc':  'Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.',
+'incl.4.title': 'Monitoring and tuning',
+'incl.4.desc':  'We watch what your employee does. We fix what doesn\'t work. You don\'t touch infrastructure.',
+'incl.5.title': 'One number to call',
+'incl.5.desc':  'When something needs adjusting, you tell us. No support tickets. No prompt engineering.',
+'incl.6.title': 'Cancel anytime',
+'incl.6.desc':  'No annual contracts. No notice periods. We earn the next month or we don\'t.',
+```
+
+`T.hu`:
+```javascript
+'incl.label':   'Amit mi intézünk',
+'incl.h2.a':    'Fix havidíj.',
+'incl.h2.b':    'Minden benne van.',
+'incl.1.title': 'Az összes AI-költség',
+'incl.1.desc':  'Mi álljuk minden tokent és minden szerverórát. Nincs mért számla. Nincs meglepetés.',
+'incl.2.title': 'A feladathoz legjobb modell',
+'incl.2.desc':  'Modell-független routing. Olcsó modellek a rutin munkához. Csúcs-modellek a nehéz problémákhoz. Nem te választasz. Mi igen.',
+'incl.3.title': 'EU-s hosztolás',
+'incl.3.desc':  'Érzékeny adat? Saját üzemeltetésű, nyílt forrású modellekre irányítjuk EU-s infrastruktúrán. Az adatod nem hagyja el az EU-t.',
+'incl.4.title': 'Felügyelet és finomhangolás',
+'incl.4.desc':  'Figyeljük, mit csinál a munkavállalód. Megjavítjuk, ami nem működik. Te nem nyúlsz az infrához.',
+'incl.5.title': 'Egy szám, amit hívhatsz',
+'incl.5.desc':  'Ha valamin állítani kell, csak szólsz. Nincsenek support ticketek. Nincs prompt-mérnökölés.',
+'incl.6.title': 'Bármikor lemondható',
+'incl.6.desc':  'Nincs éves szerződés. Nincs felmondási idő. Megnyerjük a következő hónapot, vagy nem.',
+```
+
+`T.de`:
+```javascript
+'incl.label':   'Was wir übernehmen',
+'incl.h2.a':    'Fester Preis.',
+'incl.h2.b':    'Alles inklusive.',
+'incl.1.title': 'Alle KI-Kosten',
+'incl.1.desc':  'Wir tragen jedes Token und jede Serverstunde. Keine getakteten Rechnungen. Keine Überraschungs-Überschreitungen.',
+'incl.2.title': 'Das beste Modell für den Job',
+'incl.2.desc':  'Modell-agnostisches Routing. Günstige Modelle für Routine. Frontier-Modelle für harte Probleme. Du wählst nicht. Wir tun es.',
+'incl.3.title': 'EU-Hosting verfügbar',
+'incl.3.desc':  'Sensible Daten? Wir routen zu selbst gehosteten Open-Source-Modellen auf EU-Infrastruktur. Deine Daten verlassen die EU nicht.',
+'incl.4.title': 'Monitoring und Tuning',
+'incl.4.desc':  'Wir beobachten, was dein Mitarbeiter macht. Wir beheben, was nicht funktioniert. Du fasst keine Infrastruktur an.',
+'incl.5.title': 'Eine Nummer zum Anrufen',
+'incl.5.desc':  'Wenn etwas angepasst werden muss, sagst du es uns. Keine Support-Tickets. Kein Prompt-Engineering.',
+'incl.6.title': 'Jederzeit kündbar',
+'incl.6.desc':  'Keine Jahresverträge. Keine Kündigungsfristen. Wir verdienen uns den nächsten Monat — oder nicht.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: 6 cards in 2-col grid on desktop, sage circle ✓ on each, all 3 languages.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add 'what's included' section addressing flat-fee promise"
+```
+
+---
+
+## Task 8: Pricing (3 tiers)
+
+**Files:** Modify `index.html` — append pricing `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append pricing CSS**
+
+```css
+.pricing { background: var(--bg-2); }
+.pricing h2 { text-align: center; max-width: 22ch; margin: 0 auto 1rem; }
+.pricing-intro { text-align: center; color: var(--ink-soft); max-width: 38rem; margin: 0 auto 3rem; }
+
+.tiers {
+  display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+  max-width: 1100px; margin: 0 auto;
+}
+@media (min-width: 900px) {
+  .tiers { grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+}
+
+.tier {
+  display: flex; flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+}
+.tier.featured {
+  border-color: var(--accent);
+  box-shadow: 0 1px 0 var(--accent), 0 24px 50px -28px rgba(74,108,91,0.4);
+  position: relative;
+}
+.tier-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: 0.25rem 0.7rem;
+  background: var(--accent); color: var(--bg);
+  border-radius: 999px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.tier-name { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+.tier-price { display: flex; align-items: baseline; gap: 0.25rem; margin: 0.5rem 0 0.25rem; }
+.tier-price .amount { font-size: 2.4rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+.tier-price .period { font-size: 0.95rem; color: var(--muted); }
+.tier-tagline { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 1.5rem; min-height: 2.7em; }
+.tier-features { list-style: none; padding: 0; margin: 0 0 2rem; }
+.tier-features li {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  padding: 0.55rem 0; font-size: 0.92rem; color: var(--ink-soft);
+  border-top: 1px solid var(--border);
+}
+.tier-features li:first-child { border-top: none; }
+.tier-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.tier-cta { margin-top: auto; width: 100%; text-align: center; }
+.tier-cta .btn-primary { width: 100%; }
+.tier.featured .btn-primary { background: var(--accent); }
+.tier.featured .btn-primary:hover { background: var(--accent-2); }
+
+.pricing-foot { text-align: center; margin-top: 2rem; color: var(--muted); font-size: 0.9rem; }
+```
+
+- [ ] **Step 2: Append pricing `<section>` after included**
+
+```html
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" data-i18n="price.label">Pricing</div>
+      <h2>
+        <span data-i18n="price.h2.a">One plan per employee.</span>
+        <em data-i18n="price.h2.b">Cancel anytime.</em>
+      </h2>
+      <p class="pricing-intro" data-i18n="price.intro">Tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal reveal-delay-1">
+        <div class="tier-name" data-i18n="price.starter.name">Starter</div>
+        <div class="tier-price">
+          <span class="amount">€299</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.starter.tagline">Best for trying it; light repetitive tasks.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.starter.f1">1 hour of tuning per month</li>
+          <li data-i18n="price.starter.f2">1 connected source</li>
+          <li data-i18n="price.starter.f3">Memory & feedback loop</li>
+          <li data-i18n="price.starter.f4">All AI and infrastructure costs included</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-starter" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+      <div class="tier featured reveal reveal-delay-2">
+        <span class="tier-badge" data-i18n="price.popular">Most popular</span>
+        <div class="tier-name" data-i18n="price.specialist.name">Specialist</div>
+        <div class="tier-price">
+          <span class="amount">€699</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.specialist.tagline">Best for real role replacement.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.specialist.f1">3 hours of tuning per month</li>
+          <li data-i18n="price.specialist.f2">Up to 5 connected sources</li>
+          <li data-i18n="price.specialist.f3">Priority response to tuning requests</li>
+          <li data-i18n="price.specialist.f4">Quarterly review</li>
+          <li data-i18n="price.specialist.f5">Everything in Starter</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-specialist" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+      <div class="tier reveal reveal-delay-3">
+        <div class="tier-name" data-i18n="price.workforce.name">Workforce</div>
+        <div class="tier-price">
+          <span class="amount">€1,499</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.workforce.tagline">Best for deep specialists and mission-critical work.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.workforce.f1">8 hours of tuning per month</li>
+          <li data-i18n="price.workforce.f2">Unlimited connected sources</li>
+          <li data-i18n="price.workforce.f3">Dedicated specialist on our team</li>
+          <li data-i18n="price.workforce.f4">Custom integrations on request</li>
+          <li data-i18n="price.workforce.f5">Everything in Specialist</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-workforce" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+    </div>
+    <p class="pricing-foot" data-i18n="price.foot">No setup fee · No annual contract · Cancel anytime</p>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append pricing keys**
+
+`T.en`:
+```javascript
+'price.label':              'Pricing',
+'price.h2.a':               'One plan per employee.',
+'price.h2.b':               'Cancel anytime.',
+'price.intro':              'Tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.',
+'price.period':             '/mo',
+'price.popular':            'Most popular',
+'price.cta':                'Book a call to start',
+'price.foot':               'No setup fee · No annual contract · Cancel anytime',
+'price.starter.name':       'Starter',
+'price.starter.tagline':    'Best for trying it; light repetitive tasks.',
+'price.starter.f1':         '1 hour of tuning per month',
+'price.starter.f2':         '1 connected source',
+'price.starter.f3':         'Memory & feedback loop',
+'price.starter.f4':         'All AI and infrastructure costs included',
+'price.specialist.name':    'Specialist',
+'price.specialist.tagline': 'Best for real role replacement.',
+'price.specialist.f1':      '3 hours of tuning per month',
+'price.specialist.f2':      'Up to 5 connected sources',
+'price.specialist.f3':      'Priority response to tuning requests',
+'price.specialist.f4':      'Quarterly review',
+'price.specialist.f5':      'Everything in Starter',
+'price.workforce.name':     'Workforce',
+'price.workforce.tagline':  'Best for deep specialists and mission-critical work.',
+'price.workforce.f1':       '8 hours of tuning per month',
+'price.workforce.f2':       'Unlimited connected sources',
+'price.workforce.f3':       'Dedicated specialist on our team',
+'price.workforce.f4':       'Custom integrations on request',
+'price.workforce.f5':       'Everything in Specialist',
+```
+
+`T.hu`:
+```javascript
+'price.label':              'Árazás',
+'price.h2.a':               'Egy csomag munkavállalónként.',
+'price.h2.b':               'Bármikor lemondható.',
+'price.intro':              'A csomagok abban különböznek, hány óra emberi finomhangolást foglalnak magukban havonta. A beüzemelés mindig ingyenes; egy híváson indulunk.',
+'price.period':             '/hó',
+'price.popular':            'Legnépszerűbb',
+'price.cta':                'Foglalj hívást a kezdéshez',
+'price.foot':               'Nincs beüzemelési díj · Nincs éves szerződés · Bármikor lemondható',
+'price.starter.name':       'Starter',
+'price.starter.tagline':    'Kipróbáláshoz, könnyű ismétlődő feladatokhoz.',
+'price.starter.f1':         '1 óra finomhangolás havonta',
+'price.starter.f2':         '1 csatlakoztatott forrás',
+'price.starter.f3':         'Memória és visszajelzés-hurok',
+'price.starter.f4':         'Minden AI- és infrastruktúra-költség benne',
+'price.specialist.name':    'Specialist',
+'price.specialist.tagline': 'Valódi szerepkör-kiváltáshoz.',
+'price.specialist.f1':      '3 óra finomhangolás havonta',
+'price.specialist.f2':      'Legfeljebb 5 csatlakoztatott forrás',
+'price.specialist.f3':      'Prioritásos válasz a kéréseidre',
+'price.specialist.f4':      'Negyedéves áttekintés',
+'price.specialist.f5':      'Minden a Starter csomagból',
+'price.workforce.name':     'Workforce',
+'price.workforce.tagline':  'Mély specialistákhoz, üzletkritikus munkához.',
+'price.workforce.f1':       '8 óra finomhangolás havonta',
+'price.workforce.f2':       'Korlátlan csatlakoztatott forrás',
+'price.workforce.f3':       'Dedikált specialista a mi csapatunkból',
+'price.workforce.f4':       'Egyedi integrációk kérésre',
+'price.workforce.f5':       'Minden a Specialist csomagból',
+```
+
+`T.de`:
+```javascript
+'price.label':              'Preise',
+'price.h2.a':               'Ein Plan pro Mitarbeiter.',
+'price.h2.b':               'Jederzeit kündbar.',
+'price.intro':              'Die Tarife unterscheiden sich darin, wie viele Tuning-Stunden pro Monat enthalten sind. Setup ist immer kostenlos; du startest mit einem Gespräch.',
+'price.period':             '/Monat',
+'price.popular':            'Am beliebtesten',
+'price.cta':                'Gespräch zum Start buchen',
+'price.foot':               'Keine Einrichtungsgebühr · Kein Jahresvertrag · Jederzeit kündbar',
+'price.starter.name':       'Starter',
+'price.starter.tagline':    'Zum Ausprobieren; leichte repetitive Aufgaben.',
+'price.starter.f1':         '1 Stunde Tuning pro Monat',
+'price.starter.f2':         '1 angebundene Quelle',
+'price.starter.f3':         'Speicher & Feedback-Schleife',
+'price.starter.f4':         'Alle KI- und Infrastrukturkosten enthalten',
+'price.specialist.name':    'Specialist',
+'price.specialist.tagline': 'Für echten Rollenersatz.',
+'price.specialist.f1':      '3 Stunden Tuning pro Monat',
+'price.specialist.f2':      'Bis zu 5 angebundene Quellen',
+'price.specialist.f3':      'Priorisierte Antwortzeiten',
+'price.specialist.f4':      'Quartalsreview',
+'price.specialist.f5':      'Alles aus Starter',
+'price.workforce.name':     'Workforce',
+'price.workforce.tagline':  'Für tiefe Spezialisten und geschäftskritische Arbeit.',
+'price.workforce.f1':       '8 Stunden Tuning pro Monat',
+'price.workforce.f2':       'Unbegrenzt viele angebundene Quellen',
+'price.workforce.f3':       'Dedizierter Spezialist aus unserem Team',
+'price.workforce.f4':       'Maßgeschneiderte Integrationen auf Anfrage',
+'price.workforce.f5':       'Alles aus Specialist',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: 3 pricing cards, Specialist with badge + sage glow, "Book a call to start" CTAs on each, footer microcopy centered.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add three-tier pricing section with Specialist highlighted"
+```
+
+---
+
+## Task 9: Why us
+
+**Files:** Modify `index.html` — append whyus `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append "why us" CSS**
+
+```css
+.whyus-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .whyus-grid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+
+.whyus-body p { font-size: 1.05rem; margin-bottom: 1rem; }
+.whyus-body p:last-child { margin-bottom: 0; }
+
+.whyus-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+.whyus-stat { padding: 1.25rem; background: var(--accent-bg); border-radius: var(--radius-sm); }
+.whyus-stat .num {
+  display: block; font-size: 1.75rem; font-weight: 700;
+  color: var(--accent); letter-spacing: -0.01em;
+}
+.whyus-stat .lab { font-size: 0.88rem; color: var(--ink-soft); }
+```
+
+- [ ] **Step 2: Append the "why us" `<section>` after pricing**
+
+```html
+<section class="section whyus">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="whyus.label">Why us</div>
+      <h2>
+        <span data-i18n="whyus.h2.a">Built by operators,</span>
+        <em data-i18n="whyus.h2.b">not prompt engineers.</em>
+      </h2>
+    </div>
+    <div class="whyus-grid">
+      <div class="whyus-body reveal reveal-delay-1">
+        <p data-i18n="whyus.p1">We've been shipping production software since 2006 — enterprise data integration, high-availability systems, the kind of platforms where downtime is not an option.</p>
+        <p data-i18n="whyus.p2">AgentHeaven exists because we got tired of watching small businesses get sold AI hype by people who've never run anything in production. Your digital employee is built on the same discipline as the systems we've maintained for two decades.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="whyus-stats">
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s1.num">20+</span>
+            <span class="lab" data-i18n="whyus.s1.lab">years in production IT</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s2.num">EU</span>
+            <span class="lab" data-i18n="whyus.s2.lab">data residency available</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s3.num">Model-agnostic</span>
+            <span class="lab" data-i18n="whyus.s3.lab">best model per task</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s4.num">No lock-in</span>
+            <span class="lab" data-i18n="whyus.s4.lab">cancel any month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append "why us" keys**
+
+`T.en`:
+```javascript
+'whyus.label':  'Why us',
+'whyus.h2.a':   'Built by operators,',
+'whyus.h2.b':   'not prompt engineers.',
+'whyus.p1':     'We\'ve been shipping production software since 2006 — enterprise data integration, high-availability systems, the kind of platforms where downtime is not an option.',
+'whyus.p2':     'AgentHeaven exists because we got tired of watching small businesses get sold AI hype by people who\'ve never run anything in production. Your digital employee is built on the same discipline as the systems we\'ve maintained for two decades.',
+'whyus.s1.num': '20+',
+'whyus.s1.lab': 'years in production IT',
+'whyus.s2.num': 'EU',
+'whyus.s2.lab': 'data residency available',
+'whyus.s3.num': 'Model-agnostic',
+'whyus.s3.lab': 'best model per task',
+'whyus.s4.num': 'No lock-in',
+'whyus.s4.lab': 'cancel any month',
+```
+
+`T.hu`:
+```javascript
+'whyus.label':  'Miért mi',
+'whyus.h2.a':   'Üzemeltetők építik,',
+'whyus.h2.b':   'nem prompt-mérnökök.',
+'whyus.p1':     '2006 óta szállítunk éles szoftvert — vállalati adatintegráció, magas rendelkezésre állású rendszerek; olyan platformok, ahol a leállás nem opció.',
+'whyus.p2':     'Az AgentHeaven azért létezik, mert eluntuk nézni, ahogy kisvállalkozásoknak AI-hype-ot adnak el olyanok, akik még soha nem üzemeltettek semmit élesben. A te digitális munkavállalód ugyanazzal a fegyelemmel épül, mint a rendszerek, amiket két évtizede üzemeltetünk.',
+'whyus.s1.num': '20+',
+'whyus.s1.lab': 'év éles IT-üzemeltetésben',
+'whyus.s2.num': 'EU',
+'whyus.s2.lab': 'adattárolás választható',
+'whyus.s3.num': 'Modellfüggetlen',
+'whyus.s3.lab': 'legjobb modell minden feladathoz',
+'whyus.s4.num': 'Nincs lock-in',
+'whyus.s4.lab': 'bármely hónap végén lemondható',
+```
+
+`T.de`:
+```javascript
+'whyus.label':  'Warum wir',
+'whyus.h2.a':   'Gebaut von Operators,',
+'whyus.h2.b':   'nicht von Prompt Engineers.',
+'whyus.p1':     'Wir liefern seit 2006 Produktivsoftware — Enterprise-Datenintegration, hochverfügbare Systeme; Plattformen, bei denen Downtime keine Option ist.',
+'whyus.p2':     'AgentHeaven gibt es, weil wir es leid waren, dass kleinen Unternehmen KI-Hype von Leuten verkauft wird, die nie etwas im Produktivbetrieb gefahren haben. Dein KI-Mitarbeiter ist mit derselben Disziplin gebaut wie die Systeme, die wir seit zwei Jahrzehnten betreiben.',
+'whyus.s1.num': '20+',
+'whyus.s1.lab': 'Jahre produktive IT',
+'whyus.s2.num': 'EU',
+'whyus.s2.lab': 'Datenresidenz verfügbar',
+'whyus.s3.num': 'Modell-agnostisch',
+'whyus.s3.lab': 'bestes Modell pro Aufgabe',
+'whyus.s4.num': 'Kein Lock-in',
+'whyus.s4.lab': 'jederzeit monatlich kündbar',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: two-column section with text + 2×2 stat grid; sage stat cards; all 3 languages render.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add 'why us' section with founders' credibility note"
+```
+
+---
+
+## Task 10: FAQ
+
+**Files:** Modify `index.html` — append faq `<section>`, CSS, keys.
+
+### Steps
+
+- [ ] **Step 1: Append FAQ CSS**
+
+```css
+.faq h2 { text-align: center; margin-bottom: 3rem; }
+
+.faq-list {
+  max-width: 760px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%;
+  padding: 1.1rem 1.25rem;
+  background: transparent; border: none; cursor: pointer;
+  font-family: inherit; font-size: 1rem; font-weight: 600;
+  color: var(--ink); text-align: left;
+}
+.faq-q::after {
+  content: '+';
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-left: 1rem;
+  transition: transform 0.2s ease;
+}
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.25s ease, padding 0.25s ease;
+  padding: 0 1.25rem;
+  color: var(--ink-soft);
+  font-size: 0.97rem; line-height: 1.6;
+}
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding: 0 1.25rem 1.25rem;
+}
+```
+
+- [ ] **Step 2: Append FAQ `<section>` after the "why us" section**
+
+Each `.faq-q` button gets `aria-expanded="false"` and an `aria-controls` linking to the answer's id. The accordion script (Task 12) toggles these attributes.
+
+```html
+<section class="section faq">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" data-i18n="faq.label">FAQ</div>
+      <h2 data-i18n="faq.h2">Common questions.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" data-i18n="faq.1.q">What if it makes mistakes?</button>
+        <div class="faq-a" id="faq-a-1" data-i18n="faq.1.a">It will, especially in the first few weeks. That's why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" data-i18n="faq.2.q">Which LLM does it use?</button>
+        <div class="faq-a" id="faq-a-2" data-i18n="faq.2.a">We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" data-i18n="faq.3.q">What about my data and privacy?</button>
+        <div class="faq-a" id="faq-a-3" data-i18n="faq.3.a">Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" data-i18n="faq.4.q">What if I want to cancel?</button>
+        <div class="faq-a" id="faq-a-4" data-i18n="faq.4.a">Email us. No contract, no notice period, no exit fees. We earn the next month or we don't.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" data-i18n="faq.5.q">Can it do my specific task?</button>
+        <div class="faq-a" id="faq-a-5" data-i18n="faq.5.a">Probably. That's what the 30-minute consultation is for. We say no if it isn't a fit — we'd rather miss a sale than ship something that fails.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" data-i18n="faq.6.q">How is this different from ChatGPT Teams?</button>
+        <div class="faq-a" id="faq-a-6" data-i18n="faq.6.a">ChatGPT is a tool your team uses. A digital employee is a worker we configure, host, and tune for a specific job. You delegate the work, not the prompting.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7" data-i18n="faq.7.q">Can I bring my own model?</button>
+        <div class="faq-a" id="faq-a-7" data-i18n="faq.7.a">On the Workforce tier, yes — we can route to your private deployment or a specific provider account.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8" data-i18n="faq.8.q">How long does setup take?</button>
+        <div class="faq-a" id="faq-a-8" data-i18n="faq.8.a">From discovery call to working employee: 5–10 business days, depending on the integrations involved.</div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 3: Append FAQ keys**
+
+`T.en`:
+```javascript
+'faq.label': 'FAQ',
+'faq.h2':    'Common questions.',
+'faq.1.q':   'What if it makes mistakes?',
+'faq.1.a':   'It will, especially in the first few weeks. That\'s why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material.',
+'faq.2.q':   'Which LLM does it use?',
+'faq.2.a':   'We\'re model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.',
+'faq.3.q':   'What about my data and privacy?',
+'faq.3.a':   'Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party\'s model.',
+'faq.4.q':   'What if I want to cancel?',
+'faq.4.a':   'Email us. No contract, no notice period, no exit fees. We earn the next month or we don\'t.',
+'faq.5.q':   'Can it do my specific task?',
+'faq.5.a':   'Probably. That\'s what the 30-minute consultation is for. We say no if it isn\'t a fit — we\'d rather miss a sale than ship something that fails.',
+'faq.6.q':   'How is this different from ChatGPT Teams?',
+'faq.6.a':   'ChatGPT is a tool your team uses. A digital employee is a worker we configure, host, and tune for a specific job. You delegate the work, not the prompting.',
+'faq.7.q':   'Can I bring my own model?',
+'faq.7.a':   'On the Workforce tier, yes — we can route to your private deployment or a specific provider account.',
+'faq.8.q':   'How long does setup take?',
+'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.',
+```
+
+`T.hu`:
+```javascript
+'faq.label': 'GYIK',
+'faq.h2':    'Gyakori kérdések.',
+'faq.1.q':   'Mi van, ha hibázik?',
+'faq.1.a':   'Fog, főleg az első hetekben. Pont ezért figyeljük folyamatosan és hangoljuk aktívan. Amit jelzel, azt állítjuk. A hibák lesznek a tanítóanyag.',
+'faq.2.q':   'Milyen LLM-et használ?',
+'faq.2.a':   'Modellfüggetlenek vagyunk. Az ügynököd nyílt forrású modelleket használ a rutin feladatokhoz (Llama, Qwen, Hermes) és csúcs modelleket (Claude, GPT) a nehezebb gondolkodáshoz. A Nous Research Hermes Agent harness vezérli a routingot.',
+'faq.3.q':   'Mi van az adataimmal és a privátszférával?',
+'faq.3.a':   'Titkosítva tároljuk, ügyfelenként elszigetelve. Érzékeny adat esetén saját üzemeltetésű, nyílt forrású modellekre routingolunk EU-s infrastruktúrán — az adatod nem hagyja el az EU-t, és nem tanít harmadik fél modelljét.',
+'faq.4.q':   'Mi van, ha le akarom mondani?',
+'faq.4.a':   'Írj egy e-mailt. Nincs szerződés, nincs felmondási idő, nincs kilépési díj. Megnyerjük a következő hónapot, vagy nem.',
+'faq.5.q':   'Meg tudja csinálni a konkrét feladatomat?',
+'faq.5.a':   'Valószínűleg igen. Pont ezért van a 30 perces konzultáció. Nemet mondunk, ha nem passzol — inkább veszítünk eladást, mint hogy valami hibásat szállítsunk.',
+'faq.6.q':   'Miben más ez, mint a ChatGPT Teams?',
+'faq.6.a':   'A ChatGPT egy eszköz, amit a csapatod használ. Egy digitális munkavállalót mi konfigurálunk, futtatunk és hangolunk egy konkrét munkára. Te a munkát delegálod, nem a promptolást.',
+'faq.7.q':   'Hozhatom a saját modellem?',
+'faq.7.a':   'Workforce csomagban igen — routingolhatunk a saját privát deploymentedre vagy egy konkrét provider-fiókodra.',
+'faq.8.q':   'Mennyi a beüzemelés?',
+'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.',
+```
+
+`T.de`:
+```javascript
+'faq.label': 'FAQ',
+'faq.h2':    'Häufige Fragen.',
+'faq.1.q':   'Was, wenn er Fehler macht?',
+'faq.1.a':   'Wird er, besonders in den ersten Wochen. Genau deshalb überwachen wir alles und tunen aktiv. Was du markierst, passen wir an. Fehler werden zum Trainingsmaterial.',
+'faq.2.q':   'Welches LLM nutzt er?',
+'faq.2.a':   'Wir sind modell-agnostisch. Dein Agent nutzt Open-Source-Modelle für Routine (Llama, Qwen, Hermes) und Frontier-Modelle (Claude, GPT) für anspruchsvolleres Denken. Die Hermes Agent Harness von Nous Research steuert das Routing.',
+'faq.3.q':   'Was ist mit meinen Daten und der Privatsphäre?',
+'faq.3.a':   'Verschlüsselt gespeichert, pro Kunde isoliert. Für sensible Daten routen wir auf selbst gehostete Open-Source-Modelle in der EU-Infrastruktur — deine Daten verlassen die EU nicht und trainieren kein Drittanbieter-Modell.',
+'faq.4.q':   'Was, wenn ich kündigen will?',
+'faq.4.a':   'Schreib uns eine E-Mail. Kein Vertrag, keine Frist, keine Ausstiegsgebühr. Wir verdienen uns den nächsten Monat — oder nicht.',
+'faq.5.q':   'Kann er meine spezifische Aufgabe erledigen?',
+'faq.5.a':   'Wahrscheinlich. Genau dafür ist das 30-minütige Gespräch da. Wir sagen Nein, wenn es nicht passt — wir verlieren lieber einen Verkauf, als etwas zu liefern, das versagt.',
+'faq.6.q':   'Was unterscheidet das von ChatGPT Teams?',
+'faq.6.a':   'ChatGPT ist ein Tool, das dein Team benutzt. Ein KI-Mitarbeiter ist eine Arbeitskraft, die wir für eine bestimmte Aufgabe konfigurieren, hosten und tunen. Du delegierst die Arbeit — nicht das Prompten.',
+'faq.7.q':   'Kann ich mein eigenes Modell mitbringen?',
+'faq.7.a':   'Im Workforce-Tarif ja — wir können auf dein privates Deployment oder einen bestimmten Anbieter-Account routen.',
+'faq.8.q':   'Wie lange dauert das Setup?',
+'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected: 8 question rows, each with "+" indicator. Click behavior wired in Task 12 — answers remain collapsed for now.
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add FAQ section with 8 questions (open/close wired in task 12)"
+```
+
+---
+
+## Task 11: Final CTA + footer
+
+**Files:** Modify `index.html` — append CTA `<section>` and `<footer>`, append CSS, append keys.
+
+The CTA reassurance line contains an email link — to avoid HTML in translation values, this is structured as a `<span>` plus a separate `<a>`, each with its own `data-i18n` key.
+
+### Steps
+
+- [ ] **Step 1: Append CTA + footer CSS**
+
+```css
+.cta {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 5rem 0;
+}
+.cta h2 { color: var(--bg); text-align: center; max-width: 22ch; margin: 0 auto 1rem; }
+.cta h2 em { color: var(--accent-2); }
+.cta .section-label { color: var(--accent-2); text-align: center; margin-bottom: 1rem; }
+.cta-sub {
+  text-align: center; color: #c5c7c4;
+  max-width: 38rem; margin: 0 auto 2.5rem;
+  font-size: 1.05rem;
+}
+.cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem 1rem; }
+.cta .btn-primary { background: var(--accent); color: var(--bg); }
+.cta .btn-primary:hover { background: var(--accent-2); }
+.cta-reassure {
+  margin-top: 1rem; text-align: center;
+  color: #93958f; font-size: 0.88rem;
+}
+.cta-reassure a { color: inherit; text-decoration: underline; }
+
+footer.site-foot {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem; color: var(--muted);
+}
+footer.site-foot .container {
+  display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
+}
+@media (min-width: 700px) {
+  footer.site-foot .container { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+.foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.foot-links a { color: var(--muted); }
+.foot-links a:hover { color: var(--ink); }
+```
+
+- [ ] **Step 2: Append CTA `<section>` and `<footer>` after the FAQ section**
+
+```html
+<section class="section cta" id="cta">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="cta.label">Get started</div>
+      <h2>
+        <span data-i18n="cta.h2.a">30 minutes. No commitment.</span>
+        <em data-i18n="cta.h2.b">We listen first.</em>
+      </h2>
+      <p class="cta-sub" data-i18n="cta.sub">Tell us about the work you'd hand off if you could. We'll tell you whether a digital employee makes sense — honestly.</p>
+      <div class="cta-actions">
+        <a href="#" id="finalBookBtn" class="btn-primary" data-cta="final" data-i18n="cta.btn">Book your consultation</a>
+      </div>
+      <p class="cta-reassure">
+        <span data-i18n="cta.reassure.text">Or email us:</span>
+        <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="container">
+    <div data-i18n="footer.copy">© 2026 AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+      <a href="terms.html" data-i18n="footer.terms">Terms</a>
+      <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
+    </div>
+  </div>
+</footer>
+```
+
+- [ ] **Step 3: Append CTA + footer keys**
+
+`T.en`:
+```javascript
+'cta.label':         'Get started',
+'cta.h2.a':          '30 minutes. No commitment.',
+'cta.h2.b':          'We listen first.',
+'cta.sub':           'Tell us about the work you\'d hand off if you could. We\'ll tell you whether a digital employee makes sense — honestly.',
+'cta.btn':           'Book your consultation',
+'cta.reassure.text': 'Or email us:',
+'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+'footer.privacy':    'Privacy',
+'footer.terms':      'Terms',
+```
+
+`T.hu`:
+```javascript
+'cta.label':         'Indulás',
+'cta.h2.a':          '30 perc. Semmi kötelezettség.',
+'cta.h2.b':          'Először meghallgatunk.',
+'cta.sub':           'Mondd el, milyen munkát adnál át, ha tehetnéd. Megmondjuk őszintén, van-e értelme a digitális munkavállalónak nálad.',
+'cta.btn':           'Foglald le a konzultációd',
+'cta.reassure.text': 'Vagy írj nekünk:',
+'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+'footer.privacy':    'Adatvédelem',
+'footer.terms':      'Feltételek',
+```
+
+`T.de`:
+```javascript
+'cta.label':         'Loslegen',
+'cta.h2.a':          '30 Minuten. Keine Verpflichtung.',
+'cta.h2.b':          'Wir hören zuerst zu.',
+'cta.sub':           'Erzähl uns von der Arbeit, die du abgeben würdest, wenn du könntest. Wir sagen dir ehrlich, ob ein KI-Mitarbeiter Sinn ergibt.',
+'cta.btn':           'Beratungsgespräch buchen',
+'cta.reassure.text': 'Oder schreib uns:',
+'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+'footer.privacy':    'Datenschutz',
+'footer.terms':      'AGB',
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Reload. Expected:
+- Dark final-CTA band; centered sage italic "We listen first."
+- Single sage "Book your consultation" button
+- "Or email us: info@agentheaven.ai" with the email as an underlined link
+- Footer below with copyright + 3 links
+
+- [ ] **Step 5: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): add final CTA and footer"
+```
+
+---
+
+## Task 12: JavaScript — full wire-up
+
+**Files:** Modify `index.html` — replace the function-and-init block at the bottom of `<script>` (leave the `T` object intact).
+
+### Steps
+
+- [ ] **Step 1: Replace the part of the `<script>` from `var currentLang ...` to the end**
+
+Find the line `var currentLang = localStorage.getItem('ah_lang') ...` in the script block. Replace **everything from that line down to (but not including) the closing `</script>` tag** with the following code. **Do not modify the `T` object** above it — Tasks 2–11 populated it.
+
+```javascript
+var currentLang = localStorage.getItem('ah_lang') || (navigator.language && navigator.language.slice(0,2)) || 'en';
+if (!T[currentLang]) currentLang = 'en';
+
+function t(key) {
+  return (T[currentLang] && T[currentLang][key]) || (T.en && T.en[key]) || '';
+}
+
+function applyTranslations() {
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    var val = t(key);
+    if (val) el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-placeholder');
+    var val = t(key);
+    if (val) el.setAttribute('placeholder', val);
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-aria-label');
+    var val = t(key);
+    if (val) el.setAttribute('aria-label', val);
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
+  });
+}
+
+/* Meta Pixel base. No-op when META_PIXEL_ID is empty. */
+function loadMetaPixel() {
+  if (!META_PIXEL_ID) return;
+  /* eslint-disable */
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  /* eslint-enable */
+  window.fbq('init', META_PIXEL_ID);
+  window.fbq('track', 'PageView');
+}
+
+function trackLead(source) {
+  if (window.fbq) window.fbq('track', 'Lead', { source: source || 'unknown' });
+}
+
+/* Wire booking CTAs to BOOKING_URL and fire Lead events on click. */
+function wireBookingButtons() {
+  var selectors = ['a[data-cta]', '#navBookBtn', '#finalBookBtn'];
+  document.querySelectorAll(selectors.join(',')).forEach(function(a) {
+    a.setAttribute('href', BOOKING_URL);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
+    a.addEventListener('click', function() {
+      var src = a.getAttribute('data-cta');
+      if (!src) src = a.id === 'navBookBtn' ? 'nav' : a.id === 'finalBookBtn' ? 'final' : 'cta';
+      trackLead(src);
+    });
+  });
+}
+
+function wireNavScroll() {
+  var nav = document.getElementById('nav');
+  if (!nav) return;
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+}
+
+function wireReveal() {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el) { io.observe(el); });
+}
+
+function wireFAQ() {
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    var q = item.querySelector('.faq-q');
+    if (!q) return;
+    q.addEventListener('click', function() {
+      var open = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+}
+
+function wireLangButtons() {
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var lang = btn.getAttribute('data-lang');
+      if (lang === currentLang || !T[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('ah_lang', lang);
+      applyTranslations();
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  applyTranslations();
+  wireBookingButtons();
+  wireNavScroll();
+  wireReveal();
+  wireFAQ();
+  wireLangButtons();
+  loadMetaPixel();
+});
+```
+
+(If the partial `applyTranslations` and `DOMContentLoaded` block from Task 1 step 2 is still present, the replacement above supersedes it — make sure no duplicates remain after the edit.)
+
+- [ ] **Step 2: Verify in browser**
+
+Hard-reload (Cmd-Shift-R). Expected:
+- Scroll the page — `.reveal` elements fade in once as they enter the viewport
+- Nav grows a thin border-bottom after scrolling >30px
+- Click each FAQ question — it expands/collapses and `aria-expanded` toggles
+- Click EN / HU / DE — every translated string updates immediately, including the hero italic emphasis
+- Click any "Book a call" / "Book your consultation" / pricing CTA — opens BOOKING_URL in a new tab (placeholder Cal.com 404 expected until configured)
+- DevTools Console: no errors
+
+- [ ] **Step 3: Commit**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "feat(landing): wire i18n switcher, scroll reveal, FAQ accordion, booking CTAs, Meta Pixel scaffold"
+```
+
+---
+
+## Task 13: Refresh `privacy.html`
+
+**Files:** Modify `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/privacy.html`.
+
+### Steps
+
+- [ ] **Step 1: Read the current `privacy.html`** (Read tool, ~477 lines). Identify product-specific language tied to the old social-media-agent offer.
+
+- [ ] **Step 2: Apply targeted edits**
+
+For each match below, find the existing wording in the file and replace with the new wording.
+
+| Replace | With |
+|---|---|
+| "AI Social Media Agent for Local Business" | "AI Digital Employees for SMBs" |
+| Posting to "Instagram and Facebook" / "Instagram &amp; Facebook" | "operating an AI digital employee on your behalf" |
+| "social media accounts" (as the data source) | "the business tools (CRM, email, helpdesk, document store, etc.) you authorise us to connect" |
+| "Instagram/Facebook content" | "the data processed by your digital employee" |
+| €69/month / per-month phrasing | "the subscription tier you selected (Starter, Specialist, or Workforce)" |
+
+Beyond these, the structural sections (Controller, Data we collect, Legal basis, Retention, Your rights, Cookies, Transfers, Contact) remain valid — just update specifics inside.
+
+- [ ] **Step 3: Add a new "Sub-processors and AI providers" section**
+
+Insert a new `<section>` (or `<h2>` block, matching the file's existing structure) explaining:
+- We use the Nous Research Hermes Agent harness as our orchestration layer
+- We route LLM requests across multiple providers (Anthropic, OpenAI, self-hosted open-source models on EU infrastructure) depending on the task
+- Customer data sent to third-party LLM providers is governed by those providers' data processing terms; the current list is available on request at info@agentheaven.ai
+- For sensitive data, customers may request EU-only routing (self-hosted open-source models)
+
+- [ ] **Step 4: Update visual style to match the new `index.html`**
+
+If the file's inline `<style>` uses the old gold/cream palette, replace its `:root` block and body/typography styles with the new palette and Inter/Newsreader fonts (copy from Task 1 Step 2). Footer must match `index.html`'s footer.
+
+- [ ] **Step 5: Verify in browser**
+
+Open `privacy.html`. Expected:
+- Visual parity with `index.html`
+- No references to the social-media-agent product
+- Sub-processors section is present
+- Email info@agentheaven.ai links work
+- "Back to home" / footer "Privacy / Terms / email" links match the new footer style
+
+- [ ] **Step 6: Commit**
+
+```bash
+/usr/bin/git add privacy.html
+/usr/bin/git commit -m "docs(privacy): refresh privacy policy for digital-employees offer and AI sub-processors"
+```
+
+---
+
+## Task 14: Refresh `terms.html`
+
+**Files:** Modify `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/terms.html`.
+
+### Steps
+
+- [ ] **Step 1: Read the current `terms.html`** (~492 lines).
+
+- [ ] **Step 2: Apply targeted edits**
+
+| Replace | With |
+|---|---|
+| Service description as "AI Social Media Agent" | "AI Digital Employee (configured, hosted, and tuned by AgentHeaven)" |
+| €69/month / per-month pricing | "the subscription tier selected by the customer (Starter, Specialist, or Workforce)" |
+| Cancellation language | "The subscription may be cancelled by emailing info@agentheaven.ai at any time. The cancellation takes effect at the end of the current billing month. No exit fees, no notice period." |
+| Service-specific limitations (posting volume etc.) | Replace with limitations referencing the tuning-hours-per-month allowance per tier and fair-use on LLM/compute |
+| Refund policy | "Pro-rated refunds are available within the first 14 days of a new subscription if you decide AgentHeaven is not a fit. After 14 days, cancellation stops future billing but does not refund the current month." |
+
+- [ ] **Step 3: Add two new sections**
+
+**Acceptable use:** forbid using the digital employee for illegal activity, harassment, mass spam, or anything that violates the underlying LLM providers' acceptable-use policies.
+
+**Service levels:** target uptime 99.0% (don't promise more at launch). For Workforce-tier customers, response SLA on tuning requests is one business day.
+
+- [ ] **Step 4: Update visual style** to match `index.html` (same as Task 13 Step 4).
+
+- [ ] **Step 5: Verify in browser**
+
+Open `terms.html`. Expected:
+- Visual parity with `index.html`
+- No €69/month references
+- Cancellation, refund, acceptable use, service-level sections present and accurate
+- Footer links match the new style
+
+- [ ] **Step 6: Commit**
+
+```bash
+/usr/bin/git add terms.html
+/usr/bin/git commit -m "docs(terms): refresh terms of service for digital-employees offer"
+```
+
+---
+
+## Task 15: Regenerate `og-image.html` and `og-image.png`
+
+**Files:**
+- Modify: `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/og-image.html`
+- Replace: `/Users/papp/Documents/Secret/blacksalt/startups/agentheaven/agentheaven-landing/og-image.png`
+
+### Steps
+
+- [ ] **Step 1: Replace `og-image.html`**
+
+Rendered at 1200×630 — Facebook/Twitter standard.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    @font-face { font-family: 'Inter'; src: url(fonts/inter-700.woff2) format('woff2'); font-weight: 700; font-style: normal; }
+    @font-face { font-family: 'Inter'; src: url(fonts/inter-500.woff2) format('woff2'); font-weight: 500; font-style: normal; }
+    @font-face { font-family: 'Newsreader'; src: url(fonts/newsreader-italic-400.woff2) format('woff2'); font-weight: 400; font-style: italic; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1200px; height: 630px;
+      background: #faf7f2;
+      font-family: 'Inter', sans-serif;
+      color: #1a1d1a;
+      padding: 70px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative;
+    }
+    body::after {
+      content: '';
+      position: absolute;
+      right: -200px; bottom: -200px;
+      width: 600px; height: 600px;
+      background: #4a6c5b;
+      opacity: 0.06;
+      border-radius: 50%;
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 22px; letter-spacing: -0.01em;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: #4a6c5b; }
+    .headline {
+      font-size: 76px; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em;
+      max-width: 16ch;
+    }
+    .headline em {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic; font-weight: 400;
+      color: #4a6c5b;
+    }
+    .foot {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 18px; color: #4a4d4a; font-weight: 500;
+    }
+    .pill {
+      padding: 8px 16px; background: #eef2ed; color: #4a6c5b;
+      border-radius: 999px;
+      font-size: 16px; font-weight: 600; letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo"><span class="dot"></span>AgentHeaven</div>
+  <h1 class="headline">The boring work, <em>finally off your plate.</em></h1>
+  <div class="foot">
+    <span>AI digital employees for SMBs. Flat fee. We absorb the AI cost.</span>
+    <span class="pill">agentheaven.ai</span>
+  </div>
+</body>
+</html>
+```
+
+- [ ] **Step 2: Render to PNG via headless Chrome**
+
+From the project root:
+
+```bash
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+  --headless --disable-gpu --hide-scrollbars \
+  --window-size=1200,630 \
+  --screenshot="$(pwd)/og-image.png" \
+  "file://$(pwd)/og-image.html"
+```
+
+Expected: a new `og-image.png` (~50–250 KB) at 1200×630 in the repo root. If Chrome isn't at that path, alternatives: `chromium --headless --screenshot=... <url>` or `npx playwright-cli screenshot --viewport-size=1200,630 og-image.html og-image.png`.
+
+- [ ] **Step 3: Verify**
+
+Open `og-image.png`. Expected: warm off-white background, AgentHeaven logo top-left, big headline with italic sage emphasis, supporting line + URL pill at the bottom, soft sage circle bleeding from the bottom-right corner.
+
+- [ ] **Step 4: Commit**
+
+```bash
+/usr/bin/git add og-image.html og-image.png
+/usr/bin/git commit -m "feat(og): regenerate OG image for digital-employees pivot"
+```
+
+---
+
+## Task 16: Final QA pass
+
+**Files:** none modified; verification only.
+
+### Steps
+
+- [ ] **Step 1: Desktop sweep**
+
+Open `index.html` in Chrome (and Firefox). Scroll top to bottom. Confirm:
+- Nav sticky, subtle border-bottom after scrolling 30px
+- Hero spacing generous
+- Roles / journey / included / pricing / why us / FAQ / final CTA render without overflow
+- Italic em in Newsreader serif sage everywhere it should be
+- Sage accent consistent: eyebrow pill, role icons, journey day labels, ✓ checks, FAQ +/−, final CTA accent
+- No JS console errors
+
+- [ ] **Step 2: Mobile (375px) and tablet (768px) sweep**
+
+In Chrome DevTools device mode, test iPhone 13 (375×844) and iPad Mini (768×1024). Confirm:
+- Sections stack correctly
+- Tap targets ≥ 44px
+- No horizontal scroll at any width
+- Pricing cards stack and remain readable
+- FAQ items expand/collapse cleanly
+
+- [ ] **Step 3: All three languages**
+
+Click EN → HU → DE. After each, scroll the full page and check:
+- All headlines (including italic emphasis) translate correctly
+- Pricing tier names render per locale (note Starter / Specialist / Workforce intentionally kept in English in HU/DE)
+- FAQ answers render
+- Footer links translate
+- Hungarian (őűáéí) and German (äöüß) characters render correctly with no fallback boxes. If any do appear as boxes, the font subset is missing latin-ext coverage — re-download with the extended subset.
+
+- [ ] **Step 4: Lighthouse**
+
+DevTools → Lighthouse → mobile audit. Targets:
+- Performance ≥ 85
+- Accessibility ≥ 95
+- Best Practices ≥ 95
+- SEO ≥ 95
+
+Common fixes if scores fall short:
+- Performance: WOFF2 files too large or too many weight variants — reduce charset coverage or drop a weight
+- Accessibility: contrast on muted text, missing `aria-expanded` on FAQ buttons (already added), missing alt text on any added images
+- Don't ship until all four meet target
+
+- [ ] **Step 5: Final commit (only if fixes applied)**
+
+```bash
+/usr/bin/git add index.html
+/usr/bin/git commit -m "fix(landing): address Lighthouse findings"
+```
+
+If no fixes were needed, the QA task is complete with no commit.
+
+---
+
+## Self-Review
+
+**1. Spec coverage:**
+
+| Spec section | Plan task(s) |
+|---|---|
+| §1 Positioning, tone | Task 3 (hero), Task 9 (why us) |
+| §3 The offer | Tasks 4–8 (roles, how, journey, included, pricing) |
+| §4 Featured roles (6) | Task 4 |
+| §5 Pricing (3 tiers) | Task 8 |
+| §7 Tech (Hermes harness, LLM-agnostic) | Task 7 (incl.2), Task 10 (FAQ 2) |
+| §8 GTM (Calendly, Meta Pixel) | Task 12 |
+| §9.1 Visual identity | Task 1 |
+| §9.2 Page structure | Tasks 2–11 (one task per section) |
+| §9.3 Localisation (EN/HU/DE) | All section tasks ship all 3 locales |
+| §9.4 Technical constraints (single HTML, self-hosted fonts) | Task 1 |
+| §9.5 What goes away | Task 1 (overwrites old hero), Tasks 13–14 (refresh privacy/terms), Task 15 (OG) |
+
+No gaps detected.
+
+**2. Placeholder scan:** No "TBD" / "TODO" / "fill in details" placeholders. The two configuration constants (`BOOKING_URL`, `META_PIXEL_ID`) are explicitly labelled as runtime values the founder will supply before launch, not plan-incompleteness.
+
+**3. Type / name consistency:**
+- All `data-i18n` keys used in HTML have matching entries in all three `T` locales
+- All CSS classes referenced in HTML are defined in the preceding CSS block of the same task or in Task 1 (base styles)
+- The booking-button selectors in Task 12 (`a[data-cta]`, `#navBookBtn`, `#finalBookBtn`) match the attributes/IDs added in Tasks 2 (nav) and 11 (final CTA)
+- The `T` object created in Task 1 is populated by Tasks 2–11 — Task 12 preserves it (replacement is from `var currentLang` downward only)
+
+**4. Ambiguity:** None remaining.
+
+**5. Security note:** Translation values are plain text only and applied with `textContent`. No translation key can inject HTML, eliminating an XSS vector that earlier drafts of this plan allowed.
