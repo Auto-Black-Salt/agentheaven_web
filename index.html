@@ -1016,23 +1016,28 @@
 
     .whyus-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
     .whyus-stat {
-      padding: 1.6rem 1.4rem;
+      padding: 1.75rem 1.5rem;
       border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
-    .whyus-stat:hover { transform: translateY(-3px); }
+    .whyus-stat:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.18);
+    }
     .whyus-stat::before {
       content: '';
       position: absolute; top: 0; right: 0;
-      width: 80px; height: 80px;
+      width: 120px; height: 120px;
       background: var(--stat-bg, var(--grad-coral));
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.4;
+      filter: blur(48px);
+      opacity: 0.55;
     }
     .whyus-stat:nth-child(1) { --stat-bg: var(--grad-coral);  }
     .whyus-stat:nth-child(2) { --stat-bg: var(--grad-tide);   }
@@ -1040,17 +1045,22 @@
     .whyus-stat:nth-child(4) { --stat-bg: var(--grad-jade);   }
 
     .whyus-stat .num {
-      display: block; font-size: 1.9rem; font-weight: 800;
+      display: block; font-size: 2rem; font-weight: 800;
       letter-spacing: -0.03em; line-height: 1;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
       background: var(--stat-bg, var(--grad-coral));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
       position: relative;
+      filter: drop-shadow(0 0 20px var(--stat-glow, rgba(247,37,133,0.3)));
     }
-    .whyus-stat .lab { font-size: 0.88rem; color: var(--ink-soft); position: relative; }
+    .whyus-stat:nth-child(1) .num { --stat-glow: rgba(247,37,133,0.35); }
+    .whyus-stat:nth-child(2) .num { --stat-glow: rgba(0,224,255,0.35);  }
+    .whyus-stat:nth-child(3) .num { --stat-glow: rgba(167,139,250,0.3); }
+    .whyus-stat:nth-child(4) .num { --stat-glow: rgba(45,212,191,0.35); }
+    .whyus-stat .lab { font-size: 0.9rem; color: var(--ink-soft); position: relative; }
 
     /* ---------------- FAQ ---------------- */
     .faq { position: relative; }
@@ -1062,20 +1072,21 @@
     }
 
     .faq-item {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius);
+      backdrop-filter: blur(10px);
       overflow: hidden;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    .faq-item:hover { border-color: var(--border-2); }
+    .faq-item:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); }
     .faq-item.open {
       border-color: transparent;
       background:
-        linear-gradient(var(--card), var(--card)) padding-box,
-        var(--grad-coral) border-box;
+        linear-gradient(rgba(17,20,46,0.85), rgba(17,20,46,0.85)) padding-box,
+        var(--grad-cyber) border-box;
       border: 1.5px solid transparent;
-      box-shadow: 0 16px 40px -20px rgba(255,93,74,0.3);
+      box-shadow: 0 0 30px rgba(0,224,255,0.2), 0 16px 40px -20px rgba(0,224,255,0.35);
     }
     .faq-q {
       display: flex; justify-content: space-between; align-items: center;
@@ -1089,11 +1100,12 @@
     .faq-q::after {
       content: '+';
       font-size: 1.6rem;
-      color: var(--coral);
+      color: var(--cyan);
       margin-left: 1rem;
       transition: transform 0.25s ease;
       font-weight: 400;
       line-height: 1;
+      text-shadow: 0 0 12px rgba(0,224,255,0.5);
     }
     .faq-item.open .faq-q::after { content: '−'; transform: rotate(180deg); }
     .faq-a {
@@ -1158,9 +1170,10 @@
 
     footer.site-foot {
       padding: 3rem 0 3.5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.06);
       font-size: 0.9rem; color: var(--muted);
-      background: var(--bg);
+      background: rgba(7,9,26,0.5);
+      backdrop-filter: blur(10px);
     }
     footer.site-foot .container {
       display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
@@ -1170,7 +1183,7 @@
     }
     .foot-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .foot-links a { color: var(--muted); transition: color 0.15s ease; }
-    .foot-links a:hover { color: var(--coral-2); }
+    .foot-links a:hover { color: var(--cyan); }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
