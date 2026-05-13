@@ -368,6 +368,21 @@
 
     .pricing-foot { text-align: center; margin-top: 2rem; color: var(--muted); font-size: 0.9rem; }
 
+    /* ---------------- WHY US ---------------- */
+    .whyus-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+    @media (min-width: 900px) { .whyus-grid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+
+    .whyus-body p { font-size: 1.05rem; margin-bottom: 1rem; }
+    .whyus-body p:last-child { margin-bottom: 0; }
+
+    .whyus-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .whyus-stat { padding: 1.25rem; background: var(--accent-bg); border-radius: var(--radius-sm); }
+    .whyus-stat .num {
+      display: block; font-size: 1.75rem; font-weight: 700;
+      color: var(--accent); letter-spacing: -0.01em;
+    }
+    .whyus-stat .lab { font-size: 0.88rem; color: var(--ink-soft); }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -656,6 +671,45 @@
   </div>
 </section>
 
+<!-- WHY US -->
+<section class="section whyus">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="whyus.label">Why us</div>
+      <h2>
+        <span data-i18n="whyus.h2.a">Built by operators,</span>
+        <em data-i18n="whyus.h2.b">not prompt engineers.</em>
+      </h2>
+    </div>
+    <div class="whyus-grid">
+      <div class="whyus-body reveal reveal-delay-1">
+        <p data-i18n="whyus.p1">We've been shipping production software since 2006 — enterprise data integration, high-availability systems, the kind of platforms where downtime is not an option.</p>
+        <p data-i18n="whyus.p2">AgentHeaven exists because we got tired of watching small businesses get sold AI hype by people who've never run anything in production. Your digital employee is built on the same discipline as the systems we've maintained for two decades.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="whyus-stats">
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s1.num">20+</span>
+            <span class="lab" data-i18n="whyus.s1.lab">years in production IT</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s2.num">EU</span>
+            <span class="lab" data-i18n="whyus.s2.lab">data residency available</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s3.num">Model-agnostic</span>
+            <span class="lab" data-i18n="whyus.s3.lab">best model per task</span>
+          </div>
+          <div class="whyus-stat">
+            <span class="num" data-i18n="whyus.s4.num">No lock-in</span>
+            <span class="lab" data-i18n="whyus.s4.lab">cancel any month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -759,7 +813,20 @@
       'price.workforce.f2':       'Unlimited connected sources',
       'price.workforce.f3':       'Dedicated specialist on our team',
       'price.workforce.f4':       'Custom integrations on request',
-      'price.workforce.f5':       'Everything in Specialist'
+      'price.workforce.f5':       'Everything in Specialist',
+      'whyus.label':  'Why us',
+      'whyus.h2.a':   'Built by operators,',
+      'whyus.h2.b':   'not prompt engineers.',
+      'whyus.p1':     "We've been shipping production software since 2006 — enterprise data integration, high-availability systems, the kind of platforms where downtime is not an option.",
+      'whyus.p2':     "AgentHeaven exists because we got tired of watching small businesses get sold AI hype by people who've never run anything in production. Your digital employee is built on the same discipline as the systems we've maintained for two decades.",
+      'whyus.s1.num': '20+',
+      'whyus.s1.lab': 'years in production IT',
+      'whyus.s2.num': 'EU',
+      'whyus.s2.lab': 'data residency available',
+      'whyus.s3.num': 'Model-agnostic',
+      'whyus.s3.lab': 'best model per task',
+      'whyus.s4.num': 'No lock-in',
+      'whyus.s4.lab': 'cancel any month'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -854,7 +921,20 @@
       'price.workforce.f2':       'Korlátlan csatlakoztatott forrás',
       'price.workforce.f3':       'Dedikált specialista a mi csapatunkból',
       'price.workforce.f4':       'Egyedi integrációk kérésre',
-      'price.workforce.f5':       'Minden a Specialist csomagból'
+      'price.workforce.f5':       'Minden a Specialist csomagból',
+      'whyus.label':  'Miért mi',
+      'whyus.h2.a':   'Üzemeltetők építik,',
+      'whyus.h2.b':   'nem prompt-mérnökök.',
+      'whyus.p1':     '2006 óta szállítunk éles szoftvert — vállalati adatintegráció, magas rendelkezésre állású rendszerek; olyan platformok, ahol a leállás nem opció.',
+      'whyus.p2':     'Az AgentHeaven azért létezik, mert eluntuk nézni, ahogy kisvállalkozásoknak AI-hype-ot adnak el olyanok, akik még soha nem üzemeltettek semmit élesben. A te digitális munkavállalód ugyanazzal a fegyelemmel épül, mint a rendszerek, amiket két évtizede üzemeltetünk.',
+      'whyus.s1.num': '20+',
+      'whyus.s1.lab': 'év éles IT-üzemeltetésben',
+      'whyus.s2.num': 'EU',
+      'whyus.s2.lab': 'adattárolás választható',
+      'whyus.s3.num': 'Modellfüggetlen',
+      'whyus.s3.lab': 'legjobb modell minden feladathoz',
+      'whyus.s4.num': 'Nincs lock-in',
+      'whyus.s4.lab': 'bármely hónap végén lemondható'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -949,7 +1029,20 @@
       'price.workforce.f2':       'Unbegrenzt viele angebundene Quellen',
       'price.workforce.f3':       'Dedizierter Spezialist aus unserem Team',
       'price.workforce.f4':       'Maßgeschneiderte Integrationen auf Anfrage',
-      'price.workforce.f5':       'Alles aus Specialist'
+      'price.workforce.f5':       'Alles aus Specialist',
+      'whyus.label':  'Warum wir',
+      'whyus.h2.a':   'Gebaut von Operators,',
+      'whyus.h2.b':   'nicht von Prompt Engineers.',
+      'whyus.p1':     'Wir liefern seit 2006 Produktivsoftware — Enterprise-Datenintegration, hochverfügbare Systeme; Plattformen, bei denen Downtime keine Option ist.',
+      'whyus.p2':     'AgentHeaven gibt es, weil wir es leid waren, dass kleinen Unternehmen KI-Hype von Leuten verkauft wird, die nie etwas im Produktivbetrieb gefahren haben. Dein KI-Mitarbeiter ist mit derselben Disziplin gebaut wie die Systeme, die wir seit zwei Jahrzehnten betreiben.',
+      'whyus.s1.num': '20+',
+      'whyus.s1.lab': 'Jahre produktive IT',
+      'whyus.s2.num': 'EU',
+      'whyus.s2.lab': 'Datenresidenz verfügbar',
+      'whyus.s3.num': 'Modell-agnostisch',
+      'whyus.s3.lab': 'bestes Modell pro Aufgabe',
+      'whyus.s4.num': 'Kein Lock-in',
+      'whyus.s4.lab': 'jederzeit monatlich kündbar'
     }
   };
 
