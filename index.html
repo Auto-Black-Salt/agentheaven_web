@@ -257,6 +257,22 @@
       font-size: 1.1rem;
     }
 
+    /* ---------------- HOW IT WORKS ---------------- */
+    .how h2 { max-width: 18ch; margin-bottom: 3rem; }
+    .steps { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { .steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; } }
+
+    .step { display: flex; gap: 1.25rem; }
+    .step-num {
+      flex-shrink: 0; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--ink); color: var(--bg);
+      border-radius: 999px;
+      font-weight: 600; font-size: 0.95rem;
+    }
+    .step h3 { margin-bottom: 0.4rem; }
+    .step p { color: var(--ink-soft); font-size: 0.97rem; }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -350,6 +366,49 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="section how" id="how">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="how.label">How it works</div>
+      <h2>
+        <span data-i18n="how.h2.a">Four steps to a</span>
+        <em data-i18n="how.h2.b">working employee.</em>
+      </h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">1</div>
+        <div>
+          <h3 data-i18n="how.1.title">Discovery call</h3>
+          <p data-i18n="how.1.desc">A 30-minute call to understand your business and the work you'd like to hand off.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">2</div>
+        <div>
+          <h3 data-i18n="how.2.title">We configure</h3>
+          <p data-i18n="how.2.desc">We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">3</div>
+        <div>
+          <h3 data-i18n="how.3.title">Day 1 generalist</h3>
+          <p data-i18n="how.3.desc">Your employee starts working in days. Capable, responsive, useful from day one.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">4</div>
+        <div>
+          <h3 data-i18n="how.4.title">Day 90 specialist</h3>
+          <p data-i18n="how.4.desc">We keep tuning. Feedback shapes memory. By month three, it's a specialist at your version of the job.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -387,7 +446,18 @@
       'roles.5.title': 'Internal knowledge assistant',
       'roles.5.desc':  'Trained on your SOPs and docs. Your team asks; it answers — without bothering you.',
       'roles.6.title': 'Ops & back-office',
-      'roles.6.desc':  'Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.'
+      'roles.6.desc':  'Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.',
+      'how.label':   'How it works',
+      'how.h2.a':    'Four steps to a',
+      'how.h2.b':    'working employee.',
+      'how.1.title': 'Discovery call',
+      'how.1.desc':  "A 30-minute call to understand your business and the work you'd like to hand off.",
+      'how.2.title': 'We configure',
+      'how.2.desc':  'We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.',
+      'how.3.title': 'Day 1 generalist',
+      'how.3.desc':  'Your employee starts working in days. Capable, responsive, useful from day one.',
+      'how.4.title': 'Day 90 specialist',
+      'how.4.desc':  "We keep tuning. Feedback shapes memory. By month three, it's a specialist at your version of the job."
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -416,7 +486,18 @@
       'roles.5.title': 'Belső tudásasszisztens',
       'roles.5.desc':  'A te folyamataidra és dokumentumaidra van betanítva. A csapatod kérdez; ő válaszol — anélkül, hogy téged zavarna.',
       'roles.6.title': 'Ops és back-office',
-      'roles.6.desc':  'Számla-egyeztetés, beszállítói utánkövetés, rendelésfeldolgozás. Az iroda hátsó része, ami magát futtatja.'
+      'roles.6.desc':  'Számla-egyeztetés, beszállítói utánkövetés, rendelésfeldolgozás. Az iroda hátsó része, ami magát futtatja.',
+      'how.label':   'Hogyan működik',
+      'how.h2.a':    'Négy lépés egy',
+      'how.h2.b':    'dolgozó munkavállalóig.',
+      'how.1.title': 'Felfedező hívás',
+      'how.1.desc':  'Egy 30 perces beszélgetés, hogy megértsük a vállalkozásodat és azt a munkát, amit átadnál.',
+      'how.2.title': 'Beüzemelünk',
+      'how.2.desc':  'Beállítjuk az ügynököt a Hermes Agent harness-en, csatlakoztatjuk az eszközeidet, és megírjuk a runbookot.',
+      'how.3.title': '1. nap: generalista',
+      'how.3.desc':  'A munkavállalód napok alatt elkezd dolgozni. Hozzáértő, reaktív, az első naptól hasznos.',
+      'how.4.title': '90. nap: specialista',
+      'how.4.desc':  'Folyamatosan hangoljuk. A visszajelzések alakítják a memóriáját. A harmadik hónapra a te változatodban specialista.'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -445,7 +526,18 @@
       'roles.5.title': 'Internes Wissensassistent',
       'roles.5.desc':  'Trainiert auf deine SOPs und Dokumente. Dein Team fragt; er antwortet — ohne dich zu stören.',
       'roles.6.title': 'Ops & Back-Office',
-      'roles.6.desc':  'Rechnungsabgleich, Lieferanten-Follow-ups, Auftragsabwicklung. Das Back-Office, das sich selbst erledigt.'
+      'roles.6.desc':  'Rechnungsabgleich, Lieferanten-Follow-ups, Auftragsabwicklung. Das Back-Office, das sich selbst erledigt.',
+      'how.label':   'So funktioniert es',
+      'how.h2.a':    'Vier Schritte zu einem',
+      'how.h2.b':    'arbeitenden Mitarbeiter.',
+      'how.1.title': 'Erstgespräch',
+      'how.1.desc':  'Ein 30-minütiges Gespräch, um dein Geschäft und die Arbeit, die du abgeben möchtest, zu verstehen.',
+      'how.2.title': 'Wir konfigurieren',
+      'how.2.desc':  'Wir richten deinen Agenten auf der Hermes Agent Harness ein, verbinden deine Tools und schreiben das Runbook.',
+      'how.3.title': 'Tag 1: Generalist',
+      'how.3.desc':  'Dein Mitarbeiter arbeitet innerhalb von Tagen. Fähig, reaktiv, ab Tag eins nützlich.',
+      'how.4.title': 'Tag 90: Spezialist',
+      'how.4.desc':  'Wir tunen kontinuierlich. Feedback formt das Gedächtnis. Nach drei Monaten ist er Spezialist für deine Variante des Jobs.'
     }
   };
 
