@@ -3,1473 +3,208 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentHeaven — AI Social Media Agent for Local Business</title>
-  <meta name="description" content="AgentHeaven sets up an autonomous AI social media agent that posts to Instagram &amp; Facebook and replies to customers 24/7 — in your brand voice. €69/month. No tech skills needed." />
+  <title>AgentHeaven — Digital employees for SMBs. We handle the AI, you get the work done.</title>
+  <meta name="description" content="AgentHeaven sets up an AI digital employee that handles your repetitive work — research, inbox, support, ops. Flat monthly fee. We absorb the LLM and infrastructure cost." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://agentheaven.ai/" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentheaven.ai/" />
   <meta property="og:site_name" content="AgentHeaven" />
-  <meta property="og:title" content="AgentHeaven — AI Social Media Agent for Local Business" />
-  <meta property="og:description" content="Autonomous AI agents that post on Instagram &amp; Facebook and reply to customers 24/7 — in your brand voice. €69/month. No tech skills needed." />
+  <meta property="og:title" content="AgentHeaven — Digital employees for SMBs" />
+  <meta property="og:description" content="We set up and run an AI digital employee that handles your repetitive work. Flat fee. We absorb the LLM and infrastructure cost." />
   <meta property="og:image" content="https://agentheaven.ai/og-image.png" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="hu_HU" />
   <meta property="og:locale:alternate" content="de_DE" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AgentHeaven — AI Social Media Agent for Local Business" />
-  <meta name="twitter:description" content="Autonomous AI social media agent for local business. Posts to Instagram &amp; Facebook and replies to customers 24/7. €69/month." />
+  <meta name="twitter:title" content="AgentHeaven — Digital employees for SMBs" />
+  <meta name="twitter:description" content="AI digital employees that quietly handle your repetitive work. Flat fee. We absorb the LLM and infra cost." />
   <meta name="twitter:image" content="https://agentheaven.ai/og-image.png" />
 
-  <!-- hreflang (same-URL multilingual SPA) -->
   <link rel="alternate" hreflang="en" href="https://agentheaven.ai/" />
   <link rel="alternate" hreflang="hu" href="https://agentheaven.ai/" />
   <link rel="alternate" hreflang="de" href="https://agentheaven.ai/" />
   <link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/" />
+
   <style>
-    /* Self-hosted fonts — no 3rd-party CDN, no render blocking */
+    /* Inter: variable font; same file referenced across all weights, browser uses the wght axis. */
     @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 300;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
       font-display: swap;
-      src: url(fonts/fraunces-0.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/fraunces-1.woff2) format('woff2');
+      src: url(fonts/inter-latin-ext.woff2) format('woff2');
       unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
     @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/fraunces-2.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-0.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-1.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: italic;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-2.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Fraunces';
+      font-family: 'Inter';
       font-style: normal;
-      font-weight: 300;
+      font-weight: 400 700;
       font-display: swap;
-      src: url(fonts/fraunces-3.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/fraunces-4.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/fraunces-5.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-3.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-4.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/fraunces-5.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/fraunces-3.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/fraunces-4.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/fraunces-5.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-0.woff2) format('woff2');
-      unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-1.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-2.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 300;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-3.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-0.woff2) format('woff2');
-      unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-1.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-2.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-3.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-0.woff2) format('woff2');
-      unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-1.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-2.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-3.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-0.woff2) format('woff2');
-      unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-1.woff2) format('woff2');
-      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-2.woff2) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-    @font-face {
-      font-family: 'Plus Jakarta Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(fonts/plusjakartasans-3.woff2) format('woff2');
+      src: url(fonts/inter-latin.woff2) format('woff2');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
 
-    /* Fallback font metrics matching Fraunces — reduces LCP font-swap layout shift */
+    /* Newsreader italic 400 — used only for emphasis in headings. */
     @font-face {
-      font-family: 'Fraunces-fallback';
-      src: local('Georgia'), local('Times New Roman');
-      size-adjust: 98%;
-      ascent-override: 94%;
-      descent-override: 24%;
-      line-gap-override: 0%;
+      font-family: 'Newsreader';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/newsreader-italic-latin-ext.woff2) format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: 'Newsreader';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/newsreader-italic-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0C0B09;
-      --bg2:       #131109;
-      --card:      #18160F;
-      --card2:     #201D13;
-      --border:    #2A2618;
-      --gold:      #E8A838;
-      --gold-dim:  #B07E22;
-      --gold-glow: rgba(232,168,56,0.15);
-      --text:      #C8BFA0;
-      --muted:     #6B6248;
-      --white:     #FAF6EC;
+      --bg:        #faf7f2;
+      --bg-2:      #f3eee5;
+      --ink:       #1a1d1a;
+      --ink-soft:  #4a4d4a;
+      --muted:     #767972;
+      --accent:    #4a6c5b;
+      --accent-2:  #5d8071;
+      --accent-bg: #eef2ed;
+      --card:      #ffffff;
+      --border:    #e4dfd4;
+
+      --s-1: 0.5rem; --s-2: 1rem; --s-3: 1.5rem; --s-4: 2rem;
+      --s-5: 3rem;   --s-6: 4rem; --s-7: 6rem;
+
+      --radius: 14px;
+      --radius-sm: 8px;
+      --max-w: 1140px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 16px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-      pointer-events: none; z-index: 999; opacity: 0.6;
+    h1, h2, h3 { color: var(--ink); line-height: 1.15; letter-spacing: -0.015em; font-weight: 600; }
+    h1 { font-size: clamp(2.5rem, 5.5vw, 4.5rem); font-weight: 600; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 600; }
+    h3 { font-size: 1.25rem; font-weight: 600; }
+
+    h1 em, h2 em {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
     }
 
-    h1, h2, h3 { font-family: 'Fraunces', 'Fraunces-fallback', serif; line-height: 1.1; color: var(--white); }
-    h1 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 400; letter-spacing: -0.02em; }
-    h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; letter-spacing: -0.01em; }
-    h3 { font-size: 1.3rem; font-weight: 400; }
-    p  { color: var(--text); font-weight: 300; }
+    p { color: var(--ink-soft); }
 
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-    .section    { padding: 7rem 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.25rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(12,11,9,0.92);
-      backdrop-filter: blur(12px);
-      border-color: var(--border);
-    }
-    .nav-left { display: flex; align-items: center; gap: 2rem; }
-    .logo {
-      font-family: 'Fraunces', 'Fraunces-fallback', serif;
-      font-size: 1.35rem; font-weight: 600;
-      color: var(--white); letter-spacing: -0.01em;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .logo-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--gold);
-      display: inline-block;
-      box-shadow: 0 0 8px var(--gold);
-      animation: pulse 2s infinite;
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+    @media (min-width: 768px) { .container { padding: 0 2rem; } }
+
+    .section { padding: var(--s-7) 0; }
+
+    .section-label {
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--s-2);
     }
 
-    /* language switcher */
-    .lang-switcher {
-      display: flex; gap: 0.15rem; align-items: center;
-    }
-    .lang-btn {
-      background: none; border: none; cursor: pointer;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.25rem 0.45rem; border-radius: 4px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .lang-btn:hover   { color: var(--text); }
-    .lang-btn.active  { color: var(--gold); background: rgba(232,168,56,0.08); }
-    .lang-sep { color: var(--border); font-size: 0.7rem; }
-
-    .nav-cta {
-      background: var(--gold); color: #0C0B09;
-      border: none; padding: 0.6rem 1.4rem;
-      border-radius: 100px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.875rem; font-weight: 600;
-      cursor: pointer; transition: opacity 0.2s, transform 0.2s;
-      text-decoration: none; white-space: nowrap;
-    }
-    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.6; transform: scale(0.85); }
-    }
-
-    /* ── HERO LOGO ── */
-    .hero-logo {
-      width: 260px; margin-bottom: 2rem;
-      opacity: 0; animation: fadeUp 0.6s 0.05s forwards;
-    }
-    .hero-logo svg { width: 100%; height: auto; display: block; }
-    @media (max-width: 600px) { .hero-logo { width: 200px; } }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 8rem 0 5rem; position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: ''; position: absolute; top: 80px; left: 55%;
-      width: 700px; height: 700px;
-      background: radial-gradient(ellipse at center, rgba(232,168,56,0.07) 0%, transparent 70%);
-      pointer-events: none;
-      will-change: transform;
-    }
-    .hero-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      border: 1px solid var(--border); padding: 0.4rem 1rem;
-      border-radius: 100px; font-size: 0.8rem;
-      color: var(--gold); letter-spacing: 0.06em;
-      text-transform: uppercase; margin-bottom: 1.5rem;
-      background: rgba(232,168,56,0.05);
-      opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
-    }
-    .hero h1 { opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-sub {
-      margin-top: 1.5rem; font-size: 1.1rem; line-height: 1.7;
-      max-width: 420px; opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
-    }
-    .hero-actions {
-      margin-top: 2.5rem; display: flex; align-items: center; gap: 1.25rem;
-      opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
-    }
     .btn-primary {
-      background: var(--gold); color: #0C0B09; border: none;
-      padding: 0.9rem 2rem; border-radius: 100px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.95rem; font-weight: 600;
-      cursor: pointer; text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-      display: inline-block; white-space: nowrap;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.95rem 1.5rem;
+      background: var(--ink); color: var(--bg);
+      border: none; border-radius: var(--radius-sm);
+      font-family: inherit; font-size: 1rem; font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
     }
-    .btn-primary:hover {
-      opacity: 0.9; transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,168,56,0.25);
-    }
+    .btn-primary:hover { background: #000; color: var(--bg); transform: translateY(-1px); }
+
     .btn-ghost {
-      color: var(--text); font-size: 0.9rem; font-weight: 400;
-      text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
-      transition: color 0.2s; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.95rem 0.5rem;
+      color: var(--ink); font-weight: 500; font-size: 1rem;
     }
-    .btn-ghost:hover { color: var(--white); }
-    .btn-ghost .arrow { transition: transform 0.2s; display: inline-block; }
-    .btn-ghost:hover .arrow { transform: translateX(3px); }
+    .btn-ghost:hover { color: var(--accent); }
 
-    /* ── AGENT PANEL ── */
-    .agent-panel {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-      opacity: 0; animation: fadeIn 0.8s 0.6s forwards;
-    }
-    .panel-header {
-      padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      background: var(--card2);
-    }
-    .panel-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; }
-    .panel-live  { display: flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; color: #4CAF82; font-weight: 500; }
-    .live-dot    { width: 6px; height: 6px; border-radius: 50%; background: #4CAF82; animation: pulse 1.5s infinite; }
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
 
-    .feed-list { padding: 0.5rem 0; min-height: 320px; }
-    .feed-item {
-      padding: 0.85rem 1.25rem; border-bottom: 1px solid rgba(42,38,24,0.5);
-      display: flex; gap: 0.85rem; align-items: flex-start;
-      transition: background 0.2s;
-      opacity: 0; transform: translateY(8px);
-      animation: slideIn 0.4s forwards;
-    }
-    .feed-item:last-child { border-bottom: none; }
-    .feed-item:hover { background: rgba(232,168,56,0.03); }
-    .feed-icon {
-      width: 32px; height: 32px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; flex-shrink: 0; margin-top: 2px;
-    }
-    .feed-icon.post  { background: rgba(232,168,56,0.12); }
-    .feed-icon.reply { background: rgba(76,175,130,0.12); }
-    .feed-icon.dm    { background: rgba(100,160,240,0.12); }
-    .feed-content { flex: 1; min-width: 0; }
-    .feed-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
-    .feed-label.post  { color: var(--gold); }
-    .feed-label.reply { color: #4CAF82; }
-    .feed-label.dm    { color: #64A0F0; }
-    .feed-text { font-size: 0.82rem; color: var(--text); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .feed-meta { font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; }
-
-    .panel-footer {
-      padding: 0.85rem 1.25rem; border-top: 1px solid var(--border);
-      background: var(--card2);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .panel-stat { text-align: center; }
-    .panel-stat-num { font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--white); font-weight: 600; }
-    .panel-stat-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-
-    /* ── TICKER ── */
-    .ticker-bar {
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      background: var(--bg2); padding: 0.85rem 0; overflow: hidden; position: relative;
-    }
-    .ticker-bar::before, .ticker-bar::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
-    }
-    .ticker-bar::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
-    .ticker-bar::after  { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
-    .ticker-track { display: flex; gap: 3rem; animation: ticker 28s linear infinite; white-space: nowrap; }
-    .ticker-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); font-weight: 300; }
-    .ticker-highlight { color: var(--gold); font-weight: 500; }
-
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    /* ── HOW IT WORKS ── */
-    .steps { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; margin-top: 4rem; }
-    .step {
-      background: var(--card); padding: 2.5rem 2rem;
-      transition: background 0.3s;
-    }
-    .step:first-child { border-radius: 16px 0 0 16px; }
-    .step:last-child  { border-radius: 0 16px 16px 0; }
-    .step:hover       { background: var(--card2); }
-    .step-num { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: 1.25rem; }
-    .step h3 { color: var(--white); margin-bottom: 0.6rem; font-size: 1.1rem; }
-    .step p  { font-size: 0.9rem; line-height: 1.65; }
-    .step-connector {
-      background: var(--card);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .step-connector-dot {
-      width: 24px; height: 24px; background: var(--gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; color: #0C0B09; font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* ── FEATURES ── */
-    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
-    .feature-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 2rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; cursor: default;
-    }
-    .feature-card:hover {
-      border-color: var(--gold-dim); transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(232,168,56,0.1);
-    }
-    .feature-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: var(--gold-glow); border: 1px solid rgba(232,168,56,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; margin-bottom: 1.25rem;
-    }
-    .feature-card h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.5rem; }
-    .feature-card p  { font-size: 0.875rem; line-height: 1.65; }
-
-    /* ── FOR WHO ── */
-    .who-section { background: var(--bg2); }
-    .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3.5rem; }
-    .who-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.75rem 1.5rem; text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .who-card:hover { border-color: rgba(232,168,56,0.3); transform: translateY(-3px); }
-    .who-emoji { font-size: 2.2rem; display: block; margin-bottom: 0.75rem; }
-    .who-card h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
-    .who-card p  { font-size: 0.8rem; color: var(--muted); }
-
-    /* ── PRICING ── */
-    .pricing-card {
-      max-width: 520px; margin: 3.5rem auto 0;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 24px; overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-    }
-    .pricing-header {
-      background: linear-gradient(135deg, #1A1709 0%, #201B0B 100%);
-      padding: 2.5rem; border-bottom: 1px solid var(--border); text-align: center;
-    }
-    .pricing-badge {
-      display: inline-block; background: rgba(232,168,56,0.15);
-      border: 1px solid rgba(232,168,56,0.3); color: var(--gold);
-      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1rem;
-    }
-    .pricing-price { font-family: 'Fraunces', serif; font-size: 4.5rem; color: var(--white); font-weight: 300; line-height: 1; }
-    .pricing-price sup { font-size: 1.5rem; vertical-align: super; }
-    .pricing-period { color: var(--muted); font-size: 0.85rem; margin-top: 0.35rem; }
-    .pricing-features { padding: 2rem 2.5rem; }
-    .pricing-feature {
-      display: flex; align-items: flex-start; gap: 0.75rem;
-      padding: 0.7rem 0; border-bottom: 1px solid rgba(42,38,24,0.4); font-size: 0.9rem;
-    }
-    .pricing-feature:last-child { border-bottom: none; }
-    .check {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: rgba(76,175,130,0.15); border: 1px solid rgba(76,175,130,0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: #4CAF82; font-size: 0.65rem; flex-shrink: 0; margin-top: 2px;
-    }
-    .pricing-cta { padding: 1.75rem 2.5rem 2.5rem; }
-    .pricing-cta .btn-primary { width: 100%; text-align: center; padding: 1rem 2rem; font-size: 1rem; }
-    .pricing-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 0.85rem; }
-
-    /* ── SECTION LABEL ── */
-    .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 1rem; }
-
-    /* ── CTA ── */
-    .cta-section { text-align: center; padding: 8rem 0; position: relative; overflow: hidden; }
-    .cta-section::before {
-      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(232,168,56,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-section h2 { max-width: 600px; margin: 0 auto 1rem; }
-    .cta-section p  { max-width: 460px; margin: 0 auto 2.5rem; font-size: 1rem; }
-    .email-row { display: flex; gap: 1rem; justify-content: center; max-width: 420px; margin: 0 auto; }
-    .email-input {
-      flex: 1; background: var(--card); border: 1px solid var(--border);
-      border-radius: 100px; padding: 0.9rem 1.5rem; color: var(--white);
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; outline: none;
-      transition: border-color 0.2s;
-    }
-    .email-input:focus { border-color: var(--gold-dim); }
-    .email-input::placeholder { color: var(--muted); }
-
-    /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); padding: 2.5rem 0; display: flex; align-items: center; justify-content: space-between; }
-    .footer-copy { font-size: 0.8rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible   { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1   { transition-delay: 0.1s; }
-    .reveal-delay-2   { transition-delay: 0.2s; }
-    .reveal-delay-3   { transition-delay: 0.3s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .steps { grid-template-columns: 1fr; gap: 1px; border-radius: 16px; overflow: hidden; }
-      .step:first-child, .step:last-child { border-radius: 0; }
-      .step-connector { display: none; }
-      .step-connector + .step, .steps > .step-connector { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .who-grid { grid-template-columns: repeat(2, 1fr); }
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
-    }
-    @media (max-width: 600px) {
-      .who-grid { grid-template-columns: 1fr 1fr; }
-      h1 { font-size: 2.6rem; }
-      .email-row { flex-direction: column; }
-      .lang-switcher { display: none; }
-    }
+    /* Section-specific styles are appended below this line. */
   </style>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://agentheaven.ai/#organization",
-        "name": "AgentHeaven",
-        "legalName": "Black Salt Kft.",
-        "url": "https://agentheaven.ai",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://agentheaven.ai/agentheaven.svg"
-        },
-        "email": "info@agentheaven.ai",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Baross tér 14",
-          "addressLocality": "Budapest",
-          "postalCode": "1077",
-          "addressCountry": "HU"
-        },
-        "vatID": "HU13853619",
-        "description": "AgentHeaven sets up and runs autonomous AI social media agents for local businesses — posting content and replying to customers on Instagram and Facebook 24/7 in their brand voice."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://agentheaven.ai/#website",
-        "url": "https://agentheaven.ai",
-        "name": "AgentHeaven",
-        "publisher": { "@id": "https://agentheaven.ai/#organization" },
-        "inLanguage": ["en", "hu", "de"]
-      },
-      {
-        "@type": "Service",
-        "@id": "https://agentheaven.ai/#service",
-        "name": "AI Social Media Agent for Local Business",
-        "provider": { "@id": "https://agentheaven.ai/#organization" },
-        "serviceType": "Social Media Management",
-        "description": "A fully managed AI agent that creates and publishes posts to Instagram and Facebook on a daily schedule and auto-replies to DMs and comments — 24/7, in your brand voice. No tech skills required.",
-        "offers": {
-          "@type": "Offer",
-          "price": "69",
-          "priceCurrency": "EUR",
-          "priceSpecification": {
-            "@type": "UnitPriceSpecification",
-            "price": "69",
-            "priceCurrency": "EUR",
-            "unitCode": "MON"
-          },
-          "availability": "https://schema.org/InStock"
-        },
-        "areaServed": ["HU", "AT", "DE", "EU"],
-        "audience": {
-          "@type": "Audience",
-          "audienceType": "Small local businesses — gyms, fitness studios, hair salons, restaurants, cafés, running clubs"
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-left">
-    <div class="logo">
-      <span class="logo-dot"></span>
-      AgentHeaven
-    </div>
-    <div class="lang-switcher">
-      <button class="lang-btn active" data-lang="en">EN</button>
-      <span class="lang-sep">&middot;</span>
-      <button class="lang-btn" data-lang="hu">HU</button>
-      <span class="lang-sep">&middot;</span>
-      <button class="lang-btn" data-lang="de">DE</button>
-    </div>
-  </div>
-  <a href="#early-access" class="nav-cta" data-i18n="nav.cta">Get early access</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" aria-label="AgentHeaven" role="img" focusable="false">
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 196.258 1435.8 C 225.373 1374.9 261.546 1308.01 292.861 1247.72 C 334.522 1165.83 376.626 1084.17 419.169 1002.74 L 502.878 840.013 C 516.194 814.001 529.961 783.685 544.654 758.954 C 552.414 772.57 560.497 788.574 567.417 802.643 C 602.565 874.101 641.343 944.075 676.992 1015.2 C 667.789 1031.17 641.476 1063.97 629.067 1077.43 C 621.449 1065.68 611.423 1044.27 604.894 1031.21 C 594.432 1010.28 583.65 989.522 572.552 968.928 C 570.882 963.864 563.411 950.632 560.69 945.741 C 555.597 935.864 549.175 924.17 544.533 914.253 C 532.372 934.885 518.274 964.688 507.171 986.529 L 443.121 1112.34 L 387.075 1222.17 C 376.69 1242.32 362.766 1267.66 353.752 1287.87 C 582.987 1277.65 695.777 1160.95 807.093 970.224 C 796.501 974.593 771.691 982.93 765.823 991.304 C 756.25 992.14 729.609 994.72 722.994 988.604 L 730.017 977.918 C 711.608 969.209 683.866 955.353 665.821 948.646 C 678.482 942.324 691.902 936.032 704.803 930.19 C 770.427 900.472 835.148 866.373 900.994 837.404 C 899.748 845.39 899.335 857.749 898.58 866.221 L 892.913 926.367 C 887.129 986.508 881.769 1046.69 876.832 1106.91 C 861.795 1091.74 843.494 1069.96 828.86 1053.64 C 804.021 1096.94 782.219 1124.02 751.916 1161.72 C 757.608 1173.74 764.425 1186.33 770.608 1198.15 C 811.896 1277.1 850.892 1357.69 893.42 1435.97 C 842.974 1435.11 790.638 1436.05 739.941 1435.89 C 712.735 1378.31 680.672 1316.79 651.411 1259.87 C 640.369 1267.02 629.826 1275.06 618.629 1282.18 C 550.3 1325.61 473.298 1346.84 393.315 1356.16 C 379.372 1379.35 364.845 1411.12 351.674 1435.73 C 301.742 1437.03 246.605 1435.84 196.258 1435.8 z M 682.749 1234.67 L 727.372 1322.07 C 733.408 1333.83 742.857 1353.57 749.627 1364.36 L 761.155 1364.29 L 774.151 1364.47 C 756.318 1326.54 734.485 1289.47 716.525 1251.42 C 714.124 1246.33 702.742 1222.28 699.838 1218.94 C 694.265 1224.32 688.567 1229.56 682.749 1234.67 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 364.361 751.56 C 361.839 750.412 359.335 749.226 356.849 748.002 C 335.765 737.578 311.171 723.559 303.577 699.665 C 299.469 686.74 300.496 673.092 307 661.159 C 322.434 632.842 357.315 619.112 386.508 610.468 C 483.209 581.833 659.584 579.281 749.102 628.495 C 765.404 637.457 779.911 651.229 784.968 669.664 C 789.017 684.423 786.515 699.904 778.843 712.989 C 763.657 738.89 727.692 751.164 700.226 758.532 L 705.414 771.705 C 762.316 777.179 798.91 796.384 817.909 851.861 C 811.111 854.774 804.374 857.827 797.703 861.02 C 757.69 878.026 718.668 899.162 678.959 916.967 C 671.951 920.11 664.293 923.681 657.493 927.246 L 573.314 762.267 C 564.104 744.068 553.259 724.606 544.751 706.317 L 442.56 906.079 C 428.288 933.586 413.538 963.255 398.557 990.266 C 395.644 995.603 390.588 1012.86 385.081 1013.07 C 358.963 1014.12 332.369 1012.19 306.167 1013.03 C 280.521 1013.86 259.527 1012.24 237.963 996.831 C 218.766 982.901 205.928 961.88 202.303 938.44 C 192.634 879.71 229.975 839.609 286.181 830.491 C 292.587 788.342 323.458 760.289 364.361 751.56 z"/>
-<path transform="translate(0,0)" fill="rgb(250,246,233)" d="M 364.361 751.56 C 361.839 750.412 359.335 749.226 356.849 748.002 C 335.765 737.578 311.171 723.559 303.577 699.665 C 299.469 686.74 300.496 673.092 307 661.159 C 322.434 632.842 357.315 619.112 386.508 610.468 C 483.209 581.833 659.584 579.281 749.102 628.495 C 765.404 637.457 779.911 651.229 784.968 669.664 C 789.017 684.423 786.515 699.904 778.843 712.989 C 763.657 738.89 727.692 751.164 700.226 758.532 L 705.414 771.705 C 762.316 777.179 798.91 796.384 817.909 851.861 C 811.111 854.774 804.374 857.827 797.703 861.02 C 794.526 852.61 791.918 845.662 787.296 837.967 C 766.53 803.401 727.436 791.96 689.62 800.928 C 673.65 719.755 598.129 667.86 516.652 684.514 C 478.949 692.182 445.863 714.574 424.731 746.726 C 417.9 757.087 413.927 765.801 409.489 777.257 C 387.817 771.647 364.641 772.669 344.952 784.094 C 326.444 794.959 313.069 812.795 307.825 833.606 C 305.972 840.685 305.235 847.434 304.498 854.685 C 283.178 852.692 266.095 855.411 248.969 869.457 C 234.875 880.979 225.979 897.662 224.264 915.786 C 222.626 933.77 227.609 952.228 239.446 966.058 C 251.228 980.015 268.178 988.581 286.402 989.789 C 298.986 990.717 315.758 990.203 328.709 990.172 C 351.991 990.044 375.275 990.075 398.557 990.266 C 395.644 995.603 390.588 1012.86 385.081 1013.07 C 358.963 1014.12 332.369 1012.19 306.167 1013.03 C 280.521 1013.86 259.527 1012.24 237.963 996.831 C 218.766 982.901 205.928 961.88 202.303 938.44 C 192.634 879.71 229.975 839.609 286.181 830.491 C 292.587 788.342 323.458 760.289 364.361 751.56 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 534.076 614.445 C 593.454 612.336 683.559 620.389 736.753 648.787 C 747.305 654.465 761.98 666.313 764.4 678.484 C 771.355 713.459 713.616 732.282 689.266 737.813 C 682.198 727.973 676.079 719.854 667.867 710.919 C 690.029 706.367 716.516 698.936 733.684 683.644 C 697.208 653.826 603.5 646.429 556.831 645.911 C 509.372 645.574 393.308 650.128 358.552 684.227 C 372.429 698.814 405.796 707.399 425.103 710.695 C 415.881 720.578 410.351 727.238 402.88 738.476 C 377.793 731.135 329.787 718.94 326.488 686.619 C 324.575 667.877 342.499 653.87 357.957 646.596 C 411.996 621.168 475.158 616.176 534.076 614.445 z"/>
-<path transform="translate(0,0)" fill="rgb(134,108,54)" d="M 392.318 1263.13 C 400.294 1245.16 410.51 1226.46 419.49 1208.76 L 467.951 1113.35 L 513.419 1024.82 C 523.061 1005.87 534.276 982.185 544.869 964.222 C 566.259 1006.88 592.025 1053.07 611.865 1095.37 C 606.503 1101.54 589.201 1116.91 582.706 1122.29 C 571.405 1103.75 554.523 1069.44 544.548 1049.33 C 524.641 1087.36 506.203 1126.41 485.94 1164.29 C 477.941 1179.25 469.767 1194.59 462.659 1209.97 C 586.434 1177.68 656.163 1090.13 722.994 988.604 C 729.609 994.72 756.25 992.14 765.823 991.304 C 697.682 1117.9 581.643 1231.54 435.902 1256.41 C 421.394 1258.88 406.527 1260.47 392.318 1263.13 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1838.46 1169.52 C 1842.29 1169.24 1847.01 1169.45 1850.91 1169.51 C 1851.7 1220.02 1851.04 1272.33 1851.08 1322.99 C 1841.28 1323.07 1831.49 1323.04 1821.69 1322.9 C 1809.8 1310.26 1797.53 1293.69 1786.58 1279.97 C 1773.49 1263.57 1759.99 1247.02 1747.21 1230.41 C 1747.72 1261.25 1747.98 1292.08 1748 1322.92 L 1722.75 1323.01 L 1713.04 1323.03 C 1711.61 1274.16 1711.92 1218.76 1712.61 1169.73 C 1722.83 1169.68 1732.36 1169.65 1742.61 1170.14 C 1750.76 1178.14 1759.93 1191.34 1767.4 1200.56 C 1783.6 1220.54 1799.15 1241.49 1816.1 1260.85 C 1815.48 1230.41 1815.13 1199.96 1815.05 1169.5 C 1822.64 1169.76 1830.81 1169.56 1838.46 1169.52 z"/>
-<path transform="translate(0,0)" fill="rgb(194,182,150)" d="M 1444.17 964.24 C 1451.02 964.069 1471.55 962.454 1475.83 967.043 C 1484.4 976.228 1492.64 987.083 1500.63 996.86 L 1549.06 1054.94 C 1548.7 1024.95 1548.9 994.642 1548.91 964.624 L 1584.41 964.568 C 1583.21 998.976 1584.55 1034.67 1584.18 1069.14 C 1584.09 1077.13 1585.15 1110.88 1583.65 1115.68 L 1581.21 1116.56 C 1572.44 1116 1562.73 1116.48 1553.3 1115.97 C 1528.27 1088.09 1505.71 1054.81 1479.07 1025.39 C 1479.91 1034.2 1479.54 1049.49 1479.55 1058.68 L 1479.59 1116.9 C 1468.57 1116.54 1455.6 1116.86 1444.44 1116.87 C 1443.51 1066.65 1444.08 1014.54 1444.17 964.24 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1309.56 1169.46 C 1318.31 1169.75 1334.94 1166.82 1342.54 1170.79 C 1345.11 1172.12 1404.62 1306.08 1410.7 1323.08 C 1398.55 1323.36 1386.39 1323.38 1374.23 1323.15 C 1368.93 1313.72 1363.62 1300.79 1359.8 1290.73 L 1343.25 1290.71 C 1325.63 1291.04 1307.34 1290.8 1289.63 1290.91 C 1287.11 1300.87 1282.22 1312.83 1277.79 1322.06 C 1268.37 1323.08 1250.27 1322.79 1240.15 1322.91 C 1245.29 1312.28 1250.59 1298.39 1255.5 1287.17 C 1266.77 1261.84 1277.83 1236.41 1288.67 1210.88 C 1293.78 1198.81 1298.84 1186.55 1303.95 1174.48 C 1305.63 1170.5 1306.4 1170.65 1309.56 1169.46 z M 1301.68 1262.67 C 1309.38 1262.61 1317.07 1262.6 1324.76 1262.62 L 1348.48 1262.61 C 1344.58 1252.92 1329.46 1212.34 1325.19 1206.6 C 1316.99 1225.13 1309.15 1243.83 1301.68 1262.67 z"/>
-<path transform="translate(0,0)" fill="rgb(194,182,150)" d="M 1012.75 965.119 C 1024.44 964.724 1036.14 964.93 1047.84 965.029 C 1052.23 971.188 1069.05 1008.59 1073 1017.81 C 1086.8 1049.95 1105.25 1084.99 1118.26 1116.84 C 1105.91 1117.01 1093.57 1116.94 1081.23 1116.63 C 1076.42 1108.38 1071.27 1094.71 1067.31 1085.44 L 1054.45 1085.06 L 995.291 1084.94 C 991.452 1095.31 986.655 1106.55 982.463 1116.88 L 946.789 1116.93 C 957.697 1085.82 975.287 1050.76 988.229 1020.02 C 992.696 1009.41 1007.71 972.946 1012.75 965.119 z M 1007.33 1056.98 L 1032.5 1056.9 L 1054.43 1056.76 C 1050.19 1045.97 1035.69 1008.33 1030.66 1000.82 C 1023.07 1018.95 1015.2 1039.13 1007.33 1056.98 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 947.567 1169.22 C 959.323 1169.42 971.082 1169.46 982.84 1169.34 C 983.358 1188.73 982.96 1209.52 983.177 1229.09 C 1003.44 1228.11 1028.84 1229.62 1049.88 1229.69 C 1048.18 1218.04 1049.06 1183.38 1049.1 1170.18 C 1060.61 1169.84 1073.27 1170.07 1084.86 1170.04 C 1083.7 1185.72 1084.51 1200.6 1084.67 1216.28 L 1085 1284.66 C 1085.03 1294.2 1085.65 1313.95 1084.67 1322.6 L 1049.05 1322.98 L 1049.04 1259.04 L 982.933 1259.06 L 983.009 1322.97 L 947.04 1323.05 C 946.795 1274.21 945.991 1217.58 947.567 1169.22 z"/>
-<path transform="translate(0,0)" fill="rgb(194,182,150)" d="M 1297.82 964.604 L 1413.87 965.009 L 1414.23 993.635 C 1388.73 992.899 1358.3 992.649 1332.86 993.559 L 1332.88 1024.96 C 1356.07 1024.4 1381.43 1024.91 1404.79 1024.94 C 1404.55 1034.77 1404.76 1043.31 1405.1 1053.09 C 1384.66 1053.51 1362.79 1053.19 1342.25 1053.21 C 1338.31 1053.16 1337.33 1053.04 1333.56 1053.87 C 1332.59 1062.47 1333.25 1078.91 1333.35 1088.08 C 1360.86 1087.69 1389.4 1088.12 1416.99 1088.16 L 1417.11 1117.04 C 1377.73 1116.43 1337.38 1116.82 1297.94 1116.82 L 1297.82 964.604 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1118.29 1169.88 C 1151.43 1168.3 1197.72 1169.91 1231.9 1169.79 L 1231.52 1198.84 C 1206.29 1198.29 1179.21 1198.84 1153.84 1198.93 L 1153.98 1230.75 C 1175.36 1229.9 1200.75 1230.47 1222.47 1230.45 C 1222.45 1239.93 1222.59 1249.41 1222.89 1258.88 C 1203.99 1257.88 1178.06 1258.7 1158.75 1258.88 L 1153.86 1258.7 C 1152.66 1261.63 1153.03 1289.02 1153.02 1294.1 C 1180.06 1294.02 1207.05 1293.25 1234.13 1293.04 C 1234.15 1301.79 1233.8 1314.44 1234.91 1322.81 L 1118.7 1323.22 C 1117.93 1304.27 1118.34 1283.61 1118.29 1264.46 C 1118.12 1232.93 1118.12 1201.4 1118.29 1169.88 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1572.8 1169.43 L 1684.85 1169.43 C 1684.31 1179.7 1684.21 1188.63 1684.21 1198.86 C 1659.09 1198.98 1631.56 1199.33 1606.59 1198.55 C 1606.99 1208.38 1606.75 1220.13 1606.97 1230.3 C 1627.69 1229.45 1654.96 1230.03 1675.92 1230.34 L 1675.95 1258.2 C 1654.42 1257.53 1630.52 1257.99 1608.8 1258.01 C 1607.57 1258.15 1608.24 1257.93 1606.96 1259.06 C 1606.6 1270.19 1607.01 1282.33 1607.17 1293.54 C 1632.51 1294.48 1662.31 1293.47 1687.74 1293.03 C 1688.03 1302.68 1687.89 1313.26 1687.93 1322.97 L 1572.02 1322.9 C 1572.02 1308.1 1570.7 1175.2 1572.8 1169.43 z"/>
-<path transform="translate(0,0)" fill="rgb(194,182,150)" d="M 1195.14 962.247 C 1229.94 960.335 1243.93 965.378 1270.36 988.089 C 1265.03 992.804 1252.11 1005.47 1246.57 1008.11 C 1227.42 996.678 1211.56 987.491 1188.36 995.237 C 1164.01 1003.37 1152.38 1034.63 1161.31 1057.91 C 1165.93 1070.01 1175.3 1079.69 1187.24 1084.71 C 1203.81 1091.74 1218.01 1088.54 1233.74 1082.22 C 1233.75 1074.75 1232.45 1045.04 1234.3 1039.63 L 1236.75 1038.84 C 1246.66 1038.66 1256.86 1038.83 1266.79 1038.86 C 1265.92 1059.82 1266.28 1078.54 1266.06 1099.4 C 1234.13 1122.71 1191.29 1127.81 1157.44 1105.5 C 1119.73 1080.65 1112.62 1030.01 1137.62 993.649 C 1151.08 974.079 1172.58 965.784 1195.14 962.247 z"/>
-<path transform="translate(0,0)" fill="rgb(212,159,51)" d="M 1395.36 1169.3 C 1406.09 1169.53 1420.42 1167.97 1430.73 1170.46 C 1432.83 1170.78 1434.59 1174.12 1435.41 1175.97 C 1450.27 1209.64 1462.27 1244.49 1478.01 1277.8 C 1481.2 1268.01 1488.93 1250.86 1493.12 1240.81 C 1503.04 1217.14 1512.84 1193.41 1522.52 1169.64 C 1534.41 1169.39 1546.3 1169.4 1558.19 1169.67 C 1554.28 1181.14 1549.18 1192.57 1544.43 1203.75 C 1529.29 1241.16 1511.23 1286.84 1494.74 1322.85 C 1482.96 1323.09 1470.62 1322.95 1458.79 1322.99 C 1445.08 1288.03 1429.33 1253.4 1415.05 1218.63 C 1408.46 1202.61 1400.85 1185.64 1395.36 1169.3 z"/>
-<path transform="translate(0,0)" fill="rgb(194,182,150)" d="M 1603.05 964.784 C 1645.98 963.843 1692.78 964.749 1735.95 964.758 L 1736.05 994.06 L 1687.26 994.042 L 1687.01 1069.1 L 1687.02 1116.84 L 1651.66 1117.04 C 1649.85 1079.15 1650.93 1032.5 1651.2 994.122 C 1635.13 994.279 1619.07 994.231 1603 993.976 L 1603.05 964.784 z"/>
-          </svg>
-        </div>
-        <div class="hero-badge">
-          <span class="logo-dot"></span>
-          <span data-i18n="hero.badge">Now in early access</span>
-        </div>
-        <h1>
-          <span data-i18n="hero.h1.line1">Your business,</span><br />
-          <em data-i18n="hero.h1.em">always on.</em>
-        </h1>
-        <p class="hero-sub" data-i18n="hero.sub">
-          We set up an AI agent that posts on social media and replies to your customers — every day, on autopilot. No tech skills needed.
-        </p>
-        <div class="hero-actions">
-          <a href="#early-access" class="btn-primary" data-i18n="hero.cta">Start for &euro;69 / month</a>
-          <a href="#how-it-works" class="btn-ghost">
-            <span data-i18n="hero.ghost">See how it works</span>
-            <span class="arrow">&#8594;</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="agent-panel">
-        <div class="panel-header">
-          <span class="panel-title" data-i18n="panel.title">Your agent &mdash; live activity</span>
-          <div class="panel-live"><span class="live-dot"></span><span data-i18n="panel.live">Running now</span></div>
-        </div>
-        <div class="feed-list" id="feedList"></div>
-        <div class="panel-footer">
-          <div class="panel-stat">
-            <div class="panel-stat-num" id="statPosts">0</div>
-            <div class="panel-stat-label" data-i18n="panel.stat.posts">Posts today</div>
-          </div>
-          <div class="panel-stat">
-            <div class="panel-stat-num" id="statReplies">0</div>
-            <div class="panel-stat-label" data-i18n="panel.stat.replies">Replies sent</div>
-          </div>
-          <div class="panel-stat">
-            <div class="panel-stat-num" id="statEngagement">3.2%</div>
-            <div class="panel-stat-label" data-i18n="panel.stat.engagement">Engagement</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker-bar">
-  <div class="ticker-track" id="tickerTrack"></div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how-it-works">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label" data-i18n="hiw.label">How it works</div>
-      <h2>
-        <span data-i18n="hiw.h2.line1">Three steps, then</span><br />
-        <em data-i18n="hiw.h2.em">we handle the rest</em>
-      </h2>
-    </div>
-    <div class="steps">
-      <div class="step reveal reveal-delay-1">
-        <div class="step-num">01</div>
-        <h3 data-i18n="hiw.step1.title">We have a call</h3>
-        <p data-i18n="hiw.step1.desc">A 30-minute conversation where we learn your brand &mdash; your voice, your topics, your customers. No forms, no homework.</p>
-      </div>
-      <div class="step-connector"><div class="step-connector-dot">&#8594;</div></div>
-      <div class="step reveal reveal-delay-2">
-        <div class="step-num">02</div>
-        <h3 data-i18n="hiw.step2.title">We build your agent</h3>
-        <p data-i18n="hiw.step2.desc">We configure an AI agent trained on your brand. You connect your social accounts once. We deploy and test everything.</p>
-      </div>
-      <div class="step-connector"><div class="step-connector-dot">&#8594;</div></div>
-      <div class="step reveal reveal-delay-3">
-        <div class="step-num">03</div>
-        <h3 data-i18n="hiw.step3.title">Your agent works 24/7</h3>
-        <p data-i18n="hiw.step3.desc">Posts go out on schedule. Customer messages get replied to. Your social media runs itself while you run your business.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section" style="padding-top:2rem;">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label" data-i18n="feat.label">What your agent does</div>
-      <h2>
-        <span data-i18n="feat.h2.line1">Everything your social</span><br />
-        <em data-i18n="feat.h2.em">media needs</em>
-      </h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon">&#128248;</div>
-        <h3 data-i18n="feat.1.title">Scheduled social posts</h3>
-        <p data-i18n="feat.1.desc">Your agent creates and publishes posts to Instagram and Facebook on a consistent schedule &mdash; written in your voice, about your business.</p>
-      </div>
-      <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon">&#128172;</div>
-        <h3 data-i18n="feat.2.title">Instant DM replies</h3>
-        <p data-i18n="feat.2.desc">Customer messages answered in seconds, any time of day. Questions about hours, prices, bookings &mdash; your agent knows the answers.</p>
-      </div>
-      <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon">&#129504;</div>
-        <h3 data-i18n="feat.3.title">Gets smarter over time</h3>
-        <p data-i18n="feat.3.desc">Your agent learns from every post and interaction. The longer it runs, the better it knows your brand and your customers.</p>
-      </div>
-      <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon">&#128737;</div>
-        <h3 data-i18n="feat.4.title">Fully managed by us</h3>
-        <p data-i18n="feat.4.desc">We monitor your agent every day. If something needs adjusting, we handle it. You get results without the maintenance work.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOR WHO -->
-<section class="section who-section">
-  <div class="container">
-    <div class="reveal" style="text-align:center;">
-      <div class="section-label" data-i18n="who.label">Built for</div>
-      <h2>
-        <span data-i18n="who.h2.line1">Any local business that</span><br />
-        <em data-i18n="who.h2.em">should be online more</em>
-      </h2>
-    </div>
-    <div class="who-grid">
-      <div class="who-card reveal reveal-delay-1">
-        <span class="who-emoji">&#127947;</span>
-        <h3 data-i18n="who.1.title">Gyms &amp; fitness studios</h3>
-        <p data-i18n="who.1.desc">Classes, offers, motivation &mdash; posted daily</p>
-      </div>
-      <div class="who-card reveal reveal-delay-2">
-        <span class="who-emoji">&#9986;</span>
-        <h3 data-i18n="who.2.title">Hair &amp; beauty salons</h3>
-        <p data-i18n="who.2.desc">Transformations, tips, and booking reminders</p>
-      </div>
-      <div class="who-card reveal reveal-delay-1">
-        <span class="who-emoji">&#127837;</span>
-        <h3 data-i18n="who.3.title">Restaurants &amp; caf&eacute;s</h3>
-        <p data-i18n="who.3.desc">Daily specials, events, customer love</p>
-      </div>
-      <div class="who-card reveal reveal-delay-2">
-        <span class="who-emoji">&#127939;</span>
-        <h3 data-i18n="who.4.title">Sports &amp; running clubs</h3>
-        <p data-i18n="who.4.desc">Events, results, community engagement</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="section" id="pricing">
-  <div class="container">
-    <div class="reveal" style="text-align:center;">
-      <div class="section-label" data-i18n="price.label">Pricing</div>
-      <h2>
-        <span data-i18n="price.h2.line1">One plan.</span><br />
-        <em data-i18n="price.h2.em">No surprises.</em>
-      </h2>
-    </div>
-    <div class="pricing-card reveal">
-      <div class="pricing-header">
-        <div class="pricing-badge" data-i18n="price.badge">Early access offer</div>
-        <div class="pricing-price"><sup>&euro;</sup>69</div>
-        <div class="pricing-period" data-i18n="price.period">per month &middot; cancel anytime</div>
-      </div>
-      <div class="pricing-features" id="pricingFeatures"></div>
-      <div class="pricing-cta">
-        <a href="#early-access" class="btn-primary" data-i18n="price.cta">Get early access</a>
-        <p class="pricing-note" data-i18n="price.note">First 10 customers get locked-in early access pricing.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="cta-section" id="early-access">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label" style="text-align:center;" data-i18n="cta.label">Get started</div>
-      <h2>
-        <span data-i18n="cta.h2.line1">Your agent is ready.</span><br />
-        <em data-i18n="cta.h2.em">Are you?</em>
-      </h2>
-      <p data-i18n="cta.sub">Join the waitlist and we&rsquo;ll reach out within 48 hours to set up your free onboarding call.</p>
-      <div class="email-row">
-        <input type="email" id="emailInput" class="email-input" data-i18n-placeholder="cta.placeholder" placeholder="your@email.com" />
-        <button class="btn-primary" id="signupBtn" data-i18n="cta.btn">Join waitlist</button>
-      </div>
-      <p id="signupMsg" style="margin-top:1rem;font-size:0.85rem;color:var(--gold);min-height:1.2em;"></p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<div class="container">
-  <footer>
-    <div class="footer-copy">&copy; 2026 AgentHeaven &middot; agentheaven.ai</div>
-    <div class="footer-links">
-      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
-      <a href="terms.html" data-i18n="footer.terms">Terms</a>
-      <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
-    </div>
-  </footer>
-</div>
+<!-- Sections appended by subsequent tasks. -->
 
 <script>
-  /* ─────────────────────────────────────────
-     TRANSLATIONS
-  ───────────────────────────────────────── */
-  var T = {
-    en: {
-      'nav.cta':              'Get early access',
-      'hero.badge':           'Now in early access',
-      'hero.h1.line1':        'Your business,',
-      'hero.h1.em':           'always on.',
-      'hero.sub':             'We set up an autonomous AI social media agent that posts to Instagram \u0026 Facebook and replies to your customers \u2014 every day, on autopilot. No tech skills needed.',
-      'hero.cta':             'Start for \u20AC69\u202F/\u202Fmonth',
-      'hero.ghost':           'See how it works',
-      'panel.title':          'Your agent \u2014 live activity',
-      'panel.live':           'Running now',
-      'panel.stat.posts':     'Posts today',
-      'panel.stat.replies':   'Replies sent',
-      'panel.stat.engagement':'Engagement',
-      'hiw.label':            'How it works',
-      'hiw.h2.line1':         'Three steps, then',
-      'hiw.h2.em':            'we handle the rest',
-      'hiw.step1.title':      'We have a call',
-      'hiw.step1.desc':       'A 30-minute conversation where we learn your brand \u2014 your voice, your topics, your customers. No forms, no homework.',
-      'hiw.step2.title':      'We build your AI agent',
-      'hiw.step2.desc':       'We configure an AI social media agent trained on your brand voice. You connect your Instagram and Facebook once. We deploy and test everything.',
-      'hiw.step3.title':      'Your AI agent works 24/7',
-      'hiw.step3.desc':       'Posts go out on schedule. Customer DMs and comments get replied to instantly. Your social media runs on autopilot while you run your business.',
-      'feat.label':           'What your agent does',
-      'feat.h2.line1':        'Everything your social',
-      'feat.h2.em':           'media needs',
-      'feat.1.title':         'AI-powered social media posts',
-      'feat.1.desc':          'Your AI agent creates and publishes posts to Instagram and Facebook on a daily schedule \u2014 written in your brand voice, about your business, automatically.',
-      'feat.2.title':         'Instant DM replies',
-      'feat.2.desc':          'Customer messages answered in seconds, any time of day. Questions about hours, prices, bookings \u2014 your agent knows the answers.',
-      'feat.3.title':         'Gets smarter over time',
-      'feat.3.desc':          'Your agent learns from every post and interaction. The longer it runs, the better it knows your brand and your customers.',
-      'feat.4.title':         'Fully managed by us',
-      'feat.4.desc':          'We monitor your agent every day. If something needs adjusting, we handle it. You get results without the maintenance work.',
-      'who.label':            'Built for',
-      'who.h2.line1':         'AI social media automation for',
-      'who.h2.em':            'every local business',
-      'who.1.title':          'Gyms & fitness studios',
-      'who.1.desc':           'Classes, offers, motivation \u2014 posted daily',
-      'who.2.title':          'Hair & beauty salons',
-      'who.2.desc':           'Transformations, tips, and booking reminders',
-      'who.3.title':          'Restaurants & caf\u00e9s',
-      'who.3.desc':           'Daily specials, events, customer love',
-      'who.4.title':          'Sports & running clubs',
-      'who.4.desc':           'Events, results, community engagement',
-      'price.label':          'Pricing',
-      'price.h2.line1':       'One plan.',
-      'price.h2.em':          'No surprises.',
-      'price.badge':          'Early access offer',
-      'price.period':         'per month \u00b7 cancel anytime',
-      'price.cta':            'Get early access',
-      'price.note':           'First 10 customers get locked-in early access pricing.',
-      'price.features': [
-        '2 posts per day to Instagram & Facebook',
-        'Instant auto-replies to DMs and comments',
-        'Personal onboarding call \u2014 we learn your brand',
-        'Agent trained on your voice, topics & style',
-        'Fully managed & monitored by our team',
-        'No setup fee \u00b7 No technical skills required'
-      ],
-      'cta.label':      'Get started',
-      'cta.h2.line1':   'Your agent is ready.',
-      'cta.h2.em':      'Are you?',
-      'cta.sub':        'Join the waitlist and we\u2019ll reach out within 48 hours to set up your free onboarding call.',
-      'cta.placeholder':'your@email.com',
-      'cta.btn':        'Join waitlist',
-      'msg.success':    '\u2713 You\u2019re on the list! We\u2019ll be in touch within 48 hours.',
-      'msg.error':      'Please enter a valid email address.',
-      'footer.privacy': 'Privacy',
-      'footer.terms':   'Terms',
-      'ticker.detail':  ['2 posts today','8 DMs replied','1 post scheduled','12 comments answered','3 posts this week','5 reviews responded','2 posts today','9 DMs replied'],
-      'feed': [
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post published', text:'"Monday motivation \u2014 your best week starts NOW \uD83D\uDCAA #fitness #gym"',         meta:'Instagram \u00b7 just now' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Comment replied', text:'@sara_m: "Hi! Our morning class is at 7:00am \u2014 see you there! \uD83C\uDF05"',       meta:'Facebook \u00b7 2 min ago' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM answered',    text:'@run_tom: "Yes, we\'re open Sunday! Doors at 8am. \uD83C\uDFC3"',                         meta:'Instagram \u00b7 5 min ago' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post published', text:'"5 reasons your hair needs deep treatment this winter \u2728 Book now"',                    meta:'Instagram \u00b7 12 min ago' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Comment replied', text:'@lena_w: "Love this! We recommend 2x per week for best results \uD83D\uDD25"',            meta:'Instagram \u00b7 18 min ago' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM answered',    text:'@felix: "Today\'s special is tagliatelle al tartufo \u2014 \u20AC14 \uD83C\uDF5D"',        meta:'Facebook \u00b7 22 min ago' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post scheduled', text:'"Sunday run: 10km trail, meet at 9am at the park gate \uD83C\uDFC3\u200D\u2640\uFE0F"',    meta:'Instagram \u00b7 31 min ago' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Comment replied', text:'@pilates_fan: "Absolutely! Beginners very welcome \u2014 see you Tuesday!"',               meta:'Facebook \u00b7 45 min ago' }
-      ]
-    },
+  /* Configuration. Founder replaces these with real values before launch. */
+  var BOOKING_URL = 'https://cal.com/agentheaven/30min';
+  var META_PIXEL_ID = '';
 
-    hu: {
-      'nav.cta':              'Korai hozz\u00e1f\u00e9r\u00e9s',
-      'hero.badge':           'Korai hozz\u00e1f\u00e9r\u00e9s',
-      'hero.h1.line1':        'V\u00e1llalkoz\u00e1sod,',
-      'hero.h1.em':           'mindig el\u00e9rhet\u0151.',
-      'hero.sub':             'Be\u00e1ll\u00edtunk egy AI \u00fcgyn\u00f6k\u00f6t, amely naponta posztol a k\u00f6z\u00f6ss\u00e9gi m\u00e9di\u00e1ban \u00e9s v\u00e1laszol az \u00fcgyfeleidnek \u2014 automatikusan. Technikai tud\u00e1s nem sz\u00fcks\u00e9ges.',
-      'hero.cta':             'Kezdj \u20AC69\u202F/\u202Fh\u00f3t\u00f3l',
-      'hero.ghost':           'Hogyan m\u0171k\u00f6dik',
-      'panel.title':          'Az \u00fcgyn\u00f6k\u00f6d \u2014 \u00e9l\u0151 tev\u00e9kenys\u00e9g',
-      'panel.live':           'Fut',
-      'panel.stat.posts':     'Mai posztok',
-      'panel.stat.replies':   'V\u00e1laszok',
-      'panel.stat.engagement':'Elk\u00f6telezetss\u00e9g',
-      'hiw.label':            'Hogyan m\u0171k\u00f6dik',
-      'hiw.h2.line1':         'H\u00e1rom l\u00e9p\u00e9s, aztán',
-      'hiw.h2.em':            'mi int\u00e9z\u00fcnk mindent',
-      'hiw.step1.title':      'Egyeztet\u00fcnk',
-      'hiw.step1.desc':       'Egy 30 perces besz\u00e9lget\u00e9s, ahol megismerjük a m\u00e1rk\u00e1dat \u2014 hangnemed, t\u00e9m\u00e1id, \u00fcgyfeleid. Semmi bonyolults\u00e1g.',
-      'hiw.step2.title':      'Megép\u00edt\u00fcnk az \u00fcgyn\u00f6k\u00f6d',
-      'hiw.step2.desc':       'Az \u00fcgyn\u00f6k\u00f6t a te m\u00e1rk\u00e1dhoz igazítjuk. Te csak egyszer csatlakoztatod a social media fi\u00f3kjaidat. Mi \u00fczembe helyez\u00fcnk \u00e9s tesztel\u00fcnk mindent.',
-      'hiw.step3.title':      'Az \u00fcgyn\u00f6k\u00f6d 24/7 dolgozik',
-      'hiw.step3.desc':       'A posztok menetrend szerint jelennek meg. Az \u00fcgyfelek \u00fczenetei megv\u00e1laszol\u00e1sra ker\u00fclnek. A k\u00f6z\u00f6ss\u00e9gi m\u00e9di\u00e1d mag\u00e1t\u00f3l megy, te pedig az \u00fczletedre koncentr\u00e1lhatsz.',
-      'feat.label':           'Mit csin\u00e1l az \u00fcgyn\u00f6k\u00f6d',
-      'feat.h2.line1':        'Minden, amit a k\u00f6z\u00f6ss\u00e9gi',
-      'feat.h2.em':           'm\u00e9di\u00e1d ig\u00e9nyel',
-      'feat.1.title':         '\u00dctemezett posztok',
-      'feat.1.desc':          'Az \u00fcgyn\u00f6k\u00f6d posztokat hoz l\u00e9tre \u00e9s tesz k\u00f6zz\u00e9 az Instagramon \u00e9s Facebookon \u2014 a te hangnemen, a te v\u00e1llalkoz\u00e1sodról.',
-      'feat.2.title':         'Azonnali \u00fczenetvlaszok',
-      'feat.2.desc':          'Az \u00fcgyfelek \u00fczenetei m\u00e1sodperceken bel\u00fcl megv\u00e1laszol\u00e1sra ker\u00fclnek, napszakt\u00f3l f\u00fcggetlenül. Nyitvatart\u00e1s, \u00e1rak, foglal\u00e1s \u2014 az \u00fcgyn\u00f6k\u00f6d tudja a v\u00e1laszokat.',
-      'feat.3.title':         'Id\u0151vel egyre okosabb',
-      'feat.3.desc':          'Az \u00fcgyn\u00f6k\u00f6d tanul minden posztb\u00f3l \u00e9s interakci\u00f3b\u00f3l. Min\u00e9l tov\u00e1bb fut, ann\u00e1l jobban ismeri a m\u00e1rk\u00e1dat \u00e9s \u00fcgyfeleidet.',
-      'feat.4.title':         'Mi kezeljük teljesk\u00f6r\u0171en',
-      'feat.4.desc':          'Naponta figyelemmel k\u00eds\u00e9rj\u00fck az \u00fcgyn\u00f6k\u00f6d. Ha valamin m\u00f3dos\u00edtani kell, mi int\u00e9zz\u00fck. Te az eredm\u00e9nyeket kapod, karbantart\u00e1s n\u00e9lk\u00fcl.',
-      'who.label':            'Ide\u00e1lis',
-      'who.h2.line1':         'Minden helyi v\u00e1llalkoz\u00e1snak,',
-      'who.h2.em':            'amelynek t\u00f6bb online jelenl\u00e9tre van sz\u00fcks\u00e9ge',
-      'who.1.title':          'Edz\u0151termek \u00e9s fitnesz st\u00fadi\u00f3k',
-      'who.1.desc':           '\u00d3r\u00e1k, aj\u00e1nlatok, motiv\u00e1ci\u00f3 \u2014 naponta k\u00f6zz\u00e9t\u00e9ve',
-      'who.2.title':          'Hajszalonok \u00e9s sz\u00e9ps\u00e9gszalonok',
-      'who.2.desc':           '\u00c1talakul\u00e1sok, tippek \u00e9s foglal\u00e1si eml\u00e9keztet\u0151k',
-      'who.3.title':          '\u00c9ttermek \u00e9s k\u00e1v\u00e9z\u00f3k',
-      'who.3.desc':           'Napi aj\u00e1nlatok, esem\u00e9nyek, visszajelz\u00e9sek',
-      'who.4.title':          'Sportegyesulek \u00e9s fut\u00f3klubok',
-      'who.4.desc':           'Esem\u00e9nyek, eredm\u00e9nyek, k\u00f6z\u00f6ss\u00e9gi aktivit\u00e1s',
-      'price.label':          '\u00c1raz\u00e1s',
-      'price.h2.line1':       'Egy csomag.',
-      'price.h2.em':          'Nincsenek rejtett d\u00edjak.',
-      'price.badge':          'Korai hozz\u00e1f\u00e9r\u00e9si aj\u00e1nlat',
-      'price.period':         'havonta \u00b7 b\u00e1rmikor lemondhat\u00f3',
-      'price.cta':            'Korai hozz\u00e1f\u00e9r\u00e9s',
-      'price.note':           'Az els\u0151 10 \u00fcgyf\u00e9l \u00f6r\u00f6kre megkapja a korai hozz\u00e1f\u00e9r\u00e9si \u00e1rat.',
-      'price.features': [
-        'Napi 2 poszt az Instagramon \u00e9s Facebookon',
-        'Azonnali automatikus v\u00e1laszok DM-ekre \u00e9s kommentekre',
-        'Szem\u00e9lyes onboarding h\u00edv\u00e1s \u2014 megismerjük a m\u00e1rk\u00e1dat',
-        'A te hangneme, t\u00e9m\u00e1idra \u00e9s st\u00edlusodra betanított \u00fcgyn\u00f6k',
-        'Csapatunk teljes k\u00f6r\u0171en kezeli \u00e9s figyeli',
-        'Nincs be\u00e1ll\u00edt\u00e1si d\u00edj \u00b7 Nincs sz\u00fcks\u00e9g technikai tud\u00e1sra'
-      ],
-      'cta.label':      'Kezdj\u00fck el',
-      'cta.h2.line1':   'Az \u00fcgyn\u00f6k\u00f6d k\u00e9szen \u00e1ll.',
-      'cta.h2.em':      'Te is?',
-      'cta.sub':        'Csatlakozz a v\u00e1r\u00f3list\u00e1hoz, \u00e9s 48 \u00f3r\u00e1n bel\u00fcl megkereresünk az ingyenes onboarding h\u00edv\u00e1s egyeztet\u00e9s\u00e9re.',
-      'cta.placeholder':'email@cimed.hu',
-      'cta.btn':        'Csatlakozom',
-      'msg.success':    '\u2713 Felker\u00fclt\u00e9l a list\u00e1ra! 48 \u00f3r\u00e1n bel\u00fcl megkeres\u00fcnk.',
-      'msg.error':      'K\u00e9rjük, adj meg egy \u00e9rv\u00e9nyes e-mail-c\u00edmet.',
-      'footer.privacy': 'Adatv\u00e9delem',
-      'footer.terms':   'Felt\u00e9telek',
-      'ticker.detail':  ['2 poszt ma','8 DM megv\u00e1laszolva','1 poszt \u00fctemezve','12 komment megv\u00e1laszolva','3 poszt ezen a h\u00e9ten','5 \u00e9rt\u00e9kel\u00e9s megv\u00e1laszolva','2 poszt ma','9 DM megv\u00e1laszolva'],
-      'feed': [
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Poszt k\u00f6zz\u00e9t\u00e9ve', text:'"H\u00e9tf\u0151i motiv\u00e1ci\u00f3 \u2014 a legjobb heted MOST kezd\u0151dik \uD83D\uDCAA #fitness #edz\u00f3terem"',  meta:'Instagram \u00b7 most' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentre v\u00e1lasz',  text:'@sara_m: "Szia! A reggeli \u00f3r\u00e1nk 7:00-kor van \u2014 viszl\u00e1t! \uD83C\uDF05"',                    meta:'Facebook \u00b7 2 perce' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM megv\u00e1laszolva', text:'@run_tom: "Igen, vas\u00e1rnap ny\u00e9rve vagyunk! Nyit\u00e1s 8-kor. \uD83C\uDFC3"',                        meta:'Instagram \u00b7 5 perce' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Poszt k\u00f6zz\u00e9t\u00e9ve', text:'"5 ok, mi\u00e9rt kell m\u00e9lykezel\u00e9s a hajadnak t\u00e9len \u2728 Foglalj most"',            meta:'Instagram \u00b7 12 perce' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentre v\u00e1lasz',  text:'@lena_w: "Nagyon j\u00f3 k\u00e9rd\u00e9s! Heti 2x javasoljuk a legjobb eredm\u00e9nyhez \uD83D\uDD25"',  meta:'Instagram \u00b7 18 perce' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM megv\u00e1laszolva', text:'@felix: "A mai napi aj\u00e1nlatunk a tagliatelle al tartufo \u2014 14\u20AC \uD83C\uDF5D"',               meta:'Facebook \u00b7 22 perce' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Poszt \u00fctemezve',    text:'"Vas\u00e1rnapi fut\u00e1s: 10km trail, tal\u00e1lkoz\u00f3 9-kor a park bej\u00e1rat\u00e1n\u00e1l \uD83C\uDFC3"', meta:'Instagram \u00b7 31 perce' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentre v\u00e1lasz',  text:'@pilates_fan: "Persze! Kezd\u0151k is nagyon welcome-ok \u2014 v\u00e1runk kedd\u00f6n!"',                 meta:'Facebook \u00b7 45 perce' }
-      ]
-    },
+  /* Translations: sections 2–11 each add their keys to T.en, T.hu, T.de.
+     All values are plain text — applyTranslations uses textContent only. */
+  var T = { en: {}, hu: {}, de: {} };
 
-    de: {
-      'nav.cta':              'Early Access',
-      'hero.badge':           'Jetzt im Early Access',
-      'hero.h1.line1':        'Dein Business,',
-      'hero.h1.em':           'immer aktiv.',
-      'hero.sub':             'Wir richten einen KI-Agenten ein, der t\u00e4glich auf Social Media postet und auf deine Kunden antwortet \u2014 vollautomatisch. Keine technischen Kenntnisse erforderlich.',
-      'hero.cta':             'Starten f\u00fcr \u20AC69\u202F/\u202FMonat',
-      'hero.ghost':           'So funktioniert es',
-      'panel.title':          'Dein Agent \u2014 Live-Aktivit\u00e4t',
-      'panel.live':           'L\u00e4uft jetzt',
-      'panel.stat.posts':     'Posts heute',
-      'panel.stat.replies':   'Antworten',
-      'panel.stat.engagement':'Engagement',
-      'hiw.label':            'So funktioniert es',
-      'hiw.h2.line1':         'Drei Schritte, dann',
-      'hiw.h2.em':            '\u00fcbernehmen wir den Rest',
-      'hiw.step1.title':      'Wir telefonieren',
-      'hiw.step1.desc':       'Ein 30-min\u00fctiges Gespr\u00e4ch, in dem wir deine Marke kennenlernen \u2014 deine Stimme, deine Themen, deine Kunden. Kein Aufwand.',
-      'hiw.step2.title':      'Wir bauen deinen Agenten',
-      'hiw.step2.desc':       'Wir konfigurieren einen KI-Agenten, der auf deine Marke trainiert ist. Du verbindest einmalig deine Social-Media-Konten. Wir deployen und testen alles.',
-      'hiw.step3.title':      'Dein Agent arbeitet 24/7',
-      'hiw.step3.desc':       'Posts gehen planm\u00e4\u00dfig raus. Kundennachrichten werden beantwortet. Dein Social Media l\u00e4uft von selbst, w\u00e4hrend du dein Unternehmen f\u00fchrst.',
-      'feat.label':           'Was dein Agent macht',
-      'feat.h2.line1':        'Alles, was deine Social-',
-      'feat.h2.em':           'Media braucht',
-      'feat.1.title':         'Geplante Social-Posts',
-      'feat.1.desc':          'Dein Agent erstellt und ver\u00f6ffentlicht Posts auf Instagram und Facebook nach einem festen Plan \u2014 in deiner Stimme, \u00fcber dein Unternehmen.',
-      'feat.2.title':         'Sofortige DM-Antworten',
-      'feat.2.desc':          'Kundennachrichten werden in Sekunden beantwortet, rund um die Uhr. Fragen zu \u00d6ffnungszeiten, Preisen, Buchungen \u2014 dein Agent kennt die Antworten.',
-      'feat.3.title':         'Wird mit der Zeit smarter',
-      'feat.3.desc':          'Dein Agent lernt aus jedem Post und jeder Interaktion. Je l\u00e4nger er l\u00e4uft, desto besser kennt er deine Marke und deine Kunden.',
-      'feat.4.title':         'Vollst\u00e4ndig von uns verwaltet',
-      'feat.4.desc':          'Wir \u00fcberwachen deinen Agenten t\u00e4glich. Wenn etwas angepasst werden muss, k\u00fcmmern wir uns darum. Du bekommst Ergebnisse ohne Wartungsaufwand.',
-      'who.label':            'Gemacht f\u00fcr',
-      'who.h2.line1':         'Jedes lokale Unternehmen,',
-      'who.h2.em':            'das mehr Online-Pr\u00e4senz braucht',
-      'who.1.title':          'Fitnessstudios',
-      'who.1.desc':           'Kurse, Angebote, Motivation \u2014 t\u00e4glich gepostet',
-      'who.2.title':          'Friseur- & Beautysalons',
-      'who.2.desc':           'Verwandlungen, Tipps und Buchungserinnerungen',
-      'who.3.title':          'Restaurants & Caf\u00e9s',
-      'who.3.desc':           'Tagesgerichte, Events, Kundenfeedback',
-      'who.4.title':          'Sport- & Laufvereine',
-      'who.4.desc':           'Events, Ergebnisse, Community-Engagement',
-      'price.label':          'Preise',
-      'price.h2.line1':       'Ein Plan.',
-      'price.h2.em':          'Keine versteckten Kosten.',
-      'price.badge':          'Early-Access-Angebot',
-      'price.period':         'pro Monat \u00b7 jederzeit k\u00fcndbar',
-      'price.cta':            'Early Access sichern',
-      'price.note':           'Die ersten 10 Kunden erhalten dauerhaft den Early-Access-Preis.',
-      'price.features': [
-        '2 Posts t\u00e4glich auf Instagram & Facebook',
-        'Sofortige Auto-Antworten auf DMs und Kommentare',
-        'Pers\u00f6nliches Onboarding-Gespr\u00e4ch \u2014 wir lernen deine Marke kennen',
-        'Agent trainiert auf deine Stimme, Themen & Stil',
-        'Vollst\u00e4ndig von unserem Team verwaltet & \u00fcberwacht',
-        'Keine Einrichtungsgeb\u00fchr \u00b7 Keine technischen Kenntnisse n\u00f6tig'
-      ],
-      'cta.label':      'Loslegen',
-      'cta.h2.line1':   'Dein Agent wartet.',
-      'cta.h2.em':      'Du auch?',
-      'cta.sub':        'Trag dich in die Warteliste ein und wir melden uns innerhalb von 48 Stunden f\u00fcr ein kostenloses Onboarding-Gespr\u00e4ch.',
-      'cta.placeholder':'deine@email.de',
-      'cta.btn':        'Zur Warteliste',
-      'msg.success':    '\u2713 Du bist auf der Liste! Wir melden uns innerhalb von 48 Stunden.',
-      'msg.error':      'Bitte gib eine g\u00fcltige E-Mail-Adresse ein.',
-      'footer.privacy': 'Datenschutz',
-      'footer.terms':   'AGB',
-      'ticker.detail':  ['2 Posts heute','8 DMs beantwortet','1 Post geplant','12 Kommentare beantwortet','3 Posts diese Woche','5 Bewertungen beantwortet','2 Posts heute','9 DMs beantwortet'],
-      'feed': [
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post ver\u00f6ffentlicht', text:'"Montags-Motivation \u2014 deine beste Woche startet JETZT \uD83D\uDCAA #fitness #gym"',              meta:'Instagram \u00b7 gerade eben' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentar beantwortet', text:'@sara_m: "Hallo! Unser Morgenkurs ist um 7:00 Uhr \u2014 bis dann! \uD83C\uDF05"',                    meta:'Facebook \u00b7 vor 2 Min.' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM beantwortet',        text:'@run_tom: "Ja, wir haben sonntags ge\u00f6ffnet! Ab 8 Uhr. \uD83C\uDFC3"',                             meta:'Instagram \u00b7 vor 5 Min.' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post ver\u00f6ffentlicht', text:'"5 Gr\u00fcnde, warum dein Haar eine Tiefenpflege braucht \u2728 Jetzt buchen"',                      meta:'Instagram \u00b7 vor 12 Min.' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentar beantwortet', text:'@lena_w: "Super Frage! Wir empfehlen 2x pro Woche f\u00fcr beste Ergebnisse \uD83D\uDD25"',             meta:'Instagram \u00b7 vor 18 Min.' },
-        { type:'dm',    icon:'\u2709\uFE0F',  label:'DM beantwortet',        text:'@felix: "Das Tagesgericht ist Tagliatelle al tartufo \u2014 14\u20AC \uD83C\uDF5D"',                    meta:'Facebook \u00b7 vor 22 Min.' },
-        { type:'post',  icon:'\uD83D\uDCF8', label:'Post geplant',           text:'"Sonntagslauf: 10km Trail, Treff um 9 Uhr am Parkeingang \uD83C\uDFC3\u200D\u2640\uFE0F"',               meta:'Instagram \u00b7 vor 31 Min.' },
-        { type:'reply', icon:'\uD83D\uDCAC', label:'Kommentar beantwortet', text:'@pilates_fan: "Nat\u00fcrlich! Anf\u00e4nger sehr willkommen \u2014 bis Dienstag!"',                       meta:'Facebook \u00b7 vor 45 Min.' }
-      ]
-    }
-  };
-
-  /* ─────────────────────────────────────────
-     LANGUAGE ENGINE
-  ───────────────────────────────────────── */
-  var currentLang = localStorage.getItem('ah_lang') || 'en';
-  var feedIndex    = 0;
-  var feedCount    = 0;
-  var postsCount   = 0;
-  var repliesCount = 0;
-  var feedTimer    = null;
-
-  var tickerBizNames = ['Sunny Fit Gym','Bliss Hair Studio','Bella Pasta','Peak Running Club','Urban Yoga','La Forge Coffee','Iron House Gym','Flow Pilates'];
+  var currentLang = localStorage.getItem('ah_lang') || (navigator.language && navigator.language.slice(0,2)) || 'en';
+  if (!T[currentLang]) currentLang = 'en';
 
   function t(key) {
-    var lang = T[currentLang];
-    return lang && lang[key] !== undefined ? lang[key] : (T['en'][key] || key);
+    return (T[currentLang] && T[currentLang][key]) || (T.en && T.en[key]) || '';
   }
 
   function applyTranslations() {
     document.documentElement.lang = currentLang;
-
-    // text elements
-    var els = document.querySelectorAll('[data-i18n]');
-    for (var i = 0; i < els.length; i++) {
-      var el  = els[i];
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
       var val = t(key);
-      if (typeof val === 'string') el.textContent = val;
-    }
-
-    // placeholder
-    var phEls = document.querySelectorAll('[data-i18n-placeholder]');
-    for (var j = 0; j < phEls.length; j++) {
-      var pKey = phEls[j].getAttribute('data-i18n-placeholder');
-      phEls[j].placeholder = t(pKey);
-    }
-
-    // pricing features (rebuild)
-    rebuildPricingFeatures();
-
-    // panel stat labels (re-apply since they have data-i18n already handled above)
-    // ticker rebuild
-    rebuildTicker();
-
-    // feed reset on lang change
-    resetFeed();
-
-    // active lang button
-    var btns = document.querySelectorAll('.lang-btn');
-    for (var k = 0; k < btns.length; k++) {
-      btns[k].classList.toggle('active', btns[k].getAttribute('data-lang') === currentLang);
-    }
-
-    // clear signup message on language change
-    document.getElementById('signupMsg').textContent = '';
-  }
-
-  /* ─────────────────────────────────────────
-     PRICING FEATURES
-  ───────────────────────────────────────── */
-  function rebuildPricingFeatures() {
-    var container = document.getElementById('pricingFeatures');
-    while (container.firstChild) container.removeChild(container.firstChild);
-    var features = t('price.features');
-    if (!Array.isArray(features)) return;
-    features.forEach(function(text) {
-      var row = document.createElement('div');
-      row.className = 'pricing-feature';
-      var check = document.createElement('div');
-      check.className = 'check';
-      check.textContent = '\u2713';
-      var label = document.createElement('span');
-      label.textContent = text;
-      row.appendChild(check);
-      row.appendChild(label);
-      container.appendChild(row);
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      var val = t(key);
+      if (val) el.setAttribute('placeholder', val);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-aria-label');
+      var val = t(key);
+      if (val) el.setAttribute('aria-label', val);
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
     });
   }
 
-  /* ─────────────────────────────────────────
-     TICKER
-  ───────────────────────────────────────── */
-  function rebuildTicker() {
-    var track = document.getElementById('tickerTrack');
-    while (track.firstChild) track.removeChild(track.firstChild);
-    var details = t('ticker.detail');
-    [0, 1].forEach(function() {
-      tickerBizNames.forEach(function(biz, i) {
-        var span = document.createElement('span');
-        span.className = 'ticker-item';
-        var emoji = document.createTextNode(i % 2 === 0 ? '\uD83D\uDCCD ' : '\uD83D\uDCAC ');
-        var hl = document.createElement('span');
-        hl.className = 'ticker-highlight';
-        hl.textContent = biz;
-        var rest = document.createTextNode(' \u00b7 ' + (Array.isArray(details) ? details[i] : ''));
-        span.appendChild(emoji);
-        span.appendChild(hl);
-        span.appendChild(rest);
-        track.appendChild(span);
-      });
-    });
-  }
-
-  /* ─────────────────────────────────────────
-     LIVE FEED
-  ───────────────────────────────────────── */
-  function resetFeed() {
-    feedIndex    = 0;
-    feedCount    = 0;
-    postsCount   = 0;
-    repliesCount = 0;
-    var feedList = document.getElementById('feedList');
-    while (feedList.firstChild) feedList.removeChild(feedList.firstChild);
-    document.getElementById('statPosts').textContent      = '0';
-    document.getElementById('statReplies').textContent    = '0';
-    document.getElementById('statEngagement').textContent = '3.2%';
-    if (feedTimer) clearInterval(feedTimer);
-    for (var i = 0; i < 4; i++) addFeedItem();
-    feedTimer = setInterval(addFeedItem, 4000);
-  }
-
-  function addFeedItem() {
-    var feedData = t('feed');
-    if (!Array.isArray(feedData) || feedData.length === 0) return;
-    var d = feedData[feedIndex % feedData.length];
-    feedIndex++;
-
-    var item = document.createElement('div');
-    item.className = 'feed-item';
-    item.style.animationDelay = '0ms';
-
-    var iconDiv = document.createElement('div');
-    iconDiv.className = 'feed-icon ' + d.type;
-    iconDiv.textContent = d.icon;
-
-    var contentDiv = document.createElement('div');
-    contentDiv.className = 'feed-content';
-
-    var labelDiv = document.createElement('div');
-    labelDiv.className = 'feed-label ' + d.type;
-    labelDiv.textContent = d.label;
-
-    var textDiv = document.createElement('div');
-    textDiv.className = 'feed-text';
-    textDiv.textContent = d.text;
-
-    var metaDiv = document.createElement('div');
-    metaDiv.className = 'feed-meta';
-    metaDiv.textContent = d.meta;
-
-    contentDiv.appendChild(labelDiv);
-    contentDiv.appendChild(textDiv);
-    contentDiv.appendChild(metaDiv);
-    item.appendChild(iconDiv);
-    item.appendChild(contentDiv);
-
-    var feedList = document.getElementById('feedList');
-    feedList.insertBefore(item, feedList.firstChild);
-    feedCount++;
-    while (feedCount > 5) { feedList.removeChild(feedList.lastChild); feedCount--; }
-
-    if (d.type === 'post') postsCount++;
-    else repliesCount++;
-
-    document.getElementById('statPosts').textContent      = postsCount;
-    document.getElementById('statReplies').textContent    = repliesCount;
-    document.getElementById('statEngagement').textContent = (3.2 + postsCount * 0.3).toFixed(1) + '%';
-  }
-
-  /* ─────────────────────────────────────────
-     INIT
-  ───────────────────────────────────────── */
-  // Nav scroll
-  var nav = document.getElementById('nav');
-  window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+  document.addEventListener('DOMContentLoaded', function() {
+    applyTranslations();
   });
-
-  // Scroll reveal
-  var revealEls = document.querySelectorAll('.reveal');
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(function(el) { revealObserver.observe(el); });
-
-  // Language buttons
-  var langBtns = document.querySelectorAll('.lang-btn');
-  langBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var lang = btn.getAttribute('data-lang');
-      if (lang === currentLang) return;
-      currentLang = lang;
-      localStorage.setItem('ah_lang', lang);
-      applyTranslations();
-    });
-  });
-
-  // Signup
-  function handleSignup() {
-    var input = document.getElementById('emailInput');
-    var msg   = document.getElementById('signupMsg');
-    var email = input.value.trim();
-    if (!email || email.indexOf('@') < 1) {
-      msg.style.color = '#E07070';
-      msg.textContent = t('msg.error');
-      return;
-    }
-    msg.style.color = 'var(--gold)';
-    msg.textContent = t('msg.success');
-    input.value = '';
-  }
-  document.getElementById('signupBtn').addEventListener('click', handleSignup);
-  document.getElementById('emailInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') handleSignup();
-  });
-
-  // Apply on load
-  applyTranslations();
 </script>
+
 </body>
 </html>
