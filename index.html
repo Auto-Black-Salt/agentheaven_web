@@ -273,6 +273,28 @@
     .step h3 { margin-bottom: 0.4rem; }
     .step p { color: var(--ink-soft); font-size: 0.97rem; }
 
+    /* ---------------- JOURNEY ---------------- */
+    .journey { background: var(--ink); color: var(--bg); }
+    .journey h2 { color: var(--bg); max-width: 18ch; margin-bottom: 3rem; }
+    .journey h2 em { color: var(--accent-2); }
+    .journey .section-label { color: var(--accent-2); }
+
+    .journey-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 800px) { .journey-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; } }
+
+    .journey-card {
+      padding: 1.75rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+    }
+    .journey-card h3 { color: var(--bg); margin-bottom: 0.4rem; }
+    .journey-card p { color: #cfd1cd; font-size: 0.97rem; }
+    .journey-day {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.75rem;
+    }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -409,6 +431,36 @@
   </div>
 </section>
 
+<!-- JOURNEY -->
+<section class="section journey">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="journey.label">The journey</div>
+      <h2>
+        <span data-i18n="journey.h2.a">Generalist on Monday.</span>
+        <em data-i18n="journey.h2.b">Specialist by quarter-end.</em>
+      </h2>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-card reveal reveal-delay-1">
+        <div class="journey-day" data-i18n="journey.1.day">Day 1</div>
+        <h3 data-i18n="journey.1.title">Trained on your runbook</h3>
+        <p data-i18n="journey.1.desc">Connected to your tools. Working the moment you say go. Knows the basics of your business and the shape of the job.</p>
+      </div>
+      <div class="journey-card reveal reveal-delay-2">
+        <div class="journey-day" data-i18n="journey.2.day">Day 30</div>
+        <h3 data-i18n="journey.2.title">Knows your edge cases</h3>
+        <p data-i18n="journey.2.desc">Has seen your customers, your exceptions, your preferences. Stops asking the same questions twice.</p>
+      </div>
+      <div class="journey-card reveal reveal-delay-3">
+        <div class="journey-day" data-i18n="journey.3.day">Day 90</div>
+        <h3 data-i18n="journey.3.title">Indistinguishable from a senior</h3>
+        <p data-i18n="journey.3.desc">A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -457,7 +509,19 @@
       'how.3.title': 'Day 1 generalist',
       'how.3.desc':  'Your employee starts working in days. Capable, responsive, useful from day one.',
       'how.4.title': 'Day 90 specialist',
-      'how.4.desc':  "We keep tuning. Feedback shapes memory. By month three, it's a specialist at your version of the job."
+      'how.4.desc':  "We keep tuning. Feedback shapes memory. By month three, it's a specialist at your version of the job.",
+      'journey.label':   'The journey',
+      'journey.h2.a':    'Generalist on Monday.',
+      'journey.h2.b':    'Specialist by quarter-end.',
+      'journey.1.day':   'Day 1',
+      'journey.1.title': 'Trained on your runbook',
+      'journey.1.desc':  'Connected to your tools. Working the moment you say go. Knows the basics of your business and the shape of the job.',
+      'journey.2.day':   'Day 30',
+      'journey.2.title': 'Knows your edge cases',
+      'journey.2.desc':  'Has seen your customers, your exceptions, your preferences. Stops asking the same questions twice.',
+      'journey.3.day':   'Day 90',
+      'journey.3.title': 'Indistinguishable from a senior',
+      'journey.3.desc':  'A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -497,7 +561,19 @@
       'how.3.title': '1. nap: generalista',
       'how.3.desc':  'A munkavállalód napok alatt elkezd dolgozni. Hozzáértő, reaktív, az első naptól hasznos.',
       'how.4.title': '90. nap: specialista',
-      'how.4.desc':  'Folyamatosan hangoljuk. A visszajelzések alakítják a memóriáját. A harmadik hónapra a te változatodban specialista.'
+      'how.4.desc':  'Folyamatosan hangoljuk. A visszajelzések alakítják a memóriáját. A harmadik hónapra a te változatodban specialista.',
+      'journey.label':   'Az út',
+      'journey.h2.a':    'Hétfőn generalista.',
+      'journey.h2.b':    'A negyedév végére specialista.',
+      'journey.1.day':   '1. nap',
+      'journey.1.title': 'A runbookodra betanítva',
+      'journey.1.desc':  'Az eszközeidhez csatlakoztatva. Dolgozik abban a pillanatban, hogy azt mondod, mehet. Tudja az alapokat a vállalkozásodról és a munka formájáról.',
+      'journey.2.day':   '30. nap',
+      'journey.2.title': 'Ismeri a kivételeket',
+      'journey.2.desc':  'Látta az ügyfeleidet, a kivételeket, a preferenciáidat. Már nem kérdezi kétszer ugyanazt.',
+      'journey.3.day':   '90. nap',
+      'journey.3.title': 'Megkülönböztethetetlen egy senior munkatárstól',
+      'journey.3.desc':  'Specialista a munkájában. Tud olyan dolgokat, amiket leírni elfelejtettél. Az új normális — és alig veszed észre, hogy dolgozik.'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -537,7 +613,19 @@
       'how.3.title': 'Tag 1: Generalist',
       'how.3.desc':  'Dein Mitarbeiter arbeitet innerhalb von Tagen. Fähig, reaktiv, ab Tag eins nützlich.',
       'how.4.title': 'Tag 90: Spezialist',
-      'how.4.desc':  'Wir tunen kontinuierlich. Feedback formt das Gedächtnis. Nach drei Monaten ist er Spezialist für deine Variante des Jobs.'
+      'how.4.desc':  'Wir tunen kontinuierlich. Feedback formt das Gedächtnis. Nach drei Monaten ist er Spezialist für deine Variante des Jobs.',
+      'journey.label':   'Der Weg',
+      'journey.h2.a':    'Montag Generalist.',
+      'journey.h2.b':    'Quartalsende Spezialist.',
+      'journey.1.day':   'Tag 1',
+      'journey.1.title': 'Auf dein Runbook trainiert',
+      'journey.1.desc':  'Mit deinen Tools verbunden. Arbeitet, sobald du grünes Licht gibst. Kennt die Grundlagen deines Geschäfts und die Form der Aufgabe.',
+      'journey.2.day':   'Tag 30',
+      'journey.2.title': 'Kennt deine Ausnahmen',
+      'journey.2.desc':  'Hat deine Kunden, deine Ausnahmen, deine Präferenzen gesehen. Stellt nicht zweimal dieselbe Frage.',
+      'journey.3.day':   'Tag 90',
+      'journey.3.title': 'Nicht von einem Senior zu unterscheiden',
+      'journey.3.desc':  'Spezialist für den Job. Weiß Dinge, die du vergessen hast aufzuschreiben. Das neue Normal — und du merkst kaum, dass er arbeitet.'
     }
   };
 
