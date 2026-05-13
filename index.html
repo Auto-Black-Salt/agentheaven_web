@@ -383,6 +383,48 @@
     }
     .whyus-stat .lab { font-size: 0.88rem; color: var(--ink-soft); }
 
+    /* ---------------- FAQ ---------------- */
+    .faq h2 { text-align: center; margin-bottom: 3rem; }
+
+    .faq-list {
+      max-width: 760px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%;
+      padding: 1.1rem 1.25rem;
+      background: transparent; border: none; cursor: pointer;
+      font-family: inherit; font-size: 1rem; font-weight: 600;
+      color: var(--ink); text-align: left;
+    }
+    .faq-q::after {
+      content: '+';
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-left: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.open .faq-q::after { content: '−'; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.25s ease, padding 0.25s ease;
+      padding: 0 1.25rem;
+      color: var(--ink-soft);
+      font-size: 0.97rem; line-height: 1.6;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 1.25rem 1.25rem;
+    }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -710,6 +752,50 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section faq">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" data-i18n="faq.label">FAQ</div>
+      <h2 data-i18n="faq.h2">Common questions.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" data-i18n="faq.1.q">What if it makes mistakes?</button>
+        <div class="faq-a" id="faq-a-1" data-i18n="faq.1.a">It will, especially in the first few weeks. That's why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" data-i18n="faq.2.q">Which LLM does it use?</button>
+        <div class="faq-a" id="faq-a-2" data-i18n="faq.2.a">We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" data-i18n="faq.3.q">What about my data and privacy?</button>
+        <div class="faq-a" id="faq-a-3" data-i18n="faq.3.a">Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" data-i18n="faq.4.q">What if I want to cancel?</button>
+        <div class="faq-a" id="faq-a-4" data-i18n="faq.4.a">Email us. No contract, no notice period, no exit fees. We earn the next month or we don't.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" data-i18n="faq.5.q">Can it do my specific task?</button>
+        <div class="faq-a" id="faq-a-5" data-i18n="faq.5.a">Probably. That's what the 30-minute consultation is for. We say no if it isn't a fit — we'd rather miss a sale than ship something that fails.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" data-i18n="faq.6.q">How is this different from ChatGPT Teams?</button>
+        <div class="faq-a" id="faq-a-6" data-i18n="faq.6.a">ChatGPT is a tool your team uses. A digital employee is a worker we configure, host, and tune for a specific job. You delegate the work, not the prompting.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7" data-i18n="faq.7.q">Can I bring my own model?</button>
+        <div class="faq-a" id="faq-a-7" data-i18n="faq.7.a">On the Workforce tier, yes — we can route to your private deployment or a specific provider account.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8" data-i18n="faq.8.q">How long does setup take?</button>
+        <div class="faq-a" id="faq-a-8" data-i18n="faq.8.a">From discovery call to working employee: 5–10 business days, depending on the integrations involved.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -826,7 +912,25 @@
       'whyus.s3.num': 'Model-agnostic',
       'whyus.s3.lab': 'best model per task',
       'whyus.s4.num': 'No lock-in',
-      'whyus.s4.lab': 'cancel any month'
+      'whyus.s4.lab': 'cancel any month',
+      'faq.label': 'FAQ',
+      'faq.h2':    'Common questions.',
+      'faq.1.q':   'What if it makes mistakes?',
+      'faq.1.a':   "It will, especially in the first few weeks. That's why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material.",
+      'faq.2.q':   'Which LLM does it use?',
+      'faq.2.a':   "We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.",
+      'faq.3.q':   'What about my data and privacy?',
+      'faq.3.a':   "Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model.",
+      'faq.4.q':   'What if I want to cancel?',
+      'faq.4.a':   "Email us. No contract, no notice period, no exit fees. We earn the next month or we don't.",
+      'faq.5.q':   'Can it do my specific task?',
+      'faq.5.a':   "Probably. That's what the 30-minute consultation is for. We say no if it isn't a fit — we'd rather miss a sale than ship something that fails.",
+      'faq.6.q':   'How is this different from ChatGPT Teams?',
+      'faq.6.a':   'ChatGPT is a tool your team uses. A digital employee is a worker we configure, host, and tune for a specific job. You delegate the work, not the prompting.',
+      'faq.7.q':   'Can I bring my own model?',
+      'faq.7.a':   'On the Workforce tier, yes — we can route to your private deployment or a specific provider account.',
+      'faq.8.q':   'How long does setup take?',
+      'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -934,7 +1038,25 @@
       'whyus.s3.num': 'Modellfüggetlen',
       'whyus.s3.lab': 'legjobb modell minden feladathoz',
       'whyus.s4.num': 'Nincs lock-in',
-      'whyus.s4.lab': 'bármely hónap végén lemondható'
+      'whyus.s4.lab': 'bármely hónap végén lemondható',
+      'faq.label': 'GYIK',
+      'faq.h2':    'Gyakori kérdések.',
+      'faq.1.q':   'Mi van, ha hibázik?',
+      'faq.1.a':   'Fog, főleg az első hetekben. Pont ezért figyeljük folyamatosan és hangoljuk aktívan. Amit jelzel, azt állítjuk. A hibák lesznek a tanítóanyag.',
+      'faq.2.q':   'Milyen LLM-et használ?',
+      'faq.2.a':   'Modellfüggetlenek vagyunk. Az ügynököd nyílt forrású modelleket használ a rutin feladatokhoz (Llama, Qwen, Hermes) és csúcs modelleket (Claude, GPT) a nehezebb gondolkodáshoz. A Nous Research Hermes Agent harness vezérli a routingot.',
+      'faq.3.q':   'Mi van az adataimmal és a privátszférával?',
+      'faq.3.a':   'Titkosítva tároljuk, ügyfelenként elszigetelve. Érzékeny adat esetén saját üzemeltetésű, nyílt forrású modellekre routingolunk EU-s infrastruktúrán — az adatod nem hagyja el az EU-t, és nem tanít harmadik fél modelljét.',
+      'faq.4.q':   'Mi van, ha le akarom mondani?',
+      'faq.4.a':   'Írj egy e-mailt. Nincs szerződés, nincs felmondási idő, nincs kilépési díj. Megnyerjük a következő hónapot, vagy nem.',
+      'faq.5.q':   'Meg tudja csinálni a konkrét feladatomat?',
+      'faq.5.a':   'Valószínűleg igen. Pont ezért van a 30 perces konzultáció. Nemet mondunk, ha nem passzol — inkább veszítünk eladást, mint hogy valami hibásat szállítsunk.',
+      'faq.6.q':   'Miben más ez, mint a ChatGPT Teams?',
+      'faq.6.a':   'A ChatGPT egy eszköz, amit a csapatod használ. Egy digitális munkavállalót mi konfigurálunk, futtatunk és hangolunk egy konkrét munkára. Te a munkát delegálod, nem a promptolást.',
+      'faq.7.q':   'Hozhatom a saját modellem?',
+      'faq.7.a':   'Workforce csomagban igen — routingolhatunk a saját privát deploymentedre vagy egy konkrét provider-fiókodra.',
+      'faq.8.q':   'Mennyi a beüzemelés?',
+      'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -1042,7 +1164,25 @@
       'whyus.s3.num': 'Modell-agnostisch',
       'whyus.s3.lab': 'bestes Modell pro Aufgabe',
       'whyus.s4.num': 'Kein Lock-in',
-      'whyus.s4.lab': 'jederzeit monatlich kündbar'
+      'whyus.s4.lab': 'jederzeit monatlich kündbar',
+      'faq.label': 'FAQ',
+      'faq.h2':    'Häufige Fragen.',
+      'faq.1.q':   'Was, wenn er Fehler macht?',
+      'faq.1.a':   'Wird er, besonders in den ersten Wochen. Genau deshalb überwachen wir alles und tunen aktiv. Was du markierst, passen wir an. Fehler werden zum Trainingsmaterial.',
+      'faq.2.q':   'Welches LLM nutzt er?',
+      'faq.2.a':   'Wir sind modell-agnostisch. Dein Agent nutzt Open-Source-Modelle für Routine (Llama, Qwen, Hermes) und Frontier-Modelle (Claude, GPT) für anspruchsvolleres Denken. Die Hermes Agent Harness von Nous Research steuert das Routing.',
+      'faq.3.q':   'Was ist mit meinen Daten und der Privatsphäre?',
+      'faq.3.a':   'Verschlüsselt gespeichert, pro Kunde isoliert. Für sensible Daten routen wir auf selbst gehostete Open-Source-Modelle in der EU-Infrastruktur — deine Daten verlassen die EU nicht und trainieren kein Drittanbieter-Modell.',
+      'faq.4.q':   'Was, wenn ich kündigen will?',
+      'faq.4.a':   'Schreib uns eine E-Mail. Kein Vertrag, keine Frist, keine Ausstiegsgebühr. Wir verdienen uns den nächsten Monat — oder nicht.',
+      'faq.5.q':   'Kann er meine spezifische Aufgabe erledigen?',
+      'faq.5.a':   'Wahrscheinlich. Genau dafür ist das 30-minütige Gespräch da. Wir sagen Nein, wenn es nicht passt — wir verlieren lieber einen Verkauf, als etwas zu liefern, das versagt.',
+      'faq.6.q':   'Was unterscheidet das von ChatGPT Teams?',
+      'faq.6.a':   'ChatGPT ist ein Tool, das dein Team benutzt. Ein KI-Mitarbeiter ist eine Arbeitskraft, die wir für eine bestimmte Aufgabe konfigurieren, hosten und tunen. Du delegierst die Arbeit — nicht das Prompten.',
+      'faq.7.q':   'Kann ich mein eigenes Modell mitbringen?',
+      'faq.7.a':   'Im Workforce-Tarif ja — wir können auf dein privates Deployment oder einen bestimmten Anbieter-Account routen.',
+      'faq.8.q':   'Wie lange dauert das Setup?',
+      'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.'
     }
   };
 
