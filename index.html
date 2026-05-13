@@ -1311,8 +1311,91 @@
     });
   }
 
+  /* Meta Pixel base. No-op when META_PIXEL_ID is empty. */
+  function loadMetaPixel() {
+    if (!META_PIXEL_ID) return;
+    /* eslint-disable */
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    /* eslint-enable */
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  function trackLead(source) {
+    if (window.fbq) window.fbq('track', 'Lead', { source: source || 'unknown' });
+  }
+
+  /* Wire every booking CTA to BOOKING_URL and fire a Lead event on click. */
+  function wireBookingButtons() {
+    var selectors = ['a[data-cta]', '#navBookBtn', '#finalBookBtn'];
+    document.querySelectorAll(selectors.join(',')).forEach(function(a) {
+      a.setAttribute('href', BOOKING_URL);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.addEventListener('click', function() {
+        var src = a.getAttribute('data-cta');
+        if (!src) src = a.id === 'navBookBtn' ? 'nav' : a.id === 'finalBookBtn' ? 'final' : 'cta';
+        trackLead(src);
+      });
+    });
+  }
+
+  function wireNavScroll() {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+  }
+
+  function wireReveal() {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { io.observe(el); });
+  }
+
+  function wireFAQ() {
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      var q = item.querySelector('.faq-q');
+      if (!q) return;
+      q.addEventListener('click', function() {
+        var open = item.classList.toggle('open');
+        q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  }
+
+  function wireLangButtons() {
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var lang = btn.getAttribute('data-lang');
+        if (lang === currentLang || !T[lang]) return;
+        currentLang = lang;
+        localStorage.setItem('ah_lang', lang);
+        applyTranslations();
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     applyTranslations();
+    wireBookingButtons();
+    wireNavScroll();
+    wireReveal();
+    wireFAQ();
+    wireLangButtons();
+    loadMetaPixel();
   });
 </script>
 
