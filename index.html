@@ -295,6 +295,27 @@
       text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.75rem;
     }
 
+    /* ---------------- INCLUDED ---------------- */
+    .included h2 { max-width: 22ch; margin-bottom: 3rem; }
+    .included-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 700px) { .included-grid { grid-template-columns: 1fr 1fr; } }
+
+    .included-card {
+      display: flex; gap: 1rem;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .included-card .check {
+      flex-shrink: 0; width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-bg); color: var(--accent);
+      border-radius: 999px; font-weight: 700;
+    }
+    .included-card h3 { margin-bottom: 0.3rem; }
+    .included-card p { color: var(--ink-soft); font-size: 0.95rem; }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -461,6 +482,63 @@
   </div>
 </section>
 
+<!-- WHAT WE HANDLE -->
+<section class="section included">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="incl.label">What we handle</div>
+      <h2>
+        <span data-i18n="incl.h2.a">Flat fee.</span>
+        <em data-i18n="incl.h2.b">Everything included.</em>
+      </h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-card reveal reveal-delay-1">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.1.title">All the AI costs</h3>
+          <p data-i18n="incl.1.desc">We absorb every token and every server hour. No metered bills. No surprise overage.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-2">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.2.title">The best model for the job</h3>
+          <p data-i18n="incl.2.desc">Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don't choose. We do.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-3">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.3.title">EU hosting available</h3>
+          <p data-i18n="incl.3.desc">Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-1">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.4.title">Monitoring and tuning</h3>
+          <p data-i18n="incl.4.desc">We watch what your employee does. We fix what doesn't work. You don't touch infrastructure.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-2">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.5.title">One number to call</h3>
+          <p data-i18n="incl.5.desc">When something needs adjusting, you tell us. No support tickets. No prompt engineering.</p>
+        </div>
+      </div>
+      <div class="included-card reveal reveal-delay-3">
+        <div class="check" aria-hidden="true">✓</div>
+        <div>
+          <h3 data-i18n="incl.6.title">Cancel anytime</h3>
+          <p data-i18n="incl.6.desc">No annual contracts. No notice periods. We earn the next month or we don't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -521,7 +599,22 @@
       'journey.2.desc':  'Has seen your customers, your exceptions, your preferences. Stops asking the same questions twice.',
       'journey.3.day':   'Day 90',
       'journey.3.title': 'Indistinguishable from a senior',
-      'journey.3.desc':  'A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.'
+      'journey.3.desc':  'A specialist on the job. Knows things you forgot to write down. The new normal — and you barely notice it working.',
+      'incl.label':   'What we handle',
+      'incl.h2.a':    'Flat fee.',
+      'incl.h2.b':    'Everything included.',
+      'incl.1.title': 'All the AI costs',
+      'incl.1.desc':  'We absorb every token and every server hour. No metered bills. No surprise overage.',
+      'incl.2.title': 'The best model for the job',
+      'incl.2.desc':  "Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don't choose. We do.",
+      'incl.3.title': 'EU hosting available',
+      'incl.3.desc':  'Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.',
+      'incl.4.title': 'Monitoring and tuning',
+      'incl.4.desc':  "We watch what your employee does. We fix what doesn't work. You don't touch infrastructure.",
+      'incl.5.title': 'One number to call',
+      'incl.5.desc':  'When something needs adjusting, you tell us. No support tickets. No prompt engineering.',
+      'incl.6.title': 'Cancel anytime',
+      'incl.6.desc':  "No annual contracts. No notice periods. We earn the next month or we don't."
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -573,7 +666,22 @@
       'journey.2.desc':  'Látta az ügyfeleidet, a kivételeket, a preferenciáidat. Már nem kérdezi kétszer ugyanazt.',
       'journey.3.day':   '90. nap',
       'journey.3.title': 'Megkülönböztethetetlen egy senior munkatárstól',
-      'journey.3.desc':  'Specialista a munkájában. Tud olyan dolgokat, amiket leírni elfelejtettél. Az új normális — és alig veszed észre, hogy dolgozik.'
+      'journey.3.desc':  'Specialista a munkájában. Tud olyan dolgokat, amiket leírni elfelejtettél. Az új normális — és alig veszed észre, hogy dolgozik.',
+      'incl.label':   'Amit mi intézünk',
+      'incl.h2.a':    'Fix havidíj.',
+      'incl.h2.b':    'Minden benne van.',
+      'incl.1.title': 'Az összes AI-költség',
+      'incl.1.desc':  'Mi álljuk minden tokent és minden szerverórát. Nincs mért számla. Nincs meglepetés.',
+      'incl.2.title': 'A feladathoz legjobb modell',
+      'incl.2.desc':  'Modell-független routing. Olcsó modellek a rutin munkához. Csúcs-modellek a nehéz problémákhoz. Nem te választasz. Mi igen.',
+      'incl.3.title': 'EU-s hosztolás',
+      'incl.3.desc':  'Érzékeny adat? Saját üzemeltetésű, nyílt forrású modellekre irányítjuk EU-s infrastruktúrán. Az adatod nem hagyja el az EU-t.',
+      'incl.4.title': 'Felügyelet és finomhangolás',
+      'incl.4.desc':  'Figyeljük, mit csinál a munkavállalód. Megjavítjuk, ami nem működik. Te nem nyúlsz az infrához.',
+      'incl.5.title': 'Egy szám, amit hívhatsz',
+      'incl.5.desc':  'Ha valamin állítani kell, csak szólsz. Nincsenek support ticketek. Nincs prompt-mérnökölés.',
+      'incl.6.title': 'Bármikor lemondható',
+      'incl.6.desc':  'Nincs éves szerződés. Nincs felmondási idő. Megnyerjük a következő hónapot, vagy nem.'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -625,7 +733,22 @@
       'journey.2.desc':  'Hat deine Kunden, deine Ausnahmen, deine Präferenzen gesehen. Stellt nicht zweimal dieselbe Frage.',
       'journey.3.day':   'Tag 90',
       'journey.3.title': 'Nicht von einem Senior zu unterscheiden',
-      'journey.3.desc':  'Spezialist für den Job. Weiß Dinge, die du vergessen hast aufzuschreiben. Das neue Normal — und du merkst kaum, dass er arbeitet.'
+      'journey.3.desc':  'Spezialist für den Job. Weiß Dinge, die du vergessen hast aufzuschreiben. Das neue Normal — und du merkst kaum, dass er arbeitet.',
+      'incl.label':   'Was wir übernehmen',
+      'incl.h2.a':    'Fester Preis.',
+      'incl.h2.b':    'Alles inklusive.',
+      'incl.1.title': 'Alle KI-Kosten',
+      'incl.1.desc':  'Wir tragen jedes Token und jede Serverstunde. Keine getakteten Rechnungen. Keine Überraschungs-Überschreitungen.',
+      'incl.2.title': 'Das beste Modell für den Job',
+      'incl.2.desc':  'Modell-agnostisches Routing. Günstige Modelle für Routine. Frontier-Modelle für harte Probleme. Du wählst nicht. Wir tun es.',
+      'incl.3.title': 'EU-Hosting verfügbar',
+      'incl.3.desc':  'Sensible Daten? Wir routen zu selbst gehosteten Open-Source-Modellen auf EU-Infrastruktur. Deine Daten verlassen die EU nicht.',
+      'incl.4.title': 'Monitoring und Tuning',
+      'incl.4.desc':  'Wir beobachten, was dein Mitarbeiter macht. Wir beheben, was nicht funktioniert. Du fasst keine Infrastruktur an.',
+      'incl.5.title': 'Eine Nummer zum Anrufen',
+      'incl.5.desc':  'Wenn etwas angepasst werden muss, sagst du es uns. Keine Support-Tickets. Kein Prompt-Engineering.',
+      'incl.6.title': 'Jederzeit kündbar',
+      'incl.6.desc':  'Keine Jahresverträge. Keine Kündigungsfristen. Wir verdienen uns den nächsten Monat — oder nicht.'
     }
   };
 
