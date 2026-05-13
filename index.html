@@ -228,6 +228,35 @@
     .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-bottom: 1rem; }
     .hero-reassure { font-size: 0.88rem; color: var(--muted); }
 
+    /* ---------------- ROLES ---------------- */
+    .roles { background: var(--bg-2); }
+    .roles h2 { max-width: 22ch; margin-bottom: 1rem; }
+    .roles-intro { color: var(--ink-soft); max-width: 38rem; margin-bottom: 3rem; }
+
+    .roles-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 600px) { .roles-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .roles-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .role-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .role-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .role-card h3 { margin-bottom: 0.5rem; }
+    .role-card p { color: var(--ink-soft); font-size: 0.95rem; }
+
+    .role-icon {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--accent-bg); color: var(--accent);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -275,6 +304,52 @@
   </div>
 </section>
 
+<!-- ROLES -->
+<section class="section roles" id="roles">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="roles.label">What it can do</div>
+      <h2>
+        <span data-i18n="roles.h2.a">One employee.</span>
+        <em data-i18n="roles.h2.b">Many possible jobs.</em>
+      </h2>
+      <p class="roles-intro" data-i18n="roles.intro">Pick the work you wish you had time to do well. We configure the digital employee around it.</p>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card reveal reveal-delay-1">
+        <span class="role-icon" aria-hidden="true">⟲</span>
+        <h3 data-i18n="roles.1.title">Repetitive task assistant</h3>
+        <p data-i18n="roles.1.desc">Data entry, weekly reports, copying things between tools. The work nobody wants but everyone needs done.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-2">
+        <span class="role-icon" aria-hidden="true">⌕</span>
+        <h3 data-i18n="roles.2.title">Research assistant</h3>
+        <p data-i18n="roles.2.desc">Market research, competitor monitoring, lead enrichment. Delivered to you, not buried in tabs.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-3">
+        <span class="role-icon" aria-hidden="true">✉</span>
+        <h3 data-i18n="roles.3.title">Inbox &amp; triage</h3>
+        <p data-i18n="roles.3.desc">Sorts your email, drafts replies, flags what actually matters. Your inbox, finally tamed.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-1">
+        <span class="role-icon" aria-hidden="true">☎</span>
+        <h3 data-i18n="roles.4.title">Customer support agent</h3>
+        <p data-i18n="roles.4.desc">Answers FAQs, handles tickets, escalates the rest. Available around the clock, consistent every time.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-2">
+        <span class="role-icon" aria-hidden="true">⌘</span>
+        <h3 data-i18n="roles.5.title">Internal knowledge assistant</h3>
+        <p data-i18n="roles.5.desc">Trained on your SOPs and docs. Your team asks; it answers — without bothering you.</p>
+      </div>
+      <div class="role-card reveal reveal-delay-3">
+        <span class="role-icon" aria-hidden="true">∎</span>
+        <h3 data-i18n="roles.6.title">Ops &amp; back-office</h3>
+        <p data-i18n="roles.6.desc">Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -296,7 +371,23 @@
       'hero.sub':      'We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.',
       'hero.cta':      'Book a free 30-min call',
       'hero.ghost':    'See how it works →',
-      'hero.reassure': '30 minutes. No slides. No commitment.'
+      'hero.reassure': '30 minutes. No slides. No commitment.',
+      'roles.label':   'What it can do',
+      'roles.h2.a':    'One employee.',
+      'roles.h2.b':    'Many possible jobs.',
+      'roles.intro':   'Pick the work you wish you had time to do well. We configure the digital employee around it.',
+      'roles.1.title': 'Repetitive task assistant',
+      'roles.1.desc':  'Data entry, weekly reports, copying things between tools. The work nobody wants but everyone needs done.',
+      'roles.2.title': 'Research assistant',
+      'roles.2.desc':  'Market research, competitor monitoring, lead enrichment. Delivered to you, not buried in tabs.',
+      'roles.3.title': 'Inbox & triage',
+      'roles.3.desc':  'Sorts your email, drafts replies, flags what actually matters. Your inbox, finally tamed.',
+      'roles.4.title': 'Customer support agent',
+      'roles.4.desc':  'Answers FAQs, handles tickets, escalates the rest. Available around the clock, consistent every time.',
+      'roles.5.title': 'Internal knowledge assistant',
+      'roles.5.desc':  'Trained on your SOPs and docs. Your team asks; it answers — without bothering you.',
+      'roles.6.title': 'Ops & back-office',
+      'roles.6.desc':  'Invoice reconciliation, vendor follow-ups, order processing. The back-office that runs itself.'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -309,7 +400,23 @@
       'hero.sub':      'Beüzemelünk, futtatunk és csendben fejlesztünk egy AI-munkatársat, aki elvégzi az ismétlődő munkát. Egy fix havidíj — mi álljuk az AI-, szerver- és felügyeleti költségeket.',
       'hero.cta':      'Foglalj egy ingyenes 30 perces hívást',
       'hero.ghost':    'Nézd meg, hogyan működik →',
-      'hero.reassure': '30 perc. Nincs prezentáció. Semmi kötelezettség.'
+      'hero.reassure': '30 perc. Nincs prezentáció. Semmi kötelezettség.',
+      'roles.label':   'Mire képes',
+      'roles.h2.a':    'Egy munkavállaló.',
+      'roles.h2.b':    'Sokféle feladat.',
+      'roles.intro':   'Válaszd ki a munkát, amit szeretnél, ha lenne időd jól megcsinálni. A digitális munkavállalót köré építjük.',
+      'roles.1.title': 'Ismétlődő feladatok asszisztens',
+      'roles.1.desc':  'Adatbevitel, heti riportok, információ átemelése rendszerek között. A munka, amit senki sem szeret, de mindenkinek kell.',
+      'roles.2.title': 'Kutatási asszisztens',
+      'roles.2.desc':  'Piackutatás, versenytársak figyelése, leadek dúsítása. Hozzád érkezik, nem 30 megnyitott fülön.',
+      'roles.3.title': 'Inbox és szortírozás',
+      'roles.3.desc':  'Rendezi az e-maileket, válaszokat fogalmaz, jelzi, ami tényleg számít. A postafiókod végre kézben.',
+      'roles.4.title': 'Ügyfélszolgálati ügynök',
+      'roles.4.desc':  'Válaszol a GYIK-re, kezeli a ticketeket, eszkalálja, ami nem fér bele. Éjjel-nappal, mindig egyformán.',
+      'roles.5.title': 'Belső tudásasszisztens',
+      'roles.5.desc':  'A te folyamataidra és dokumentumaidra van betanítva. A csapatod kérdez; ő válaszol — anélkül, hogy téged zavarna.',
+      'roles.6.title': 'Ops és back-office',
+      'roles.6.desc':  'Számla-egyeztetés, beszállítói utánkövetés, rendelésfeldolgozás. Az iroda hátsó része, ami magát futtatja.'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -322,7 +429,23 @@
       'hero.sub':      'Wir richten einen KI-Mitarbeiter ein, hosten ihn und verbessern ihn still und leise. Ein fester Monatspreis — wir tragen die KI-, Server- und Betreuungskosten.',
       'hero.cta':      'Kostenloses 30-min Gespräch buchen',
       'hero.ghost':    'So funktioniert es →',
-      'hero.reassure': '30 Minuten. Keine Slides. Keine Verpflichtung.'
+      'hero.reassure': '30 Minuten. Keine Slides. Keine Verpflichtung.',
+      'roles.label':   'Was er kann',
+      'roles.h2.a':    'Ein Mitarbeiter.',
+      'roles.h2.b':    'Viele mögliche Rollen.',
+      'roles.intro':   'Wähle die Arbeit, die du eigentlich gut machen würdest, wenn du Zeit hättest. Wir bauen den KI-Mitarbeiter darum herum.',
+      'roles.1.title': 'Assistent für repetitive Aufgaben',
+      'roles.1.desc':  'Dateneingabe, Wochenreports, Informationen zwischen Tools übertragen. Die Arbeit, die niemand will, aber jeder braucht.',
+      'roles.2.title': 'Recherche-Assistent',
+      'roles.2.desc':  'Marktrecherche, Wettbewerbsbeobachtung, Lead-Anreicherung. Geliefert zu dir, statt in 30 offenen Tabs zu versinken.',
+      'roles.3.title': 'Inbox & Triage',
+      'roles.3.desc':  'Sortiert deine E-Mails, schreibt Antwortentwürfe, markiert, was wirklich zählt. Dein Postfach, endlich im Griff.',
+      'roles.4.title': 'Kundenservice-Agent',
+      'roles.4.desc':  'Beantwortet FAQs, bearbeitet Tickets, eskaliert den Rest. Rund um die Uhr, immer gleich konsistent.',
+      'roles.5.title': 'Internes Wissensassistent',
+      'roles.5.desc':  'Trainiert auf deine SOPs und Dokumente. Dein Team fragt; er antwortet — ohne dich zu stören.',
+      'roles.6.title': 'Ops & Back-Office',
+      'roles.6.desc':  'Rechnungsabgleich, Lieferanten-Follow-ups, Auftragsabwicklung. Das Back-Office, das sich selbst erledigt.'
     }
   };
 
