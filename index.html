@@ -316,6 +316,58 @@
     .included-card h3 { margin-bottom: 0.3rem; }
     .included-card p { color: var(--ink-soft); font-size: 0.95rem; }
 
+    /* ---------------- PRICING ---------------- */
+    .pricing { background: var(--bg-2); }
+    .pricing h2 { text-align: center; max-width: 22ch; margin: 0 auto 1rem; }
+    .pricing-intro { text-align: center; color: var(--ink-soft); max-width: 38rem; margin: 0 auto 3rem; }
+
+    .tiers {
+      display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    @media (min-width: 900px) {
+      .tiers { grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+    }
+
+    .tier {
+      display: flex; flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+    }
+    .tier.featured {
+      border-color: var(--accent);
+      box-shadow: 0 1px 0 var(--accent), 0 24px 50px -28px rgba(74,108,91,0.4);
+      position: relative;
+    }
+    .tier-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      padding: 0.25rem 0.7rem;
+      background: var(--accent); color: var(--bg);
+      border-radius: 999px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tier-name { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+    .tier-price { display: flex; align-items: baseline; gap: 0.25rem; margin: 0.5rem 0 0.25rem; }
+    .tier-price .amount { font-size: 2.4rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+    .tier-price .period { font-size: 0.95rem; color: var(--muted); }
+    .tier-tagline { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 1.5rem; min-height: 2.7em; }
+    .tier-features { list-style: none; padding: 0; margin: 0 0 2rem; }
+    .tier-features li {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      padding: 0.55rem 0; font-size: 0.92rem; color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+    }
+    .tier-features li:first-child { border-top: none; }
+    .tier-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .tier-cta { margin-top: auto; width: 100%; text-align: center; }
+    .tier-cta .btn-primary { width: 100%; }
+    .tier.featured .btn-primary { background: var(--accent); }
+    .tier.featured .btn-primary:hover { background: var(--accent-2); }
+
+    .pricing-foot { text-align: center; margin-top: 2rem; color: var(--muted); font-size: 0.9rem; }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -539,6 +591,71 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" data-i18n="price.label">Pricing</div>
+      <h2>
+        <span data-i18n="price.h2.a">One plan per employee.</span>
+        <em data-i18n="price.h2.b">Cancel anytime.</em>
+      </h2>
+      <p class="pricing-intro" data-i18n="price.intro">Tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal reveal-delay-1">
+        <div class="tier-name" data-i18n="price.starter.name">Starter</div>
+        <div class="tier-price">
+          <span class="amount">€299</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.starter.tagline">Best for trying it; light repetitive tasks.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.starter.f1">1 hour of tuning per month</li>
+          <li data-i18n="price.starter.f2">1 connected source</li>
+          <li data-i18n="price.starter.f3">Memory &amp; feedback loop</li>
+          <li data-i18n="price.starter.f4">All AI and infrastructure costs included</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-starter" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+      <div class="tier featured reveal reveal-delay-2">
+        <span class="tier-badge" data-i18n="price.popular">Most popular</span>
+        <div class="tier-name" data-i18n="price.specialist.name">Specialist</div>
+        <div class="tier-price">
+          <span class="amount">€699</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.specialist.tagline">Best for real role replacement.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.specialist.f1">3 hours of tuning per month</li>
+          <li data-i18n="price.specialist.f2">Up to 5 connected sources</li>
+          <li data-i18n="price.specialist.f3">Priority response to tuning requests</li>
+          <li data-i18n="price.specialist.f4">Quarterly review</li>
+          <li data-i18n="price.specialist.f5">Everything in Starter</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-specialist" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+      <div class="tier reveal reveal-delay-3">
+        <div class="tier-name" data-i18n="price.workforce.name">Workforce</div>
+        <div class="tier-price">
+          <span class="amount">€1,499</span>
+          <span class="period" data-i18n="price.period">/mo</span>
+        </div>
+        <div class="tier-tagline" data-i18n="price.workforce.tagline">Best for deep specialists and mission-critical work.</div>
+        <ul class="tier-features">
+          <li data-i18n="price.workforce.f1">8 hours of tuning per month</li>
+          <li data-i18n="price.workforce.f2">Unlimited connected sources</li>
+          <li data-i18n="price.workforce.f3">Dedicated specialist on our team</li>
+          <li data-i18n="price.workforce.f4">Custom integrations on request</li>
+          <li data-i18n="price.workforce.f5">Everything in Specialist</li>
+        </ul>
+        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-workforce" data-i18n="price.cta">Book a call to start</a></div>
+      </div>
+    </div>
+    <p class="pricing-foot" data-i18n="price.foot">No setup fee · No annual contract · Cancel anytime</p>
+  </div>
+</section>
+
 <!-- Sections appended by subsequent tasks. -->
 
 <script>
@@ -614,7 +731,35 @@
       'incl.5.title': 'One number to call',
       'incl.5.desc':  'When something needs adjusting, you tell us. No support tickets. No prompt engineering.',
       'incl.6.title': 'Cancel anytime',
-      'incl.6.desc':  "No annual contracts. No notice periods. We earn the next month or we don't."
+      'incl.6.desc':  "No annual contracts. No notice periods. We earn the next month or we don't.",
+      'price.label':              'Pricing',
+      'price.h2.a':               'One plan per employee.',
+      'price.h2.b':               'Cancel anytime.',
+      'price.intro':              'Tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.',
+      'price.period':             '/mo',
+      'price.popular':            'Most popular',
+      'price.cta':                'Book a call to start',
+      'price.foot':               'No setup fee · No annual contract · Cancel anytime',
+      'price.starter.name':       'Starter',
+      'price.starter.tagline':    'Best for trying it; light repetitive tasks.',
+      'price.starter.f1':         '1 hour of tuning per month',
+      'price.starter.f2':         '1 connected source',
+      'price.starter.f3':         'Memory & feedback loop',
+      'price.starter.f4':         'All AI and infrastructure costs included',
+      'price.specialist.name':    'Specialist',
+      'price.specialist.tagline': 'Best for real role replacement.',
+      'price.specialist.f1':      '3 hours of tuning per month',
+      'price.specialist.f2':      'Up to 5 connected sources',
+      'price.specialist.f3':      'Priority response to tuning requests',
+      'price.specialist.f4':      'Quarterly review',
+      'price.specialist.f5':      'Everything in Starter',
+      'price.workforce.name':     'Workforce',
+      'price.workforce.tagline':  'Best for deep specialists and mission-critical work.',
+      'price.workforce.f1':       '8 hours of tuning per month',
+      'price.workforce.f2':       'Unlimited connected sources',
+      'price.workforce.f3':       'Dedicated specialist on our team',
+      'price.workforce.f4':       'Custom integrations on request',
+      'price.workforce.f5':       'Everything in Specialist'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -681,7 +826,35 @@
       'incl.5.title': 'Egy szám, amit hívhatsz',
       'incl.5.desc':  'Ha valamin állítani kell, csak szólsz. Nincsenek support ticketek. Nincs prompt-mérnökölés.',
       'incl.6.title': 'Bármikor lemondható',
-      'incl.6.desc':  'Nincs éves szerződés. Nincs felmondási idő. Megnyerjük a következő hónapot, vagy nem.'
+      'incl.6.desc':  'Nincs éves szerződés. Nincs felmondási idő. Megnyerjük a következő hónapot, vagy nem.',
+      'price.label':              'Árazás',
+      'price.h2.a':               'Egy csomag munkavállalónként.',
+      'price.h2.b':               'Bármikor lemondható.',
+      'price.intro':              'A csomagok abban különböznek, hány óra emberi finomhangolást foglalnak magukban havonta. A beüzemelés mindig ingyenes; egy híváson indulunk.',
+      'price.period':             '/hó',
+      'price.popular':            'Legnépszerűbb',
+      'price.cta':                'Foglalj hívást a kezdéshez',
+      'price.foot':               'Nincs beüzemelési díj · Nincs éves szerződés · Bármikor lemondható',
+      'price.starter.name':       'Starter',
+      'price.starter.tagline':    'Kipróbáláshoz, könnyű ismétlődő feladatokhoz.',
+      'price.starter.f1':         '1 óra finomhangolás havonta',
+      'price.starter.f2':         '1 csatlakoztatott forrás',
+      'price.starter.f3':         'Memória és visszajelzés-hurok',
+      'price.starter.f4':         'Minden AI- és infrastruktúra-költség benne',
+      'price.specialist.name':    'Specialist',
+      'price.specialist.tagline': 'Valódi szerepkör-kiváltáshoz.',
+      'price.specialist.f1':      '3 óra finomhangolás havonta',
+      'price.specialist.f2':      'Legfeljebb 5 csatlakoztatott forrás',
+      'price.specialist.f3':      'Prioritásos válasz a kéréseidre',
+      'price.specialist.f4':      'Negyedéves áttekintés',
+      'price.specialist.f5':      'Minden a Starter csomagból',
+      'price.workforce.name':     'Workforce',
+      'price.workforce.tagline':  'Mély specialistákhoz, üzletkritikus munkához.',
+      'price.workforce.f1':       '8 óra finomhangolás havonta',
+      'price.workforce.f2':       'Korlátlan csatlakoztatott forrás',
+      'price.workforce.f3':       'Dedikált specialista a mi csapatunkból',
+      'price.workforce.f4':       'Egyedi integrációk kérésre',
+      'price.workforce.f5':       'Minden a Specialist csomagból'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -748,7 +921,35 @@
       'incl.5.title': 'Eine Nummer zum Anrufen',
       'incl.5.desc':  'Wenn etwas angepasst werden muss, sagst du es uns. Keine Support-Tickets. Kein Prompt-Engineering.',
       'incl.6.title': 'Jederzeit kündbar',
-      'incl.6.desc':  'Keine Jahresverträge. Keine Kündigungsfristen. Wir verdienen uns den nächsten Monat — oder nicht.'
+      'incl.6.desc':  'Keine Jahresverträge. Keine Kündigungsfristen. Wir verdienen uns den nächsten Monat — oder nicht.',
+      'price.label':              'Preise',
+      'price.h2.a':               'Ein Plan pro Mitarbeiter.',
+      'price.h2.b':               'Jederzeit kündbar.',
+      'price.intro':              'Die Tarife unterscheiden sich darin, wie viele Tuning-Stunden pro Monat enthalten sind. Setup ist immer kostenlos; du startest mit einem Gespräch.',
+      'price.period':             '/Monat',
+      'price.popular':            'Am beliebtesten',
+      'price.cta':                'Gespräch zum Start buchen',
+      'price.foot':               'Keine Einrichtungsgebühr · Kein Jahresvertrag · Jederzeit kündbar',
+      'price.starter.name':       'Starter',
+      'price.starter.tagline':    'Zum Ausprobieren; leichte repetitive Aufgaben.',
+      'price.starter.f1':         '1 Stunde Tuning pro Monat',
+      'price.starter.f2':         '1 angebundene Quelle',
+      'price.starter.f3':         'Speicher & Feedback-Schleife',
+      'price.starter.f4':         'Alle KI- und Infrastrukturkosten enthalten',
+      'price.specialist.name':    'Specialist',
+      'price.specialist.tagline': 'Für echten Rollenersatz.',
+      'price.specialist.f1':      '3 Stunden Tuning pro Monat',
+      'price.specialist.f2':      'Bis zu 5 angebundene Quellen',
+      'price.specialist.f3':      'Priorisierte Antwortzeiten',
+      'price.specialist.f4':      'Quartalsreview',
+      'price.specialist.f5':      'Alles aus Starter',
+      'price.workforce.name':     'Workforce',
+      'price.workforce.tagline':  'Für tiefe Spezialisten und geschäftskritische Arbeit.',
+      'price.workforce.f1':       '8 Stunden Tuning pro Monat',
+      'price.workforce.f2':       'Unbegrenzt viele angebundene Quellen',
+      'price.workforce.f3':       'Dedizierter Spezialist aus unserem Team',
+      'price.workforce.f4':       'Maßgeschneiderte Integrationen auf Anfrage',
+      'price.workforce.f5':       'Alles aus Specialist'
     }
   };
 
