@@ -425,6 +425,44 @@
       padding: 0 1.25rem 1.25rem;
     }
 
+    /* ---------------- CTA + FOOTER ---------------- */
+    .cta {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 5rem 0;
+    }
+    .cta h2 { color: var(--bg); text-align: center; max-width: 22ch; margin: 0 auto 1rem; }
+    .cta h2 em { color: var(--accent-2); }
+    .cta .section-label { color: var(--accent-2); text-align: center; margin-bottom: 1rem; }
+    .cta-sub {
+      text-align: center; color: #c5c7c4;
+      max-width: 38rem; margin: 0 auto 2.5rem;
+      font-size: 1.05rem;
+    }
+    .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem 1rem; }
+    .cta .btn-primary { background: var(--accent); color: var(--bg); }
+    .cta .btn-primary:hover { background: var(--accent-2); }
+    .cta-reassure {
+      margin-top: 1rem; text-align: center;
+      color: #93958f; font-size: 0.88rem;
+    }
+    .cta-reassure a { color: inherit; text-decoration: underline; }
+
+    footer.site-foot {
+      padding: 2.5rem 0 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem; color: var(--muted);
+    }
+    footer.site-foot .container {
+      display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
+    }
+    @media (min-width: 700px) {
+      footer.site-foot .container { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+    .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .foot-links a { color: var(--muted); }
+    .foot-links a:hover { color: var(--ink); }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
@@ -796,7 +834,38 @@
   </div>
 </section>
 
-<!-- Sections appended by subsequent tasks. -->
+<!-- FINAL CTA -->
+<section class="section cta" id="cta">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="cta.label">Get started</div>
+      <h2>
+        <span data-i18n="cta.h2.a">30 minutes. No commitment.</span>
+        <em data-i18n="cta.h2.b">We listen first.</em>
+      </h2>
+      <p class="cta-sub" data-i18n="cta.sub">Tell us about the work you'd hand off if you could. We'll tell you whether a digital employee makes sense — honestly.</p>
+      <div class="cta-actions">
+        <a href="#" id="finalBookBtn" class="btn-primary" data-cta="final" data-i18n="cta.btn">Book your consultation</a>
+      </div>
+      <p class="cta-reassure">
+        <span data-i18n="cta.reassure.text">Or email us:</span>
+        <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="container">
+    <div data-i18n="footer.copy">© 2026 AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+      <a href="terms.html" data-i18n="footer.terms">Terms</a>
+      <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
+    </div>
+  </div>
+</footer>
 
 <script>
   /* Configuration. Founder replaces these with real values before launch. */
@@ -930,7 +999,16 @@
       'faq.7.q':   'Can I bring my own model?',
       'faq.7.a':   'On the Workforce tier, yes — we can route to your private deployment or a specific provider account.',
       'faq.8.q':   'How long does setup take?',
-      'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.'
+      'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.',
+      'cta.label':         'Get started',
+      'cta.h2.a':          '30 minutes. No commitment.',
+      'cta.h2.b':          'We listen first.',
+      'cta.sub':           "Tell us about the work you'd hand off if you could. We'll tell you whether a digital employee makes sense — honestly.",
+      'cta.btn':           'Book your consultation',
+      'cta.reassure.text': 'Or email us:',
+      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':    'Privacy',
+      'footer.terms':      'Terms'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -1056,7 +1134,16 @@
       'faq.7.q':   'Hozhatom a saját modellem?',
       'faq.7.a':   'Workforce csomagban igen — routingolhatunk a saját privát deploymentedre vagy egy konkrét provider-fiókodra.',
       'faq.8.q':   'Mennyi a beüzemelés?',
-      'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.'
+      'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.',
+      'cta.label':         'Indulás',
+      'cta.h2.a':          '30 perc. Semmi kötelezettség.',
+      'cta.h2.b':          'Először meghallgatunk.',
+      'cta.sub':           'Mondd el, milyen munkát adnál át, ha tehetnéd. Megmondjuk őszintén, van-e értelme a digitális munkavállalónak nálad.',
+      'cta.btn':           'Foglald le a konzultációd',
+      'cta.reassure.text': 'Vagy írj nekünk:',
+      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':    'Adatvédelem',
+      'footer.terms':      'Feltételek'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -1182,7 +1269,16 @@
       'faq.7.q':   'Kann ich mein eigenes Modell mitbringen?',
       'faq.7.a':   'Im Workforce-Tarif ja — wir können auf dein privates Deployment oder einen bestimmten Anbieter-Account routen.',
       'faq.8.q':   'Wie lange dauert das Setup?',
-      'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.'
+      'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.',
+      'cta.label':         'Loslegen',
+      'cta.h2.a':          '30 Minuten. Keine Verpflichtung.',
+      'cta.h2.b':          'Wir hören zuerst zu.',
+      'cta.sub':           'Erzähl uns von der Arbeit, die du abgeben würdest, wenn du könntest. Wir sagen dir ehrlich, ob ein KI-Mitarbeiter Sinn ergibt.',
+      'cta.btn':           'Beratungsgespräch buchen',
+      'cta.reassure.text': 'Oder schreib uns:',
+      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':    'Datenschutz',
+      'footer.terms':      'AGB'
     }
   };
 
