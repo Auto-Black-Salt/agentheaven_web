@@ -5,7 +5,7 @@
   <style>
     @font-face {
       font-family: 'Inter';
-      font-style: normal; font-weight: 400 700;
+      font-style: normal; font-weight: 400 800;
       src: url(fonts/inter-latin.woff2) format('woff2');
     }
     @font-face {
@@ -14,58 +14,98 @@
       src: url(fonts/newsreader-italic-latin.woff2) format('woff2');
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       width: 1200px; height: 630px;
-      background: #faf7f2;
+      background: #07091a;
       font-family: 'Inter', sans-serif;
-      color: #1a1d1a;
+      color: #f0f3ff;
       padding: 70px;
       display: flex; flex-direction: column; justify-content: space-between;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    body::after {
-      content: '';
-      position: absolute;
-      right: -200px; bottom: -200px;
-      width: 600px; height: 600px;
-      background: #4a6c5b;
-      opacity: 0.06;
-      border-radius: 50%;
+
+    /* Aurora gradient orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); mix-blend-mode: screen;
     }
+    .orb-1 { width: 500px; height: 500px; top: -160px; left: -100px;  background: radial-gradient(circle, #00e0ff 0%, transparent 70%); opacity: 0.55; }
+    .orb-2 { width: 460px; height: 460px; top: -120px; right: -120px; background: radial-gradient(circle, #f72585 0%, transparent 70%); opacity: 0.55; }
+    .orb-3 { width: 420px; height: 420px; bottom: -180px; left: 35%;  background: radial-gradient(circle, #a78bfa 0%, transparent 70%); opacity: 0.5;  }
+
+    /* Subtle grid overlay */
+    .grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 40%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 40%, #000 30%, transparent 80%);
+    }
+
+    .row { position: relative; z-index: 2; }
+
+    /* Header row */
     .logo {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-weight: 700; font-size: 22px; letter-spacing: -0.01em;
-      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 14px;
+      font-weight: 800; font-size: 28px; letter-spacing: -0.02em;
     }
-    .dot { width: 12px; height: 12px; border-radius: 50%; background: #4a6c5b; }
+    .dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: linear-gradient(135deg, #00e0ff 0%, #a78bfa 100%);
+      box-shadow: 0 0 0 4px rgba(0,224,255,0.18), 0 0 22px rgba(0,224,255,0.65);
+    }
+
+    /* Headline */
     .headline {
-      font-size: 76px; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em;
+      font-size: 92px; font-weight: 800; line-height: 1.0; letter-spacing: -0.035em;
       max-width: 16ch;
-      position: relative; z-index: 1;
     }
     .headline em {
       font-family: 'Newsreader', Georgia, serif;
       font-style: italic; font-weight: 400;
-      color: #4a6c5b;
+      background: linear-gradient(135deg, #00e0ff 0%, #a78bfa 45%, #f72585 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      letter-spacing: -0.04em;
     }
+
+    /* Foot row */
     .foot {
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 18px; color: #4a4d4a; font-weight: 500;
-      position: relative; z-index: 1;
+      gap: 32px;
+    }
+    .tagline {
+      font-size: 22px; color: #b8bdda; font-weight: 500;
+      max-width: 700px; line-height: 1.4;
     }
     .pill {
-      padding: 8px 16px; background: #eef2ed; color: #4a6c5b;
+      padding: 12px 22px;
       border-radius: 999px;
-      font-size: 16px; font-weight: 600; letter-spacing: 0.04em;
+      background: rgba(0,224,255,0.08);
+      border: 1.5px solid rgba(0,224,255,0.45);
+      color: #00e0ff;
+      font-size: 18px; font-weight: 700; letter-spacing: 0.04em;
+      white-space: nowrap;
+      box-shadow: 0 0 30px rgba(0,224,255,0.18);
     }
   </style>
 </head>
 <body>
-  <div class="logo"><span class="dot"></span>AgentHeaven</div>
-  <h1 class="headline">The boring work, <em>finally off your plate.</em></h1>
-  <div class="foot">
-    <span>AI digital employees for SMBs. Flat fee. We absorb the AI cost.</span>
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+  <div class="grid"></div>
+
+  <div class="row logo"><span class="dot"></span>AgentHeaven</div>
+
+  <h1 class="row headline">The boring work, <em>finally off your plate.</em></h1>
+
+  <div class="row foot">
+    <span class="tagline">AI digital employees for SMBs. Flat fee. We absorb the AI cost.</span>
     <span class="pill">agentheaven.ai</span>
   </div>
 </body>
