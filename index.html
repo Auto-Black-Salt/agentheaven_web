@@ -156,10 +156,81 @@
     .reveal-delay-3 { transition-delay: 0.24s; }
     .reveal-delay-4 { transition-delay: 0.32s; }
 
+    /* ---------------- NAV ---------------- */
+    nav#nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: rgba(250, 247, 242, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    nav#nav.scrolled { border-bottom-color: var(--border); }
+    @media (min-width: 768px) { nav#nav { padding: 1rem 2rem; } }
+
+    .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+
+    .logo {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-weight: 700; font-size: 1.1rem; color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+
+    .nav-links { display: none; gap: 1.5rem; }
+    .nav-links a { color: var(--ink-soft); font-size: 0.93rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--ink); }
+    @media (min-width: 900px) { .nav-links { display: flex; } }
+
+    .lang-switcher { display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--muted); }
+    .lang-btn {
+      background: none; border: none;
+      font-family: inherit; font-size: 0.8rem;
+      color: var(--muted); cursor: pointer;
+      padding: 0.2rem 0.3rem; letter-spacing: 0.05em;
+    }
+    .lang-btn.active { color: var(--ink); font-weight: 600; }
+    .lang-sep { color: var(--border); }
+
+    .nav-cta {
+      padding: 0.55rem 1rem;
+      background: var(--ink); color: var(--bg) !important;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem; font-weight: 500;
+    }
+    .nav-cta:hover { background: #000; }
+
     /* Section-specific styles are appended below this line. */
   </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="logo">
+      <span class="logo-dot"></span>
+      AgentHeaven
+    </a>
+    <div class="nav-links">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#roles" data-i18n="nav.roles">Roles</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+    </div>
+  </div>
+  <div class="nav-left">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="hu">HU</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="#cta" class="nav-cta" id="navBookBtn" data-i18n="nav.cta">Book a call</a>
+  </div>
+</nav>
 
 <!-- Sections appended by subsequent tasks. -->
 
@@ -170,7 +241,26 @@
 
   /* Translations: sections 2–11 each add their keys to T.en, T.hu, T.de.
      All values are plain text — applyTranslations uses textContent only. */
-  var T = { en: {}, hu: {}, de: {} };
+  var T = {
+    en: {
+      'nav.how':     'How it works',
+      'nav.roles':   'Roles',
+      'nav.pricing': 'Pricing',
+      'nav.cta':     'Book a call'
+    },
+    hu: {
+      'nav.how':     'Hogyan működik',
+      'nav.roles':   'Szerepkörök',
+      'nav.pricing': 'Árazás',
+      'nav.cta':     'Időpontfoglalás'
+    },
+    de: {
+      'nav.how':     'So funktioniert es',
+      'nav.roles':   'Rollen',
+      'nav.pricing': 'Preise',
+      'nav.cta':     'Termin buchen'
+    }
+  };
 
   var currentLang = localStorage.getItem('ah_lang') || (navigator.language && navigator.language.slice(0,2)) || 'en';
   if (!T[currentLang]) currentLang = 'en';
