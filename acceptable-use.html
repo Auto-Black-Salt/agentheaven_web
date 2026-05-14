@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceptable Use Policy — AgentHeaven</title>
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-latin.woff2) format('woff2'); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#faf7f2; --ink:#1a1d1a; --ink-soft:#4a4d4a; --muted:#767972; --accent:#4a6c5b; --accent-2:#5d8071; --card:#fff; --border:#e4dfd4; --warning-bg:#fdf6e7; --warning-bd:#d9b878; --radius-sm:8px; }
+    body { background: var(--bg); color: var(--ink-soft); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 50; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(250,247,242,0.85); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--border); }
+    @media (min-width: 768px) { nav { padding: 1rem 2rem; } }
+    .logo { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .nav-back { font-size: 0.9rem; color: var(--ink-soft); text-decoration: none; }
+    .container { max-width: 780px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+    @media (min-width: 768px) { .container { padding: 5rem 2rem 6rem; } }
+    .page-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    h1 { color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .effective-date { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    h2 { color: var(--ink); font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem; }
+    p { margin-bottom: 1rem; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    a { color: var(--accent); text-decoration: underline; }
+    strong { color: var(--ink); font-weight: 600; }
+    .warning-box { background: var(--warning-bg); border: 1px solid var(--warning-bd); border-left: 3px solid var(--warning-bd); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; color: #5a4422; }
+    footer.site-foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    footer.site-foot .container { padding-top: 0; padding-bottom: 0; display: flex; flex-direction: column; gap: 1rem; }
+    .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .foot-links a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AgentHeaven</a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="page-label">Legal</div>
+  <h1>Acceptable Use Policy</h1>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 14 May 2026</p>
+
+  <p>This Acceptable Use Policy applies to all use of AgentHeaven, including agents hosted by AgentHeaven, self-hosted open-source model routing, third-party LLM routing, Composio tool connections, AgentMail email workflows, and any connected customer systems.</p>
+
+  <div class="warning-box">
+    <p><strong>Human oversight required:</strong> AgentHeaven is a managed AI digital-employee service. Customers must use appropriate human review for outputs that affect people, money, legal rights, employment, contracts, regulated services, safety, or important business decisions.</p>
+  </div>
+
+  <h2>1. Prohibited Uses</h2>
+  <p>You may not use AgentHeaven to:</p>
+  <ul>
+    <li>Violate applicable law, regulation, sanctions, export controls, or third-party rights.</li>
+    <li>Send spam, phishing messages, deceptive outreach, credential-harvesting messages, or unlawful marketing.</li>
+    <li>Generate or distribute malware, exploit code, instructions for cyber abuse, or attempts to bypass security controls.</li>
+    <li>Impersonate people or organisations without permission, or mislead recipients about whether they are interacting with an AI system.</li>
+    <li>Create defamatory, harassing, discriminatory, hateful, sexually exploitative, or violent content.</li>
+    <li>Process data from tools or systems that you are not authorised to connect.</li>
+    <li>Bypass rate limits, usage controls, provider policies, model safeguards, or connected-platform terms.</li>
+    <li>Extract prompts, hidden system instructions, model internals, credentials, or another customer's information.</li>
+  </ul>
+
+  <h2>2. Prohibited AI Practices</h2>
+  <p>The following uses are prohibited without exception and cannot be unlocked by separate agreement, because they correspond to practices restricted or banned under Article 5 of the EU AI Act, the GDPR, or comparable law:</p>
+  <ul>
+    <li>Social scoring of natural persons by public authorities or on their behalf for general-purpose evaluation.</li>
+    <li>Untargeted scraping of facial images from the internet or CCTV to build or expand facial-recognition databases.</li>
+    <li>Real-time remote biometric identification in publicly accessible spaces for law-enforcement purposes.</li>
+    <li>Emotion recognition in the workplace or in education settings (other than for medical or safety reasons strictly permitted by law).</li>
+    <li>Biometric categorisation that infers race, political opinions, trade-union membership, religious or philosophical beliefs, sex life, or sexual orientation.</li>
+    <li>Profiling, behavioural prediction, or targeted advertising directed at children.</li>
+    <li>Manipulative, deceptive, or subliminal techniques designed to materially distort behaviour in a way that causes or is likely to cause harm.</li>
+    <li>Exploitation of vulnerabilities of specific groups (such as age, disability, or socio-economic situation) to materially distort their behaviour.</li>
+  </ul>
+
+  <h2>3. High-Risk and Regulated Uses</h2>
+  <p>Unless separately agreed in writing after a compliance review, you may not use AgentHeaven as an autonomous decision-maker for:</p>
+  <ul>
+    <li>Employment, hiring, firing, promotion, worker evaluation, or workforce monitoring decisions.</li>
+    <li>Credit, lending, insurance, housing, eligibility, or pricing decisions affecting individuals.</li>
+    <li>Medical, health, psychological, legal, tax, immigration, or financial advice.</li>
+    <li>Education access, grading, exam evaluation, or student assessment.</li>
+    <li>Law enforcement, migration, asylum, border control, or public-benefit eligibility decisions with legal or similarly significant effects.</li>
+    <li>Other uses classified as high-risk under Annex III of the EU AI Act or comparable law.</li>
+  </ul>
+  <p>For any of the uses listed above, a written addendum identifying the human-oversight, documentation, and post-deployment monitoring measures will be required before AgentHeaven enables the use case.</p>
+
+  <h2>4. External Communications</h2>
+  <p>If an agent sends email, support replies, sales messages, or other external communications, you are responsible for ensuring that recipients are not misled, that marketing laws are followed, and that a human can review or intervene where appropriate. Where legally required, communications should disclose that an AI-assisted system is involved.</p>
+
+  <h2>5. Connected Tools</h2>
+  <p>You may connect only tools, accounts, mailboxes, CRMs, helpdesks, document sources, and APIs that you are authorised to use. You must configure least-privilege access and promptly revoke access that is no longer needed.</p>
+
+  <h2>6. Data Restrictions</h2>
+  <p>You should not connect sources containing special-category, highly sensitive, regulated, or children's data unless the use case has been reviewed and you have a lawful basis for processing. AgentHeaven may refuse, suspend, or limit use cases that create unacceptable security, privacy, legal, or safety risk.</p>
+
+  <h2>7. Enforcement</h2>
+  <p>For non-urgent enforcement, AgentHeaven will notify Customer of the alleged violation and provide a reasonable opportunity (ordinarily at least 14 days, in line with Terms §7) to remedy the issue before suspending or terminating Service.</p>
+  <p>For urgent issues — including a credible threat to other customers, third parties, providers, AgentHeaven systems, or the safety of any person, or a violation of §2 (Prohibited AI Practices) — AgentHeaven may suspend, rate-limit, disable tool access, switch routing mode, or terminate Service with immediate effect and provide notice of the action as soon as reasonably practicable thereafter.</p>
+
+  <h2>8. Reporting</h2>
+  <p>Report suspected misuse, unsafe output, or unauthorised activity to <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>.</p>
+</div>
+
+<footer class="site-foot">
+  <div class="container">
+    <div>© 2026 Black Salt Kft. · AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="dpa.html">DPA</a>
+      <a href="subprocessors.html">Sub-processors</a>
+      <a href="security.html">Security</a>
+      <a href="cookie-policy.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing Addendum — AgentHeaven</title>
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/newsreader-italic-latin.woff2) format('woff2'); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#faf7f2; --bg-2:#f3eee5; --ink:#1a1d1a; --ink-soft:#4a4d4a; --muted:#767972; --accent:#4a6c5b; --accent-2:#5d8071; --accent-bg:#eef2ed; --card:#fff; --border:#e4dfd4; --radius:14px; --radius-sm:8px; }
+    body { background: var(--bg); color: var(--ink-soft); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 50; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(250,247,242,0.85); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--border); }
+    @media (min-width: 768px) { nav { padding: 1rem 2rem; } }
+    .logo { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; color: var(--ink); letter-spacing: -0.01em; text-decoration: none; }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .nav-back { font-size: 0.9rem; color: var(--ink-soft); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .nav-back:hover { color: var(--ink); }
+    .container { max-width: 780px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+    @media (min-width: 768px) { .container { padding: 5rem 2rem 6rem; } }
+    .page-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    h1 { color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    h1 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400; color: var(--accent); }
+    .effective-date { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    h2 { color: var(--ink); font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem; letter-spacing: -0.01em; }
+    p { margin-bottom: 1rem; }
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    a { color: var(--accent); text-decoration: underline; }
+    a:hover { color: var(--accent-2); }
+    strong { color: var(--ink); font-weight: 600; }
+    .highlight-box { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.92rem; }
+    .data-table th { text-align: left; padding: 0.6rem 1rem; background: var(--accent-bg); color: var(--accent); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); }
+    .data-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table tr:nth-child(even) td { background: var(--bg-2); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+    footer.site-foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    footer.site-foot .container { padding-top: 0; padding-bottom: 0; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+    @media (min-width: 700px) { footer.site-foot .container { flex-direction: row; justify-content: space-between; align-items: center; } }
+    .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .foot-links a { color: var(--muted); text-decoration: none; }
+    .foot-links a:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AgentHeaven</a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="page-label">Legal</div>
+  <h1>Data Processing <em>Addendum</em></h1>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 14 May 2026</p>
+
+  <p>This Data Processing Addendum ("DPA") forms part of the agreement between <strong>Black Salt Kft.</strong>, trading as <strong>AgentHeaven</strong> ("AgentHeaven", "processor", "we", "us"), and the customer using the AgentHeaven managed AI digital-employee service ("Customer", "controller", "you").</p>
+  <p>This DPA applies where AgentHeaven processes personal data on behalf of the Customer in connection with the Service, including operational data processed by the digital employee, session and activity logs, connected-tool data, and customer-specific memory/wiki content.</p>
+
+  <div class="highlight-box">
+    <p><strong>Plain English summary:</strong> You decide what business data and tools your digital employee may access. We process that data only to operate, secure, support, and improve your own digital employee. We do not use your data for cross-customer training, shared datasets, or unrelated AgentHeaven purposes.</p>
+  </div>
+
+  <h2>1. Roles</h2>
+  <p>For account, billing, website, consultation, and marketing data, AgentHeaven may act as an independent data controller as described in the Privacy Policy. For operational data that your digital employee processes under your instructions, the Customer is the controller and AgentHeaven is the processor.</p>
+
+  <h2>2. Processing Details</h2>
+  <table class="data-table">
+    <tbody>
+      <tr><th>Subject matter</th><td>Provision of a managed AI digital employee, including agent hosting, tool connection, session execution, logging, customer memory/wiki, support, and tuning.</td></tr>
+      <tr><th>Duration</th><td>For the subscription term plus the post-cancellation retention/export period stated in the Privacy Policy, unless a longer period is required by law or agreed in writing.</td></tr>
+      <tr><th>Nature and purpose</th><td>Processing business communications, records, prompts, tool outputs, logs, and customer-specific memory/wiki to perform work selected by the Customer.</td></tr>
+      <tr><th>Data categories</th><td>Identity, contact, business, operational, source-system, session, activity-log, support, and customer memory/wiki data.</td></tr>
+      <tr><th>Data subjects</th><td>Customer personnel, customers' customers, leads, prospects, vendors, email correspondents, ticket submitters, and other persons whose data appears in connected systems.</td></tr>
+      <tr><th>Special-category data</th><td>Not intentionally requested by AgentHeaven, but may be incidentally processed if present in Customer-connected systems. Customer remains responsible for the lawful basis and suitability of connected data sources.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Customer Instructions</h2>
+  <p>AgentHeaven will process Customer personal data only on documented instructions from the Customer, including the Terms, onboarding instructions, runbooks, connected-tool permissions, support requests, and written configuration changes. If we believe an instruction violates applicable data protection law, we will inform you unless legally prohibited.</p>
+
+  <h2>4. Confidentiality</h2>
+  <p>AgentHeaven will ensure that personnel authorised to process Customer personal data are bound by confidentiality obligations and access Customer data only where needed to provide, secure, support, or troubleshoot the Service.</p>
+
+  <h2>5. Security Measures</h2>
+  <p>AgentHeaven will implement appropriate technical and organisational measures as described in the <a href="security.html">Security Measures</a> page, including VPS-level hardening, per-customer isolation, credential protection, activity logging, and restricted access. Customer is responsible for permissions and data quality in connected tools.</p>
+
+  <h2>6. Sub-processors</h2>
+  <p>Customer provides general written authorisation for AgentHeaven to engage the sub-processors listed on the <a href="subprocessors.html">Sub-processors</a> page. AgentHeaven will impose data-protection obligations on each sub-processor that are materially no less protective than this DPA.</p>
+  <p><strong>Change notice:</strong> AgentHeaven will give Customer at least <strong>30 days' prior notice</strong> (by email to the billing contact on file, by an update to the Sub-processors page that Customer can subscribe to, or by both) before a new sub-processor begins processing Customer personal data, except where a faster change is required to address a security risk, legal requirement, or provider outage, in which case notice will be given as soon as reasonably practicable.</p>
+  <p><strong>Objection:</strong> Customer may object on reasonable data-protection grounds within the 30-day notice period. AgentHeaven will use commercially reasonable efforts to make the affected processing available without the new sub-processor or to propose an alternative routing or self-hosted option. If AgentHeaven cannot accommodate the objection, Customer may terminate the affected portion of the Service for cause, with a pro-rata refund of pre-paid fees attributable to the unused remaining subscription period.</p>
+
+  <h2>7. International Transfers</h2>
+  <p>Where AgentHeaven transfers Customer personal data outside the EEA to a country without an adequacy decision, the parties rely on the European Commission's Standard Contractual Clauses (Implementing Decision (EU) 2021/914), which are deemed incorporated into this DPA by reference: <strong>Module Two</strong> (Controller-to-Processor) where AgentHeaven acts as a non-EEA data importer, and <strong>Module Three</strong> (Processor-to-Sub-Processor) where Customer personal data is transferred onward to a non-EEA sub-processor. Where applicable, AgentHeaven may also rely on the EU-US Data Privacy Framework or its successor mechanisms for transfers to certified US sub-processors. UK and Swiss transfers are covered by the corresponding UK International Data Transfer Addendum and Swiss FDPIC-recognised SCC variant respectively.</p>
+  <p>Customers may choose self-hosted or EU-only routing for sensitive workloads where technically available, in which case the transfer scenarios above will not arise for the routed traffic.</p>
+
+  <h2>8. Data Subject Requests</h2>
+  <p>AgentHeaven will reasonably assist the Customer in responding to access, deletion, correction, portability, objection, and restriction requests relating to Customer operational data. Requests sent directly to AgentHeaven that clearly relate to Customer-controlled data may be forwarded to the Customer where appropriate.</p>
+
+  <h2>9. Breach Notification</h2>
+  <p>AgentHeaven will notify the Customer without undue delay, and in any event <strong>within 48 hours</strong> of confirming a personal data breach affecting Customer personal data. The notice will include the information available at that point about the nature of the incident, affected data categories and (where known) data subjects, likely consequences, mitigation and containment steps, and a contact point. Where the full picture is not yet known, AgentHeaven will provide an initial notice within the 48-hour window and follow up with further information as the investigation progresses.</p>
+
+  <h2>10. Deletion and Return</h2>
+  <p>On termination, AgentHeaven will delete or return Customer operational data, customer memory/wiki, and credentials according to the Privacy Policy retention periods, unless EU or Member State law requires retention. Source documents are not stored by default. Session logs may be retained for security, dispute, legal, or compliance reasons for the periods stated in the Privacy Policy.</p>
+
+  <h2>11. Audits</h2>
+  <p>On reasonable written request, and no more than once per twelve-month period unless a personal data breach or a regulator-directed enquiry justifies an additional review, AgentHeaven will provide information necessary to demonstrate compliance with this DPA and Article 28 GDPR. The parties will first seek to satisfy the audit through written security summaries, policies, logs, completed security questionnaires, and any third-party audit reports AgentHeaven holds.</p>
+  <p>Where these materials are not sufficient to demonstrate compliance, Customer (or an independent third-party auditor mandated by Customer and not a competitor of AgentHeaven, bound by appropriate confidentiality obligations) may conduct an on-site or remote inspection on reasonable advance written notice, during business hours, and in a manner that does not compromise the confidentiality, security, or service continuity of other customers. Customer bears its own audit costs unless the audit reveals material non-compliance, in which case AgentHeaven bears reasonable audit costs and remediates without undue delay.</p>
+
+  <h2>12. Precedence</h2>
+  <p>If there is a conflict between this DPA and the Terms regarding processor obligations for Customer personal data, this DPA controls. The Terms continue to apply to commercial, payment, liability, and service terms.</p>
+
+  <h2>13. Contact</h2>
+  <p>Data processing questions should be sent to <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>.</p>
+
+  <hr />
+  <p style="font-size:0.88rem; color:var(--muted);">This DPA is intended as a baseline Article 28 processor addendum and should be reviewed by counsel before enterprise use.</p>
+</div>
+
+<footer class="site-foot">
+  <div class="container">
+    <div>© 2026 Black Salt Kft. · AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="subprocessors.html">Sub-processors</a>
+      <a href="security.html">Security</a>
+      <a href="acceptable-use.html">Acceptable Use</a>
+      <a href="cookie-policy.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

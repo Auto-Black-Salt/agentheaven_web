@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sub-processors — AgentHeaven</title>
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-latin.woff2) format('woff2'); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#faf7f2; --bg-2:#f3eee5; --ink:#1a1d1a; --ink-soft:#4a4d4a; --muted:#767972; --accent:#4a6c5b; --accent-2:#5d8071; --accent-bg:#eef2ed; --card:#fff; --border:#e4dfd4; --radius-sm:8px; }
+    body { background: var(--bg); color: var(--ink-soft); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 50; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(250,247,242,0.85); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--border); }
+    @media (min-width: 768px) { nav { padding: 1rem 2rem; } }
+    .logo { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .nav-back { font-size: 0.9rem; color: var(--ink-soft); text-decoration: none; }
+    .container { max-width: 960px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+    @media (min-width: 768px) { .container { padding: 5rem 2rem 6rem; } }
+    .page-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    h1 { color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .effective-date { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    h2 { color: var(--ink); font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem; }
+    p { margin-bottom: 1rem; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    a { color: var(--accent); text-decoration: underline; }
+    strong { color: var(--ink); font-weight: 600; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); }
+    table { width: 100%; border-collapse: collapse; min-width: 860px; font-size: 0.9rem; }
+    th { text-align: left; padding: 0.65rem 0.8rem; background: var(--accent-bg); color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); }
+    td { padding: 0.75rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: var(--bg-2); }
+    .highlight-box { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; }
+    footer.site-foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    footer.site-foot .container { padding-top: 0; padding-bottom: 0; display: flex; flex-direction: column; gap: 1rem; }
+    .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .foot-links a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AgentHeaven</a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="page-label">Legal</div>
+  <h1>Sub-processors</h1>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 14 May 2026</p>
+
+  <p>This page lists third-party providers that may process personal data for AgentHeaven. Actual use depends on the customer's plan, selected routing mode, connected tools, and billing method.</p>
+
+  <div class="highlight-box">
+    <p><strong>Important:</strong> Self-hosted model routing and local memory/vector storage are operated by AgentHeaven on controlled VPS infrastructure. In that mode, prompts, source content, customer memory/wiki, and vector data are not sent to third-party LLM providers.</p>
+  </div>
+
+  <h2>Current Providers</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Service</th>
+          <th>Data processed</th>
+          <th>Location / transfer</th>
+          <th>Use case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hostinger</strong></td>
+          <td>VPS hosting</td>
+          <td>Agent runtime, application files, customer-specific logs and memory/wiki where deployed on Hostinger VPS</td>
+          <td>Hosting region selected by AgentHeaven; EEA preferred where available</td>
+          <td>Infrastructure for agent hosting and self-hosted components</td>
+        </tr>
+        <tr>
+          <td><strong>DigitalOcean</strong></td>
+          <td>VPS/cloud hosting</td>
+          <td>Agent runtime, application files, customer-specific logs and memory/wiki where deployed on DigitalOcean infrastructure</td>
+          <td>Hosting region selected by AgentHeaven; EEA preferred where available; safeguards used for non-EEA transfers</td>
+          <td>Infrastructure for agent hosting and self-hosted components</td>
+        </tr>
+        <tr>
+          <td><strong>OpenAI</strong></td>
+          <td>Third-party LLM provider</td>
+          <td>Prompts, session context, outputs, and limited business context sent when OpenAI routing is selected or needed</td>
+          <td>May involve non-EEA processing; DPA and transfer safeguards apply</td>
+          <td>Frontier-model reasoning and generation</td>
+        </tr>
+        <tr>
+          <td><strong>Anthropic</strong></td>
+          <td>Third-party LLM provider</td>
+          <td>Prompts, session context, outputs, and limited business context sent when Anthropic routing is selected or needed</td>
+          <td>May involve non-EEA processing; DPA and transfer safeguards apply</td>
+          <td>Frontier-model reasoning and generation</td>
+        </tr>
+        <tr>
+          <td><strong>Self-hosted open-source models</strong></td>
+          <td>LLM inference controlled by AgentHeaven</td>
+          <td>Prompts, session context, outputs, and customer memory/wiki processed on controlled infrastructure</td>
+          <td>Controlled VPS infrastructure; no third-party LLM provider receives the prompt in this mode</td>
+          <td>EU-only or private model routing</td>
+        </tr>
+        <tr>
+          <td><strong>Composio</strong></td>
+          <td>Tool integration / connector layer</td>
+          <td>Connected-tool metadata, OAuth flow data, tool-call payloads, and action results depending on enabled integrations</td>
+          <td>Provider locations and transfer safeguards apply</td>
+          <td>Connecting agents to customer-approved tools</td>
+        </tr>
+        <tr>
+          <td><strong>Cal.eu</strong></td>
+          <td>Booking</td>
+          <td>Name, email, meeting time, meeting notes, scheduling metadata</td>
+          <td>Provider locations and transfer safeguards apply</td>
+          <td>Consultation booking</td>
+        </tr>
+        <tr>
+          <td><strong>AgentMail</strong></td>
+          <td>Email / agent mailbox</td>
+          <td>Email addresses, message content, headers, delivery metadata, agent email activity</td>
+          <td>Provider locations and transfer safeguards apply</td>
+          <td>Agent email, service email, support by email</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe</strong></td>
+          <td>Card payments and billing</td>
+          <td>Billing contact data, payment metadata, invoices, transaction records; card data handled by Stripe</td>
+          <td>May involve non-EEA processing; DPA and transfer safeguards apply</td>
+          <td>Subscription payments</td>
+        </tr>
+        <tr>
+          <td><strong>Google Analytics</strong></td>
+          <td>Website analytics</td>
+          <td>Device/browser data, page views, approximate location, events, identifiers where enabled</td>
+          <td>May involve non-EEA processing; consent and transfer safeguards required where applicable</td>
+          <td>Website analytics, only when enabled after consent</td>
+        </tr>
+        <tr>
+          <td><strong>Meta Pixel</strong></td>
+          <td>Advertising attribution</td>
+          <td>Page views, lead events, browser/device data, advertising identifiers where enabled</td>
+          <td>May involve non-EEA processing; consent and transfer safeguards required where applicable</td>
+          <td>Ad measurement, only when enabled after consent</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Independent Controllers (Informational)</h2>
+  <p>The following parties act as <strong>independent data controllers</strong> rather than sub-processors of AgentHeaven, but are listed here for transparency because Customer personal data may flow to them in the course of providing the Service:</p>
+  <ul>
+    <li><strong>Bank-transfer payment chain</strong> — Customer's bank, AgentHeaven's bank, and any intermediary payment networks. Each acts under its own banking and payment-services law and processes payer name, account details, payment reference, and reconciliation data when Customer pays by bank transfer.</li>
+    <li><strong>Tax and accounting authorities</strong> — Where retention of invoices, VAT records, or payment data is required by law.</li>
+  </ul>
+
+  <h2>Internal Systems</h2>
+  <p>AgentHeaven currently uses custom logs and local files for memory/vector storage on controlled VPS infrastructure. These are internal systems rather than third-party sub-processors, but they may contain session data, activity logs, customer memory/wiki, and vectorized representations of customer-specific business context.</p>
+
+  <h2>Changes</h2>
+  <p>We will give active customers at least <strong>30 days' prior notice</strong> before a new sub-processor begins processing Customer personal data, except where a faster change is required to address a security risk, legal requirement, or provider outage, in which case notice will be given as soon as reasonably practicable.</p>
+  <p>Notice is given by email to the billing contact on file and by updating this page (with the new "Last updated" date at the top). Customers who prefer in-line notification can email <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a> with the subject line <strong>"Subscribe: sub-processor updates"</strong> to be added to a dedicated change-notification list.</p>
+  <p>Customers may object to a new sub-processor on reasonable data-protection grounds within the 30-day notice period as described in DPA §6.</p>
+</div>
+
+<footer class="site-foot">
+  <div class="container">
+    <div>© 2026 Black Salt Kft. · AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="dpa.html">DPA</a>
+      <a href="security.html">Security</a>
+      <a href="acceptable-use.html">Acceptable Use</a>
+      <a href="cookie-policy.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

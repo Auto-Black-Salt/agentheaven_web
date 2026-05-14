@@ -1190,6 +1190,73 @@
     .foot-links a { color: var(--muted); transition: color 0.15s ease; }
     .foot-links a:hover { color: var(--cyan); }
 
+    .cookie-banner {
+      position: fixed;
+      left: 1rem; right: 1rem; bottom: 1rem;
+      z-index: 100;
+      display: none;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius-sm);
+      background: rgba(17,20,46,0.96);
+      box-shadow: var(--shadow-deep);
+      backdrop-filter: blur(16px);
+    }
+    .cookie-banner.visible { display: block; }
+    .cookie-banner .cookie-text { margin: 0 0 0.85rem; color: var(--ink-soft); font-size: 0.9rem; }
+    .cookie-banner a { color: var(--cyan); text-decoration: underline; }
+    .cookie-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.25rem;
+      margin-bottom: 0.95rem;
+    }
+    .cookie-choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      flex: 1 1 240px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+    .cookie-choice input[type="checkbox"] {
+      margin-top: 0.2rem;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+    .cookie-choice strong { display: block; color: var(--ink); font-size: 0.88rem; font-weight: 600; }
+    .cookie-choice .desc { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.45; margin-top: 0.1rem; }
+    .cookie-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .cookie-actions button {
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      background: rgba(255,255,255,0.04);
+      color: var(--ink);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .cookie-actions button:hover { background: rgba(255,255,255,0.09); }
+    .cookie-actions .cookie-save {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #07091a;
+    }
+    .cookie-actions .cookie-save:hover {
+      background: var(--cyan-2);
+      border-color: var(--cyan-2);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1206,7 +1273,7 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-left">
-    <a href="#" class="logo">
+    <a href="index.html" class="logo">
       <span class="logo-dot"></span>
       AgentHeaven
     </a>
@@ -1224,7 +1291,7 @@
       <span class="lang-sep">·</span>
       <button class="lang-btn" data-lang="de">DE</button>
     </div>
-    <a href="#cta" class="nav-cta" id="navBookBtn" data-i18n="nav.cta">Book a call</a>
+    <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="nav-cta" id="navBookBtn" data-i18n="nav.cta">Book a call</a>
   </div>
 </nav>
 
@@ -1244,7 +1311,7 @@
       </h1>
       <p class="hero-sub" data-i18n="hero.sub">We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.</p>
       <div class="hero-actions">
-        <a href="#cta" class="btn-primary" data-cta="hero"><span data-i18n="hero.cta">Book a free 30-min call</span></a>
+        <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="hero"><span data-i18n="hero.cta">Book a free 30-min call</span></a>
         <a href="#how" class="btn-ghost" data-i18n="hero.ghost">See how it works →</a>
       </div>
       <p class="hero-reassure"><span data-i18n="hero.reassure">30 minutes. No slides. No commitment.</span></p>
@@ -1542,7 +1609,7 @@
           <li data-i18n="price.starter.f3">Memory &amp; feedback loop</li>
           <li data-i18n="price.starter.f4">All AI and infrastructure costs included</li>
         </ul>
-        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-starter" data-i18n="price.cta">Book a call to start</a></div>
+        <div class="tier-cta"><a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="price-starter" data-i18n="price.cta">Book a call to start</a></div>
       </div>
       <div class="tier featured reveal reveal-delay-2">
         <span class="tier-badge" data-i18n="price.popular">Most popular</span>
@@ -1559,7 +1626,7 @@
           <li data-i18n="price.specialist.f4">Quarterly review</li>
           <li data-i18n="price.specialist.f5">Everything in Starter</li>
         </ul>
-        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-specialist" data-i18n="price.cta">Book a call to start</a></div>
+        <div class="tier-cta"><a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="price-specialist" data-i18n="price.cta">Book a call to start</a></div>
       </div>
       <div class="tier reveal reveal-delay-3">
         <div class="tier-name" data-i18n="price.workforce.name">Workforce</div>
@@ -1575,7 +1642,7 @@
           <li data-i18n="price.workforce.f4">Custom integrations on request</li>
           <li data-i18n="price.workforce.f5">Everything in Specialist</li>
         </ul>
-        <div class="tier-cta"><a href="#cta" class="btn-primary" data-cta="price-workforce" data-i18n="price.cta">Book a call to start</a></div>
+        <div class="tier-cta"><a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="price-workforce" data-i18n="price.cta">Book a call to start</a></div>
       </div>
     </div>
     <p class="pricing-foot" data-i18n="price.foot">No setup fee · No annual contract · Cancel anytime</p>
@@ -1676,7 +1743,7 @@
       </h2>
       <p class="cta-sub" data-i18n="cta.sub">Tell us about the work you'd hand off if you could. We'll tell you whether a digital employee makes sense — honestly.</p>
       <div class="cta-actions">
-        <a href="#" id="finalBookBtn" class="btn-primary" data-cta="final" data-i18n="cta.btn">Book your consultation</a>
+        <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" id="finalBookBtn" class="btn-primary" data-cta="final" data-i18n="cta.btn">Book your consultation</a>
       </div>
       <p class="cta-reassure">
         <span data-i18n="cta.reassure.text">Or email us:</span>
@@ -1693,15 +1760,53 @@
     <div class="foot-links">
       <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
       <a href="terms.html" data-i18n="footer.terms">Terms</a>
+      <a href="dpa.html">DPA</a>
+      <a href="subprocessors.html">Sub-processors</a>
+      <a href="security.html">Security</a>
+      <a href="acceptable-use.html">Acceptable Use</a>
+      <a href="cookie-policy.html">Cookies</a>
+      <a href="#" id="cookiePrefsLink" data-i18n="footer.cookie_prefs">Cookie preferences</a>
       <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
     </div>
   </div>
 </footer>
 
+<div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
+  <p class="cookie-text">
+    <span data-i18n="cookie.text">We use optional analytics and advertising/conversion tracking only with your consent. Choose what to allow — refusing either does not affect your access to the site.</span>
+    <a href="cookie-policy.html" data-i18n="cookie.link">Cookie Policy</a>
+  </p>
+  <div class="cookie-choices">
+    <label class="cookie-choice">
+      <input type="checkbox" id="cookieAnalytics" />
+      <span>
+        <strong data-i18n="cookie.analytics.title">Analytics</strong>
+        <span class="desc" data-i18n="cookie.analytics.desc">Google Analytics — page views and traffic, IP anonymised.</span>
+      </span>
+    </label>
+    <label class="cookie-choice">
+      <input type="checkbox" id="cookieAdvertising" />
+      <span>
+        <strong data-i18n="cookie.advertising.title">Advertising</strong>
+        <span class="desc" data-i18n="cookie.advertising.desc">Meta Pixel — measures lead conversions from ads.</span>
+      </span>
+    </label>
+  </div>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-save" id="cookieSave" data-i18n="cookie.save">Save preferences</button>
+    <button type="button" id="cookieRejectAll" data-i18n="cookie.reject">Reject all</button>
+    <button type="button" id="cookieAcceptAll" data-i18n="cookie.accept">Accept all</button>
+  </div>
+</div>
+
 <script>
   /* Configuration. Founder replaces these with real values before launch. */
   var BOOKING_URL = 'https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true';
   var META_PIXEL_ID = '';
+  var GOOGLE_ANALYTICS_ID = '';
+  var COOKIE_CONSENT_KEY = 'ah_cookie_consent';
+  /* Consent expires after 180 days (in line with CNIL guidance), after which the banner is shown again. */
+  var COOKIE_CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
 
   /* Translations: sections 2–11 each add their keys to T.en, T.hu, T.de.
      All values are plain text — applyTranslations uses textContent only. */
@@ -1841,9 +1946,19 @@
       'cta.sub':           "Tell us about the work you'd hand off if you could. We'll tell you whether a digital employee makes sense — honestly.",
       'cta.btn':           'Book your consultation',
       'cta.reassure.text': 'Or email us:',
-      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
-      'footer.privacy':    'Privacy',
-      'footer.terms':      'Terms'
+      'footer.copy':         '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':      'Privacy',
+      'footer.terms':        'Terms',
+      'footer.cookie_prefs': 'Cookie preferences',
+      'cookie.text':              'We use optional analytics and advertising/conversion tracking only with your consent. Choose what to allow — refusing either does not affect your access to the site.',
+      'cookie.link':              'Cookie Policy',
+      'cookie.analytics.title':   'Analytics',
+      'cookie.analytics.desc':    'Google Analytics — page views and traffic, IP anonymised.',
+      'cookie.advertising.title': 'Advertising',
+      'cookie.advertising.desc':  'Meta Pixel — measures lead conversions from ads.',
+      'cookie.save':              'Save preferences',
+      'cookie.accept':            'Accept all',
+      'cookie.reject':            'Reject all'
     },
     hu: {
       'nav.how':     'Hogyan működik',
@@ -1980,9 +2095,19 @@
       'cta.sub':           'Mondd el, milyen munkát adnál át, ha tehetnéd. Megmondjuk őszintén, van-e értelme a digitális munkavállalónak nálad.',
       'cta.btn':           'Foglald le a konzultációd',
       'cta.reassure.text': 'Vagy írj nekünk:',
-      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
-      'footer.privacy':    'Adatvédelem',
-      'footer.terms':      'Feltételek'
+      'footer.copy':         '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':      'Adatvédelem',
+      'footer.terms':        'Feltételek',
+      'footer.cookie_prefs': 'Süti beállítások',
+      'cookie.text':              'Opcionális analitikát és hirdetési/konverziómérést csak a hozzájárulásoddal használunk. Válaszd ki, mit engedélyezel — ezek elutasítása nem érinti az oldal használatát.',
+      'cookie.link':              'Süti szabályzat',
+      'cookie.analytics.title':   'Analitika',
+      'cookie.analytics.desc':    'Google Analytics — oldalmegtekintések és forgalom, anonimizált IP-vel.',
+      'cookie.advertising.title': 'Hirdetés',
+      'cookie.advertising.desc':  'Meta Pixel — hirdetésekből származó lead-konverziók mérése.',
+      'cookie.save':              'Beállítások mentése',
+      'cookie.accept':            'Mindet elfogadom',
+      'cookie.reject':            'Mindet elutasítom'
     },
     de: {
       'nav.how':     'So funktioniert es',
@@ -2119,13 +2244,53 @@
       'cta.sub':           'Erzähl uns von der Arbeit, die du abgeben würdest, wenn du könntest. Wir sagen dir ehrlich, ob ein KI-Mitarbeiter Sinn ergibt.',
       'cta.btn':           'Beratungsgespräch buchen',
       'cta.reassure.text': 'Oder schreib uns:',
-      'footer.copy':       '© 2026 AgentHeaven · agentheaven.ai',
-      'footer.privacy':    'Datenschutz',
-      'footer.terms':      'AGB'
+      'footer.copy':         '© 2026 AgentHeaven · agentheaven.ai',
+      'footer.privacy':      'Datenschutz',
+      'footer.terms':        'AGB',
+      'footer.cookie_prefs': 'Cookie-Einstellungen',
+      'cookie.text':              'Wir verwenden optionale Analyse- und Werbe-/Conversion-Messung nur mit deiner Zustimmung. Wähle, was du erlaubst — eine Ablehnung schränkt die Nutzung der Seite nicht ein.',
+      'cookie.link':              'Cookie-Richtlinie',
+      'cookie.analytics.title':   'Analyse',
+      'cookie.analytics.desc':    'Google Analytics — Seitenaufrufe und Traffic, IP anonymisiert.',
+      'cookie.advertising.title': 'Werbung',
+      'cookie.advertising.desc':  'Meta Pixel — misst Lead-Conversions aus Anzeigen.',
+      'cookie.save':              'Einstellungen speichern',
+      'cookie.accept':            'Alle akzeptieren',
+      'cookie.reject':            'Alle ablehnen'
     }
   };
 
-  var currentLang = localStorage.getItem('ah_lang') || (navigator.language && navigator.language.slice(0,2)) || 'en';
+  function getStoredLang() {
+    try {
+      return window.localStorage && localStorage.getItem('ah_lang');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setStoredLang(lang) {
+    try {
+      if (window.localStorage) localStorage.setItem('ah_lang', lang);
+    } catch (e) {
+      /* Language switching still works for the current page view. */
+    }
+  }
+
+  function getStoredValue(key) {
+    try {
+      return window.localStorage && localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setStoredValue(key, value) {
+    try {
+      if (window.localStorage) localStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  var currentLang = getStoredLang() || (navigator.language && navigator.language.slice(0,2)) || 'en';
   if (!T[currentLang]) currentLang = 'en';
 
   function t(key) {
@@ -2154,14 +2319,72 @@
     });
   }
 
-  /* Meta Pixel base. No-op when META_PIXEL_ID is empty. */
+  /* Meta Pixel base. No-op when META_PIXEL_ID is empty or pixel already loaded. */
   function loadMetaPixel() {
-    if (!META_PIXEL_ID) return;
+    if (!META_PIXEL_ID || window.fbq) return;
     /* eslint-disable */
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     /* eslint-enable */
     window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
+  }
+
+  /* Google Analytics 4 with Consent Mode v2 defaults. Ad signals stay denied
+     unless the visitor has also accepted advertising. */
+  function loadGoogleAnalytics(consent) {
+    if (!GOOGLE_ANALYTICS_ID || window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    window.gtag('consent', 'update', {
+      analytics_storage: consent && consent.analytics ? 'granted' : 'denied',
+      ad_storage: consent && consent.advertising ? 'granted' : 'denied',
+      ad_user_data: consent && consent.advertising ? 'granted' : 'denied',
+      ad_personalization: consent && consent.advertising ? 'granted' : 'denied'
+    });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ANALYTICS_ID);
+    document.head.appendChild(s);
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ANALYTICS_ID, { anonymize_ip: true });
+  }
+
+  /* Reads the JSON consent record. Returns null when missing, malformed, or
+     older than COOKIE_CONSENT_MAX_AGE_MS (the banner will then re-prompt). */
+  function readConsent() {
+    var raw = getStoredValue(COOKIE_CONSENT_KEY);
+    if (!raw) return null;
+    var parsed;
+    try { parsed = JSON.parse(raw); } catch (e) { return null; }
+    if (!parsed || typeof parsed !== 'object') return null;
+    if (!parsed.savedAt || (Date.now() - parsed.savedAt) > COOKIE_CONSENT_MAX_AGE_MS) return null;
+    return {
+      analytics: Boolean(parsed.analytics),
+      advertising: Boolean(parsed.advertising),
+      savedAt: parsed.savedAt
+    };
+  }
+
+  function writeConsent(analytics, advertising) {
+    var record = {
+      analytics: Boolean(analytics),
+      advertising: Boolean(advertising),
+      savedAt: Date.now()
+    };
+    setStoredValue(COOKIE_CONSENT_KEY, JSON.stringify(record));
+    return record;
+  }
+
+  function applyConsent(consent) {
+    if (!consent) return;
+    if (consent.analytics) loadGoogleAnalytics(consent);
+    if (consent.advertising) loadMetaPixel();
   }
 
   function trackLead(source) {
@@ -2225,9 +2448,73 @@
         var lang = btn.getAttribute('data-lang');
         if (lang === currentLang || !T[lang]) return;
         currentLang = lang;
-        localStorage.setItem('ah_lang', lang);
+        setStoredLang(lang);
         applyTranslations();
       });
+    });
+  }
+
+  /* The banner is only mounted when at least one tracker ID is configured;
+     the footer "Cookie preferences" link is wired regardless so visitors can
+     re-open the banner after the IDs are set in production. */
+  function wireCookieConsent() {
+    var banner = document.getElementById('cookieBanner');
+    var prefsLink = document.getElementById('cookiePrefsLink');
+    var hasTracking = Boolean(META_PIXEL_ID || GOOGLE_ANALYTICS_ID);
+
+    function openBanner(preset) {
+      if (!banner) return;
+      var analyticsBox = document.getElementById('cookieAnalytics');
+      var advertisingBox = document.getElementById('cookieAdvertising');
+      if (analyticsBox) analyticsBox.checked = Boolean(preset && preset.analytics);
+      if (advertisingBox) advertisingBox.checked = Boolean(preset && preset.advertising);
+      banner.classList.add('visible');
+    }
+    function closeBanner() {
+      if (banner) banner.classList.remove('visible');
+    }
+
+    if (prefsLink) {
+      prefsLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!hasTracking) {
+          /* No trackers configured: nothing to manage, but acknowledge the click. */
+          alert('No optional tracking is currently active on this site.');
+          return;
+        }
+        openBanner(readConsent() || { analytics: false, advertising: false });
+      });
+    }
+
+    if (!hasTracking || !banner) return;
+
+    var save = document.getElementById('cookieSave');
+    var rejectAll = document.getElementById('cookieRejectAll');
+    var acceptAll = document.getElementById('cookieAcceptAll');
+    var analyticsBox = document.getElementById('cookieAnalytics');
+    var advertisingBox = document.getElementById('cookieAdvertising');
+    if (!save || !rejectAll || !acceptAll || !analyticsBox || !advertisingBox) return;
+
+    var stored = readConsent();
+    if (stored) {
+      applyConsent(stored);
+    } else {
+      openBanner();
+    }
+
+    save.addEventListener('click', function() {
+      var record = writeConsent(analyticsBox.checked, advertisingBox.checked);
+      closeBanner();
+      applyConsent(record);
+    });
+    rejectAll.addEventListener('click', function() {
+      writeConsent(false, false);
+      closeBanner();
+    });
+    acceptAll.addEventListener('click', function() {
+      var record = writeConsent(true, true);
+      closeBanner();
+      applyConsent(record);
     });
   }
 
@@ -2238,7 +2525,7 @@
     wireReveal();
     wireFAQ();
     wireLangButtons();
-    loadMetaPixel();
+    wireCookieConsent();
   });
 </script>
 

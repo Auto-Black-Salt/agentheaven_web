@@ -192,10 +192,10 @@
 
   <div class="page-label">Legal</div>
   <h1>Terms &amp; <em>Conditions</em></h1>
-  <p class="effective-date">Effective date: 13 May 2026 &nbsp;·&nbsp; Last updated: 13 May 2026</p>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 14 May 2026</p>
 
   <p>Please read these Terms and Conditions ("Terms") carefully before using the <strong>AgentHeaven</strong> service operated by <strong>Black Salt Kft.</strong> ("we", "us", or "our") at <strong>agentheaven.ai</strong>, registered at 1077 Budapest, Baross tér 14, Hungary (company registration no. 01 09 450602, VAT no. HU13853619).</p>
-  <p>By subscribing to our service or accessing our website, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you may not use our service.</p>
+  <p>By subscribing to our service or accessing our website, you agree to be bound by these Terms. These Terms incorporate our <a href="acceptable-use.html">Acceptable Use Policy</a>, <a href="dpa.html">Data Processing Addendum</a> where applicable, <a href="subprocessors.html">Sub-processors</a> page, <a href="security.html">Security Measures</a>, <a href="privacy.html">Privacy Policy</a>, and <a href="cookie-policy.html">Cookie Policy</a>. If you do not agree with any part of these Terms, you may not use our service.</p>
 
   <div class="highlight-box">
     <p><strong>Summary:</strong> AgentHeaven is a managed AI digital-employee service. We configure, host, and tune an AI digital employee on your behalf to perform specific work. The subscription is monthly, includes all AI and infrastructure costs, and can be cancelled at any time.</p>
@@ -205,11 +205,12 @@
   <p>AgentHeaven provides a managed artificial-intelligence digital-employee service ("the Service") that, on your behalf:</p>
   <ul>
     <li>Configures a digital employee to perform a defined role (e.g., research, inbox triage, customer support, repetitive task automation, internal knowledge assistance, ops/back-office tasks);</li>
-    <li>Hosts the agent on our infrastructure, using the Hermes Agent harness from Nous Research and a model-agnostic routing layer over open-source and frontier LLM providers;</li>
+    <li>Hosts the agent on VPS infrastructure controlled by us, using an agent harness and a model-agnostic routing layer over optional self-hosted open-source models and selected third-party LLM providers;</li>
     <li>Absorbs all underlying compute and LLM costs as part of the flat monthly subscription;</li>
-    <li>Continuously tunes the agent based on your feedback and our team's ongoing review, within the tuning-hours allowance of your subscription tier.</li>
+    <li>Maintains a customer-specific long-term memory/wiki for the agent, containing relevant business information, workflows, preferences, and approved learning from sessions;</li>
+    <li>Continuously tunes the agent based on your feedback, session logs, the customer-specific memory/wiki, and our team's ongoing review, within the tuning-hours allowance of your subscription tier.</li>
   </ul>
-  <p>The Service is configured by us following an onboarding consultation with you. You provide us with access to the tools the agent needs (e.g., CRM, email, helpdesk, document store) and a description of the work to be done. We manage the digital employee on an ongoing basis.</p>
+  <p>The Service is configured by us following an onboarding consultation with you. You provide us with access to the tools the agent needs (e.g., CRM, email, helpdesk, document store) and a description of the work to be done. We process source documents and connected-tool content during agent sessions, but do not store your source documents by default. We do store session and activity logs, and we store the customer-specific memory/wiki needed for your agent to improve over time. We manage the digital employee on an ongoing basis.</p>
 
   <h2>2. Eligibility</h2>
   <p>You must be at least 18 years old and have the legal authority to enter into these Terms on behalf of yourself or your business. By using the Service, you represent and warrant that you meet these requirements.</p>
@@ -220,6 +221,7 @@
     <li>Provide accurate, complete, and up-to-date information during onboarding and throughout your subscription;</li>
     <li>Grant us the necessary access and permissions for the tools the digital employee is configured to operate;</li>
     <li>Keep us informed of any changes to your business processes, runbook, or preferences that may affect the agent's output;</li>
+    <li>Review and correct the customer-specific memory/wiki if you become aware that it contains inaccurate, outdated, confidential, or inappropriate information;</li>
     <li>Review agent activity periodically and notify us promptly if you identify any output that is inappropriate, inaccurate, or off-brief;</li>
     <li>Comply with the terms of service of any third-party platforms the agent connects to on your authorisation.</li>
   </ul>
@@ -234,7 +236,7 @@
     <li>Violates the community guidelines or terms of service of any platform the agent is connected to;</li>
     <li>Promotes illegal products, services, or activities.</li>
   </ul>
-  <p>We reserve the right to refuse to operate the agent in a manner that we reasonably believe violates the above standards, applicable law, or the acceptable-use policies of the underlying LLM providers.</p>
+  <p>We reserve the right to refuse to operate the agent in a manner that we reasonably believe violates the above standards, applicable law, our <a href="acceptable-use.html">Acceptable Use Policy</a>, or the acceptable-use policies of the underlying LLM providers.</p>
 
   <h2>5. Acceptable Use</h2>
   <p>In addition to Section 4, you may not use the Service:</p>
@@ -242,7 +244,7 @@
     <li>To send mass unsolicited communications (spam) of any kind;</li>
     <li>To attempt to circumvent rate limits, security controls, or fair-use limits;</li>
     <li>To facilitate phishing, fraud, identity theft, or other malicious activity;</li>
-    <li>To generate content prohibited by the acceptable-use policies of the underlying LLM providers (Anthropic, OpenAI, and open-source model licences);</li>
+    <li>To generate content prohibited by our <a href="acceptable-use.html">Acceptable Use Policy</a>, the acceptable-use policies of underlying LLM providers (Anthropic, OpenAI, and open-source model licences), or connected-platform rules;</li>
     <li>To reverse-engineer, decompile, or extract the prompts, weights, runbook, or memory of any digital employee, your own or anyone else's.</li>
   </ul>
   <p>Violation of this Section may result in immediate suspension or termination of the Service without refund.</p>
@@ -287,12 +289,13 @@
   <p><strong>Support:</strong> Support is provided via email at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>. We aim to respond within 2 business days for Starter customers and within 1 business day for Specialist customers. Workforce customers receive a response on tuning and support requests within 1 business day under our service-level commitment.</p>
 
   <h2>9. Intellectual Property</h2>
-  <p><strong>Your content:</strong> You retain ownership of all business information, runbook content, brand materials, and operational data you provide to us. You grant us a limited licence to use this material solely to configure, operate, and tune your digital employee.</p>
+  <p><strong>Your content:</strong> You retain ownership of all business information, runbook content, brand materials, operational data, and customer-specific memory/wiki content you provide to us or authorise the agent to derive from your sessions. You grant us a limited licence to use this material solely to configure, operate, secure, support, and tune your digital employee.</p>
+  <p><strong>No cross-customer use:</strong> We do not use your business information, source documents, session content, logs, or customer-specific memory/wiki to train shared models, improve another customer's agent, create generic datasets, or develop unrelated AgentHeaven products. We do not disclose your customer-specific memory/wiki to third parties except where strictly necessary to operate your selected LLM routing mode or connected-tool workflow.</p>
   <p><strong>Our service:</strong> All technology, software, processes, methods, prompts, and tuning materials used to deliver the Service remain the intellectual property of AgentHeaven and its partners (including the Hermes Agent harness, licensed from Nous Research under its applicable terms). These Terms do not grant you any licence to our intellectual property beyond the right to use the Service as described herein.</p>
   <p><strong>AI-generated output:</strong> AgentHeaven grants you a perpetual, royalty-free, worldwide licence to use, copy, distribute, and repurpose the output produced by your digital employee in the course of your subscription. Note that AI-generated content may not qualify for copyright protection under applicable law; we make no warranty as to its copyright status.</p>
 
   <h2>10. Confidentiality</h2>
-  <p>We treat your business information, runbook, operational data, and tool access credentials as confidential. We will not disclose this information to third parties except as necessary to operate the Service (see our <a href="privacy.html">Privacy Policy</a> for the list of sub-processors) or as required by law.</p>
+  <p>We treat your business information, runbook, operational data, session logs, customer-specific memory/wiki, and tool access credentials as confidential. We will not disclose this information to third parties except as necessary to operate the Service (see our <a href="subprocessors.html">Sub-processors</a> page), as required by your selected LLM routing mode or connected-tool workflow, or as required by law.</p>
   <p>Equally, you agree to keep confidential any proprietary information about our processes, tuning methodology, or technical methods that we share with you during the course of the Service.</p>
 
   <h2>11. Limitation of Liability</h2>
@@ -330,10 +333,10 @@
   <h2>15. Governing Law and Disputes</h2>
   <p>These Terms are governed by and construed in accordance with the laws of <strong>Hungary</strong>. Any disputes arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts of <strong>Budapest, Hungary</strong>, except where mandatory applicable consumer law in your country of residence provides otherwise.</p>
   <p>We will always attempt to resolve any dispute amicably in the first instance — please contact us at <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a> before pursuing any formal action.</p>
-  <p>If you are a consumer located in the EU, you may also use the European Commission's Online Dispute Resolution platform: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>. Our email address for ODR purposes is <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>.</p>
+  <p>If you are a consumer located in the EU, you may also seek assistance through the consumer redress bodies listed by the European Commission: <a href="https://consumer-redress.ec.europa.eu/dispute-resolution-bodies" target="_blank" rel="noopener">https://consumer-redress.ec.europa.eu/dispute-resolution-bodies</a>. The former European Online Dispute Resolution platform was discontinued on 20 July 2025.</p>
 
   <h2>16. Entire Agreement</h2>
-  <p>These Terms, together with our <a href="privacy.html">Privacy Policy</a>, constitute the entire agreement between you and AgentHeaven regarding the Service and supersede all prior agreements and understandings, whether written or oral.</p>
+  <p>These Terms, together with our <a href="privacy.html">Privacy Policy</a>, <a href="dpa.html">Data Processing Addendum</a> where applicable, <a href="acceptable-use.html">Acceptable Use Policy</a>, <a href="subprocessors.html">Sub-processors</a> page, <a href="security.html">Security Measures</a>, and <a href="cookie-policy.html">Cookie Policy</a>, constitute the entire agreement between you and AgentHeaven regarding the Service and supersede all prior agreements and understandings, whether written or oral.</p>
   <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.</p>
 
   <h2>17. Contact</h2>
@@ -348,7 +351,7 @@
   </div>
 
   <hr />
-  <p style="font-size:0.88rem; color:var(--muted);">These Terms were last reviewed on 13 May 2026. AgentHeaven reserves the right to update this document at any time. The current version is always available at agentheaven.ai/terms.</p>
+  <p style="font-size:0.88rem; color:var(--muted);">These Terms were last reviewed on 14 May 2026. AgentHeaven reserves the right to update this document at any time. The current version is always available at agentheaven.ai/terms.</p>
 
 </div>
 
@@ -358,6 +361,11 @@
     <div class="foot-links">
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
+      <a href="dpa.html">DPA</a>
+      <a href="subprocessors.html">Sub-processors</a>
+      <a href="security.html">Security</a>
+      <a href="acceptable-use.html">Acceptable Use</a>
+      <a href="cookie-policy.html">Cookies</a>
       <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
     </div>
   </div>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Measures — AgentHeaven</title>
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-latin.woff2) format('woff2'); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#faf7f2; --bg-2:#f3eee5; --ink:#1a1d1a; --ink-soft:#4a4d4a; --muted:#767972; --accent:#4a6c5b; --accent-2:#5d8071; --accent-bg:#eef2ed; --card:#fff; --border:#e4dfd4; --radius-sm:8px; }
+    body { background: var(--bg); color: var(--ink-soft); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 50; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(250,247,242,0.85); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--border); }
+    @media (min-width: 768px) { nav { padding: 1rem 2rem; } }
+    .logo { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .nav-back { font-size: 0.9rem; color: var(--ink-soft); text-decoration: none; }
+    .container { max-width: 780px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+    @media (min-width: 768px) { .container { padding: 5rem 2rem 6rem; } }
+    .page-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    h1 { color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .effective-date { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    h2 { color: var(--ink); font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem; }
+    h3 { color: var(--ink); font-size: 1rem; font-weight: 600; margin: 1.35rem 0 0.35rem; }
+    p { margin-bottom: 1rem; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    a { color: var(--accent); text-decoration: underline; }
+    strong { color: var(--ink); font-weight: 600; }
+    .highlight-box { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; }
+    footer.site-foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    footer.site-foot .container { padding-top: 0; padding-bottom: 0; display: flex; flex-direction: column; gap: 1rem; }
+    .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .foot-links a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AgentHeaven</a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="page-label">Legal</div>
+  <h1>Security Measures</h1>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 14 May 2026</p>
+
+  <p>This page describes AgentHeaven's baseline technical and organisational measures ("TOMs") for protecting customer data, session logs, credentials, and customer-specific memory/wiki content.</p>
+
+  <div class="highlight-box">
+    <p><strong>Scope:</strong> These measures apply to AgentHeaven-controlled systems, including VPS-hosted agents, custom logs, local file memory/vector stores, and self-hosted model deployments. Third-party providers listed on the <a href="subprocessors.html">Sub-processors</a> page maintain their own security controls.</p>
+  </div>
+
+  <h2>1. Hosting and Network Security</h2>
+  <ul>
+    <li>Agents are hosted on VPS infrastructure controlled by AgentHeaven, currently using Hostinger and/or DigitalOcean.</li>
+    <li>Production access is restricted to authorised operators on a need-to-know basis.</li>
+    <li>Administrative access should use strong credentials, SSH keys where applicable, and provider-side account protection.</li>
+    <li>Services are configured to expose only the ports and endpoints required for operation.</li>
+    <li>Infrastructure regions are selected with EU/EEA hosting preferred for sensitive workloads where available.</li>
+  </ul>
+
+  <h2>2. Data Minimisation</h2>
+  <ul>
+    <li>Source documents are processed transiently during agent sessions and are not stored by default.</li>
+    <li>Session and activity logs are limited to what is needed for reliability, auditability, debugging, security, and support.</li>
+    <li>Customer-specific memory/wiki content is kept only for the customer's own agent and is not reused across customers.</li>
+    <li>Local vector/memory files are treated as customer data because they may encode business context or personal data.</li>
+  </ul>
+
+  <h2>3. Customer Isolation</h2>
+  <ul>
+    <li>Customer configuration, credentials, logs, memory/wiki, and local vector data are logically separated per customer.</li>
+    <li>Agents are configured to use only customer-authorised tools and sources.</li>
+    <li>Agent outputs and memory are not used to improve another customer's agent or a shared training dataset.</li>
+  </ul>
+
+  <h2>4. Encryption</h2>
+  <ul>
+    <li><strong>In transit:</strong> Connections to the website, agent endpoints, third-party LLM providers, and connected tools use TLS.</li>
+    <li><strong>At rest:</strong> OAuth tokens, API keys, agent mailbox credentials, customer-specific memory/wiki, and operational data persisted on AgentHeaven-controlled VPS infrastructure are stored encrypted at rest, either through full-disk encryption on the underlying volume or through application-level encryption of the credential record, depending on the data category.</li>
+    <li>Encryption keys are managed by AgentHeaven and are not shared with other customers.</li>
+  </ul>
+
+  <h2>5. Credentials and Tool Access</h2>
+  <ul>
+    <li>Connected-tool access is limited to the permissions needed for the configured role.</li>
+    <li>OAuth tokens, API keys, and agent mailbox credentials are treated as confidential operational secrets and are stored encrypted at rest as described in §4.</li>
+    <li>Credentials are revoked or deleted on cancellation where technically possible and no longer needed.</li>
+    <li>Customers remain responsible for source-system account hygiene, permission scopes, and revocation inside their own tools.</li>
+  </ul>
+
+  <h2>6. LLM Routing Controls</h2>
+  <ul>
+    <li>Customers may use self-hosted open-source model routing where available, so prompts are processed on AgentHeaven-controlled infrastructure rather than sent to a third-party LLM provider.</li>
+    <li>Where OpenAI or Anthropic routing is selected or needed, only the context required for the task should be sent.</li>
+    <li>AgentHeaven does not authorise third-party LLM providers to use customer prompts, session context, or customer memory/wiki to train their models.</li>
+  </ul>
+
+  <h2>7. Logging and Monitoring</h2>
+  <ul>
+    <li>AgentHeaven uses custom logs to record session identifiers, timestamps, tool calls, routing decisions, system events, errors, and security-relevant activity.</li>
+    <li>Logs are used for support, reliability, security investigation, auditability, and dispute resolution.</li>
+    <li>Logs are retained according to the Privacy Policy and may be retained longer for incident investigation or legal claims.</li>
+  </ul>
+
+  <h2>8. Personnel and Access</h2>
+  <ul>
+    <li>Access to customer data is restricted to personnel who need it to deliver, support, secure, or troubleshoot the Service.</li>
+    <li>Personnel with access to customer data are bound by confidentiality obligations.</li>
+    <li>Operational access should be reviewed periodically and removed when no longer needed.</li>
+  </ul>
+
+  <h2>9. Incident Response</h2>
+  <ul>
+    <li>Suspected incidents are triaged to determine affected systems, customers, data categories, severity, and containment steps.</li>
+    <li>AgentHeaven may suspend an agent, revoke tool access, or disable routing if needed to contain abuse or a security incident.</li>
+    <li>Customers will be notified without undue delay where an incident affects their personal data or operational data and notification is required by law or contract.</li>
+  </ul>
+
+  <h2>10. Deletion and Exit</h2>
+  <ul>
+    <li>On cancellation, the agent is deactivated and customer credentials are revoked or deleted where technically possible.</li>
+    <li>Customer memory/wiki and operational data are deleted after the post-cancellation retention/export window stated in the Privacy Policy, unless longer retention is required by law or agreed in writing.</li>
+    <li>Source documents remain in the customer's connected systems unless a separate document-storage integration was explicitly agreed.</li>
+  </ul>
+
+  <h2>11. Customer Responsibilities</h2>
+  <p>Security is shared. Customers are responsible for choosing appropriate connected tools, limiting permissions, keeping source data lawful and accurate, reviewing agent outputs, reporting suspicious behaviour promptly, and disabling access in their own systems when no longer needed.</p>
+
+  <h2>12. Security Contact and Vulnerability Disclosure</h2>
+  <p>Report suspected vulnerabilities, security incidents, or unsafe agent behaviour to <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a> with the subject line <strong>"Security"</strong>. Please include reproduction steps, affected components, and any evidence available. We will acknowledge receipt promptly and coordinate remediation. We do not currently offer a paid bug-bounty programme, but we appreciate responsible disclosure and will credit researchers in our remediation notes on request.</p>
+</div>
+
+<footer class="site-foot">
+  <div class="container">
+    <div>© 2026 Black Salt Kft. · AgentHeaven · agentheaven.ai</div>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="dpa.html">DPA</a>
+      <a href="subprocessors.html">Sub-processors</a>
+      <a href="acceptable-use.html">Acceptable Use</a>
+      <a href="cookie-policy.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
