@@ -1799,11 +1799,13 @@
   </div>
 </div>
 
+<script src="tracking-config.js"></script>
 <script>
-  /* Configuration. Founder replaces these with real values before launch. */
-  var BOOKING_URL = 'https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true';
-  var META_PIXEL_ID = '';
-  var GOOGLE_ANALYTICS_ID = '';
+  /* Configuration. Put live tracking IDs in tracking-config.js. */
+  var TRACKING_CONFIG = window.AGENTHEAVEN_TRACKING || {};
+  var BOOKING_URL = TRACKING_CONFIG.bookingUrl || 'https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true';
+  var META_PIXEL_ID = TRACKING_CONFIG.metaPixelId || '';
+  var GOOGLE_ANALYTICS_ID = TRACKING_CONFIG.googleAnalyticsId || '';
   var COOKIE_CONSENT_KEY = 'ah_cookie_consent';
   /* Consent expires after 180 days (in line with CNIL guidance), after which the banner is shown again. */
   var COOKIE_CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
