@@ -1765,7 +1765,7 @@
       <a href="security.html">Security</a>
       <a href="acceptable-use.html">Acceptable Use</a>
       <a href="cookie-policy.html">Cookies</a>
-      <a href="#" id="cookiePrefsLink" data-i18n="footer.cookie_prefs">Cookie preferences</a>
+      <a href="?consent_test=1" id="cookiePrefsLink" aria-controls="cookieBanner" data-i18n="footer.cookie_prefs">Cookie preferences</a>
       <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
     </div>
   </div>
@@ -1804,7 +1804,7 @@
   /* Configuration. Put live tracking IDs in tracking-config.js. */
   var TRACKING_CONFIG = window.AGENTHEAVEN_TRACKING || {};
   var BOOKING_URL = TRACKING_CONFIG.bookingUrl || 'https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true';
-  var META_PIXEL_ID = TRACKING_CONFIG.metaPixelId || '';
+  var META_PIXEL_ID = TRACKING_CONFIG.metaPixelId || '1312428030957959';
   var GOOGLE_ANALYTICS_ID = TRACKING_CONFIG.googleAnalyticsId || '';
   var COOKIE_CONSENT_KEY = 'ah_cookie_consent';
   /* Consent expires after 180 days (in line with CNIL guidance), after which the banner is shown again. */
@@ -2495,11 +2495,6 @@
     if (prefsLink) {
       prefsLink.addEventListener('click', function(e) {
         e.preventDefault();
-        if (!hasTracking) {
-          /* No trackers configured: nothing to manage, but acknowledge the click. */
-          alert('No optional tracking is currently active on this site.');
-          return;
-        }
         openBanner(readConsent() || { analytics: false, advertising: false });
       });
     }
