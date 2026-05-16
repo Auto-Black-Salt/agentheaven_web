@@ -2389,6 +2389,22 @@
     if (consent.advertising) loadMetaPixel();
   }
 
+  function isPixelTestMode() {
+    try {
+      return new URLSearchParams(window.location.search).get('pixel_test') === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function isConsentTestMode() {
+    try {
+      return new URLSearchParams(window.location.search).get('consent_test') === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
   function trackLead(source) {
     if (window.fbq) window.fbq('track', 'Lead', { source: source || 'unknown' });
   }
@@ -2498,8 +2514,12 @@
     if (!save || !rejectAll || !acceptAll || !analyticsBox || !advertisingBox) return;
 
     var stored = readConsent();
-    if (stored) {
+    if (isConsentTestMode()) {
+      openBanner(stored || { analytics: false, advertising: false });
+    } else if (stored) {
       applyConsent(stored);
+    } else if (isPixelTestMode()) {
+      loadMetaPixel();
     } else {
       openBanner();
     }
