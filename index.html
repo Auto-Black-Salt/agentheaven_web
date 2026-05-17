@@ -1190,7 +1190,7 @@
     .foot-links a { color: var(--muted); transition: color 0.15s ease; }
     .foot-links a:hover { color: var(--cyan); }
 
-    .cookie-banner {
+    .ah-permissions-panel {
       position: fixed;
       left: 1rem; right: 1rem; bottom: 1rem;
       z-index: 100;
@@ -1204,16 +1204,16 @@
       box-shadow: var(--shadow-deep);
       backdrop-filter: blur(16px);
     }
-    .cookie-banner.visible { display: block; }
-    .cookie-banner .cookie-text { margin: 0 0 0.85rem; color: var(--ink-soft); font-size: 0.9rem; }
-    .cookie-banner a { color: var(--cyan); text-decoration: underline; }
-    .cookie-choices {
+    .ah-permissions-panel.visible { display: block; }
+    .ah-permissions-panel .ah-permissions-text { margin: 0 0 0.85rem; color: var(--ink-soft); font-size: 0.9rem; }
+    .ah-permissions-panel a { color: var(--cyan); text-decoration: underline; }
+    .ah-permissions-options {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem 1.25rem;
       margin-bottom: 0.95rem;
     }
-    .cookie-choice {
+    .ah-permission-option {
       display: flex;
       align-items: flex-start;
       gap: 0.55rem;
@@ -1222,19 +1222,19 @@
       font-size: 0.85rem;
       color: var(--ink-soft);
     }
-    .cookie-choice input[type="checkbox"] {
+    .ah-permission-option input[type="checkbox"] {
       margin-top: 0.2rem;
       accent-color: var(--cyan);
       cursor: pointer;
     }
-    .cookie-choice strong { display: block; color: var(--ink); font-size: 0.88rem; font-weight: 600; }
-    .cookie-choice .desc { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.45; margin-top: 0.1rem; }
-    .cookie-actions {
+    .ah-permission-option strong { display: block; color: var(--ink); font-size: 0.88rem; font-weight: 600; }
+    .ah-permission-option .desc { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.45; margin-top: 0.1rem; }
+    .ah-permission-actions {
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
-    .cookie-actions button {
+    .ah-permission-actions button {
       border: 1px solid rgba(255,255,255,0.22);
       border-radius: 999px;
       padding: 0.6rem 1rem;
@@ -1246,13 +1246,13 @@
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease;
     }
-    .cookie-actions button:hover { background: rgba(255,255,255,0.09); }
-    .cookie-actions .cookie-save {
+    .ah-permission-actions button:hover { background: rgba(255,255,255,0.09); }
+    .ah-permission-actions .ah-permission-save {
       background: var(--cyan);
       border-color: var(--cyan);
       color: #07091a;
     }
-    .cookie-actions .cookie-save:hover {
+    .ah-permission-actions .ah-permission-save:hover {
       background: var(--cyan-2);
       border-color: var(--cyan-2);
     }
@@ -1765,37 +1765,37 @@
       <a href="security.html">Security</a>
       <a href="acceptable-use.html">Acceptable Use</a>
       <a href="cookie-policy.html">Cookies</a>
-      <a href="?consent_test=1" id="cookiePrefsLink" aria-controls="cookieBanner" data-i18n="footer.cookie_prefs">Cookie preferences</a>
+      <a href="?consent_test=1" id="ahPrefsLink" aria-controls="ahPermissionsPanel" data-i18n="footer.cookie_prefs">Cookie preferences</a>
       <a href="mailto:info@agentheaven.ai">info@agentheaven.ai</a>
     </div>
   </div>
 </footer>
 
-<div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
-  <p class="cookie-text">
+<div class="ah-permissions-panel" id="ahPermissionsPanel" role="region" aria-label="Cookie consent">
+  <p class="ah-permissions-text">
     <span data-i18n="cookie.text">We use optional analytics and advertising/conversion tracking only with your consent. Choose what to allow — refusing either does not affect your access to the site.</span>
     <a href="cookie-policy.html" data-i18n="cookie.link">Cookie Policy</a>
   </p>
-  <div class="cookie-choices">
-    <label class="cookie-choice">
-      <input type="checkbox" id="cookieAnalytics" />
+  <div class="ah-permissions-options">
+    <label class="ah-permission-option">
+      <input type="checkbox" id="ahAnalyticsOption" />
       <span>
         <strong data-i18n="cookie.analytics.title">Analytics</strong>
         <span class="desc" data-i18n="cookie.analytics.desc">Google Analytics — page views and traffic, IP anonymised.</span>
       </span>
     </label>
-    <label class="cookie-choice">
-      <input type="checkbox" id="cookieAdvertising" />
+    <label class="ah-permission-option">
+      <input type="checkbox" id="ahAdsOption" />
       <span>
         <strong data-i18n="cookie.advertising.title">Advertising</strong>
         <span class="desc" data-i18n="cookie.advertising.desc">Meta Pixel — measures lead conversions from ads.</span>
       </span>
     </label>
   </div>
-  <div class="cookie-actions">
-    <button type="button" class="cookie-save" id="cookieSave" data-i18n="cookie.save">Save preferences</button>
-    <button type="button" id="cookieRejectAll" data-i18n="cookie.reject">Reject all</button>
-    <button type="button" id="cookieAcceptAll" data-i18n="cookie.accept">Accept all</button>
+  <div class="ah-permission-actions">
+    <button type="button" class="ah-permission-save" id="ahSavePreferences" data-i18n="cookie.save">Save preferences</button>
+    <button type="button" id="ahRejectAllPreferences" data-i18n="cookie.reject">Reject all</button>
+    <button type="button" id="ahAcceptAllPreferences" data-i18n="cookie.accept">Accept all</button>
   </div>
 </div>
 
@@ -2389,14 +2389,6 @@
     if (consent.advertising) loadMetaPixel();
   }
 
-  function isPixelTestMode() {
-    try {
-      return new URLSearchParams(window.location.search).get('pixel_test') === '1';
-    } catch (e) {
-      return false;
-    }
-  }
-
   function isConsentTestMode() {
     try {
       return new URLSearchParams(window.location.search).get('consent_test') === '1';
@@ -2476,14 +2468,14 @@
      the footer "Cookie preferences" link is wired regardless so visitors can
      re-open the banner after the IDs are set in production. */
   function wireCookieConsent() {
-    var banner = document.getElementById('cookieBanner');
-    var prefsLink = document.getElementById('cookiePrefsLink');
+    var banner = document.getElementById('ahPermissionsPanel');
+    var prefsLink = document.getElementById('ahPrefsLink');
     var hasTracking = Boolean(META_PIXEL_ID || GOOGLE_ANALYTICS_ID);
 
     function openBanner(preset) {
       if (!banner) return;
-      var analyticsBox = document.getElementById('cookieAnalytics');
-      var advertisingBox = document.getElementById('cookieAdvertising');
+      var analyticsBox = document.getElementById('ahAnalyticsOption');
+      var advertisingBox = document.getElementById('ahAdsOption');
       if (analyticsBox) analyticsBox.checked = Boolean(preset && preset.analytics);
       if (advertisingBox) advertisingBox.checked = Boolean(preset && preset.advertising);
       banner.classList.add('visible');
@@ -2501,11 +2493,11 @@
 
     if (!hasTracking || !banner) return;
 
-    var save = document.getElementById('cookieSave');
-    var rejectAll = document.getElementById('cookieRejectAll');
-    var acceptAll = document.getElementById('cookieAcceptAll');
-    var analyticsBox = document.getElementById('cookieAnalytics');
-    var advertisingBox = document.getElementById('cookieAdvertising');
+    var save = document.getElementById('ahSavePreferences');
+    var rejectAll = document.getElementById('ahRejectAllPreferences');
+    var acceptAll = document.getElementById('ahAcceptAllPreferences');
+    var analyticsBox = document.getElementById('ahAnalyticsOption');
+    var advertisingBox = document.getElementById('ahAdsOption');
     if (!save || !rejectAll || !acceptAll || !analyticsBox || !advertisingBox) return;
 
     var stored = readConsent();
@@ -2513,8 +2505,6 @@
       openBanner(stored || { analytics: false, advertising: false });
     } else if (stored) {
       applyConsent(stored);
-    } else if (isPixelTestMode()) {
-      loadMetaPixel();
     } else {
       openBanner();
     }

@@ -374,18 +374,10 @@
     window.fbq('track', 'Lead', payload);
   }
 
-  function isPixelTestMode() {
-    try {
-      return new URLSearchParams(window.location.search).get('pixel_test') === '1';
-    } catch (e) {
-      return false;
-    }
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     var consent = readConsent();
     if (consent && consent.analytics) loadGoogleAnalytics(consent);
-    if ((consent && consent.advertising) || isPixelTestMode()) {
+    if (consent && consent.advertising) {
       loadMetaPixel();
       trackThankYouConversion();
     }
