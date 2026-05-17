@@ -294,6 +294,7 @@
 <script>
   var TRACKING_CONFIG = window.AGENTHEAVEN_TRACKING || {};
   var META_PIXEL_ID = TRACKING_CONFIG.metaPixelId || '1312428030957959';
+  var GOOGLE_ANALYTICS_ID = TRACKING_CONFIG.googleAnalyticsId || '';
   var COOKIE_CONSENT_KEY = 'ah_cookie_consent';
   var COOKIE_CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
 
@@ -313,6 +314,7 @@
     if (!parsed || typeof parsed !== 'object') return null;
     if (!parsed.savedAt || (Date.now() - parsed.savedAt) > COOKIE_CONSENT_MAX_AGE_MS) return null;
     return {
+      analytics: Boolean(parsed.analytics),
       advertising: Boolean(parsed.advertising),
       savedAt: parsed.savedAt
     };
@@ -323,6 +325,30 @@
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
+  }
+
+  function loadGoogleAnalytics(consent) {
+    if (!GOOGLE_ANALYTICS_ID || window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    window.gtag('consent', 'update', {
+      analytics_storage: consent && consent.analytics ? 'granted' : 'denied',
+      ad_storage: consent && consent.advertising ? 'granted' : 'denied',
+      ad_user_data: consent && consent.advertising ? 'granted' : 'denied',
+      ad_personalization: consent && consent.advertising ? 'granted' : 'denied'
+    });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ANALYTICS_ID);
+    document.head.appendChild(s);
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ANALYTICS_ID, { anonymize_ip: true });
   }
 
   function getBookingUid() {
@@ -358,9 +384,11 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var consent = readConsent();
-    if ((!consent || !consent.advertising) && !isPixelTestMode()) return;
-    loadMetaPixel();
-    trackThankYouConversion();
+    if (consent && consent.analytics) loadGoogleAnalytics(consent);
+    if ((consent && consent.advertising) || isPixelTestMode()) {
+      loadMetaPixel();
+      trackThankYouConversion();
+    }
   });
 </script>
 </body>
