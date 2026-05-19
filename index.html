@@ -2471,9 +2471,11 @@
     var banner = document.getElementById('ahPermissionsPanel');
     var prefsLink = document.getElementById('ahPrefsLink');
     var hasTracking = Boolean(META_PIXEL_ID || GOOGLE_ANALYTICS_ID);
+    var DEFAULT_CONSENT = { analytics: true, advertising: true };
 
     function openBanner(preset) {
       if (!banner) return;
+      preset = preset || DEFAULT_CONSENT;
       var analyticsBox = document.getElementById('ahAnalyticsOption');
       var advertisingBox = document.getElementById('ahAdsOption');
       if (analyticsBox) analyticsBox.checked = Boolean(preset && preset.analytics);
@@ -2487,7 +2489,7 @@
     if (prefsLink) {
       prefsLink.addEventListener('click', function(e) {
         e.preventDefault();
-        openBanner(readConsent() || { analytics: false, advertising: false });
+        openBanner(readConsent() || DEFAULT_CONSENT);
       });
     }
 
@@ -2502,7 +2504,7 @@
 
     var stored = readConsent();
     if (isConsentTestMode()) {
-      openBanner(stored || { analytics: false, advertising: false });
+      openBanner(stored || DEFAULT_CONSENT);
     } else if (stored) {
       applyConsent(stored);
     } else {
