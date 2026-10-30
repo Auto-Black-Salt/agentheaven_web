@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentHeaven — Digital employees for SMBs. We handle the AI, you get the work done.</title>
-  <meta name="description" content="AgentHeaven sets up an AI digital employee that handles your repetitive work — research, inbox, support, ops. Flat monthly fee. We absorb the LLM and infrastructure cost." />
+  <title>AgentHeaven — AI receptionist and digital employees for SMBs</title>
+  <meta name="description" content="Set up an AI receptionist or digital employee for your business. Answer calls, book appointments, handle inboxes and repetitive work — for one flat monthly fee." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://agentheaven.ai/" />
 
@@ -13,21 +13,21 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentheaven.ai/" />
   <meta property="og:site_name" content="AgentHeaven" />
-  <meta property="og:title" content="AgentHeaven — Digital employees for SMBs" />
-  <meta property="og:description" content="We set up and run an AI digital employee that handles your repetitive work. Flat fee. We absorb the LLM and infrastructure cost." />
+  <meta property="og:title" content="AgentHeaven — AI receptionist and digital employees for SMBs" />
+  <meta property="og:description" content="An AI receptionist that answers, books and follows up — plus digital employees for the work behind the calls." />
   <meta property="og:image" content="https://agentheaven.ai/og-image.png" />
   <meta property="og:image:secure_url" content="https://agentheaven.ai/og-image.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="AgentHeaven — Digital employees for SMBs" />
+  <meta property="og:image:alt" content="AgentHeaven — Never let a good customer go unanswered" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="hu_HU" />
   <meta property="og:locale:alternate" content="de_DE" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AgentHeaven — Digital employees for SMBs" />
-  <meta name="twitter:description" content="AI digital employees that quietly handle your repetitive work. Flat fee. We absorb the LLM and infra cost." />
+  <meta name="twitter:title" content="AgentHeaven — AI receptionist and digital employees" />
+  <meta name="twitter:description" content="Give your business an AI receptionist that answers, books and follows up — without adding more admin." />
   <meta name="twitter:image" content="https://agentheaven.ai/og-image.png" />
 
   <link rel="alternate" hreflang="en" href="https://agentheaven.ai/" />
@@ -342,7 +342,7 @@
     }
     .nav-links a:hover { color: var(--ink); }
     .nav-links a:hover::after { transform: scaleX(1); }
-    @media (min-width: 900px) { .nav-links { display: flex; } }
+    @media (min-width: 1080px) { .nav-links { display: flex; } }
 
     .lang-switcher { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: var(--muted); }
     .lang-btn {
@@ -370,6 +370,11 @@
       transform: translateY(-1px);
       box-shadow: 0 14px 32px -8px rgba(247,37,133,0.7), 0 0 30px rgba(247,37,133,0.35);
       filter: saturate(1.1);
+    }
+    @media (max-width: 620px) {
+      nav#nav { padding: 0.85rem 1rem; }
+      .nav-left { gap: 0.8rem; }
+      .nav-cta { display: none; }
     }
 
     /* ---------------- HERO ---------------- */
@@ -595,6 +600,135 @@
       color: var(--cyan);
       border-color: rgba(0,224,255,0.3);
       background: rgba(0,224,255,0.06);
+    }
+
+    /* ---------------- AI RECEPTIONIST ---------------- */
+    .receptionist {
+      position: relative;
+      overflow: hidden;
+    }
+    .receptionist::before {
+      content: '';
+      position: absolute;
+      width: 520px; height: 520px;
+      left: -260px; top: 12%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,224,255,0.16) 0%, transparent 68%);
+      filter: blur(45px);
+      pointer-events: none;
+    }
+    .receptionist-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 920px) {
+      .receptionist-grid { grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr); gap: 5rem; }
+    }
+    .receptionist-copy h2 { max-width: 15ch; margin-bottom: 1.25rem; }
+    .receptionist-copy > p { max-width: 36rem; font-size: 1.08rem; }
+    .receptionist-points {
+      display: grid;
+      gap: 0.8rem;
+      margin: 2rem 0 2.25rem;
+      list-style: none;
+    }
+    .receptionist-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--ink-soft);
+    }
+    .receptionist-points li::before {
+      content: '✓';
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 1.45rem; height: 1.45rem;
+      margin-top: 0.08rem;
+      border-radius: 50%;
+      color: #050714;
+      background: var(--lime);
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: 0 0 16px rgba(200,255,58,0.28);
+    }
+    .receptionist-note { margin-top: 1rem; color: var(--muted); font-size: 0.86rem; }
+
+    .call-console {
+      position: relative;
+      padding: 1px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(0,224,255,0.7), rgba(167,139,250,0.2) 44%, rgba(247,37,133,0.65));
+      box-shadow: var(--shadow-deep), 0 0 70px rgba(0,224,255,0.12);
+    }
+    .call-console-inner {
+      border-radius: 27px;
+      padding: 1.5rem;
+      background: rgba(8,11,29,0.94);
+      backdrop-filter: blur(18px);
+    }
+    .call-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .call-status { display: flex; align-items: center; gap: 0.75rem; }
+    .call-status-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 0 5px rgba(200,255,58,0.12), 0 0 18px rgba(200,255,58,0.6);
+      animation: pulse-soft 2s ease-in-out infinite;
+    }
+    .call-status strong { display: block; color: var(--ink); font-size: 0.95rem; }
+    .call-status small { display: block; color: var(--muted); font-size: 0.76rem; }
+    .call-time {
+      padding: 0.35rem 0.65rem;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px;
+      color: var(--cyan-2);
+      background: rgba(0,224,255,0.06);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.8rem;
+    }
+    .call-transcript { display: grid; gap: 0.8rem; padding: 1.35rem 0; }
+    .call-line {
+      max-width: 88%;
+      padding: 0.78rem 0.95rem;
+      border-radius: 14px 14px 14px 4px;
+      background: rgba(255,255,255,0.055);
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .call-line.ai {
+      margin-left: auto;
+      border-radius: 14px 14px 4px 14px;
+      background: linear-gradient(135deg, rgba(0,224,255,0.13), rgba(99,102,241,0.16));
+      border: 1px solid rgba(0,224,255,0.14);
+      color: var(--ink);
+    }
+    .call-outcome {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .call-outcome div {
+      min-width: 0;
+      padding: 0.75rem 0.65rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.035);
+      text-align: center;
+    }
+    .call-outcome strong { display: block; color: var(--ink); font-size: 0.8rem; }
+    .call-outcome span { display: block; color: var(--muted); font-size: 0.68rem; margin-top: 0.16rem; }
+    @media (max-width: 480px) {
+      .call-outcome { grid-template-columns: 1fr; }
+      .call-outcome div { display: flex; justify-content: space-between; align-items: center; text-align: left; }
+      .call-outcome span { margin-top: 0; }
     }
 
     /* ---------------- ROLES ---------------- */
@@ -1278,6 +1412,7 @@
       AgentHeaven
     </a>
     <div class="nav-links">
+      <a href="#receptionist" data-i18n="nav.receptionist">AI Receptionist</a>
       <a href="#how" data-i18n="nav.how">How it works</a>
       <a href="#roles" data-i18n="nav.roles">Roles</a>
       <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
@@ -1304,15 +1439,15 @@
   </div>
   <div class="container">
     <div class="hero-copy">
-      <span class="hero-eyebrow"><span data-i18n="hero.eyebrow">AI digital employees for SMBs</span></span>
+      <span class="hero-eyebrow"><span data-i18n="hero.eyebrow">AI receptionist + digital employees for SMBs</span></span>
       <h1>
-        <span data-i18n="hero.h1.a">The boring work,</span>
-        <em data-i18n="hero.h1.b">finally off your plate.</em>
+        <span data-i18n="hero.h1.a">Never let a good customer</span>
+        <em data-i18n="hero.h1.b">go unanswered.</em>
       </h1>
-      <p class="hero-sub" data-i18n="hero.sub">We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Start with an AI receptionist that answers calls, books appointments and follows up — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.</p>
       <div class="hero-actions">
         <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="hero"><span data-i18n="hero.cta">Book a free 30-min call</span></a>
-        <a href="#how" class="btn-ghost" data-i18n="hero.ghost">See how it works →</a>
+        <a href="#receptionist" class="btn-ghost" data-i18n="hero.ghost">Meet the AI receptionist →</a>
       </div>
       <p class="hero-reassure"><span data-i18n="hero.reassure">30 minutes. No slides. No commitment.</span></p>
     </div>
@@ -1329,10 +1464,10 @@
           <rect width="200" height="200" fill="url(#dot-grid)"/>
         </svg>
       </div>
-      <span class="chip chip-1"><span class="dot"></span>Inbox sorted</span>
-      <span class="chip chip-2"><span class="dot"></span>Lead enriched</span>
-      <span class="chip chip-3"><span class="dot"></span>Report drafted</span>
-      <span class="chip chip-4"><span class="dot"></span>Ticket closed</span>
+      <span class="chip chip-1"><span class="dot"></span>Call answered</span>
+      <span class="chip chip-2"><span class="dot"></span>Lead qualified</span>
+      <span class="chip chip-3"><span class="dot"></span>Visit booked</span>
+      <span class="chip chip-4"><span class="dot"></span>Summary sent</span>
       <span class="spark spark-1"></span>
       <span class="spark spark-2"></span>
       <span class="spark spark-3"></span>
@@ -1346,6 +1481,54 @@
   </div>
 </section>
 
+<!-- AI RECEPTIONIST -->
+<section class="section receptionist" id="receptionist">
+  <div class="container receptionist-grid">
+    <div class="receptionist-copy reveal">
+      <div class="section-label" data-i18n="receptionist.label">Meet your AI receptionist</div>
+      <h2>
+        <span data-i18n="receptionist.h2.a">A front desk that is</span>
+        <em data-i18n="receptionist.h2.b">always ready to answer.</em>
+      </h2>
+      <p data-i18n="receptionist.intro">Give callers a helpful first response even when you are with a customer, after hours, or simply busy running the business.</p>
+      <ul class="receptionist-points">
+        <li data-i18n="receptionist.p1">Answers common questions in your business's tone</li>
+        <li data-i18n="receptionist.p2">Qualifies new enquiries and captures the details you need</li>
+        <li data-i18n="receptionist.p3">Books appointments and sends confirmations</li>
+        <li data-i18n="receptionist.p4">Transfers urgent or sensitive calls to the right person</li>
+        <li data-i18n="receptionist.p5">Sends your team a concise summary after every conversation</li>
+      </ul>
+      <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="receptionist"><span data-i18n="receptionist.cta">Set up my AI receptionist</span></a>
+      <p class="receptionist-note" data-i18n="receptionist.note">We design the call flow around your business, your calendar and your escalation rules.</p>
+    </div>
+
+    <div class="call-console reveal reveal-delay-2" aria-label="Illustrative AI receptionist call flow" data-i18n-aria-label="receptionist.demo.label">
+      <div class="call-console-inner">
+        <div class="call-top">
+          <div class="call-status">
+            <span class="call-status-dot"></span>
+            <span>
+              <strong data-i18n="receptionist.demo.live">Incoming call · AI answering</strong>
+              <small data-i18n="receptionist.demo.context">New customer enquiry</small>
+            </span>
+          </div>
+          <span class="call-time">00:42</span>
+        </div>
+        <div class="call-transcript">
+          <div class="call-line ai" data-i18n="receptionist.demo.ai1">Good afternoon, Northside Dental. How can I help?</div>
+          <div class="call-line" data-i18n="receptionist.demo.caller">I'd like to book a check-up next week, preferably after work.</div>
+          <div class="call-line ai" data-i18n="receptionist.demo.ai2">Of course. I can offer Tuesday at 17:30 or Thursday at 18:00. Which works better?</div>
+        </div>
+        <div class="call-outcome">
+          <div><strong data-i18n="receptionist.demo.o1">Qualified</strong><span data-i18n="receptionist.demo.o1s">New patient</span></div>
+          <div><strong data-i18n="receptionist.demo.o2">Booked</strong><span data-i18n="receptionist.demo.o2s">Tue · 17:30</span></div>
+          <div><strong data-i18n="receptionist.demo.o3">Synced</strong><span data-i18n="receptionist.demo.o3s">Calendar + summary</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ROLES -->
 <section class="section roles" id="roles">
   <div class="container">
@@ -1355,7 +1538,7 @@
         <span data-i18n="roles.h2.a">One employee.</span>
         <em data-i18n="roles.h2.b">Many possible jobs.</em>
       </h2>
-      <p class="roles-intro" data-i18n="roles.intro">Pick the work you wish you had time to do well. We configure the digital employee around it.</p>
+      <p class="roles-intro" data-i18n="roles.intro">The receptionist can be your first digital employee — or we can configure one around another job you need handled.</p>
     </div>
     <div class="roles-grid">
       <div class="role-card reveal reveal-delay-1">
@@ -1728,6 +1911,10 @@
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8" data-i18n="faq.8.q">How long does setup take?</button>
         <div class="faq-a" id="faq-a-8" data-i18n="faq.8.a">From discovery call to working employee: 5–10 business days, depending on the integrations involved.</div>
       </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-9" data-i18n="faq.9.q">What can the AI receptionist handle?</button>
+        <div class="faq-a" id="faq-a-9" data-i18n="faq.9.a">It can answer routine questions, qualify enquiries, book appointments, capture messages and send summaries. You choose when it should transfer or escalate to a person.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1814,25 +2001,49 @@
      All values are plain text — applyTranslations uses textContent only. */
   var T = {
     en: {
+      'nav.receptionist': 'AI Receptionist',
       'nav.how':     'How it works',
       'nav.roles':   'Roles',
       'nav.pricing': 'Pricing',
       'nav.cta':     'Book a call',
-      'hero.eyebrow':  'AI digital employees for SMBs',
-      'hero.h1.a':     'The boring work,',
-      'hero.h1.b':     'finally off your plate.',
-      'hero.sub':      'We set up, host, and quietly improve an AI employee that handles your repetitive work. You pay one flat monthly fee — we cover the AI, the infrastructure, and the babysitting.',
+      'hero.eyebrow':  'AI receptionist + digital employees for SMBs',
+      'hero.h1.a':     'Never let a good customer',
+      'hero.h1.b':     'go unanswered.',
+      'hero.sub':      'Start with an AI receptionist that answers calls, books appointments and follows up — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.',
       'hero.cta':      'Book a free 30-min call',
-      'hero.ghost':    'See how it works →',
+      'hero.ghost':    'Meet the AI receptionist →',
       'hero.reassure': '30 minutes. No slides. No commitment.',
       'trust.1':       'Flat monthly fee',
       'trust.2':       'Free setup',
       'trust.3':       'EU hosting available',
       'trust.4':       'Cancel any month',
+      'receptionist.label':        'Meet your AI receptionist',
+      'receptionist.h2.a':         'A front desk that is',
+      'receptionist.h2.b':         'always ready to answer.',
+      'receptionist.intro':        'Give callers a helpful first response even when you are with a customer, after hours, or simply busy running the business.',
+      'receptionist.p1':           "Answers common questions in your business's tone",
+      'receptionist.p2':           'Qualifies new enquiries and captures the details you need',
+      'receptionist.p3':           'Books appointments and sends confirmations',
+      'receptionist.p4':           'Transfers urgent or sensitive calls to the right person',
+      'receptionist.p5':           'Sends your team a concise summary after every conversation',
+      'receptionist.cta':          'Set up my AI receptionist',
+      'receptionist.note':         'We design the call flow around your business, your calendar and your escalation rules.',
+      'receptionist.demo.label':   'Illustrative AI receptionist call flow',
+      'receptionist.demo.live':    'Incoming call · AI answering',
+      'receptionist.demo.context': 'New customer enquiry',
+      'receptionist.demo.ai1':     'Good afternoon, Northside Dental. How can I help?',
+      'receptionist.demo.caller':  "I'd like to book a check-up next week, preferably after work.",
+      'receptionist.demo.ai2':     'Of course. I can offer Tuesday at 17:30 or Thursday at 18:00. Which works better?',
+      'receptionist.demo.o1':      'Qualified',
+      'receptionist.demo.o1s':     'New patient',
+      'receptionist.demo.o2':      'Booked',
+      'receptionist.demo.o2s':     'Tue · 17:30',
+      'receptionist.demo.o3':      'Synced',
+      'receptionist.demo.o3s':     'Calendar + summary',
       'roles.label':   'What it can do',
       'roles.h2.a':    'One employee.',
       'roles.h2.b':    'Many possible jobs.',
-      'roles.intro':   'Pick the work you wish you had time to do well. We configure the digital employee around it.',
+      'roles.intro':   'The receptionist can be your first digital employee — or we can configure one around another job you need handled.',
       'roles.1.title': 'Repetitive task assistant',
       'roles.1.desc':  'Data entry, weekly reports, copying things between tools. The work nobody wants but everyone needs done.',
       'roles.2.title': 'Research assistant',
@@ -1942,6 +2153,8 @@
       'faq.7.a':   'On the Workforce tier, yes — we can route to your private deployment or a specific provider account.',
       'faq.8.q':   'How long does setup take?',
       'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.',
+      'faq.9.q':   'What can the AI receptionist handle?',
+      'faq.9.a':   'It can answer routine questions, qualify enquiries, book appointments, capture messages and send summaries. You choose when it should transfer or escalate to a person.',
       'cta.label':         'Get started',
       'cta.h2.a':          '30 minutes. No commitment.',
       'cta.h2.b':          'We listen first.',
@@ -1963,25 +2176,49 @@
       'cookie.reject':            'Reject all'
     },
     hu: {
+      'nav.receptionist': 'AI recepciós',
       'nav.how':     'Hogyan működik',
       'nav.roles':   'Szerepkörök',
       'nav.pricing': 'Árazás',
       'nav.cta':     'Időpontfoglalás',
-      'hero.eyebrow':  'AI digitális munkavállalók kkv-knak',
-      'hero.h1.a':     'Az unalmas munka,',
-      'hero.h1.b':     'végre nem a tiéd.',
-      'hero.sub':      'Beüzemelünk, futtatunk és csendben fejlesztünk egy AI-munkatársat, aki elvégzi az ismétlődő munkát. Egy fix havidíj — mi álljuk az AI-, szerver- és felügyeleti költségeket.',
+      'hero.eyebrow':  'AI recepciós + digitális munkatársak kkv-knak',
+      'hero.h1.a':     'Egy jó ügyfél se maradjon',
+      'hero.h1.b':     'válasz nélkül.',
+      'hero.sub':      'Kezdj egy AI recepcióssal, aki felveszi a telefont, időpontot foglal és utánkövet — vagy add át neki a háttérben ismétlődő feladatokat. Mi beüzemeljük és fix havidíjért működtetjük.',
       'hero.cta':      'Foglalj egy ingyenes 30 perces hívást',
-      'hero.ghost':    'Nézd meg, hogyan működik →',
+      'hero.ghost':    'Ismerd meg az AI recepcióst →',
       'hero.reassure': '30 perc. Nincs prezentáció. Semmi kötelezettség.',
       'trust.1':       'Fix havidíj',
       'trust.2':       'Ingyenes beüzemelés',
       'trust.3':       'EU-s hosztolás',
       'trust.4':       'Bármikor lemondható',
+      'receptionist.label':        'Ismerd meg az AI recepciósodat',
+      'receptionist.h2.a':         'Egy recepció, amely',
+      'receptionist.h2.b':         'mindig felveszi a telefont.',
+      'receptionist.intro':        'A hívóid akkor is segítőkész választ kapnak, amikor ügyféllel vagy, munkaidőn túl keresnek, vagy egyszerűen a vállalkozásoddal foglalkozol.',
+      'receptionist.p1':           'A vállalkozásod hangján válaszol a gyakori kérdésekre',
+      'receptionist.p2':           'Minősíti az új érdeklődőket és bekéri a szükséges adatokat',
+      'receptionist.p3':           'Időpontot foglal és visszaigazolást küld',
+      'receptionist.p4':           'A sürgős vagy érzékeny hívásokat a megfelelő emberhez kapcsolja',
+      'receptionist.p5':           'Minden beszélgetés után rövid összefoglalót küld a csapatodnak',
+      'receptionist.cta':          'Beállítom az AI recepciósomat',
+      'receptionist.note':         'A hívás menetét a vállalkozásodhoz, a naptáradhoz és az eszkalációs szabályaidhoz igazítjuk.',
+      'receptionist.demo.label':   'Az AI recepciós szemléltető hívásfolyamata',
+      'receptionist.demo.live':    'Bejövő hívás · az AI válaszol',
+      'receptionist.demo.context': 'Új ügyfél érdeklődése',
+      'receptionist.demo.ai1':     'Jó napot, Northside Dental. Miben segíthetek?',
+      'receptionist.demo.caller':  'Jövő hétre szeretnék kontrollidőpontot, lehetőleg munka után.',
+      'receptionist.demo.ai2':     'Természetesen. Kedden 17:30-kor vagy csütörtökön 18:00-kor tudom fogadni. Melyik lenne jobb?',
+      'receptionist.demo.o1':      'Minősítve',
+      'receptionist.demo.o1s':     'Új páciens',
+      'receptionist.demo.o2':      'Lefoglalva',
+      'receptionist.demo.o2s':     'Kedd · 17:30',
+      'receptionist.demo.o3':      'Szinkronizálva',
+      'receptionist.demo.o3s':     'Naptár + összefoglaló',
       'roles.label':   'Mire képes',
       'roles.h2.a':    'Egy munkavállaló.',
       'roles.h2.b':    'Sokféle feladat.',
-      'roles.intro':   'Válaszd ki a munkát, amit szeretnél, ha lenne időd jól megcsinálni. A digitális munkavállalót köré építjük.',
+      'roles.intro':   'A recepciós lehet az első digitális munkatársad — vagy beállíthatunk egyet egy másik feladatra, amit szeretnél átadni.',
       'roles.1.title': 'Ismétlődő feladatok asszisztens',
       'roles.1.desc':  'Adatbevitel, heti riportok, információ átemelése rendszerek között. A munka, amit senki sem szeret, de mindenkinek kell.',
       'roles.2.title': 'Kutatási asszisztens',
@@ -2091,6 +2328,8 @@
       'faq.7.a':   'Workforce csomagban igen — routingolhatunk a saját privát deploymentedre vagy egy konkrét provider-fiókodra.',
       'faq.8.q':   'Mennyi a beüzemelés?',
       'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.',
+      'faq.9.q':   'Mit tud kezelni az AI recepciós?',
+      'faq.9.a':   'Válaszol a rutin kérdésekre, minősíti az érdeklődőket, időpontot foglal, üzenetet vesz fel és összefoglalót küld. Te döntöd el, mikor kapcsoljon vagy eszkaláljon emberhez.',
       'cta.label':         'Indulás',
       'cta.h2.a':          '30 perc. Semmi kötelezettség.',
       'cta.h2.b':          'Először meghallgatunk.',
@@ -2112,25 +2351,49 @@
       'cookie.reject':            'Mindet elutasítom'
     },
     de: {
+      'nav.receptionist': 'KI-Rezeption',
       'nav.how':     'So funktioniert es',
       'nav.roles':   'Rollen',
       'nav.pricing': 'Preise',
       'nav.cta':     'Termin buchen',
-      'hero.eyebrow':  'KI-Mitarbeiter für KMU',
-      'hero.h1.a':     'Die langweilige Arbeit,',
-      'hero.h1.b':     'endlich vom Tisch.',
-      'hero.sub':      'Wir richten einen KI-Mitarbeiter ein, hosten ihn und verbessern ihn still und leise. Ein fester Monatspreis — wir tragen die KI-, Server- und Betreuungskosten.',
+      'hero.eyebrow':  'KI-Rezeption + digitale Mitarbeiter für KMU',
+      'hero.h1.a':     'Lass keinen guten Kunden',
+      'hero.h1.b':     'ohne Antwort.',
+      'hero.sub':      'Starte mit einer KI-Rezeption, die Anrufe annimmt, Termine bucht und nachfasst — oder gib die repetitive Arbeit im Hintergrund ab. Wir richten alles ein und halten es für einen festen Monatspreis am Laufen.',
       'hero.cta':      'Kostenloses 30-min Gespräch buchen',
-      'hero.ghost':    'So funktioniert es →',
+      'hero.ghost':    'KI-Rezeption kennenlernen →',
       'hero.reassure': '30 Minuten. Keine Slides. Keine Verpflichtung.',
       'trust.1':       'Fester Monatspreis',
       'trust.2':       'Kostenlose Einrichtung',
       'trust.3':       'EU-Hosting verfügbar',
       'trust.4':       'Monatlich kündbar',
+      'receptionist.label':        'Lerne deine KI-Rezeption kennen',
+      'receptionist.h2.a':         'Ein Empfang, der',
+      'receptionist.h2.b':         'immer ans Telefon geht.',
+      'receptionist.intro':        'Deine Anrufer bekommen auch dann eine hilfreiche erste Antwort, wenn du gerade bei einem Kunden bist, Feierabend hast oder einfach dein Geschäft führst.',
+      'receptionist.p1':           'Beantwortet häufige Fragen im Ton deines Unternehmens',
+      'receptionist.p2':           'Qualifiziert neue Anfragen und erfasst alle wichtigen Details',
+      'receptionist.p3':           'Bucht Termine und sendet Bestätigungen',
+      'receptionist.p4':           'Verbindet dringende oder sensible Anrufe mit der richtigen Person',
+      'receptionist.p5':           'Sendet deinem Team nach jedem Gespräch eine kurze Zusammenfassung',
+      'receptionist.cta':          'Meine KI-Rezeption einrichten',
+      'receptionist.note':         'Wir gestalten den Gesprächsablauf passend zu deinem Unternehmen, deinem Kalender und deinen Eskalationsregeln.',
+      'receptionist.demo.label':   'Beispielhafter Anrufablauf der KI-Rezeption',
+      'receptionist.demo.live':    'Eingehender Anruf · KI antwortet',
+      'receptionist.demo.context': 'Anfrage eines Neukunden',
+      'receptionist.demo.ai1':     'Guten Tag, Northside Dental. Wie kann ich helfen?',
+      'receptionist.demo.caller':  'Ich möchte nächste Woche einen Kontrolltermin buchen, am liebsten nach der Arbeit.',
+      'receptionist.demo.ai2':     'Gerne. Ich kann Dienstag um 17:30 Uhr oder Donnerstag um 18:00 Uhr anbieten. Was passt besser?',
+      'receptionist.demo.o1':      'Qualifiziert',
+      'receptionist.demo.o1s':     'Neuer Patient',
+      'receptionist.demo.o2':      'Gebucht',
+      'receptionist.demo.o2s':     'Di · 17:30',
+      'receptionist.demo.o3':      'Synchronisiert',
+      'receptionist.demo.o3s':     'Kalender + Zusammenfassung',
       'roles.label':   'Was er kann',
       'roles.h2.a':    'Ein Mitarbeiter.',
       'roles.h2.b':    'Viele mögliche Rollen.',
-      'roles.intro':   'Wähle die Arbeit, die du eigentlich gut machen würdest, wenn du Zeit hättest. Wir bauen den KI-Mitarbeiter darum herum.',
+      'roles.intro':   'Die Rezeption kann dein erster digitaler Mitarbeiter sein — oder wir konfigurieren einen für eine andere Aufgabe, die du abgeben möchtest.',
       'roles.1.title': 'Assistent für repetitive Aufgaben',
       'roles.1.desc':  'Dateneingabe, Wochenreports, Informationen zwischen Tools übertragen. Die Arbeit, die niemand will, aber jeder braucht.',
       'roles.2.title': 'Recherche-Assistent',
@@ -2240,6 +2503,8 @@
       'faq.7.a':   'Im Workforce-Tarif ja — wir können auf dein privates Deployment oder einen bestimmten Anbieter-Account routen.',
       'faq.8.q':   'Wie lange dauert das Setup?',
       'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.',
+      'faq.9.q':   'Was kann die KI-Rezeption übernehmen?',
+      'faq.9.a':   'Sie beantwortet Routinefragen, qualifiziert Anfragen, bucht Termine, nimmt Nachrichten auf und sendet Zusammenfassungen. Du bestimmst, wann sie an einen Menschen weiterleitet oder eskaliert.',
       'cta.label':         'Loslegen',
       'cta.h2.a':          '30 Minuten. Keine Verpflichtung.',
       'cta.h2.b':          'Wir hören zuerst zu.',

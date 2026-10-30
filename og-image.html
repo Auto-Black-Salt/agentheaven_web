@@ -16,11 +16,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      width: 1200px; height: 630px;
+      /* Quick Look renders HTML thumbnails on a 1024px canvas, then scales to 1200px. */
+      width: 1024px; height: 538px;
       background: #07091a;
       font-family: 'Inter', sans-serif;
       color: #f0f3ff;
-      padding: 70px;
+      padding: 60px;
       display: flex; flex-direction: column; justify-content: space-between;
       position: relative; overflow: hidden;
       -webkit-font-smoothing: antialiased;
@@ -50,19 +51,19 @@
 
     /* Header row */
     .logo {
-      display: inline-flex; align-items: center; gap: 14px;
-      font-weight: 800; font-size: 28px; letter-spacing: -0.02em;
+      display: inline-flex; align-items: center; gap: 12px;
+      font-weight: 800; font-size: 24px; letter-spacing: -0.02em;
     }
     .dot {
-      width: 16px; height: 16px; border-radius: 50%;
+      width: 14px; height: 14px; border-radius: 50%;
       background: linear-gradient(135deg, #00e0ff 0%, #a78bfa 100%);
       box-shadow: 0 0 0 4px rgba(0,224,255,0.18), 0 0 22px rgba(0,224,255,0.65);
     }
 
     /* Headline */
     .headline {
-      font-size: 92px; font-weight: 800; line-height: 1.0; letter-spacing: -0.035em;
-      max-width: 16ch;
+      font-size: 72px; font-weight: 800; line-height: 1.0; letter-spacing: -0.035em;
+      max-width: 15ch;
     }
     .headline em {
       font-family: 'Newsreader', Georgia, serif;
@@ -79,10 +80,11 @@
       gap: 32px;
     }
     .tagline {
-      font-size: 22px; color: #b8bdda; font-weight: 500;
-      max-width: 700px; line-height: 1.4;
+      font-size: 19px; color: #b8bdda; font-weight: 500;
+      max-width: 900px; line-height: 1.4;
     }
     .pill {
+      display: none;
       padding: 12px 22px;
       border-radius: 999px;
       background: rgba(0,224,255,0.08);
@@ -102,10 +104,10 @@
 
   <div class="row logo"><span class="dot"></span>AgentHeaven</div>
 
-  <h1 class="row headline">The boring work, <em>finally off your plate.</em></h1>
+  <h1 class="row headline">Never let a good customer <em>go unanswered.</em></h1>
 
   <div class="row foot">
-    <span class="tagline">AI digital employees for SMBs. Flat fee. We absorb the AI cost.</span>
+    <span class="tagline">AI receptionist + digital employees for SMBs. One flat monthly fee.</span>
     <span class="pill">agentheaven.ai</span>
   </div>
 </body>
