@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you.html
+Disallow: /files/
+
+Sitemap: https://agentheaven.ai/sitemap.xml
