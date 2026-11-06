@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="625" height="189" viewBox="47 30 625 189" role="img" aria-labelledby="title desc">
+<title id="title">AgentHeaven — gold-black</title>
+<desc id="desc">Minimal geometric cube with a perspective-correct A engraved in its right face, followed by the AgentHeaven wordmark.</desc>
+<g transform="translate(22 18) scale(1.05)">
+  <path d="M100 19 L169 59 L100 99 L31 59Z" fill="#D4A73C"/>
+  <path d="M31 67 L94 104 L94 184 L31 147Z" fill="#D4A73C"/>
+  <path d="M106 104 L169 67 L169 147 L106 184Z M 116.71 164.91 L 132.46 102.86 L 142.54 96.94 L 158.29 140.49 L 148.21 146.41 L 144.12 134.42 L 130.88 142.19 L 126.79 158.99 Z M 137.50 116.70 L 133.72 131.72 L 141.28 127.28 Z" fill="#D4A73C" fill-rule="evenodd"/>
+</g>
+<g font-family="Inter, 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-weight="750" letter-spacing="-2.5">
+  <text x="244" y="136" font-size="70" fill="#F2E2A6">Agent<tspan fill="#D4A73C">Heaven</tspan></text>
+</g>
+<text x="248" y="172" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="17" font-weight="550" letter-spacing="3.1" fill="#C8A552">AI EMPLOYEES. REAL WORK DONE.</text>
+</svg>
