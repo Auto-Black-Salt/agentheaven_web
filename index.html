@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentHeaven — AI receptionist and digital employees for SMBs</title>
-  <meta name="description" content="Set up an AI receptionist or digital employee for your business. Answer calls, book appointments, handle inboxes and repetitive work — for one flat monthly fee." />
+  <title>AI Receptionist and Digital Employees for SMBs | AgentHeaven</title>
+  <meta name="description" content="AI receptionist that answers your calls, takes the message and texts you a summary. Plus digital employees for repetitive work. One flat monthly fee." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://agentheaven.ai/" />
 
   <link rel="icon" type="image/svg+xml" href="brand/icon-dark.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <meta name="theme-color" content="#07091a" />
 
   <!-- Hero text is the LCP element; preloading the two Latin subsets it needs
@@ -21,8 +23,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentheaven.ai/" />
   <meta property="og:site_name" content="AgentHeaven" />
-  <meta property="og:title" content="AgentHeaven — AI receptionist and digital employees for SMBs" />
-  <meta property="og:description" content="An AI receptionist that answers, books and follows up — plus digital employees for the work behind the calls." />
+  <meta property="og:title" content="AI Receptionist and Digital Employees for SMBs | AgentHeaven" />
+  <meta property="og:description" content="An AI receptionist that answers, takes the message and texts you a summary — plus digital employees for the work behind the calls." />
   <meta property="og:image" content="https://agentheaven.ai/og-image.png" />
   <meta property="og:image:secure_url" content="https://agentheaven.ai/og-image.png" />
   <meta property="og:image:type" content="image/png" />
@@ -34,13 +36,14 @@
   <meta property="og:locale:alternate" content="de_DE" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AgentHeaven — AI receptionist and digital employees" />
-  <meta name="twitter:description" content="Give your business an AI receptionist that answers, books and follows up — without adding more admin." />
+  <meta name="twitter:title" content="AI Receptionist and Digital Employees for SMBs | AgentHeaven" />
+  <meta name="twitter:description" content="Give your business an AI receptionist that answers, takes the message and texts you a summary — without adding more admin." />
   <meta name="twitter:image" content="https://agentheaven.ai/og-image.png" />
+  <meta name="twitter:image:alt" content="AgentHeaven — Never let a good customer go unanswered" />
 
   <link rel="alternate" hreflang="en" href="https://agentheaven.ai/" />
-  <link rel="alternate" hreflang="hu" href="https://agentheaven.ai/?lang=hu" />
-  <link rel="alternate" hreflang="de" href="https://agentheaven.ai/?lang=de" />
+  <link rel="alternate" hreflang="hu" href="https://agentheaven.ai/hu/" />
+  <link rel="alternate" hreflang="de" href="https://agentheaven.ai/de/" />
   <link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/" />
 
   <script type="application/ld+json">
@@ -52,7 +55,11 @@
         "@id": "https://agentheaven.ai/#org",
         "name": "AgentHeaven",
         "url": "https://agentheaven.ai/",
-        "logo": "https://agentheaven.ai/brand/logo-dark.svg",
+        "legalName": "Black Salt Kft.",
+        "vatID": "HU13853619",
+        "logo": { "@type": "ImageObject", "url": "https://agentheaven.ai/brand/logo-512.png", "width": 512, "height": 512 },
+        "image": "https://agentheaven.ai/og-image.png",
+        "address": { "@type": "PostalAddress", "streetAddress": "Baross tér 14", "postalCode": "1077", "addressLocality": "Budapest", "addressCountry": "HU" },
         "email": "info@agentheaven.ai",
         "description": "AI receptionist and digital employees for small and medium businesses — configured, hosted and continuously tuned for one flat monthly fee.",
         "areaServed": ["HU", "DE", "AT", "EU"],
@@ -78,9 +85,9 @@
         "serviceType": "AI receptionist",
         "provider": { "@id": "https://agentheaven.ai/#org" },
         "areaServed": ["HU", "DE", "AT", "EU"],
-        "description": "An AI receptionist that answers calls, qualifies enquiries, books appointments and sends summaries — plus digital employees for repetitive back-office work. Setup, hosting, AI costs and tuning included.",
+        "description": "An AI receptionist that answers forwarded calls, takes the caller's details and texts you a summary — plus digital employees for repetitive back-office work. Setup, hosting, AI costs and tuning included.",
         "offers": [
-          { "@type": "Offer", "name": "AI receptionist", "price": "80", "priceCurrency": "EUR", "url": "https://agentheaven.ai/#receptionist-pricing", "description": "From €80 per month, priced by call volume. Answers calls 24/7, books appointments, sends call summaries. Setup included." },
+          { "@type": "Offer", "name": "AI receptionist", "price": "80", "priceCurrency": "EUR", "url": "https://agentheaven.ai/#receptionist-pricing", "description": "From €80 per month, priced by call volume. Answers calls 24/7, takes callback requests, sends an SMS summary after every call. Setup included." },
           { "@type": "Offer", "name": "Starter", "price": "299", "priceCurrency": "EUR", "url": "https://agentheaven.ai/#pricing", "description": "1 hour of tuning per month, 1 connected source, all AI and infrastructure costs included." },
           { "@type": "Offer", "name": "Specialist", "price": "699", "priceCurrency": "EUR", "url": "https://agentheaven.ai/#pricing", "description": "3 hours of tuning per month, up to 5 connected sources, priority tuning, quarterly review." },
           { "@type": "Offer", "name": "Workforce", "price": "1499", "priceCurrency": "EUR", "url": "https://agentheaven.ai/#pricing", "description": "8 hours of tuning per month, unlimited sources, dedicated specialist, custom integrations." }
@@ -91,14 +98,14 @@
         "@id": "https://agentheaven.ai/#faq",
         "mainEntity": [
           { "@type": "Question", "name": "What if it makes mistakes?", "acceptedAnswer": { "@type": "Answer", "text": "It will, especially in the first few weeks. That's why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material." } },
-          { "@type": "Question", "name": "Which LLM does it use?", "acceptedAnswer": { "@type": "Answer", "text": "We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing." } },
-          { "@type": "Question", "name": "What about my data and privacy?", "acceptedAnswer": { "@type": "Answer", "text": "Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model." } },
-          { "@type": "Question", "name": "What if I want to cancel?", "acceptedAnswer": { "@type": "Answer", "text": "Email us. No contract, no notice period, no exit fees. We earn the next month or we don't." } },
+          { "@type": "Question", "name": "Which LLM does it use?", "acceptedAnswer": { "@type": "Answer", "text": "We're model-agnostic and use cutting-edge models: the most capable frontier models (such as GPT and Claude) for conversation and hard reasoning, lighter ones for routine steps. We pick them and upgrade them as better ones appear." } },
+          { "@type": "Question", "name": "What about my data and privacy?", "acceptedAnswer": { "@type": "Answer", "text": "Stored encrypted and isolated per customer, with data storage in the EU. Conversations are processed by cutting-edge AI models from carefully selected providers; our privacy policy lists them and explains what happens to your data." } },
+          { "@type": "Question", "name": "What if I want to cancel?", "acceptedAnswer": { "@type": "Answer", "text": "Of course we have a contract, and it has a notice period. Send us a cancellation request at least 30 days before the end of a month and the contract ends on the last day of that month; a later request ends it a month after. Until then the monthly fee and the minutes you use are payable." } },
           { "@type": "Question", "name": "Can it do my specific task?", "acceptedAnswer": { "@type": "Answer", "text": "Probably. That's what the 30-minute consultation is for. We say no if it isn't a fit — we'd rather miss a sale than ship something that fails." } },
           { "@type": "Question", "name": "How is this different from ChatGPT Teams?", "acceptedAnswer": { "@type": "Answer", "text": "ChatGPT is a tool your team uses. A digital employee is a worker we configure, host, and tune for a specific job. You delegate the work, not the prompting." } },
           { "@type": "Question", "name": "Can I bring my own model?", "acceptedAnswer": { "@type": "Answer", "text": "On the Workforce tier, yes — we can route to your private deployment or a specific provider account." } },
           { "@type": "Question", "name": "How long does setup take?", "acceptedAnswer": { "@type": "Answer", "text": "From discovery call to working employee: 5–10 business days, depending on the integrations involved." } },
-          { "@type": "Question", "name": "What can the AI receptionist handle?", "acceptedAnswer": { "@type": "Answer", "text": "It can answer routine questions, qualify enquiries, book appointments, capture messages and send summaries. You choose when it should transfer or escalate to a person." } }
+          { "@type": "Question", "name": "What can the AI receptionist handle?", "acceptedAnswer": { "@type": "Answer", "text": "It answers calls forwarded from your number, asks the questions you set, notes the caller's number and request, and texts you a summary; the full transcript is in your dashboard. It speaks Hungarian (English can be switched on). It does not book appointments, quote prices you haven't given it or transfer calls — a colleague calls the customer back." } }
         ]
       }
     ]
@@ -1624,7 +1631,7 @@
         <span data-i18n="hero.h1.a">Never let a good customer</span>
         <em data-i18n="hero.h1.b">go unanswered.</em>
       </h1>
-      <p class="hero-sub" data-i18n="hero.sub">Start with an AI receptionist that answers calls, books appointments and follows up — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Start with an AI receptionist that answers your calls, takes the caller's details and texts you a summary — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.</p>
       <div class="hero-actions">
         <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="hero"><span data-i18n="hero.cta">Book a free 30-min call</span></a>
         <a href="#receptionist" class="btn-ghost" data-i18n="hero.ghost">Meet the AI receptionist →</a>
@@ -1638,10 +1645,10 @@
         <div class="hub-ring hub-ring-c"></div>
         <div class="hub-core"><div class="hub-sphere"><b><span data-i18n="hero.hub.core.a">AI</span><small data-i18n="hero.hub.core.b">receptionist</small></b></div></div>
         <div class="hub-sat hub-sat-1"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.1">Phone line</div></div></div>
-        <div class="hub-sat hub-sat-2"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.2">Calendar</div></div></div>
-        <div class="hub-sat hub-sat-3"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.3">Website</div></div></div>
-        <div class="hub-sat hub-sat-4"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.4">Your CRM</div></div></div>
-        <div class="hub-sat hub-sat-5"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.5">Email / SMS</div></div></div>
+        <div class="hub-sat hub-sat-2"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.2">Forwarding</div></div></div>
+        <div class="hub-sat hub-sat-3"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.3">Dashboard</div></div></div>
+        <div class="hub-sat hub-sat-4"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.4">Transcripts</div></div></div>
+        <div class="hub-sat hub-sat-5"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.5">SMS summary</div></div></div>
         <div class="hub-sat hub-sat-6"><div class="hub-chip"><div class="hub-chip-in" data-i18n="hero.hub.6">Your team</div></div></div>
       </div></div></div>
     </div>
@@ -1649,8 +1656,8 @@
   <div class="trust-strip">
     <span class="pill" data-i18n="trust.1">Flat monthly fee</span>
     <span class="pill" data-i18n="trust.2">Free setup</span>
-    <span class="pill" data-i18n="trust.3">EU hosting available</span>
-    <span class="pill" data-i18n="trust.4">Cancel any month</span>
+    <span class="pill" data-i18n="trust.3">EU data storage</span>
+    <span class="pill" data-i18n="trust.4">No annual contract</span>
   </div>
 </section>
 
@@ -1665,14 +1672,14 @@
       </h2>
       <p data-i18n="receptionist.intro">Give callers a helpful first response even when you are with a customer, after hours, or simply busy running the business.</p>
       <ul class="receptionist-points">
-        <li data-i18n="receptionist.p1">Answers common questions in your business's tone</li>
-        <li data-i18n="receptionist.p2">Qualifies new enquiries and captures the details you need</li>
-        <li data-i18n="receptionist.p3">Books appointments and sends confirmations</li>
-        <li data-i18n="receptionist.p4">Transfers urgent or sensitive calls to the right person</li>
-        <li data-i18n="receptionist.p5">Sends your team a concise summary after every conversation</li>
+        <li data-i18n="receptionist.p1">Answers in your business's name, in Hungarian (English can be switched on)</li>
+        <li data-i18n="receptionist.p2">Asks only the questions you choose and notes the caller's number and request</li>
+        <li data-i18n="receptionist.p3">Never promises prices or appointment times — a colleague calls back</li>
+        <li data-i18n="receptionist.p4">Texts you a short summary right after each call</li>
+        <li data-i18n="receptionist.p5">Keeps every call's transcript in your online dashboard</li>
       </ul>
       <a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="receptionist"><span data-i18n="receptionist.cta">Set up my AI receptionist</span></a>
-      <p class="receptionist-note" data-i18n="receptionist.note">We design the call flow around your business, your calendar and your escalation rules.</p>
+      <p class="receptionist-note" data-i18n="receptionist.note">You describe your business and we set up the greeting and the questions. Then you forward your calls to your number from your phone's settings.</p>
     </div>
 
     <div class="call-console reveal reveal-delay-2" aria-label="Illustrative AI receptionist call flow" data-i18n-aria-label="receptionist.demo.label">
@@ -1688,14 +1695,14 @@
           <span class="call-time">00:42</span>
         </div>
         <div class="call-transcript">
-          <div class="call-line ai" data-i18n="receptionist.demo.ai1">Good afternoon, Northside Dental. How can I help?</div>
-          <div class="call-line" data-i18n="receptionist.demo.caller">I'd like to book a check-up next week, preferably after work.</div>
-          <div class="call-line ai" data-i18n="receptionist.demo.ai2">Of course. I can offer Tuesday at 17:30 or Thursday at 18:00. Which works better?</div>
+          <div class="call-line ai" data-i18n="receptionist.demo.ai1">Good afternoon, I'm the AI assistant of Northside Dental. How can I help?</div>
+          <div class="call-line" data-i18n="receptionist.demo.caller">I'd like a check-up appointment next week.</div>
+          <div class="call-line ai" data-i18n="receptionist.demo.ai2">Understood. What number can a colleague call you back on?</div>
         </div>
         <div class="call-outcome">
-          <div><strong data-i18n="receptionist.demo.o1">Qualified</strong><span data-i18n="receptionist.demo.o1s">New patient</span></div>
-          <div><strong data-i18n="receptionist.demo.o2">Booked</strong><span data-i18n="receptionist.demo.o2s">Tue · 17:30</span></div>
-          <div><strong data-i18n="receptionist.demo.o3">Synced</strong><span data-i18n="receptionist.demo.o3s">Calendar + summary</span></div>
+          <div><strong data-i18n="receptionist.demo.o1">Request noted</strong><span data-i18n="receptionist.demo.o1s">Check-up</span></div>
+          <div><strong data-i18n="receptionist.demo.o2">Callback</strong><span data-i18n="receptionist.demo.o2s">Number noted</span></div>
+          <div><strong data-i18n="receptionist.demo.o3">SMS sent</strong><span data-i18n="receptionist.demo.o3s">Summary to you</span></div>
         </div>
       </div>
     </div>
@@ -1809,7 +1816,7 @@
         <div class="step-num">2</div>
         <div>
           <h3 data-i18n="how.2.title">We configure</h3>
-          <p data-i18n="how.2.desc">We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.</p>
+          <p data-i18n="how.2.desc">We build your agent on the best-fit technology, connect your tools, and write down how it should work.</p>
         </div>
       </div>
       <div class="step reveal reveal-delay-3">
@@ -1905,14 +1912,14 @@
         <div class="check" aria-hidden="true">✓</div>
         <div>
           <h3 data-i18n="incl.2.title">The best model for the job</h3>
-          <p data-i18n="incl.2.desc">Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don't choose. We do.</p>
+          <p data-i18n="incl.2.desc">Model-agnostic. We use cutting-edge models and switch as better ones appear. You don't choose. We do.</p>
         </div>
       </div>
       <div class="included-card reveal reveal-delay-3">
         <div class="check" aria-hidden="true">✓</div>
         <div>
-          <h3 data-i18n="incl.3.title">EU hosting available</h3>
-          <p data-i18n="incl.3.desc">Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.</p>
+          <h3 data-i18n="incl.3.title">Private by design</h3>
+          <p data-i18n="incl.3.desc">Stored encrypted and isolated per customer, with data storage in the EU. Our privacy policy lists the partners that process your data.</p>
         </div>
       </div>
       <div class="included-card reveal reveal-delay-1">
@@ -1932,8 +1939,8 @@
       <div class="included-card reveal reveal-delay-3">
         <div class="check" aria-hidden="true">✓</div>
         <div>
-          <h3 data-i18n="incl.6.title">Cancel anytime</h3>
-          <p data-i18n="incl.6.desc">No annual contracts. No notice periods. We earn the next month or we don't.</p>
+          <h3 data-i18n="incl.6.title">Month to month</h3>
+          <p data-i18n="incl.6.desc">No annual contracts. Cancel with 30 days' notice before the end of any month. We earn the next month or we don't.</p>
         </div>
       </div>
     </div>
@@ -1947,7 +1954,7 @@
       <div class="section-label" data-i18n="price.label">Pricing</div>
       <h2>
         <span data-i18n="price.h2.a">One plan per employee.</span>
-        <em data-i18n="price.h2.b">Cancel anytime.</em>
+        <em data-i18n="price.h2.b">Month to month.</em>
       </h2>
       <p class="pricing-intro" data-i18n="price.intro">Start with the AI receptionist, or add a digital employee. Employee tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.</p>
     </div>
@@ -1963,10 +1970,10 @@
           <div class="tier-tagline" data-i18n="price.rx.tagline">Priced by call volume. The starter plan covers a small practice or shop; we size it together on the call.</div>
         </div>
         <ul class="tier-features">
-          <li data-i18n="price.rx.f1">Answers calls 24/7 in your business's tone</li>
-          <li data-i18n="price.rx.f2">Books appointments into your calendar</li>
-          <li data-i18n="price.rx.f3">Email summary after every call</li>
-          <li data-i18n="price.rx.f4">Setup included · cancel any month</li>
+          <li data-i18n="price.rx.f1">Answers forwarded calls 24/7, in Hungarian</li>
+          <li data-i18n="price.rx.f2">Takes the callback number and request — no promised prices or times</li>
+          <li data-i18n="price.rx.f3">SMS summary after every call, transcript in your dashboard</li>
+          <li data-i18n="price.rx.f4">Setup included · monthly, no long-term contract</li>
         </ul>
         <div class="tier-cta"><a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="price-receptionist" data-i18n="price.cta">Book a call to start</a></div>
       </div>
@@ -2022,7 +2029,7 @@
         <div class="tier-cta"><a href="https://www.cal.eu/albert-papp-diwz8l/30min?overlayCalendar=true" target="_blank" rel="noopener" class="btn-primary" data-cta="price-workforce" data-i18n="price.cta">Book a call to start</a></div>
       </div>
     </div>
-    <p class="pricing-foot" data-i18n="price.foot">No setup fee · No annual contract · Cancel anytime</p>
+    <p class="pricing-foot" data-i18n="price.foot">No setup fee · No annual contract · 30 days' notice to cancel</p>
   </div>
 </section>
 
@@ -2057,7 +2064,7 @@
           </div>
           <div class="whyus-stat">
             <span class="num" data-i18n="whyus.s4.num">No lock-in</span>
-            <span class="lab" data-i18n="whyus.s4.lab">cancel any month</span>
+            <span class="lab" data-i18n="whyus.s4.lab">month to month, 30 days' notice</span>
           </div>
         </div>
       </div>
@@ -2079,15 +2086,15 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" data-i18n="faq.2.q">Which LLM does it use?</button>
-        <div class="faq-a" id="faq-a-2" data-i18n="faq.2.a">We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.</div>
+        <div class="faq-a" id="faq-a-2" data-i18n="faq.2.a">We're model-agnostic and use cutting-edge models: the most capable frontier models (such as GPT and Claude) for conversation and hard reasoning, lighter ones for routine steps. We pick them and upgrade them as better ones appear.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" data-i18n="faq.3.q">What about my data and privacy?</button>
-        <div class="faq-a" id="faq-a-3" data-i18n="faq.3.a">Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model.</div>
+        <div class="faq-a" id="faq-a-3" data-i18n="faq.3.a">Stored encrypted and isolated per customer, with data storage in the EU. Conversations are processed by cutting-edge AI models from carefully selected providers; our privacy policy lists them and explains what happens to your data.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" data-i18n="faq.4.q">What if I want to cancel?</button>
-        <div class="faq-a" id="faq-a-4" data-i18n="faq.4.a">Email us. No contract, no notice period, no exit fees. We earn the next month or we don't.</div>
+        <div class="faq-a" id="faq-a-4" data-i18n="faq.4.a">Of course we have a contract, and it has a notice period. Send us a cancellation request at least 30 days before the end of a month and the contract ends on the last day of that month; a later request ends it a month after. Until then the monthly fee and the minutes you use are payable.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" data-i18n="faq.5.q">Can it do my specific task?</button>
@@ -2107,7 +2114,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a-9" data-i18n="faq.9.q">What can the AI receptionist handle?</button>
-        <div class="faq-a" id="faq-a-9" data-i18n="faq.9.a">It can answer routine questions, qualify enquiries, book appointments, capture messages and send summaries. You choose when it should transfer or escalate to a person.</div>
+        <div class="faq-a" id="faq-a-9" data-i18n="faq.9.a">It answers calls forwarded from your number, asks the questions you set, notes the caller's number and request, and texts you a summary; the full transcript is in your dashboard. It speaks Hungarian (English can be switched on). It does not book appointments, quote prices you haven't given it or transfer calls — a colleague calls the customer back.</div>
       </div>
     </div>
   </div>
@@ -2205,8 +2212,8 @@
      All values are plain text — applyTranslations uses textContent only. */
   var T = {
     en: {
-      'meta.title':       'AgentHeaven — AI receptionist and digital employees for SMBs',
-      'meta.description': 'Set up an AI receptionist or digital employee for your business. Answer calls, book appointments, handle inboxes and repetitive work — for one flat monthly fee.',
+      'meta.title':       'AI Receptionist and Digital Employees for SMBs | AgentHeaven',
+      'meta.description': 'AI receptionist that answers your calls, takes the message and texts you a summary. Plus digital employees for repetitive work. One flat monthly fee.',
       'a11y.skip':   'Skip to content',
       'nav.label':   'Main',
       'nav.language': 'Language',
@@ -2219,45 +2226,45 @@
       'hero.eyebrow':  'AI receptionist + digital employees for SMBs',
       'hero.h1.a':     'Never let a good customer',
       'hero.h1.b':     'go unanswered.',
-      'hero.sub':      'Start with an AI receptionist that answers calls, books appointments and follows up — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.',
+      'hero.sub':      "Start with an AI receptionist that answers your calls, takes the caller's details and texts you a summary — or hand off the repetitive work behind the scenes. We set it up and keep it running for one flat monthly fee.",
       'hero.cta':      'Book a free 30-min call',
       'hero.ghost':    'Meet the AI receptionist →',
       'hero.reassure': '30 minutes. No commitment.',
       'hero.hub.core.a': 'AI',
       'hero.hub.core.b': 'receptionist',
       'hero.hub.1':    'Phone line',
-      'hero.hub.2':    'Calendar',
-      'hero.hub.3':    'Website',
-      'hero.hub.4':    'Your CRM',
-      'hero.hub.5':    'Email / SMS',
+      'hero.hub.2':    'Forwarding',
+      'hero.hub.3':    'Dashboard',
+      'hero.hub.4':    'Transcripts',
+      'hero.hub.5':    'SMS summary',
       'hero.hub.6':    'Your team',
       'trust.1':       'Flat monthly fee',
       'trust.2':       'Free setup',
-      'trust.3':       'EU hosting available',
-      'trust.4':       'Cancel any month',
+      'trust.3':       'EU data storage',
+      'trust.4':       'No annual contract',
       'receptionist.label':        'Meet your AI receptionist',
       'receptionist.h2.a':         'A front desk that is',
       'receptionist.h2.b':         'always ready to answer.',
       'receptionist.intro':        'Give callers a helpful first response even when you are with a customer, after hours, or simply busy running the business.',
-      'receptionist.p1':           "Answers common questions in your business's tone",
-      'receptionist.p2':           'Qualifies new enquiries and captures the details you need',
-      'receptionist.p3':           'Books appointments and sends confirmations',
-      'receptionist.p4':           'Transfers urgent or sensitive calls to the right person',
-      'receptionist.p5':           'Sends your team a concise summary after every conversation',
+      'receptionist.p1':           "Answers in your business's name, in Hungarian (English can be switched on)",
+      'receptionist.p2':           "Asks only the questions you choose and notes the caller's number and request",
+      'receptionist.p3':           'Never promises prices or appointment times — a colleague calls back',
+      'receptionist.p4':           'Texts you a short summary right after each call',
+      'receptionist.p5':           "Keeps every call's transcript in your online dashboard",
       'receptionist.cta':          'Set up my AI receptionist',
-      'receptionist.note':         'We design the call flow around your business, your calendar and your escalation rules.',
+      'receptionist.note':         "You describe your business and we set up the greeting and the questions. Then you forward your calls to your number from your phone's settings.",
       'receptionist.demo.label':   'Illustrative AI receptionist call flow',
       'receptionist.demo.live':    'Incoming call · AI answering',
       'receptionist.demo.context': 'New customer enquiry',
-      'receptionist.demo.ai1':     'Good afternoon, Northside Dental. How can I help?',
-      'receptionist.demo.caller':  "I'd like to book a check-up next week, preferably after work.",
-      'receptionist.demo.ai2':     'Of course. I can offer Tuesday at 17:30 or Thursday at 18:00. Which works better?',
-      'receptionist.demo.o1':      'Qualified',
-      'receptionist.demo.o1s':     'New patient',
-      'receptionist.demo.o2':      'Booked',
-      'receptionist.demo.o2s':     'Tue · 17:30',
-      'receptionist.demo.o3':      'Synced',
-      'receptionist.demo.o3s':     'Calendar + summary',
+      'receptionist.demo.ai1':     "Good afternoon, I'm the AI assistant of Northside Dental. How can I help?",
+      'receptionist.demo.caller':  "I'd like a check-up appointment next week.",
+      'receptionist.demo.ai2':     'Understood. What number can a colleague call you back on?',
+      'receptionist.demo.o1':      'Request noted',
+      'receptionist.demo.o1s':     'Check-up',
+      'receptionist.demo.o2':      'Callback',
+      'receptionist.demo.o2s':     'Number noted',
+      'receptionist.demo.o3':      'SMS sent',
+      'receptionist.demo.o3s':     'Summary to you',
       'roles.label':   'What it can do',
       'roles.h2.a':    'One employee.',
       'roles.h2.b':    'Many possible jobs.',
@@ -2280,7 +2287,7 @@
       'how.1.title': 'Discovery call',
       'how.1.desc':  "A 30-minute call to understand your business and the work you'd like to hand off.",
       'how.2.title': 'We configure',
-      'how.2.desc':  'We set up your agent on the Hermes Agent harness, connect your tools, and write the runbook.',
+      'how.2.desc':  'We build your agent on the best-fit technology, connect your tools, and write down how it should work.',
       'how.3.title': 'Day 1 generalist',
       'how.3.desc':  'Your employee starts working in days. Capable, responsive, useful from day one.',
       'how.4.title': 'Day 90 specialist',
@@ -2303,31 +2310,31 @@
       'incl.1.title': 'All the AI costs',
       'incl.1.desc':  'We absorb every token and every server hour. No metered bills. No surprise overage.',
       'incl.2.title': 'The best model for the job',
-      'incl.2.desc':  "Model-agnostic routing. Cheap models for routine work. Frontier models for hard problems. You don't choose. We do.",
-      'incl.3.title': 'EU hosting available',
-      'incl.3.desc':  'Sensitive data? We route to self-hosted open-source models on EU infrastructure. Your data never leaves the EU.',
+      'incl.2.desc':  "Model-agnostic. We use cutting-edge models and switch as better ones appear. You don't choose. We do.",
+      'incl.3.title': 'Private by design',
+      'incl.3.desc':  'Stored encrypted and isolated per customer, with data storage in the EU. Our privacy policy lists the partners that process your data.',
       'incl.4.title': 'Monitoring and tuning',
       'incl.4.desc':  "We watch what your employee does. We fix what doesn't work. You don't touch infrastructure.",
       'incl.5.title': 'One number to call',
       'incl.5.desc':  'When something needs adjusting, you tell us. No support tickets. No prompt engineering.',
-      'incl.6.title': 'Cancel anytime',
-      'incl.6.desc':  "No annual contracts. No notice periods. We earn the next month or we don't.",
+      'incl.6.title': 'Month to month',
+      'incl.6.desc':  "No annual contracts. Cancel with 30 days' notice before the end of any month. We earn the next month or we don't.",
       'price.label':              'Pricing',
       'price.h2.a':               'One plan per employee.',
-      'price.h2.b':               'Cancel anytime.',
+      'price.h2.b':               'Month to month.',
       'price.intro':              'Start with the AI receptionist, or add a digital employee. Employee tiers vary by how many hours of human tuning we include each month. Setup is always free; you onboard on a call.',
       'price.rx.name':            'AI receptionist',
       'price.rx.from':            'from',
       'price.rx.tagline':         'Priced by call volume. The starter plan covers a small practice or shop; we size it together on the call.',
-      'price.rx.f1':              "Answers calls 24/7 in your business's tone",
-      'price.rx.f2':              'Books appointments into your calendar',
-      'price.rx.f3':              'Email summary after every call',
-      'price.rx.f4':              'Setup included · cancel any month',
+      'price.rx.f1':              'Answers forwarded calls 24/7, in Hungarian',
+      'price.rx.f2':              'Takes the callback number and request — no promised prices or times',
+      'price.rx.f3':              'SMS summary after every call, transcript in your dashboard',
+      'price.rx.f4':              'Setup included · monthly, no long-term contract',
       'price.employees.label':    'Digital employees',
       'price.period':             '/mo',
       'price.popular':            'Most popular',
       'price.cta':                'Book a call to start',
-      'price.foot':               'No setup fee · No annual contract · Cancel anytime',
+      'price.foot':               "No setup fee · No annual contract · 30 days' notice to cancel",
       'price.starter.name':       'Starter',
       'price.starter.tagline':    'Best for trying it; light repetitive tasks.',
       'price.starter.f1':         '1 hour of tuning per month',
@@ -2360,17 +2367,17 @@
       'whyus.s3.num': 'Model-agnostic',
       'whyus.s3.lab': 'best model per task',
       'whyus.s4.num': 'No lock-in',
-      'whyus.s4.lab': 'cancel any month',
+      'whyus.s4.lab': "month to month, 30 days' notice",
       'faq.label': 'FAQ',
       'faq.h2':    'Common questions.',
       'faq.1.q':   'What if it makes mistakes?',
       'faq.1.a':   "It will, especially in the first few weeks. That's why we monitor everything and tune actively. When you flag something, we adjust. Mistakes become the training material.",
       'faq.2.q':   'Which LLM does it use?',
-      'faq.2.a':   "We're model-agnostic. Your agent uses open-source models for routine tasks (Llama, Qwen, Hermes) and frontier models (Claude, GPT) for harder reasoning. The Hermes Agent harness from Nous Research orchestrates the routing.",
+      'faq.2.a':   "We're model-agnostic and use cutting-edge models: the most capable frontier models (such as GPT and Claude) for conversation and hard reasoning, lighter ones for routine steps. We pick them and upgrade them as better ones appear.",
       'faq.3.q':   'What about my data and privacy?',
-      'faq.3.a':   "Stored encrypted, isolated per customer. For sensitive data, we route to self-hosted open-source models on EU infrastructure — your data never leaves the EU and never trains a third party's model.",
+      'faq.3.a':   'Stored encrypted and isolated per customer, with data storage in the EU. Conversations are processed by cutting-edge AI models from carefully selected providers; our privacy policy lists them and explains what happens to your data.',
       'faq.4.q':   'What if I want to cancel?',
-      'faq.4.a':   "Email us. No contract, no notice period, no exit fees. We earn the next month or we don't.",
+      'faq.4.a':   "Of course we have a contract, and it has a notice period. Send us a cancellation request at least 30 days before the end of a month and the contract ends on the last day of that month; a later request ends it a month after. Until then the monthly fee and the minutes you use are payable.",
       'faq.5.q':   'Can it do my specific task?',
       'faq.5.a':   "Probably. That's what the 30-minute consultation is for. We say no if it isn't a fit — we'd rather miss a sale than ship something that fails.",
       'faq.6.q':   'How is this different from ChatGPT Teams?',
@@ -2380,7 +2387,7 @@
       'faq.8.q':   'How long does setup take?',
       'faq.8.a':   'From discovery call to working employee: 5–10 business days, depending on the integrations involved.',
       'faq.9.q':   'What can the AI receptionist handle?',
-      'faq.9.a':   'It can answer routine questions, qualify enquiries, book appointments, capture messages and send summaries. You choose when it should transfer or escalate to a person.',
+      'faq.9.a':   "It answers calls forwarded from your number, asks the questions you set, notes the caller's number and request, and texts you a summary; the full transcript is in your dashboard. It speaks Hungarian (English can be switched on). It does not book appointments, quote prices you haven't given it or transfer calls — a colleague calls the customer back.",
       'cta.label':         'Get started',
       'cta.h2.a':          '30 minutes. No commitment.',
       'cta.h2.b':          'We listen first.',
@@ -2402,8 +2409,8 @@
       'cookie.reject':            'Reject all'
     },
     hu: {
-      'meta.title':       'AgentHeaven — AI recepciós és digitális munkatársak kkv-knak',
-      'meta.description': 'Állíts be egy AI recepcióst vagy digitális munkatársat a vállalkozásodnak. Felveszi a telefont, időpontot foglal, kezeli a postafiókot és az ismétlődő feladatokat — egy fix havidíjért.',
+      'meta.title':       'AI recepciós és digitális munkatársak kkv-knak | AgentHeaven',
+      'meta.description': 'AI recepciós, aki felveszi a telefont, rögzíti az üzenetet és SMS-ben összefoglalót küld. Plusz digitális munkatársak az ismétlődő munkához. Fix havidíj.',
       'a11y.skip':   'Ugrás a tartalomra',
       'nav.label':   'Fő navigáció',
       'nav.language': 'Nyelv',
@@ -2416,45 +2423,45 @@
       'hero.eyebrow':  'AI recepciós + digitális munkatársak kkv-knak',
       'hero.h1.a':     'Egy jó ügyfél se maradjon',
       'hero.h1.b':     'válasz nélkül.',
-      'hero.sub':      'Kezdj egy AI recepcióssal, aki felveszi a telefont, időpontot foglal és utánkövet — vagy add át neki a háttérben ismétlődő feladatokat. Mi beüzemeljük és fix havidíjért működtetjük.',
+      'hero.sub':      'Kezdj egy AI recepcióssal, aki felveszi a telefont, bekéri a hívó adatait és SMS-ben összefoglalót küld — vagy add át neki a háttérben ismétlődő feladatokat. Mi beüzemeljük és fix havidíjért működtetjük.',
       'hero.cta':      'Foglalj egy ingyenes 30 perces hívást',
       'hero.ghost':    'Ismerd meg az AI recepcióst →',
       'hero.reassure': '30 perc. Semmi kötelezettség.',
       'hero.hub.core.a': 'AI',
       'hero.hub.core.b': 'recepciós',
       'hero.hub.1':    'Telefonvonal',
-      'hero.hub.2':    'Naptár',
-      'hero.hub.3':    'Weboldal',
-      'hero.hub.4':    'CRM-ed',
-      'hero.hub.5':    'E-mail / SMS',
+      'hero.hub.2':    'Átirányítás',
+      'hero.hub.3':    'Felület',
+      'hero.hub.4':    'Átiratok',
+      'hero.hub.5':    'SMS-összefoglaló',
       'hero.hub.6':    'Csapatod',
       'trust.1':       'Fix havidíj',
       'trust.2':       'Ingyenes beüzemelés',
-      'trust.3':       'EU-s hosztolás',
-      'trust.4':       'Bármikor lemondható',
+      'trust.3':       'Adattárolás az EU-ban',
+      'trust.4':       'Nincs éves szerződés',
       'receptionist.label':        'Ismerd meg az AI recepciósodat',
       'receptionist.h2.a':         'Egy recepció, amely',
       'receptionist.h2.b':         'mindig felveszi a telefont.',
       'receptionist.intro':        'A hívóid akkor is segítőkész választ kapnak, amikor ügyféllel vagy, munkaidőn túl keresnek, vagy egyszerűen a vállalkozásoddal foglalkozol.',
-      'receptionist.p1':           'A vállalkozásod hangján válaszol a gyakori kérdésekre',
-      'receptionist.p2':           'Minősíti az új érdeklődőket és bekéri a szükséges adatokat',
-      'receptionist.p3':           'Időpontot foglal és visszaigazolást küld',
-      'receptionist.p4':           'A sürgős vagy érzékeny hívásokat a megfelelő emberhez kapcsolja',
-      'receptionist.p5':           'Minden beszélgetés után rövid összefoglalót küld a csapatodnak',
+      'receptionist.p1':           'A vállalkozásod nevében szól bele, magyarul (az angol bekapcsolható)',
+      'receptionist.p2':           'Csak azt kérdezi, amit megadsz, és felírja a hívó számát és kérését',
+      'receptionist.p3':           'Árat vagy időpontot nem ígér — egy kolléga visszahív',
+      'receptionist.p4':           'Közvetlenül a hívás után rövid SMS-összefoglalót küld',
+      'receptionist.p5':           'Minden hívás átirata ott van az online felületen',
       'receptionist.cta':          'Beállítom az AI recepciósomat',
-      'receptionist.note':         'A hívás menetét a vállalkozásodhoz, a naptáradhoz és az eszkalációs szabályaidhoz igazítjuk.',
+      'receptionist.note':         'Leírod a vállalkozásodat, mi beállítjuk az üdvözlést és a kérdéseket. Utána a telefonod beállításaiban átirányítod a hívásokat a hozzád rendelt számra.',
       'receptionist.demo.label':   'Az AI recepciós szemléltető hívásfolyamata',
       'receptionist.demo.live':    'Bejövő hívás · az AI válaszol',
       'receptionist.demo.context': 'Új ügyfél érdeklődése',
-      'receptionist.demo.ai1':     'Jó napot, Northside Dental. Miben segíthetek?',
-      'receptionist.demo.caller':  'Jövő hétre szeretnék kontrollidőpontot, lehetőleg munka után.',
-      'receptionist.demo.ai2':     'Természetesen. Kedden 17:30-kor vagy csütörtökön 18:00-kor tudom fogadni. Melyik lenne jobb?',
-      'receptionist.demo.o1':      'Minősítve',
-      'receptionist.demo.o1s':     'Új páciens',
-      'receptionist.demo.o2':      'Lefoglalva',
-      'receptionist.demo.o2s':     'Kedd · 17:30',
-      'receptionist.demo.o3':      'Szinkronizálva',
-      'receptionist.demo.o3s':     'Naptár + összefoglaló',
+      'receptionist.demo.ai1':     'Jó napot, a Northside Dental AI asszisztense vagyok. Miben segíthetek?',
+      'receptionist.demo.caller':  'Jövő hétre szeretnék kontrollvizsgálatot.',
+      'receptionist.demo.ai2':     'Értem. Melyik számon hívhatja vissza egy kollégánk?',
+      'receptionist.demo.o1':      'Kérés rögzítve',
+      'receptionist.demo.o1s':     'Kontroll',
+      'receptionist.demo.o2':      'Visszahívás',
+      'receptionist.demo.o2s':     'Szám rögzítve',
+      'receptionist.demo.o3':      'SMS elküldve',
+      'receptionist.demo.o3s':     'Összefoglaló neked',
       'roles.label':   'Mire képes',
       'roles.h2.a':    'Egy munkavállaló.',
       'roles.h2.b':    'Sokféle feladat.',
@@ -2477,7 +2484,7 @@
       'how.1.title': 'Felfedező hívás',
       'how.1.desc':  'Egy 30 perces beszélgetés, hogy megértsük a vállalkozásodat és azt a munkát, amit átadnál.',
       'how.2.title': 'Beüzemelünk',
-      'how.2.desc':  'Beállítjuk az ügynököt a Hermes Agent harness-en, csatlakoztatjuk az eszközeidet, és megírjuk a runbookot.',
+      'how.2.desc':  'Az ügynököt a legmegfelelőbb technológiára építjük, csatlakoztatjuk az eszközeidet, és leírjuk, hogyan kell működnie.',
       'how.3.title': '1. nap: generalista',
       'how.3.desc':  'A munkavállalód napok alatt elkezd dolgozni. Hozzáértő, reaktív, az első naptól hasznos.',
       'how.4.title': '90. nap: specialista',
@@ -2500,31 +2507,31 @@
       'incl.1.title': 'Az összes AI-költség',
       'incl.1.desc':  'Mi álljuk minden tokent és minden szerverórát. Nincs mért számla. Nincs meglepetés.',
       'incl.2.title': 'A feladathoz legjobb modell',
-      'incl.2.desc':  'Modell-független routing. Olcsó modellek a rutin munkához. Csúcs-modellek a nehéz problémákhoz. Nem te választasz. Mi igen.',
-      'incl.3.title': 'EU-s hosztolás',
-      'incl.3.desc':  'Érzékeny adat? Saját üzemeltetésű, nyílt forrású modellekre irányítjuk EU-s infrastruktúrán. Az adatod nem hagyja el az EU-t.',
+      'incl.2.desc':  'Modellfüggetlen. Csúcsmodelleket használunk, és váltunk, amint jobb jelenik meg. Nem te választasz. Mi igen.',
+      'incl.3.title': 'Alapból privát',
+      'incl.3.desc':  'Titkosítva, ügyfelenként elszigetelve tároljuk, az adattárolás az EU-ban történik. Az adatkezelési tájékoztatónk felsorolja az adataidat feldolgozó partnereket.',
       'incl.4.title': 'Felügyelet és finomhangolás',
       'incl.4.desc':  'Figyeljük, mit csinál a munkavállalód. Megjavítjuk, ami nem működik. Te nem nyúlsz az infrához.',
       'incl.5.title': 'Egy szám, amit hívhatsz',
       'incl.5.desc':  'Ha valamin állítani kell, csak szólsz. Nincsenek support ticketek. Nincs prompt-mérnökölés.',
-      'incl.6.title': 'Bármikor lemondható',
-      'incl.6.desc':  'Nincs éves szerződés. Nincs felmondási idő. Megnyerjük a következő hónapot, vagy nem.',
+      'incl.6.title': 'Havi szerződés',
+      'incl.6.desc':  'Nincs éves szerződés. A hónap vége előtt 30 nappal bármikor lemondható. Megnyerjük a következő hónapot, vagy nem.',
       'price.label':              'Árazás',
       'price.h2.a':               'Egy csomag munkavállalónként.',
-      'price.h2.b':               'Bármikor lemondható.',
+      'price.h2.b':               'Havi szerződés.',
       'price.intro':              'Kezdj az AI recepcióssal, vagy adj hozzá egy digitális munkatársat. A munkatárs-csomagok abban különböznek, hány óra emberi finomhangolást tartalmaznak havonta. A beüzemelés mindig ingyenes; egy híváson indulunk.',
       'price.rx.name':            'AI recepciós',
       'price.rx.from':            'már',
       'price.rx.tagline':         'Hívásmennyiség alapján árazva. A kezdő csomag egy kisebb rendelőnek vagy üzletnek elég; a pontos méretet a híváson egyeztetjük.',
-      'price.rx.f1':              'Éjjel-nappal felveszi a telefont a vállalkozásod hangján',
-      'price.rx.f2':              'Időpontot foglal a naptáradba',
-      'price.rx.f3':              'E-mail összefoglaló minden hívás után',
-      'price.rx.f4':              'Beüzemelés benne · bármikor lemondható',
+      'price.rx.f1':              'Éjjel-nappal fogadja az átirányított hívásokat, magyarul',
+      'price.rx.f2':              'Felveszi a visszahívási számot és a kérést — árat, időpontot nem ígér',
+      'price.rx.f3':              'SMS-összefoglaló minden hívás után, az átirat az online felületen',
+      'price.rx.f4':              'Beüzemelés benne · havi elszámolás, hosszú távú kötelezettség nélkül',
       'price.employees.label':    'Digitális munkatársak',
       'price.period':             '/hó',
       'price.popular':            'Legnépszerűbb',
       'price.cta':                'Foglalj hívást a kezdéshez',
-      'price.foot':               'Nincs beüzemelési díj · Nincs éves szerződés · Bármikor lemondható',
+      'price.foot':               'Nincs beüzemelési díj · Nincs éves szerződés · 30 napos felmondási idő',
       'price.starter.name':       'Starter',
       'price.starter.tagline':    'Kipróbáláshoz, könnyű ismétlődő feladatokhoz.',
       'price.starter.f1':         '1 óra finomhangolás havonta',
@@ -2557,17 +2564,17 @@
       'whyus.s3.num': 'Modellfüggetlen',
       'whyus.s3.lab': 'legjobb modell minden feladathoz',
       'whyus.s4.num': 'Nincs lock-in',
-      'whyus.s4.lab': 'bármely hónap végén lemondható',
+      'whyus.s4.lab': 'havi szerződés, 30 napos felmondási idő',
       'faq.label': 'GYIK',
       'faq.h2':    'Gyakori kérdések.',
       'faq.1.q':   'Mi van, ha hibázik?',
       'faq.1.a':   'Fog, főleg az első hetekben. Pont ezért figyeljük folyamatosan és hangoljuk aktívan. Amit jelzel, azt állítjuk. A hibák lesznek a tanítóanyag.',
       'faq.2.q':   'Milyen LLM-et használ?',
-      'faq.2.a':   'Modellfüggetlenek vagyunk. Az ügynököd nyílt forrású modelleket használ a rutin feladatokhoz (Llama, Qwen, Hermes) és csúcs modelleket (Claude, GPT) a nehezebb gondolkodáshoz. A Nous Research Hermes Agent harness vezérli a routingot.',
+      'faq.2.a':   'Modellfüggetlenek vagyunk, és csúcsmodelleket használunk: a legjobb frontier modelleket (például GPT, Claude) a beszélgetéshez és a nehéz gondolkodáshoz, könnyebbeket a rutinlépésekhez. Mi választjuk ki őket, és frissítjük, amint jobb jelenik meg.',
       'faq.3.q':   'Mi van az adataimmal és a privátszférával?',
-      'faq.3.a':   'Titkosítva tároljuk, ügyfelenként elszigetelve. Érzékeny adat esetén saját üzemeltetésű, nyílt forrású modellekre routingolunk EU-s infrastruktúrán — az adatod nem hagyja el az EU-t, és nem tanít harmadik fél modelljét.',
+      'faq.3.a':   'Titkosítva tároljuk, ügyfelenként elszigetelve, az adattárolás az EU-ban történik. A beszélgetéseket gondosan kiválasztott szolgáltatók csúcsmodelljei dolgozzák fel; az adatkezelési tájékoztatónk felsorolja őket, és leírja, mi történik az adataiddal.',
       'faq.4.q':   'Mi van, ha le akarom mondani?',
-      'faq.4.a':   'Írj egy e-mailt. Nincs szerződés, nincs felmondási idő, nincs kilépési díj. Megnyerjük a következő hónapot, vagy nem.',
+      'faq.4.a':   'Természetesen van szerződés és felmondási idő is. Küldj egy lemondási kérelmet legalább 30 nappal a hónap vége előtt, és a szerződés a hónap utolsó napján megszűnik; a később érkező kérelem a következő hónap végére szól. A megszűnésig a havi díj és a felhasznált percek díja fizetendő.',
       'faq.5.q':   'Meg tudja csinálni a konkrét feladatomat?',
       'faq.5.a':   'Valószínűleg igen. Pont ezért van a 30 perces konzultáció. Nemet mondunk, ha nem passzol — inkább veszítünk eladást, mint hogy valami hibásat szállítsunk.',
       'faq.6.q':   'Miben más ez, mint a ChatGPT Teams?',
@@ -2577,7 +2584,7 @@
       'faq.8.q':   'Mennyi a beüzemelés?',
       'faq.8.a':   'A felfedező hívástól a dolgozó munkavállalóig: 5–10 munkanap, az integrációk komplexitásától függően.',
       'faq.9.q':   'Mit tud kezelni az AI recepciós?',
-      'faq.9.a':   'Válaszol a rutin kérdésekre, minősíti az érdeklődőket, időpontot foglal, üzenetet vesz fel és összefoglalót küld. Te döntöd el, mikor kapcsoljon vagy eszkaláljon emberhez.',
+      'faq.9.a':   'Fogadja a telefonodról átirányított hívásokat, felteszi az általad megadott kérdéseket, rögzíti a hívó számát és kérését, és SMS-ben összefoglalót küld; a teljes átirat az online felületen olvasható. Magyarul beszél (az angol bekapcsolható). Nem foglal időpontot, nem mond olyan árat, amit nem adtál meg neki, és nem kapcsol át hívást — a kolléga hívja vissza az ügyfelet.',
       'cta.label':         'Indulás',
       'cta.h2.a':          '30 perc. Semmi kötelezettség.',
       'cta.h2.b':          'Először meghallgatunk.',
@@ -2599,8 +2606,8 @@
       'cookie.reject':            'Mindet elutasítom'
     },
     de: {
-      'meta.title':       'AgentHeaven — KI-Rezeption und digitale Mitarbeiter für KMU',
-      'meta.description': 'Richte eine KI-Rezeption oder einen digitalen Mitarbeiter für dein Unternehmen ein. Nimmt Anrufe an, bucht Termine, bearbeitet Postfächer und repetitive Arbeit — für einen festen Monatspreis.',
+      'meta.title':       'KI-Rezeption und digitale Mitarbeiter für KMU | AgentHeaven',
+      'meta.description': 'KI-Rezeption, die Anrufe annimmt, Nachrichten erfasst und dir per SMS zusammenfasst. Dazu digitale Mitarbeiter für Routinearbeit. Fester Monatspreis.',
       'a11y.skip':   'Zum Inhalt springen',
       'nav.label':   'Hauptnavigation',
       'nav.language': 'Sprache',
@@ -2613,45 +2620,45 @@
       'hero.eyebrow':  'KI-Rezeption + digitale Mitarbeiter für KMU',
       'hero.h1.a':     'Lass keinen guten Kunden',
       'hero.h1.b':     'ohne Antwort.',
-      'hero.sub':      'Starte mit einer KI-Rezeption, die Anrufe annimmt, Termine bucht und nachfasst — oder gib die repetitive Arbeit im Hintergrund ab. Wir richten alles ein und halten es für einen festen Monatspreis am Laufen.',
+      'hero.sub':      'Starte mit einer KI-Rezeption, die Anrufe annimmt, die Daten der Anrufer aufnimmt und dir eine SMS-Zusammenfassung schickt — oder gib die repetitive Arbeit im Hintergrund ab. Wir richten alles ein und halten es für einen festen Monatspreis am Laufen.',
       'hero.cta':      'Kostenloses 30-min Gespräch buchen',
       'hero.ghost':    'KI-Rezeption kennenlernen →',
       'hero.reassure': '30 Minuten. Keine Verpflichtung.',
       'hero.hub.core.a': 'KI',
       'hero.hub.core.b': 'Rezeption',
       'hero.hub.1':    'Telefonleitung',
-      'hero.hub.2':    'Kalender',
-      'hero.hub.3':    'Website',
-      'hero.hub.4':    'Dein CRM',
-      'hero.hub.5':    'E-Mail / SMS',
+      'hero.hub.2':    'Weiterleitung',
+      'hero.hub.3':    'Dashboard',
+      'hero.hub.4':    'Protokolle',
+      'hero.hub.5':    'SMS-Zusammenfassung',
       'hero.hub.6':    'Dein Team',
       'trust.1':       'Fester Monatspreis',
       'trust.2':       'Kostenlose Einrichtung',
-      'trust.3':       'EU-Hosting verfügbar',
-      'trust.4':       'Monatlich kündbar',
+      'trust.3':       'Datenspeicherung in der EU',
+      'trust.4':       'Kein Jahresvertrag',
       'receptionist.label':        'Lerne deine KI-Rezeption kennen',
       'receptionist.h2.a':         'Ein Empfang, der',
       'receptionist.h2.b':         'immer ans Telefon geht.',
       'receptionist.intro':        'Deine Anrufer bekommen auch dann eine hilfreiche erste Antwort, wenn du gerade bei einem Kunden bist, Feierabend hast oder einfach dein Geschäft führst.',
-      'receptionist.p1':           'Beantwortet häufige Fragen im Ton deines Unternehmens',
-      'receptionist.p2':           'Qualifiziert neue Anfragen und erfasst alle wichtigen Details',
-      'receptionist.p3':           'Bucht Termine und sendet Bestätigungen',
-      'receptionist.p4':           'Verbindet dringende oder sensible Anrufe mit der richtigen Person',
-      'receptionist.p5':           'Sendet deinem Team nach jedem Gespräch eine kurze Zusammenfassung',
+      'receptionist.p1':           'Meldet sich im Namen deines Unternehmens, auf Ungarisch (Englisch lässt sich zuschalten)',
+      'receptionist.p2':           'Stellt nur die Fragen, die du festlegst, und notiert Nummer und Anliegen des Anrufers',
+      'receptionist.p3':           'Verspricht weder Preise noch Termine — ein Kollege ruft zurück',
+      'receptionist.p4':           'Schickt dir direkt nach dem Anruf eine kurze SMS-Zusammenfassung',
+      'receptionist.p5':           'Jedes Gesprächsprotokoll liegt in deinem Online-Dashboard',
       'receptionist.cta':          'Meine KI-Rezeption einrichten',
-      'receptionist.note':         'Wir gestalten den Gesprächsablauf passend zu deinem Unternehmen, deinem Kalender und deinen Eskalationsregeln.',
+      'receptionist.note':         'Du beschreibst dein Unternehmen, wir richten Begrüßung und Fragen ein. Danach leitest du deine Anrufe in den Telefoneinstellungen auf deine Nummer um.',
       'receptionist.demo.label':   'Beispielhafter Anrufablauf der KI-Rezeption',
       'receptionist.demo.live':    'Eingehender Anruf · KI antwortet',
       'receptionist.demo.context': 'Anfrage eines Neukunden',
-      'receptionist.demo.ai1':     'Guten Tag, Northside Dental. Wie kann ich helfen?',
-      'receptionist.demo.caller':  'Ich möchte nächste Woche einen Kontrolltermin buchen, am liebsten nach der Arbeit.',
-      'receptionist.demo.ai2':     'Gerne. Ich kann Dienstag um 17:30 Uhr oder Donnerstag um 18:00 Uhr anbieten. Was passt besser?',
-      'receptionist.demo.o1':      'Qualifiziert',
-      'receptionist.demo.o1s':     'Neuer Patient',
-      'receptionist.demo.o2':      'Gebucht',
-      'receptionist.demo.o2s':     'Di · 17:30',
-      'receptionist.demo.o3':      'Synchronisiert',
-      'receptionist.demo.o3s':     'Kalender + Zusammenfassung',
+      'receptionist.demo.ai1':     'Guten Tag, ich bin der KI-Assistent von Northside Dental. Wie kann ich helfen?',
+      'receptionist.demo.caller':  'Ich möchte nächste Woche einen Kontrolltermin.',
+      'receptionist.demo.ai2':     'Verstanden. Unter welcher Nummer kann Sie ein Kollege zurückrufen?',
+      'receptionist.demo.o1':      'Anliegen erfasst',
+      'receptionist.demo.o1s':     'Kontrolle',
+      'receptionist.demo.o2':      'Rückruf',
+      'receptionist.demo.o2s':     'Nummer notiert',
+      'receptionist.demo.o3':      'SMS gesendet',
+      'receptionist.demo.o3s':     'Zusammenfassung an dich',
       'roles.label':   'Was er kann',
       'roles.h2.a':    'Ein Mitarbeiter.',
       'roles.h2.b':    'Viele mögliche Rollen.',
@@ -2674,7 +2681,7 @@
       'how.1.title': 'Erstgespräch',
       'how.1.desc':  'Ein 30-minütiges Gespräch, um dein Geschäft und die Arbeit, die du abgeben möchtest, zu verstehen.',
       'how.2.title': 'Wir konfigurieren',
-      'how.2.desc':  'Wir richten deinen Agenten auf der Hermes Agent Harness ein, verbinden deine Tools und schreiben das Runbook.',
+      'how.2.desc':  'Wir bauen deinen Agenten auf der passendsten Technologie auf, verbinden deine Tools und halten fest, wie er arbeiten soll.',
       'how.3.title': 'Tag 1: Generalist',
       'how.3.desc':  'Dein Mitarbeiter arbeitet innerhalb von Tagen. Fähig, reaktiv, ab Tag eins nützlich.',
       'how.4.title': 'Tag 90: Spezialist',
@@ -2697,31 +2704,31 @@
       'incl.1.title': 'Alle KI-Kosten',
       'incl.1.desc':  'Wir tragen jedes Token und jede Serverstunde. Keine getakteten Rechnungen. Keine Überraschungs-Überschreitungen.',
       'incl.2.title': 'Das beste Modell für den Job',
-      'incl.2.desc':  'Modell-agnostisches Routing. Günstige Modelle für Routine. Frontier-Modelle für harte Probleme. Du wählst nicht. Wir tun es.',
-      'incl.3.title': 'EU-Hosting verfügbar',
-      'incl.3.desc':  'Sensible Daten? Wir routen zu selbst gehosteten Open-Source-Modellen auf EU-Infrastruktur. Deine Daten verlassen die EU nicht.',
+      'incl.2.desc':  'Modell-agnostisch. Wir nutzen hochmoderne Modelle und wechseln, sobald bessere erscheinen. Du wählst nicht. Wir tun es.',
+      'incl.3.title': 'Privat von Grund auf',
+      'incl.3.desc':  'Verschlüsselt und pro Kunde isoliert gespeichert, die Datenspeicherung erfolgt in der EU. Unsere Datenschutzerklärung nennt die Partner, die deine Daten verarbeiten.',
       'incl.4.title': 'Monitoring und Tuning',
       'incl.4.desc':  'Wir beobachten, was dein Mitarbeiter macht. Wir beheben, was nicht funktioniert. Du fasst keine Infrastruktur an.',
       'incl.5.title': 'Eine Nummer zum Anrufen',
       'incl.5.desc':  'Wenn etwas angepasst werden muss, sagst du es uns. Keine Support-Tickets. Kein Prompt-Engineering.',
-      'incl.6.title': 'Jederzeit kündbar',
-      'incl.6.desc':  'Keine Jahresverträge. Keine Kündigungsfristen. Wir verdienen uns den nächsten Monat — oder nicht.',
+      'incl.6.title': 'Monatlich laufend',
+      'incl.6.desc':  'Keine Jahresverträge. Kündigung mit 30 Tagen Frist zum Ende eines beliebigen Monats. Wir verdienen uns den nächsten Monat — oder nicht.',
       'price.label':              'Preise',
       'price.h2.a':               'Ein Plan pro Mitarbeiter.',
-      'price.h2.b':               'Jederzeit kündbar.',
+      'price.h2.b':               'Monatlich kündbar.',
       'price.intro':              'Starte mit der KI-Rezeption oder ergänze einen digitalen Mitarbeiter. Die Mitarbeiter-Tarife unterscheiden sich darin, wie viele Tuning-Stunden pro Monat enthalten sind. Setup ist immer kostenlos; du startest mit einem Gespräch.',
       'price.rx.name':            'KI-Rezeption',
       'price.rx.from':            'ab',
       'price.rx.tagline':         'Preis nach Anrufvolumen. Das Starterpaket reicht für eine kleine Praxis oder ein Geschäft; die genaue Größe klären wir im Gespräch.',
-      'price.rx.f1':              'Nimmt Anrufe rund um die Uhr im Ton deines Unternehmens an',
-      'price.rx.f2':              'Bucht Termine direkt in deinen Kalender',
-      'price.rx.f3':              'E-Mail-Zusammenfassung nach jedem Anruf',
-      'price.rx.f4':              'Einrichtung inklusive · monatlich kündbar',
+      'price.rx.f1':              'Nimmt weitergeleitete Anrufe rund um die Uhr an, auf Ungarisch',
+      'price.rx.f2':              'Erfasst Rückrufnummer und Anliegen — keine Preis- oder Terminzusagen',
+      'price.rx.f3':              'SMS-Zusammenfassung nach jedem Anruf, Protokoll im Dashboard',
+      'price.rx.f4':              'Einrichtung inklusive · monatlich, keine langfristige Bindung',
       'price.employees.label':    'Digitale Mitarbeiter',
       'price.period':             '/Monat',
       'price.popular':            'Am beliebtesten',
       'price.cta':                'Gespräch zum Start buchen',
-      'price.foot':               'Keine Einrichtungsgebühr · Kein Jahresvertrag · Jederzeit kündbar',
+      'price.foot':               'Keine Einrichtungsgebühr · Kein Jahresvertrag · 30 Tage Kündigungsfrist',
       'price.starter.name':       'Starter',
       'price.starter.tagline':    'Zum Ausprobieren; leichte repetitive Aufgaben.',
       'price.starter.f1':         '1 Stunde Tuning pro Monat',
@@ -2754,17 +2761,17 @@
       'whyus.s3.num': 'Modell-agnostisch',
       'whyus.s3.lab': 'bestes Modell pro Aufgabe',
       'whyus.s4.num': 'Kein Lock-in',
-      'whyus.s4.lab': 'jederzeit monatlich kündbar',
+      'whyus.s4.lab': 'monatlich, 30 Tage Frist',
       'faq.label': 'FAQ',
       'faq.h2':    'Häufige Fragen.',
       'faq.1.q':   'Was, wenn er Fehler macht?',
       'faq.1.a':   'Wird er, besonders in den ersten Wochen. Genau deshalb überwachen wir alles und tunen aktiv. Was du markierst, passen wir an. Fehler werden zum Trainingsmaterial.',
       'faq.2.q':   'Welches LLM nutzt er?',
-      'faq.2.a':   'Wir sind modell-agnostisch. Dein Agent nutzt Open-Source-Modelle für Routine (Llama, Qwen, Hermes) und Frontier-Modelle (Claude, GPT) für anspruchsvolleres Denken. Die Hermes Agent Harness von Nous Research steuert das Routing.',
+      'faq.2.a':   'Wir sind modell-agnostisch und setzen auf hochmoderne Modelle: die leistungsfähigsten Frontier-Modelle (etwa GPT und Claude) für Gespräche und anspruchsvolles Denken, leichtere für Routineschritte. Wir wählen sie aus und aktualisieren sie, sobald bessere erscheinen.',
       'faq.3.q':   'Was ist mit meinen Daten und der Privatsphäre?',
-      'faq.3.a':   'Verschlüsselt gespeichert, pro Kunde isoliert. Für sensible Daten routen wir auf selbst gehostete Open-Source-Modelle in der EU-Infrastruktur — deine Daten verlassen die EU nicht und trainieren kein Drittanbieter-Modell.',
+      'faq.3.a':   'Verschlüsselt und pro Kunde isoliert gespeichert, die Datenspeicherung erfolgt in der EU. Gespräche werden von hochmodernen KI-Modellen sorgfältig ausgewählter Anbieter verarbeitet; unsere Datenschutzerklärung nennt sie und erklärt, was mit deinen Daten geschieht.',
       'faq.4.q':   'Was, wenn ich kündigen will?',
-      'faq.4.a':   'Schreib uns eine E-Mail. Kein Vertrag, keine Frist, keine Ausstiegsgebühr. Wir verdienen uns den nächsten Monat — oder nicht.',
+      'faq.4.a':   'Natürlich gibt es einen Vertrag und eine Kündigungsfrist. Schick uns spätestens 30 Tage vor Monatsende eine Kündigung, dann endet der Vertrag am letzten Tag dieses Monats; eine spätere Kündigung gilt zum Ende des Folgemonats. Bis dahin sind die Monatsgebühr und die genutzten Minuten zu zahlen.',
       'faq.5.q':   'Kann er meine spezifische Aufgabe erledigen?',
       'faq.5.a':   'Wahrscheinlich. Genau dafür ist das 30-minütige Gespräch da. Wir sagen Nein, wenn es nicht passt — wir verlieren lieber einen Verkauf, als etwas zu liefern, das versagt.',
       'faq.6.q':   'Was unterscheidet das von ChatGPT Teams?',
@@ -2774,7 +2781,7 @@
       'faq.8.q':   'Wie lange dauert das Setup?',
       'faq.8.a':   'Vom Erstgespräch bis zum arbeitenden Mitarbeiter: 5–10 Arbeitstage, abhängig von den Integrationen.',
       'faq.9.q':   'Was kann die KI-Rezeption übernehmen?',
-      'faq.9.a':   'Sie beantwortet Routinefragen, qualifiziert Anfragen, bucht Termine, nimmt Nachrichten auf und sendet Zusammenfassungen. Du bestimmst, wann sie an einen Menschen weiterleitet oder eskaliert.',
+      'faq.9.a':   'Sie nimmt Anrufe an, die von deiner Nummer weitergeleitet werden, stellt die von dir festgelegten Fragen, notiert Nummer und Anliegen des Anrufers und schickt dir eine SMS-Zusammenfassung; das vollständige Protokoll liegt im Dashboard. Sie spricht Ungarisch (Englisch lässt sich zuschalten). Sie bucht keine Termine, nennt keine Preise, die du ihr nicht gegeben hast, und verbindet keine Anrufe weiter — ein Kollege ruft den Kunden zurück.',
       'cta.label':         'Loslegen',
       'cta.h2.a':          '30 Minuten. Keine Verpflichtung.',
       'cta.h2.b':          'Wir hören zuerst zu.',
@@ -2836,8 +2843,10 @@
     }
   }
 
+  /* /hu/ and /de/ are static pre-rendered pages (scripts/build-i18n.py); their path decides the language. */
+  var pathLang = (window.location.pathname.match(/^\/(hu|de)(\/|$)/) || [])[1] || null;
   var urlLang = getUrlLang();
-  var currentLang = urlLang || getStoredLang() || (navigator.language && navigator.language.slice(0,2)) || 'en';
+  var currentLang = pathLang || urlLang || getStoredLang() || (navigator.language && navigator.language.slice(0,2)) || 'en';
   if (!T[currentLang]) currentLang = 'en';
   if (urlLang && T[urlLang]) setStoredLang(urlLang);
 
@@ -3064,6 +3073,8 @@
         currentLang = lang;
         setStoredLang(lang);
         applyTranslations();
+        /* Keep the address in step with the language (best effort; not possible from file://). */
+        try { history.replaceState(null, '', lang === 'en' ? '/' : '/' + lang + '/'); } catch (e) {}
       });
     });
   }

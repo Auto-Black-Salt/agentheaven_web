@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /thank-you.html
 Disallow: /files/
+Disallow: /og-image.html
+Disallow: /docs/
+Disallow: /scripts/
 
 Sitemap: https://agentheaven.ai/sitemap.xml

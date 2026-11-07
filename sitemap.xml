@@ -3,19 +3,36 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://agentheaven.ai/</loc>
-    <lastmod>2026-10-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-07</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://agentheaven.ai/"/>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://agentheaven.ai/?lang=hu"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://agentheaven.ai/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://agentheaven.ai/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://agentheaven.ai/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/"/>
   </url>
-  <url><loc>https://agentheaven.ai/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://agentheaven.ai/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://agentheaven.ai/dpa.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://agentheaven.ai/subprocessors.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://agentheaven.ai/security.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://agentheaven.ai/acceptable-use.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://agentheaven.ai/cookie-policy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url>
+    <loc>https://agentheaven.ai/hu/</loc>
+    <lastmod>2026-11-07</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agentheaven.ai/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://agentheaven.ai/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://agentheaven.ai/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/"/>
+  </url>
+  <url>
+    <loc>https://agentheaven.ai/de/</loc>
+    <lastmod>2026-11-07</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agentheaven.ai/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://agentheaven.ai/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://agentheaven.ai/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agentheaven.ai/"/>
+  </url>
+  <url><loc>https://agentheaven.ai/privacy.html</loc><lastmod>2026-11-07</lastmod><priority>0.3</priority></url>
+  <url><loc>https://agentheaven.ai/terms.html</loc><lastmod>2026-11-07</lastmod><priority>0.3</priority></url>
+  <url><loc>https://agentheaven.ai/subprocessors.html</loc><lastmod>2026-11-07</lastmod><priority>0.2</priority></url>
+  <url><loc>https://agentheaven.ai/dpa.html</loc><lastmod>2026-10-30</lastmod><priority>0.2</priority></url>
+  <url><loc>https://agentheaven.ai/security.html</loc><lastmod>2026-10-30</lastmod><priority>0.3</priority></url>
+  <url><loc>https://agentheaven.ai/acceptable-use.html</loc><lastmod>2026-10-30</lastmod><priority>0.2</priority></url>
+  <url><loc>https://agentheaven.ai/cookie-policy.html</loc><lastmod>2026-10-30</lastmod><priority>0.2</priority></url>
 </urlset>

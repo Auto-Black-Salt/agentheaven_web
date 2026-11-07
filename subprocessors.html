@@ -49,7 +49,7 @@
 <div class="container">
   <div class="page-label">Legal</div>
   <h1>Sub-processors</h1>
-  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 30 October 2026</p>
+  <p class="effective-date">Effective date: 14 May 2026 &nbsp;·&nbsp; Last updated: 7 November 2026</p>
 
   <p>This page lists third-party providers that may process personal data for AgentHeaven. Actual use depends on the customer's plan, selected routing mode, connected tools, and billing method.</p>
 
@@ -85,9 +85,37 @@
           <td>Infrastructure for agent hosting and self-hosted components</td>
         </tr>
         <tr>
+          <td><strong>IP Telecom Bulgaria LTD (Zadarma)</strong></td>
+          <td>Telephony and SMS</td>
+          <td>Phone numbers, call routing and metadata, caller numbers, summary SMS text and recipient number</td>
+          <td>Provider data centres on several continents; DPA and transfer safeguards to be confirmed before launch</td>
+          <td>AI receptionist phone numbers, call forwarding, summary SMS</td>
+        </tr>
+        <tr>
+          <td><strong>Supabase</strong></td>
+          <td>Database and authentication</td>
+          <td>Account data, call records, transcripts, extracted requests, messages</td>
+          <td>EU region</td>
+          <td>AI receptionist data storage and sign-in</td>
+        </tr>
+        <tr>
+          <td><strong>Railway</strong></td>
+          <td>Application hosting</td>
+          <td>AI receptionist call-handling application, in-memory call sessions, logs</td>
+          <td>EU region</td>
+          <td>Running the AI receptionist</td>
+        </tr>
+        <tr>
+          <td><strong>Vercel</strong></td>
+          <td>Web hosting</td>
+          <td>Web panel traffic and sign-in sessions</td>
+          <td>USA / EU</td>
+          <td>Serving the customer web panel</td>
+        </tr>
+        <tr>
           <td><strong>OpenAI</strong></td>
           <td>Third-party LLM provider</td>
-          <td>Prompts, session context, outputs, and limited business context sent when OpenAI routing is selected or needed</td>
+          <td>Prompts, session context, outputs, and limited business context; for the AI receptionist, the real-time audio and text of each call and the call summary</td>
           <td>May involve non-EEA processing; DPA and transfer safeguards apply</td>
           <td>Frontier-model reasoning and generation</td>
         </tr>
@@ -152,7 +180,7 @@
   </div>
 
   <h2>AI Receptionist Voice and Telephony Providers</h2>
-  <p>The production voice, speech-to-text, text-to-speech, and telephony providers for the AI receptionist have not yet been selected. No provider may begin processing caller personal data until it is added to the Current Providers table above, the applicable data-protection and transfer terms are in place, and affected customers receive the notice required by the DPA. The customer-specific configuration will identify which listed providers are enabled.</p>
+  <p>The AI receptionist uses IP Telecom Bulgaria LTD (Zadarma) for phone numbers, call forwarding and summary SMS, and OpenAI for real-time speech and conversation processing, with Supabase, Railway and Vercel for storage and hosting, as listed in the table above. Raw call audio is not stored by AgentHeaven. A provider may begin processing caller personal data only after it is added to the table above and the applicable data-protection and transfer terms are in place.</p>
 
   <h2>Independent Controllers (Informational)</h2>
   <p>The following parties act as <strong>independent data controllers</strong> rather than sub-processors of AgentHeaven, but are listed here for transparency because Customer personal data may flow to them in the course of providing the Service:</p>
